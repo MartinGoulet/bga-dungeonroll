@@ -25,8 +25,6 @@ define([
         return declare("bgagame.dungeonrollmg", ebg.core.gamegui, {
 
             constructor: function() {
-                console.log('dungeonrollmg constructor');
-
                 // Here, you can init the global variables of your user interface
                 this.ItemType = {
                     Party: 1,
@@ -51,8 +49,6 @@ define([
             */
 
             setup: function(gamedatas) {
-                console.log("Starting game setup");
-
                 this.player_board = {};
 
                 // Setting up player boards
@@ -75,8 +71,6 @@ define([
                     this.addItemsToZone([gamedatas.heroes[player_id]], this.player_board[player_id].hero)
                     this.addItemsToZone(gamedatas.inventories[player_id], this.player_board[player_id].inventory)
                 });
-
-                console.log(gamedatas);
 
                 this.items = {
                     'zone_party': this.initStockItemsGameDungeon("zone_party", 'onClickItem'),
@@ -102,7 +96,6 @@ define([
                 // Setup tooltip on heroes
                 this.setupTooltipHeroes();
 
-                console.log("Ending game setup");
             },
 
             initCounter(div_name, initialValue) {
@@ -247,16 +240,14 @@ define([
             },
 
             addItemsToBoard(itemsToAdd) {
-                console.log(itemsToAdd);
-                // var zones = ['dungeon', 'party', 'play', 'graveyard', 'dragon_lair', 'inventory'];
+
                 Object.keys(this.items).forEach(key => {
                     // Add dice to the specific zone
                     var zone = key.replace("zone_", "");
                     var items = itemsToAdd.filter(x => x.zone == zone);
-                    console.log(key);
-                    console.log(items);
                     this.addItemsToZone(items, this.items[key]);
                 });
+
             },
 
             addItemsToZone: function(items, zone) {
@@ -276,19 +267,9 @@ define([
             //                  You can use this method to perform some user interface changes at this moment.
             //
             onEnteringState: function(stateName, args) {
-                console.log('Entering state: ' + stateName);
 
                 switch (stateName) {
 
-                    /* Example:
-             
-            case 'myGameState':
-             
-            // Show some HTML block at this game state
-            dojo.style( 'my_html_block_id', 'display', 'block' );
-             
-            break;
-            */
                     case 'draftHeroes':
                         dojo.style('draft_zone', 'display', 'block');
                         dojo.style('board', 'display', 'none');
@@ -312,21 +293,7 @@ define([
             //                 You can use this method to perform some user interface changes at this moment.
             //
             onLeavingState: function(stateName) {
-                console.log('Leaving state: ' + stateName);
-
                 switch (stateName) {
-
-                    /* Example:
-             
-            case 'myGameState':
-             
-            // Hide the HTML block we are displaying only during this game state
-            dojo.style( 'my_html_block_id', 'display', 'none' );
-             
-            break;
-            */
-
-
                     case 'dummmy':
                         break;
                 }
@@ -336,7 +303,6 @@ define([
             //                        action status bar (ie: the HTML links in the status bar).
             //        
             onUpdateActionButtons: function(stateName, args) {
-                console.log('onUpdateActionButtons: ' + stateName);
 
                 this.removeActionButtons();
                 dojo.query("li.selected").removeClass("selected");
@@ -344,24 +310,11 @@ define([
 
                 if (this.isCurrentPlayerActive()) {
                     switch (stateName) {
-                        /*               
-                                         Example:
-                         
-                                         case 'myGameState':
-                                            
-                                            // Add 3 action buttons in the action status bar:
-                                            
-                                            this.addActionButton( 'button_1_id', _('Button 1 label'), 'onMyMethodToCall1' ); 
-                                            this.addActionButton( 'button_2_id', _('Button 2 label'), 'onMyMethodToCall2' ); 
-                                            this.addActionButton( 'button_3_id', _('Button 3 label'), 'onMyMethodToCall3' ); 
-                                            break;
-                        */
                         case 'postFormingParty':
                         case 'monsterPhase':
                         case 'lootPhase':
                         case 'regroupPhase':
                         case 'dragonPhase':
-                            // this.showButtons(args.possibleActions);
                             this.showCommands(args.commands);
                             break;
 
@@ -385,11 +338,8 @@ define([
             showCommands: function(commands) {
 
                 this.removeActionButtons();
-                console.log("Commands");
 
                 if (commands === undefined) return;
-
-                console.log(commands);
 
                 commands.forEach(command => {
                     if (command.commands === undefined) {
@@ -522,7 +472,6 @@ define([
              
             */
             setupNotifications: function() {
-                console.log('notifications subscriptions setup');
 
                 dojo.subscribe('updateScores', this, "notif_updateScores");
                 dojo.subscribe('updatePossibleActions', this, "notif_updatePossibleActions");
@@ -540,19 +489,12 @@ define([
             },
 
             notif_updateScores: function(notif) {
-
-                console.log('notif_updateScores');
-                console.log(notif);
-
                 for (var player_id in notif.args.scores) {
                     this.scoreCtrl[player_id].toValue(notif.args.scores[player_id]);
                 }
             },
 
             notif_onItemsMoved: function(notif) {
-
-                console.log('notif_onItemsMoved');
-                console.log(notif);
                 var board = this.player_board[this.getActivePlayerId()];
 
                 notif.args.items.forEach(item => {
@@ -574,7 +516,6 @@ define([
                         this.items['zone_' + item.zone].removeFromStockById(item.id);
                         this.items['zone_' + item.zone].addToStockWithId(item_type, item.id);
                     } else {
-                        console.log("Previous zone : " + 'zone_' + item.previous_zone);
                         var from = $(this.items['zone_' + item.previous_zone].getItemDivId(item.id));
                         this.items['zone_' + item.zone].addToStockWithId(item_type, item.id, from);
                         this.items['zone_' + item.previous_zone].removeFromStockById(item.id);
@@ -584,10 +525,6 @@ define([
             },
 
             notif_onHeroLevelUp: function(notif) {
-
-                console.log('notif_onHeroLevelUp');
-                console.log(notif);
-
                 var heroZone = this.player_board[notif.args.player_id].hero;
                 var from = $(heroZone.getItemDivId(notif.args.hero_novice['id']));
                 heroZone.addToStockWithId("5_" + notif.args.hero_master['value'], notif.args.hero_master['id'], from);
@@ -595,18 +532,10 @@ define([
             },
 
             notif_updatePossibleActions: function(notif) {
-
-                console.log('notif_updatePossibleActions');
-                console.log(notif);
-
                 this.showCommands(notif.args.commands);
             },
 
             notif_onRollDice: function(notif) {
-
-                console.log('notif_onRollDice');
-                console.log(notif);
-
                 notif.args.dice.forEach(die => {
                     var die_type = die.type + "_" + die.value;
                     this.items['zone_' + die.zone].removeFromStockById(die.id);
@@ -615,34 +544,19 @@ define([
             },
 
             notif_onNewPlayerTurn: function(notif) {
-
-                console.log('notif_onNewPlayerTurn');
-                console.log(notif);
-
                 this.addItemsToBoard([]);
             },
 
             notif_onNewLevel: function(notif) {
-
-                console.log('notif_onNewLevel');
-                console.log(notif);
-
                 this.dungeon_level.setValue(notif.args.level);
             },
 
             notif_onNewDelve: function(notif) {
-
-                console.log('notif_onNewDelve');
-                console.log(notif);
-
                 this.delve_counter.setValue(notif.args.delve_number);
                 this.player_board[notif.args.player_id].delve.setValue(notif.args.delve_number);
             },
 
             notif_onNewTokens: function(notif) {
-
-                console.log('notif_onNewTokens');
-                console.log(notif);
                 var playerInventory = this.player_board[this.getActivePlayerId()].inventory;
 
                 notif.args.tokens.forEach(token => {
@@ -654,10 +568,6 @@ define([
             },
 
             notif_onSelectHero: function(notif) {
-
-                console.log('notif_onSelectHero');
-                console.log(notif);
-
                 var hero = notif.args.hero;
                 var from = $(this.items['zone_' + hero.previous_zone].getItemDivId(hero.id));
                 this.player_board[hero['owner']].hero.addToStockWithId(hero.type + "_" + hero.value, hero.id, from);
