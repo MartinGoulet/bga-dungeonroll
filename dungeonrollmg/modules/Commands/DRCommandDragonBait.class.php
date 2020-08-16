@@ -1,0 +1,44 @@
+<?php
+
+class DRCommandDragonBait extends DRCommand
+{
+
+    public function __construct($game, $command_info)
+    {
+        parent::__construct($game, $command_info);
+    }
+
+    public function getAllowedStates()
+    {
+        return array('monsterPhase');
+    }
+
+    public function canExecute()
+    {
+        if (!parent::canExecute()) return false;
+
+        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        return DRItem::containsSameAs($items, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT));
+    }
+
+    public function execute($sub_command_id)
+    {
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $dragonBaits = DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT));
+
+        $items    = $this->game->components->getActivePlayerItems();
+        $monsters = DRDungeonDice::getMonsterDices($items);
+
+        // Discard the token
+        $itemsUpdate = array_merge(
+            $dragonBaits = DRItem::setZone($dragonBaits, ZONE_BOX),
+            $this->game->transformMonstersToDragons($monsters)
+        );
+
+        $this->game->manager->updateItems($itemsUpdate);
+        $this->game->NTA_itemMove($itemsUpdate);
+
+        // Go to the next state
+        $this->game->notif->updatePossibleActions();
+    }
+}

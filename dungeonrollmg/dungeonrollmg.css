@@ -1,7 +1,7 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © <Your name here> <Your email address here>
+ * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -12,6 +12,7 @@
  * DungeonRollMg stylesheet
  *
  */
+
 
 /*
     This is the CSS stylesheet of your game User Interface.
@@ -68,5 +69,240 @@
 */
 
 
+/* For dice in the action button bar */
+
+.sicon {
+    display: inline-block;
+    background-image: url('img/dice_party.jpg');
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    width: 35px;
+    height: 35px;
+    background-size: 210px 35px;
+    margin: -4px -10px;
+}
+
+.dice_scroll {
+    background-position: 0px 0px;
+}
+
+.dice_mage {
+    background-position: -35px 0px;
+}
+
+.dice_cleric {
+    background-position: -70px 0px;
+}
+
+.dice_fighter {
+    background-position: -105px 0px;
+}
+
+.dice_thief {
+    background-position: -140px 0px;
+}
+
+.dice_champion {
+    background-position: -175px 0px;
+}
 
 
+/* .hero {
+    width: 124px;
+    height: 172px;
+    margin: 0px auto;
+    background-image: url("img/cards.jpg");
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.hero.activated {
+    transform: rotate(90deg) scale(0.8)
+}
+
+.hero_4_1 {
+    background-position: 0px 0px;
+}
+
+.hero_5_1 {
+    background-position: -124px 0px;
+} */
+
+
+/* New CSS */
+
+#board {}
+
+.stockitem,
+.whiteblock {
+    border-radius: 5px;
+}
+
+.whiteblock {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.row {
+    display: flex;
+}
+
+.col_1 {
+    flex-grow: 1;
+}
+
+.col_2 {
+    flex-grow: 2;
+}
+
+.col_3 {
+    flex-grow: 3;
+}
+
+.col_4 {
+    flex-grow: 4;
+}
+
+.col_5 {
+    flex-grow: 5;
+}
+
+.dicezone {}
+
+.dicezone2 {
+    min-height: 94px;
+}
+
+.ml3 {
+    margin-left: 3px;
+}
+
+.mr3 {
+    margin-right: 3px;
+}
+
+.mt0 {
+    margin-top: 0px;
+}
+
+.navigation {
+    list-style: none;
+    padding-bottom: 5px;
+    height: 40px;
+    padding: 5px 0 7px 0;
+}
+
+.navigation>li {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    border: 3px solid black;
+    display: inline-block;
+    text-align: center;
+    background-image: url('img/phase-icons.png');
+    background-size: 160px 40px;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.navigation>li.selected {
+    background-color: cyan;
+    background-position: 0px;
+}
+
+.navigation>li.monster {
+    background-position: 0px;
+}
+
+.navigation>li.loot {
+    background-position: -40px 0px;
+}
+
+.navigation>li.dragon {
+    background-position: -80px 0px;
+}
+
+.navigation>li.regroup {
+    background-position: -120px 0px;
+    margin-right: 0px;
+}
+
+.info {
+    width: 40px
+}
+
+.h200 {
+    /* height: 200px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.h52 {
+    height: 52px;
+    text-align: center;
+}
+
+.h52 .counter {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.mt14 {
+    margin-top: 14px;
+}
+
+.cardtooltip {
+    text-align: center;
+    max-width: 300px;
+}
+
+.card-hero {
+    width: 100px;
+    padding-left: 20px;
+}
+
+.cardtooltip .keyword {
+    font-weight: bold;
+    display: inline;
+}
+
+.stockitem.temporary-item {
+    border: 3px dashed red;
+    box-sizing: content-box;
+    transform: scale(0.87);
+    transform-origin: top left;
+}
+
+.stockitem.temporary-ability {
+    border: 3px dashed blue;
+    box-sizing: content-box;
+    transform: scale(0.87);
+    transform-origin: top left;
+}
+
+
+/* Player Board */
+
+.player_board {
+    font-size: 14px;
+}
+
+
+/* .player_board .player_hero {
+    width: 55px;
+    display: inline-block;
+}
+
+.player_board .player_info {
+    display: inline-block;
+    vertical-align: top;
+} */
+
+.player_board .player_hero {
+    width: 55px;
+    float: left;
+}
+
+.player_board .player_info {
+    overflow: hidden;
+}

@@ -3,7 +3,7 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © <Your name here> <Your email address here>
+ * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -23,6 +23,8 @@
  * !! It is not a good idea to modify this file when a game is running !!
  *
  */
+
+require_once ('modules/constants.inc.php');
 
 $game_options = array(
 
@@ -49,6 +51,24 @@ $game_options = array(
             )
 
     */
+
+    GV_GAME_OPTION_ID => array(
+        'name' => totranslate('Game option'),
+        'values' => array(
+            GAME_OPTION_RANDOM_HERO => array(
+                'name' => totranslate('Random hero'),
+                'tmdisplay' => totranslate('Random hero')
+            ),
+            GAME_OPTION_SELECT_HERO => array(
+                'name' => totranslate('Select hero'),
+                'tmdisplay' => totranslate('Select hero')
+            ),
+            GAME_OPTION_NO_HERO => array(
+                'name' => totranslate('No hero'),
+                'tmdisplay' => totranslate('No hero')
+            )
+        )
+    )
 
 );
 

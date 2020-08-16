@@ -1,8 +1,9 @@
 <?php
+
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © <Your name here> <Your email address here>
+ * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -47,9 +48,8 @@
                             method).
 */
 
-//    !! It is not a good idea to modify this file when a game is running !!
+require_once("modules/constants.inc.php");
 
- 
 $machinestates = array(
 
     // The initial state. Please do not modify.
@@ -58,43 +58,185 @@ $machinestates = array(
         "description" => "",
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => array( "" => 2 )
+        "transitions" => array("" => STATE_GAME_OPTION)
     ),
-    
-    // Note: ID=2 => your first state
 
-    2 => array(
-    		"name" => "playerTurn",
-    		"description" => clienttranslate('${actplayer} must play a card or pass'),
-    		"descriptionmyturn" => clienttranslate('${you} must play a card or pass'),
-    		"type" => "activeplayer",
-    		"possibleactions" => array( "playCard", "pass" ),
-    		"transitions" => array( "playCard" => 2, "pass" => 2 )
+    STATE_GAME_OPTION => array(
+        "name" => "gameOption",
+        "type" => "game",
+        "action" => "stGameOption",
+        "transitions" => array("random" => STATE_RANDOM_HERO, "select" => STATE_SELECT_HERO, "nohero" => STATE_INIT_PLAYER_TURN)
     ),
-    
-/*
-    Examples:
-    
-    2 => array(
+
+    STATE_RANDOM_HERO => array(
+        "name" => "randomHero",
+        "type" => "game",
+        "action" => "stRandomHero",
+        "transitions" => array("" => STATE_INIT_PLAYER_TURN)
+    ),
+
+    STATE_SELECT_HERO => array(
+        "name" => "draftHeroes",
+        "description" => clienttranslate('${actplayer} must select a hero'),
+        "descriptionmyturn" => clienttranslate('${you} must select a hero'),
+        "type" => "activeplayer",
+        "args" => "argDraftHeroes",
+        "possibleactions" => array("selectHero"),
+        "transitions" => array("" => STATE_NEXT_PLAYER_HERO)
+    ),
+
+
+    STATE_NEXT_PLAYER_HERO => array(
+        "name" => "nextDraftHero",
+        "type" => "game",
+        "action" => "stNextDraftHero",
+        "transitions" => array("next" => STATE_SELECT_HERO, "end" => STATE_INIT_PLAYER_TURN)
+    ),
+
+
+    STATE_INIT_PLAYER_TURN => array(
+        "name" => "initPlayerTurn",
+        "type" => "game",
+        "action" => "stInitPlayerTurn",
+        "transitions" => array("" => STATE_FORMING_PARTY)
+    ),
+
+    // Phase when the player rolls all party dice
+    STATE_FORMING_PARTY => array(
+        "name" => "formingParty",
+        "type" => "game",
+        "action" => "stFormingParty",
+        "transitions" => array("mercenary" => STATE_POST_FORMING_PARTY, "dungeon" => STATE_DUNGEON_ROLL)
+    ),
+
+    STATE_POST_FORMING_PARTY => array(
+        "name" => "postFormingParty",
+        "description" => clienttranslate('Forming party : ${actplayer} may re-roll any number of Party dice'),
+        "descriptionmyturn" => clienttranslate('Forming party : ${you} may re-roll any number of Party dice'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("executeCommand", "moveItem"),
+        "transitions" => array("" => STATE_DUNGEON_ROLL)
+    ),
+
+    STATE_DUNGEON_ROLL => array(
+        "name" => "nextDungeonLevel",
+        "type" => "game",
+        "action" => "stRollDungeonDice",
+        "transitions" => array("" => STATE_MONSTER_PHASE)
+    ),
+
+    STATE_MONSTER_PHASE => array(
+        "name" => "monsterPhase",
+        "description" => clienttranslate('Monster phase : ${actplayer} must defeat all monsters'),
+        "descriptionmyturn" => clienttranslate('Monster phase : ${you} must defeat all monsters'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("moveItem", "executeCommand"),
+        "updateGameProgression" => true,
+        "transitions" => array(
+            "nextPhase" => STATE_PRE_LOOT_PHASE,
+            "fleeDungeon" => STATE_NEXT_PLAYER,
+            "townPortal" => STATE_NEXT_PLAYER,
+            "chooseDie" => STATE_CHOOSE_DIE,
+        )
+    ),
+
+    STATE_PRE_LOOT_PHASE => array(
+        "name" => "preLootPhase",
+        "type" => "game",
+        "action" => "stPreLootPhase",
+        "transitions" => array("lootPhase" => STATE_LOOT_PHASE, "preDragonPhase" => STATE_PRE_DRAGON_PHASE)
+    ),
+
+    STATE_LOOT_PHASE => array(
+        "name" => "lootPhase",
+        "description" => clienttranslate('Loot phase : ${actplayer} may open chests and quaff potions'),
+        "descriptionmyturn" => clienttranslate('Loot phase : ${you} may open chests and quaff potions'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("moveItem", "executeCommand"),
+        "transitions" => array("end" => STATE_PRE_DRAGON_PHASE, "townPortal" => STATE_NEXT_PLAYER, "chooseDie" => STATE_CHOOSE_DIE)
+    ),
+
+    STATE_CHOOSE_DIE => array(
+        "name" => "quaffPotion",
+        "description" => clienttranslate('Quaff potion : ${actplayer} must choose which die to get (x${nbr})'),
+        "descriptionmyturn" => clienttranslate('Quaff phase : ${you} must choose which die to get (x${nbr})'),
+        "type" => "activeplayer",
+        "args" => "argQuaffPotion",
+        "possibleactions" => array("chooseDieGain"),
+        "transitions" => array(
+            "next" => STATE_CHOOSE_DIE,
+            "monsterPhase" => STATE_MONSTER_PHASE,
+            "lootPhase" => STATE_LOOT_PHASE,
+            "dragonPhase" => STATE_DRAGON_PHASE,
+            "regroupPhase" => STATE_REGROUP_PHASE
+        )
+    ),
+
+    STATE_PRE_DRAGON_PHASE => array(
+        "name" => "preDragonPhase",
+        "type" => "game",
+        "action" => "stPreDragonPhase",
+        "transitions" => array("dragonPhase" => STATE_DRAGON_PHASE, "regroupPhase" => STATE_PRE_REGROUP_PHASE)
+    ),
+
+    STATE_DRAGON_PHASE => array(
+        "name" => "dragonPhase",
+        "description" => clienttranslate('Dragon phase : ${actplayer} must defeat all dragons'),
+        "descriptionmyturn" => clienttranslate('Dragon phase : ${you} must defeat all dragons'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("moveItem", "executeCommand"),
+        "transitions" => array(
+            "killDragons" => STATE_PRE_REGROUP_PHASE,
+            "fleeDungeon" => STATE_NEXT_PLAYER,
+            "townPortal" => STATE_NEXT_PLAYER,
+            "ringInvisibility" => STATE_PRE_REGROUP_PHASE,
+            "chooseDie" => STATE_CHOOSE_DIE,
+        )
+    ),
+
+    STATE_PRE_REGROUP_PHASE => array(
+        "name" => "preRegroupPhase",
+        "type" => "game",
+        "action" => "stPreRegroupPhase",
+        "transitions" => array("" => STATE_REGROUP_PHASE)
+    ),
+
+    STATE_REGROUP_PHASE => array(
+        "name" => "regroupPhase",
+        "description" => clienttranslate('Regroup phase : ${actplayer} must choose his or her destiny'),
+        "descriptionmyturn" => clienttranslate('Regroup phase : ${you} must choose your destiny'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("executeCommand", "moveItem"),
+        "transitions" => array(
+            "retireTavern" => STATE_NEXT_PLAYER,
+            "seekGlory" => STATE_DUNGEON_ROLL,
+            "chooseDie" => STATE_CHOOSE_DIE,
+        )
+    ),
+
+    // Next player
+    STATE_NEXT_PLAYER => array(
         "name" => "nextPlayer",
-        "description" => '',
         "type" => "game",
         "action" => "stNextPlayer",
-        "updateGameProgression" => true,   
-        "transitions" => array( "endGame" => 99, "nextPlayer" => 10 )
+        "updateGameProgression" => true,
+        "transitions" => array("endGame" => STATE_FINAL_SCORING, "formingParty" => STATE_INIT_PLAYER_TURN)
     ),
-    
-    10 => array(
-        "name" => "playerTurn",
-        "description" => clienttranslate('${actplayer} must play a card or pass'),
-        "descriptionmyturn" => clienttranslate('${you} must play a card or pass'),
-        "type" => "activeplayer",
-        "possibleactions" => array( "playCard", "pass" ),
-        "transitions" => array( "playCard" => 2, "pass" => 2 )
-    ), 
 
-*/    
-   
+
+    STATE_FINAL_SCORING => array(
+        "name" => "finalScoring",
+        "type" => "game",
+        "action" => "stGameEndScoring",
+        "updateGameProgression" => true,
+        "transitions" => array("" => 99)
+    ),
+
     // Final state.
     // Please do not modify (and do not overload action/args methods).
     99 => array(
@@ -106,6 +248,3 @@ $machinestates = array(
     )
 
 );
-
-
-

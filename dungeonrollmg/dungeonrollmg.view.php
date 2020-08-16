@@ -2,7 +2,7 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © <Your name here> <Your email address here>
+ * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -39,6 +39,17 @@
 
         /*********** Place your code below:  ************/
 
+        $this->tpl['ZONE_DELVE'] = self::_("Delve #");
+        $this->tpl['ZONE_LEVEL'] = self::_("Level #");
+        $this->tpl['ZONE_PLAYING_AREA'] = self::_("Playing Area");
+        $this->tpl['ZONE_GRAVEYARD'] = self::_("Graveyard");
+        $this->tpl['ZONE_PARTY'] = self::_("Party");
+        $this->tpl['ZONE_INVENTORY'] = self::_("Inventory");
+        $this->tpl['ZONE_DUNGEON'] = self::_("Dungeon");
+        $this->tpl['ZONE_DRAGON_LAIR'] = self::_("Dragon's Lair");
+        $this->tpl['AVAILABLE_HEROES'] = self::_("Available heroes");
+
+        
 
         /*
         

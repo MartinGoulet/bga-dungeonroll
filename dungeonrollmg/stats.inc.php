@@ -3,7 +3,7 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © <Your name here> <Your email address here>
+ * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -47,16 +47,18 @@
     
 */
 
+require_once ('modules/constants.inc.php');
+
 $stats_type = array(
 
     // Statistics global to table
     "table" => array(
 
-        "turns_number" => array("id"=> 10,
-                    "name" => totranslate("Number of turns"),
-                    "type" => "int" ),
+        // "turns_number" => array("id"=> 10,
+        //             "name" => totranslate("Number of turns"),
+        //             "type" => "int" ),
 
-/*
+        /*
         Examples:
 
 
@@ -67,17 +69,54 @@ $stats_type = array(
         "table_teststat2" => array(   "id"=> 11,
                                 "name" => totranslate("table test stat 2"), 
                                 "type" => "float" )
-*/  
-    ),
-    
+*/),
+
     // Statistics existing for each player
     "player" => array(
 
-        "turns_number" => array("id"=> 10,
-                    "name" => totranslate("Number of turns"),
-                    "type" => "int" ),
-    
-/*
+        STAT_XP_LEVEL => array(
+            "id" => STAT_XP_LEVEL_ID,
+            "name" => totranslate("Level completed"),
+            "type" => "int"
+        ),
+
+        STAT_XP_DRAGON => array(
+            "id" => STAT_XP_DRAGON_ID,
+            "name" => totranslate("XP for dragons killed"),
+            "type" => "int"
+        ),
+
+        STAT_XP_TREASURE => array(
+            "id" => STAT_XP_TREASURE_ID,
+            "name" => totranslate("XP for treasures"),
+            "type" => "int"
+        ),
+
+        STAT_XP_DRAGON_SCALE => array(
+            "id" => STAT_XP_DRAGON_SCALE_ID,
+            "name" => totranslate("XP for dragon scales"),
+            "type" => "int"
+        ),
+
+        STAT_XP_TOWN_PORTAL => array(
+            "id" => STAT_XP_TOWN_PORTAL_ID,
+            "name" => totranslate("XP for town portal"),
+            "type" => "int"
+        ),
+
+        STAT_NBR_DRAGON_KILL=> array(
+            "id" => STAT_NBR_DRAGON_KILL_ID,
+            "name" => totranslate("Dragons killed"),
+            "type" => "int"
+        ),
+
+        STAT_NBR_TREASURE_OPEN => array(
+            "id" => STAT_NBR_TREASURE_OPEN_ID,
+            "name" => totranslate("Treasures opened"),
+            "type" => "int"
+        ),
+
+        /*
         Examples:    
         
         
@@ -89,7 +128,7 @@ $stats_type = array(
                                 "name" => totranslate("player test stat 2"), 
                                 "type" => "float" )
 
-*/    
+*/
     )
 
 );

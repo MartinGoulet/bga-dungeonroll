@@ -3,7 +3,7 @@
 <!-- 
 --------
 -- BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
--- DungeonRollMg implementation : © <Your name here> <Your email address here>
+-- DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
 -- 
 -- This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
 -- See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -25,20 +25,121 @@
     Please REMOVE this comment before publishing your game on BGA
 -->
 
+<div id="draft_zone" style="display: none">
+    <div class="whiteblock">
+        <h3>{AVAILABLE_HEROES}</h3>
+        <div id="draft_card"></div>
+    </div>
+</div>
 
-This is your game interface. You can edit this HTML in your ".tpl" file.
+<div id="board">
 
+    <div class="row">
+        <div class="col_1 mr3" style="display: flex">
+            <div class="whiteblock" style="flex: 1">
+                <div class="card-hero mt14">
+                    <div id="zone_hero"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col_4 ml3 mr3">
+
+            <div class="whiteblock h52">
+                <ul class="navigation">
+                    <li id="nav_monsterPhase" class="phase monster"></li>
+                    <li id="nav_lootPhase" class="phase loot"></li>
+                    <li id="nav_dragonPhase" class="phase dragon"></li>
+                    <li id="nav_regroupPhase" class="phase regroup"></li>
+                </ul>
+            </div>
+
+            <div class="whiteblock">
+                <h3>{ZONE_PLAYING_AREA}</h3>
+                <div class="dicezone2" id="zone_play"></div>
+            </div>
+
+        </div>
+
+        <div class="col_2 ml3">
+
+            <div class="row">
+                <div class="col_1 mr3 whiteblock h52">
+                    <h3 style="margin-top: 0px;">{ZONE_DELVE}</h3>
+                    <h3 class="counter">
+                        <span id="delve_counter">1</span>
+                    </h3>
+                </div>
+                <div class="col_1 ml3 whiteblock h52">
+                    <h3 style="margin-top: 0px;">{ZONE_LEVEL}</h3>
+                    <h3 class="counter">
+                        <span id="dungeon_level">1</span>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="whiteblock mt0">
+                <h3>{ZONE_GRAVEYARD}</h3>
+                <div class="dicezone2" id="zone_graveyard"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bottom Row -->
+    <div class="row" style="margin-top: -5px;">
+        <div class="col_4 mr3">
+
+            <div class="whiteblock">
+                <h3>{ZONE_PARTY}</h3>
+                <div class="dicezone" id="zone_party"></div>
+            </div>
+
+            <div class="whiteblock">
+                <h3>{ZONE_INVENTORY}</h3>
+                <div class="dicezone" id="zone_inventory"></div>
+            </div>
+
+        </div>
+
+        <div class="col_4 ml3">
+
+            <div class="whiteblock">
+                <h3>{ZONE_DUNGEON}</h3>
+                <div class="dicezone" id="zone_dungeon"></div>
+            </div>
+
+            <div class="whiteblock">
+                <h3>{ZONE_DRAGON_LAIR}</h3>
+                <div class="dicezone" id="zone_dragon_lair"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
+    // Javascript HTML templates
 
-// Javascript HTML templates
+var jstpl_card_tooltip = '<div class="cardtooltip">\
+                            <h3>${name}</h3>\
+                            <hr/>\
+                            ${specialty}\
+                             <br/><br/>\
+                            ${ultimate}\
+                            </div>';
 
-/*
-// Example:
-var jstpl_some_game_item='<div class="my_game_item" id="my_game_item_${MY_ITEM_ID}"></div>';
+var jstpl_player_board = '\
+<div class="player_board">\
+    <div class="player_hero">\
+        <div id="player_hero_${id}" class="col_1"></div>\
+    </div>\
+    <div class="player_info">\
+        <div class="player_delve">Delve # <span id="player_delve_${id}">0</span></div>\
+        <div id="player_inventory_${id}"></div>\
+    </div>\
+</div>\
+';
 
-*/
-
-</script>  
+</script>
 
 {OVERALL_GAME_FOOTER}
