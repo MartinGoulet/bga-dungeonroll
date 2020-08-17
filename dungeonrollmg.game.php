@@ -139,12 +139,12 @@ class DungeonRollMg extends Table
             'level' => $this->vars->getDungeonLevel(),
             'delve' => $this->getCurrentDelve(),
             'currentTurn' => $this->vars->getCurrentTurn(),
-            
+
             'card_types' => $this->card_types,
             'items_party_dice' => $this->items_party_dice,
             'items_dungeon_dice' => $this->items_dungeon_dice,
             'items_treasure_tokens' => $this->items_treasure_tokens,
-            
+
             'command_infos' => $this->getCommandInfos(),
             'hero' => $this->components->getActivePlayerHero()->getUIData(),
 
@@ -303,7 +303,6 @@ class DungeonRollMg extends Table
         $this->notif->selectHero($updateItems[0]);
 
         $this->gamestate->nextState();
-
     }
 
     function stNextDraftHero()
@@ -616,7 +615,7 @@ class DungeonRollMg extends Table
         $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
 
-        if(sizeof($tokens) > 0) {
+        if (sizeof($tokens) > 0) {
             $tokens = DRItem::setZone($tokens, ZONE_INVENTORY);
             $this->manager->updateItems($tokens);
         }
@@ -703,8 +702,30 @@ class DungeonRollMg extends Table
 
         if ($state['type'] === "activeplayer") {
             switch ($statename) {
-                default:
-                    $this->gamestate->nextState("zombiePass");
+                case 'draftHeroes':
+                    // Select first hero available
+                    $hero = $this->components->getNoviceHeroes()[0];
+                    $this->selectHero($hero['id']);
+                    break;
+                case 'postFormingParty':
+                    $command = $this->commands->getCommandByName('endFormingPartyPhase');
+                    $command->execute(0);
+                    break;
+                case 'monsterPhase':
+                case 'dragonPhase':
+                    $command = $this->commands->getCommandByName('fleeDungeon');
+                    $command->execute(0);
+                    break;
+                case 'lootPhase':
+                    $command = $this->commands->getCommandByName('endLootPhase');
+                    $command->execute(0);
+                    break;
+                case 'regroupPhase':
+                    $command = $this->commands->getCommandByName('retireTavern');
+                    $command->execute(0);
+                    break;
+                case 'quaffPotion':
+                    $this->chooseDieGain(TYPE_PARTY_DIE, DIE_CHAMPION);
                     break;
             }
 
