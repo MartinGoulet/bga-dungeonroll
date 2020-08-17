@@ -17,6 +17,8 @@ class DRCommandFleeDungeon extends DRCommand
         // Reset the experience gained this turn
         $this->game->vars->setDungeonLevel(0);
 
+        $this->game->notif->fleeDungeon();
+
         // Go to the next state
         $this->game->gamestate->nextState('fleeDungeon');
     }

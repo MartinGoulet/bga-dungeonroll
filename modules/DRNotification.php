@@ -25,6 +25,14 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function fleeDungeon()
+    {
+        $message = clienttranslate('${player_name} decides to flee the dungeon.');
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+    }
+
     function heroLevelUp($heroNovice, $heroMaster)
     {
         $message = clienttranslate('${player_name} level up ${hero_novice_name} to ${hero_master_name}');
@@ -71,6 +79,14 @@ class DRNotification extends APP_GameClass
     function newTokens($tokens)
     {
         $this->game->notifyAllPlayers("onNewTokens", '', array('tokens' => $tokens));
+    }
+
+    function retireTavern()
+    {
+        $message = clienttranslate('${player_name} decides to retire at the tavern.');
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
     }
 
     function rollPartyDice($dice)

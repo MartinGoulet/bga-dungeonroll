@@ -21,6 +21,8 @@ class DRCommandRetireTavern extends DRCommand
         // Stats
         $this->game->stats->incLevelCompleted($points);
 
+        $this->game->notif->retireTavern();
+
         // Next state
         $this->game->gamestate->nextState('retireTavern');
     }
