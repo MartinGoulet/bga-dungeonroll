@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
+ * DungeonRoll implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * dungeonrollmg.css
+ * dungeonroll.css
  *
- * DungeonRollMg stylesheet
+ * DungeonRoll stylesheet
  *
  */
 
@@ -18,8 +18,8 @@
     This is the CSS stylesheet of your game User Interface.
     
     Styles defined on this file will be applied to the HTML elements you define in your
-    HTML template (dungeonrollmg_dungeonrollmg.tpl), and to HTML elements you create dynamically
-    (in dungeonrollmg.js).
+    HTML template (dungeonroll_dungeonroll.tpl), and to HTML elements you create dynamically
+    (in dungeonroll.js).
     
     Usually, you are using CSS to:
     

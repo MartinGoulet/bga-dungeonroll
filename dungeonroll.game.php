@@ -3,13 +3,13 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
+ * DungeonRoll implementation : © Martin Goulet <martin.goulet@live.ca>
  * 
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  * 
- * dungeonrollmg.game.php
+ * dungeonroll.game.php
  *
  * This is the main file for your game logic.
  *
@@ -39,7 +39,7 @@ require_once('modules/DRTreasureToken.php');
 
 
 
-class DungeonRollMg extends Table
+class DungeonRoll extends Table
 {
     function __construct()
     {
@@ -75,7 +75,7 @@ class DungeonRollMg extends Table
     protected function getGameName()
     {
         // Used for translations and stuff. Please do not modify.
-        return "dungeonrollmg";
+        return "dungeonroll";
     }
 
     /*

@@ -1,15 +1,15 @@
 /**
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
- * DungeonRollMg implementation : © Martin Goulet <martin.goulet@live.ca>
+ * DungeonRoll implementation : © Martin Goulet <martin.goulet@live.ca>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
  *
- * dungeonrollmg.js
+ * dungeonroll.js
  *
- * DungeonRollMg user interface script
+ * DungeonRoll user interface script
  * 
  */
 
@@ -22,7 +22,7 @@ define([
         "ebg/stock"
     ],
     function(dojo, declare) {
-        return declare("bgagame.dungeonrollmg", ebg.core.gamegui, {
+        return declare("bgagame.dungeonroll", ebg.core.gamegui, {
 
             constructor: function() {
                 // Here, you can init the global variables of your user interface
@@ -130,7 +130,6 @@ define([
                 var stock = new ebg.stock();
                 stock.create(this, $(zone), 25, 25);
 
-                // stock.setSelectionAppearance("class");
                 stock.setSelectionMode(0);
                 stock.image_items_per_row = 6;
                 stock.setOverlap(80, 0);
@@ -152,7 +151,6 @@ define([
                     heroZone.create(this, $(zone), 50, 70);
                 }
 
-                heroZone.setSelectionAppearance("class");
                 heroZone.setSelectionMode(0);
                 heroZone.image_items_per_row = 8;
 
@@ -196,7 +194,6 @@ define([
                 var stock = new ebg.stock();
                 stock.create(this, $(zone), 42, 42);
 
-                // stock.setSelectionAppearance("class");
                 stock.setSelectionMode(0);
                 stock.image_items_per_row = 6;
 
@@ -364,7 +361,7 @@ define([
                 dojo.stopEvent(evt);
                 if (this.checkAction('selectHero')) {
                     var hero_id = evt.currentTarget.id.substring(evt.currentTarget.id.lastIndexOf("_") + 1);
-                    this.ajaxcall("/dungeonrollmg/dungeonrollmg/selectHero.html", {
+                    this.ajaxcall("/dungeonroll/dungeonroll/selectHero.html", {
                         hero_id: hero_id,
                         lock: true
                     }, this, function(result) {});
@@ -392,7 +389,7 @@ define([
                         this.confirmationDialog(
                             command.confirmation,
                             dojo.hitch(this, function() {
-                                this.ajaxcall("/dungeonrollmg/dungeonrollmg/executeCommand.html", {
+                                this.ajaxcall("/dungeonroll/dungeonroll/executeCommand.html", {
                                     id: command.id,
                                     sub: subCommand,
                                     lock: true
@@ -400,7 +397,7 @@ define([
                             }));
 
                     } else {
-                        this.ajaxcall("/dungeonrollmg/dungeonrollmg/executeCommand.html", {
+                        this.ajaxcall("/dungeonroll/dungeonroll/executeCommand.html", {
                             id: command.id,
                             sub: subCommand,
                             lock: true
@@ -412,7 +409,7 @@ define([
             chooseDieGain: function(evt) {
                 if (this.checkAction('chooseDieGain')) {
                     var diceType = evt.currentTarget.id.substr(5);
-                    this.ajaxcall("/dungeonrollmg/dungeonrollmg/chooseDieGain.html", {
+                    this.ajaxcall("/dungeonroll/dungeonroll/chooseDieGain.html", {
                         type: diceType.split("_")[0],
                         value: diceType.split("_")[1],
                         lock: true
@@ -452,7 +449,7 @@ define([
             moveDice: function(die_id) {
                 this.removeActionButtons();
                 if (this.checkAction('moveItem')) {
-                    this.ajaxcall("/dungeonrollmg/dungeonrollmg/moveItem.html", {
+                    this.ajaxcall("/dungeonroll/dungeonroll/moveItem.html", {
                         die_id: die_id,
                         lock: true
                     }, this, function(result) {});
@@ -468,7 +465,7 @@ define([
             In this method, you associate each of your game notifications with your local method to handle it.
              
             Note: game notification names correspond to "notifyAllPlayers" and "notifyPlayer" calls in
-            your dungeonrollmg.game.php file.
+            your dungeonroll.game.php file.
              
             */
             setupNotifications: function() {

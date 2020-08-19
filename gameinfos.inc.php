@@ -123,9 +123,8 @@ $gameinfos = array(
 // Each paragraph must be wrapped with totranslate() for translation and should not contain html (plain text without formatting).
 // A good length for this text is between 100 and 150 words (about 6 to 9 lines on a standard display)
 'presentation' => array(
-//    totranslate("This wonderful game is about geometric shapes!"),
-//    totranslate("It was awarded best triangle game of the year in 2005 and nominated for the Spiel des Jahres."),
-//    ...
+    totranslate("The Dungeon lies before you; you’ve assembled your party of hearty adventurers and have a few tricks up your sleeve. How far will you go to seek glory and fame? Will you risk losing everything?"),
+    totranslate("In Dungeon Roll the player's goal is to collect the most experience points by defeating monsters, battling the dragon, and amassing treasure. Each player selects a Hero avatar, such as a Mercenary, Half-Goblin, or Enchantress, which provides them with unique powers. Then players take turns being the Adventurer, who boldly enters the dungeon seeking glory."),
 ),
 
 // Games categories
