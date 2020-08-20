@@ -82,16 +82,16 @@ class DRPaladin extends DRCrusader
             $commandChest->execute(0);
         }
 
-        // // Quaff all potions
-        // $potions = DRUtils::filter($items, 'DRDungeonDice::isPotion');
-        // if (sizeof($potions) > 0) {
-        //     // Move all potions to the playing zone
-        //     $potions = DRItem::setZone($potions, ZONE_PLAY);
-        //     $this->game->manager->updateItems($potions);
-        //     $this->game->NTA_itemMove($potions);
+        // Quaff all potions
+        $potions = DRUtils::filter($items, 'DRDungeonDice::isPotion');
+        if (sizeof($potions) > 0) {
+            // Move all potions to the playing zone
+            $potions = DRItem::setZone($potions, ZONE_PLAY);
+            $this->game->manager->updateItems($potions);
+            $this->game->NTA_itemMove($potions);
 
-        //     $commandChest = $this->game->commands->getCommandByName('quaffPotion');
-        //     $commandChest->execute(0);
-        // }
+            $commandChest = $this->game->commands->getCommandByName('quaffPotion');
+            $commandChest->execute(0);
+        }
     }
 }
