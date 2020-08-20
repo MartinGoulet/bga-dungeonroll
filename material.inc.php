@@ -583,6 +583,12 @@ $this->command_infos = array(
         'php_class' => 'DRCommandEndLootPhase'
     ),
 
+    53 => array(
+        'name' => 'endDragonPhase',
+        'text' => clienttranslate('Next phase'),
+        'php_class' => 'DRCommandEndDragonPhase'
+    ),
+
     60 => array(
         'name' => 'retireTavern',
         'text' => clienttranslate('Retire to the tavern'),

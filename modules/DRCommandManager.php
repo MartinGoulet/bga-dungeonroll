@@ -13,6 +13,7 @@ require_once('Commands/DRCommandSeekGlory.class.php');
 require_once('Commands/DRCommandRetireTavern.class.php');
 require_once('Commands/DRCommandEndLootPhase.class.php');
 require_once('Commands/DRCommandEndMonsterPhase.class.php');
+require_once('Commands/DRCommandEndDragonPhase.class.php');
 require_once('Commands/DRCommandFightDragon.class.php');
 require_once('Commands/DRCommandFightMonster.class.php');
 require_once('Commands/DRCommandHeroUltimate.class.php');

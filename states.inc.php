@@ -195,6 +195,7 @@ $machinestates = array(
             "townPortal" => STATE_NEXT_PLAYER,
             "ringInvisibility" => STATE_PRE_REGROUP_PHASE,
             "chooseDie" => STATE_CHOOSE_DIE,
+            "end" => STATE_PRE_LOOT_PHASE,
         )
     ),
 
