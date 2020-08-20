@@ -174,7 +174,7 @@ $this->items_dungeon_dice = array(
         'image_index' => 5,
         'weight' => 1,
         'tooltip' => array(
-            totranslate("One Fighter or Champion may be used to open defeats any number Goblins"),
+            totranslate("One Fighter or Champion may be used to defeat any number Goblins"),
             totranslate("Any other Companion may be used to defeat 1 Goblin"),
         )
     ),
@@ -184,7 +184,7 @@ $this->items_dungeon_dice = array(
         'image_index' => 2,
         'weight' => 2,
         'tooltip' => array(
-            totranslate("One Mage or Champion may be used to open defeats any number Oozes"),
+            totranslate("One Mage or Champion may be used to defeat any number Oozes"),
             totranslate("Any other Companion may be used to defeat 1 Ooze"),
         )
     ),
@@ -194,7 +194,7 @@ $this->items_dungeon_dice = array(
         'image_index' => 3,
         'weight' => 3,
         'tooltip' => array(
-            totranslate("One Cleric or Champion may be used to open defeats any number Skeletons"),
+            totranslate("One Cleric or Champion may be used to defeat any number Skeletons"),
             totranslate("Any other Companion may be used to defeat 1 Skeleton"),
         )
     ),
@@ -271,7 +271,7 @@ $this->items_treasure_tokens = array(
         'image_index' => 3,
         'weight' => 30,
         'tooltip' => array(
-            totranslate("At the end of the game, collect 2 additional Experience for each pair of Dragon Scales you possess"),
+            totranslate("At the end of the game, collect 2 additional Experiences for each pair of Dragon Scales you possess"),
             totranslate("Number in the box : 6"),
         )
     ),
