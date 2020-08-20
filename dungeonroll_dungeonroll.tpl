@@ -120,13 +120,21 @@
 <script type="text/javascript">
     // Javascript HTML templates
 
-var jstpl_card_tooltip = '<div class="cardtooltip">\
-                            <h3>${name}</h3>\
-                            <hr/>\
-                            ${specialty}\
-                             <br/><br/>\
-                            ${ultimate}\
-                            </div>';
+var jstpl_card_tooltip = '\
+    <div class="cardtooltip">\
+        <h3>${name}</h3>\
+        <hr/>\
+        ${specialty}\
+        <br/><br/>\
+        ${ultimate}\
+    </div>';
+
+var jstpl_item_tooltip = '\
+<div class="itemtooltip">\
+    <h3>${name}</h3>\
+    <hr/>\
+    ${text}\
+</div>';
 
 var jstpl_player_board = '\
 <div class="player_board">\

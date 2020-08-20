@@ -77,7 +77,7 @@ define([
                     'zone_dungeon': this.initStockItemsGameDungeon("zone_dungeon", 'onClickItem'),
                     'zone_play': this.initStockItemsGameDungeon("zone_play", 'onClickItem'),
                     'zone_graveyard': this.initStockItemsGameDungeon("zone_graveyard", 'onCreateItem'),
-                    'zone_dragon_lair': this.initStockItemsGameDungeon("zone_dragon_lair"),
+                    'zone_dragon_lair': this.initStockItemsGameDungeon("zone_dragon_lair", 'onCreateItem'),
                     'zone_inventory': this.initStockItemsGameDungeon("zone_inventory", 'onClickItem'),
                     'zone_hero': this.initStockHero("zone_hero", true),
                     'zone_draft': this.initStockHero("draft_card", true, 'onSelectHero'),
@@ -93,9 +93,23 @@ define([
                 // Setup game notifications to handle (see "setupNotifications" method below)
                 this.setupNotifications();
 
-                // Setup tooltip on heroes
-                this.setupTooltipHeroes();
+                // Add tooltips to items
+                this.addTooltipItems();
+            },
 
+            addTooltipItems: function() {
+                Object.keys(this.gamedatas.items_party_dice).forEach(type => {
+                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_party_dice[type]), 750);
+                });
+                Object.keys(this.gamedatas.items_dungeon_dice).forEach(type => {
+                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_dungeon_dice[type]), 750);
+                });
+                Object.keys(this.gamedatas.items_treasure_tokens).forEach(type => {
+                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_treasure_tokens[type]), 750);
+                });
+                Object.keys(this.gamedatas.phases).forEach(phase => {
+                    this.addTooltipHtml("nav_" + phase, this.getItemTooltip(this.gamedatas.phases[phase]))
+                });
             },
 
             initCounter(div_name, initialValue) {
@@ -103,6 +117,22 @@ define([
                 counter.create(div_name);
                 counter.setValue(initialValue);
                 return counter;
+            },
+
+            getItemTooltip: function(item) {
+
+                var gametext = "";
+
+                if (item.tooltip !== undefined) {
+                    gametext = item.tooltip.join("<br/><br/>");
+                }
+
+                var itemInfo = {
+                    'name': item.name,
+                    'text': gametext,
+                };
+
+                return this.format_block('jstpl_item_tooltip', itemInfo);
             },
 
             getCardTooltip: function(card_type_id) {
@@ -219,10 +249,12 @@ define([
                 var div = dojo.query('#' + card_div.id);
                 // Associate the onclick method
                 div.connect('onclick', this, callback);
-                // If the dice is empty (placeholder)
-                if (card_type_id == 0) {
-                    // Add class empty to create a border
-                    div.addClass("empty");
+
+                div.addClass("item_" + card_type_id);
+
+                var itemType = card_type_id.split("_")[0];
+                if (itemType == 1 || itemType == 2) {
+                    div.addClass("dice")
                 }
 
                 var info = card_id.split("_")
@@ -519,6 +551,9 @@ define([
                     }
 
                 });
+
+                // Add tooltips to items
+                this.addTooltipItems();
             },
 
             notif_onHeroLevelUp: function(notif) {
@@ -538,6 +573,8 @@ define([
                     this.items['zone_' + die.zone].removeFromStockById(die.id);
                     this.items['zone_' + die.zone].addToStockWithId(die_type, die.id);
                 });
+                // Add tooltips to items
+                this.addTooltipItems();
             },
 
             notif_onNewPlayerTurn: function(notif) {
@@ -562,6 +599,8 @@ define([
                     this.items['zone_' + token.zone].addToStockWithId(token.type + "_" + token.value, token.id, from);
                     this.items['zone_' + token.previous_zone].removeFromStockById(token.from);
                 });
+                // Add tooltips to items
+                this.addTooltipItems();
             },
 
             notif_onSelectHero: function(notif) {

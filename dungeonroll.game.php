@@ -144,6 +144,7 @@ class DungeonRoll extends Table
             'items_party_dice' => $this->items_party_dice,
             'items_dungeon_dice' => $this->items_dungeon_dice,
             'items_treasure_tokens' => $this->items_treasure_tokens,
+            'phases' => $this->phases,
 
             'command_infos' => $this->getCommandInfos(),
             'hero' => $this->components->getActivePlayerHero()->getUIData(),

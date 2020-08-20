@@ -131,8 +131,6 @@
 
 /* New CSS */
 
-#board {}
-
 .stockitem,
 .whiteblock {
     border-radius: 5px;
@@ -166,8 +164,6 @@
 .col_5 {
     flex-grow: 5;
 }
-
-.dicezone {}
 
 .dicezone2 {
     min-height: 94px;
@@ -280,23 +276,16 @@
     transform-origin: top left;
 }
 
+.itemtooltip {
+    max-width: 300px;
+}
+
 
 /* Player Board */
 
 .player_board {
     font-size: 14px;
 }
-
-
-/* .player_board .player_hero {
-    width: 55px;
-    display: inline-block;
-}
-
-.player_board .player_info {
-    display: inline-block;
-    vertical-align: top;
-} */
 
 .player_board .player_hero {
     width: 55px;
@@ -305,4 +294,21 @@
 
 .player_board .player_info {
     overflow: hidden;
+}
+
+
+/* Override BGA */
+
+
+/* #page-title {
+    min-height: 68px;
+} */
+
+#page-title {
+    min-height: 68px;
+}
+
+#generalactions::before {
+    content: ' ';
+    display: block;
 }
