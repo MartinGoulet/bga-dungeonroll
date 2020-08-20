@@ -66,13 +66,15 @@ class DRMinstrel extends DRStandardHero
      */
     function canExecuteUltimate() 
     {
-        $dragons = $this->game->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $dragons = DRDungeonDice::getDragonDice($items);
         return sizeof($dragons) > 0;
     }
 
     function executeUltimate($sub_command_id)
     {
-        $dragons = $this->game->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $dragons = DRDungeonDice::getDragonDice($items);
         $dragons = DRItem::setZone($dragons, ZONE_BOX);
         $this->game->manager->updateItems($dragons);
         $this->game->notif->ultimateMinstrel($dragons);

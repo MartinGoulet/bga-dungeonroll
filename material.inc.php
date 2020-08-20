@@ -421,7 +421,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'imageindex' => 9,
         'heroclass' => "DRMinstrel",
-        'commandText' => clienttranslate("Minstrel : Discard all dice from the Dragon's Lair"),
+        'commandText' => clienttranslate("Minstrel : Discard all Dragon dice"),
     ),
 
     "5_5" => array(
@@ -430,7 +430,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'imageindex' => 10,
         'heroclass' => "DRBard",
-        'commandText' => clienttranslate("Bard : Discard all dice from the Dragon's Lair"),
+        'commandText' => clienttranslate("Bard : Discard all Dragon dice"),
     ),
 
     "4_6" => array(
