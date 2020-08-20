@@ -161,7 +161,10 @@ class DRNotification extends APP_GameClass
      * Ultimates
      */
 
-
+    function heroUltimate()
+    {
+        $this->game->notifyAllPlayers("onHeroUltimate", "", []);
+    }
 
     function ultimateBattlemage($dungeon_dice)
     {

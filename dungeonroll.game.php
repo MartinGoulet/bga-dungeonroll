@@ -148,6 +148,7 @@ class DungeonRoll extends Table
 
             'command_infos' => $this->getCommandInfos(),
             'hero' => $this->components->getActivePlayerHero()->getUIData(),
+            'isHeroActivated' => $this->vars->getIsHeroActivated(),
 
             'inventories' => $this->manager->getInventoryByPlayer($players),
         ];

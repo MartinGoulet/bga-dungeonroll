@@ -95,6 +95,18 @@ define([
 
                 // Add tooltips to items
                 this.addTooltipItems();
+
+                // Set hero activation
+                this.setIsHeroActivated(gamedatas.isHeroActivated);
+            },
+
+            setIsHeroActivated: function(isActivated) {
+                var div = dojo.query('#zone_hero');
+                if (isActivated) {
+                    div.addClass("activated");
+                } else {
+                    div.removeClass("activated");
+                }
             },
 
             addTooltipItems: function() {
@@ -511,6 +523,7 @@ define([
                 dojo.subscribe('onNewTokens', this, "notif_onNewTokens");
                 dojo.subscribe('onNewDelve', this, "notif_onNewDelve");
                 dojo.subscribe('onHeroLevelUp', this, "notif_onHeroLevelUp");
+                dojo.subscribe('onHeroUltimate', this, "notif_onHeroUltimate");
                 dojo.subscribe('onSelectHero', this, "notif_onSelectHero");
 
                 this.notifqueue.setSynchronous('onDiceRolled', 1250);
@@ -579,6 +592,7 @@ define([
 
             notif_onNewPlayerTurn: function(notif) {
                 this.addItemsToBoard([]);
+                this.setIsHeroActivated(false);
             },
 
             notif_onNewLevel: function(notif) {
@@ -601,6 +615,10 @@ define([
                 });
                 // Add tooltips to items
                 this.addTooltipItems();
+            },
+
+            notif_onHeroUltimate: function(notif) {
+                this.setIsHeroActivated(true);
             },
 
             notif_onSelectHero: function(notif) {

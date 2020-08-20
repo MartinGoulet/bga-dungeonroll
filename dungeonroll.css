@@ -281,6 +281,21 @@
 }
 
 
+/* Hero zone */
+
+#zone_hero.activated .stockitem {
+    /* Safari and Chrome */
+    -webkit-transform: rotate(90deg) scale(0.9);
+    /* Firefox */
+    -moz-transform: rotate(90deg) scale(0.9);
+    /* IE 9 */
+    -ms-transform: rotate(90deg) scale(0.9);
+    /* Opera */
+    -o-transform: rotate(90deg) scale(0.9);
+    transform: rotate(90deg) scale(0.9);
+}
+
+
 /* Player Board */
 
 .player_board {
@@ -298,11 +313,6 @@
 
 
 /* Override BGA */
-
-
-/* #page-title {
-    min-height: 68px;
-} */
 
 #page-title {
     min-height: 68px;

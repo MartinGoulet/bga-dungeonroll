@@ -39,7 +39,8 @@ class DRCommandHeroUltimate extends DRCommand
         $hero = $this->game->components->getActivePlayerHero();
         $hero->executeUltimate($sub_command_id);
         $this->game->vars->setIsHeroActivated(true);
-
+        $this->game->notif->heroUltimate();
+        
         if($hero->updatePossibleActionAfterUltimate()) {
             $this->game->notif->updatePossibleActions();
         }
