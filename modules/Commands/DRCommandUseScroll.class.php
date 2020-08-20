@@ -31,7 +31,7 @@ class DRCommandUseScroll extends DRCommand
         // True if at least 1 scroll in play with another item who is not a treasure token
         // except only 1 scroll token.
         return sizeof($scrollsInPlay) >= 1 && 
-               $itemsInPlay > 1 && 
+               sizeof($itemsInPlay) > 1 && 
                sizeof($nonTreasureScroll) == 0 &&
                sizeof($itemsTemporary) == 0;
     }
