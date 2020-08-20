@@ -34,17 +34,16 @@ class DRCommandQuaffPotion extends DRCommand
                    DRTreasureToken::isScroll($item);
         }));
 
+        $party_dice_play_zone = DRPartyDice::getPartyDice($itemsInPlay);
         $items_graveyard = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
 
         if (sizeof($potions) == 0) {
             return false;
         } else if (sizeof($party_items) != 1) {
             return false;
-        } else if (sizeof($items_graveyard) < sizeof($potions) - 1) {
-            return false;
         }
 
-        return true;
+        return sizeof($party_dice_play_zone) + sizeof($items_graveyard) >= sizeof($potions);
     }
 
     public function execute($sub_command_id)
