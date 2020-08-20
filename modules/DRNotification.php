@@ -27,7 +27,7 @@ class DRNotification extends APP_GameClass
 
     function fleeDungeon()
     {
-        $message = clienttranslate('${player_name} decides to flee the dungeon.');
+        $message = clienttranslate('${player_name} decides to flee the dungeon');
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
         ]);
@@ -83,7 +83,7 @@ class DRNotification extends APP_GameClass
 
     function retireTavern()
     {
-        $message = clienttranslate('${player_name} decides to retire at the tavern.');
+        $message = clienttranslate('${player_name} decides to retire at the tavern');
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
         ]);
@@ -126,7 +126,7 @@ class DRNotification extends APP_GameClass
 
     function skipDragonPhase()
     {
-        $message = clienttranslate('${player_name} skip the dragon phase because no dragon found');
+        $message = clienttranslate('${player_name} skip the dragon phase because less than 3 dragons found');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -147,7 +147,7 @@ class DRNotification extends APP_GameClass
 
     function useScroll($scrolls, $otherDice)
     {
-        $message = clienttranslate('${player_name} uses a scroll to re-rolls ${nbr} dice.');
+        $message = clienttranslate('${player_name} uses a scroll to re-rolls ${nbr} dice');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -165,7 +165,7 @@ class DRNotification extends APP_GameClass
 
     function ultimateBattlemage($dungeon_dice)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and discard all dungeon dice.');
+        $message = clienttranslate('${player_name} uses ${hero_name} and discard all dungeon dice');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),

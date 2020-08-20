@@ -128,7 +128,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_fighter',
         'tooltip' => array(
             totranslate("May be used to defeat 1 Skeleton, 1 Ooze, or any number of Goblins"),
-            totranslate("May be used to open 1 chest or quaff any number of Potions."),
+            totranslate("May be used to open 1 chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_THIEF => array(
