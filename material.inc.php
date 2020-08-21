@@ -497,6 +497,8 @@ $this->command_infos = array(
     1 => array(
         'name' => 'useScroll',
         'text' => clienttranslate('Use scroll'),
+        'askConfirmation' => 'checkRerollPotion',
+        'confirmation' => clienttranslate("Are you sure you want to re-roll Potion(s)?"),
         'php_class' => 'DRCommandUseScroll'
     ),
 

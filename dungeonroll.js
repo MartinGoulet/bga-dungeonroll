@@ -428,7 +428,7 @@ define([
                         subCommand = info[1];
                     }
 
-                    if (command.confirmation !== undefined) {
+                    if (command.confirmation !== undefined && this.canAskConfirmation(command)) {
 
                         this.confirmationDialog(
                             command.confirmation,
@@ -448,6 +448,21 @@ define([
                         }, this, function(result) {});
                     }
                 }
+            },
+
+            canAskConfirmation: function(command) {
+                debugger;
+                switch (command.askConfirmation) {
+                    case 'checkRerollPotion':
+                        return this.checkRerollPotion();
+                    default:
+                        return true;
+                }
+            },
+
+            checkRerollPotion: function() {
+                var item_types = this.items.zone_play.getPresentTypeList();
+                return item_types["2_2"] == 1; // Potions
             },
 
             chooseDieGain: function(evt) {
