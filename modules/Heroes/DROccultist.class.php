@@ -63,7 +63,7 @@ class DROccultist extends DRStandardHero
     function canExecuteUltimate()
     {
         // At least 1 skeleton in the playing area
-        return sizeof($this->getSkeletonsPlayingArea()) >= $this->getNumberSkeletonToFighter();
+        return sizeof($this->getSkeletonsPlayingArea()) >= 1;
     }
 
     function executeUltimate($sub_command_id)

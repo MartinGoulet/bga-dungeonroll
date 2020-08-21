@@ -66,7 +66,7 @@ class DREnchantress extends DRStandardHero
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        return sizeof($monsters) == $this->getNumberOfMonsterToTransform();
+        return sizeof($monsters) <= $this->getNumberOfMonsterToTransform() && sizeof($monsters) >= 1;
     }
 
     function executeUltimate($sub_command_id)

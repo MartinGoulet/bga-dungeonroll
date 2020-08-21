@@ -25,7 +25,7 @@ class DRHalfGoblin extends DRStandardHero
     function canExecuteUltimate()
     {
         // At least 1 goblin in the playing area
-        return sizeof($this->getGoblinsPlayingArea()) >= $this->getNumberGoblinsToThief();
+        return sizeof($this->getGoblinsPlayingArea()) >= 1;
     }
 
     function executeUltimate($sub_command_id)
@@ -37,7 +37,7 @@ class DRHalfGoblin extends DRStandardHero
         $goblins = DRItem::setZone($goblins, ZONE_BOX);
         $this->game->manager->updateItems($goblins);
 
-        $thieves = $this->getThieveDice($this->getNumberGoblinsToThief());
+        $thieves = $this->getThieveDice(sizeof($goblins));
 
         $this->game->notif->ultimateHalfGoblin(array_merge($thieves, $goblins));
     }

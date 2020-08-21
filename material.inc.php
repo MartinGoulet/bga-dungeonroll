@@ -409,10 +409,10 @@ $this->card_types = array(
     "5_4" => array(
         'name' => clienttranslate("Chieftain"),
         'specialty' => clienttranslate("You may open Chests and quaff Potions at any time during the Monsters Phase"),
-        'ultimate' => clienttranslate("Transform 2 Goblins into Thieves. Discard them during the next Regroup Phase"),
+        'ultimate' => clienttranslate("Transform up to 2 Goblins into Thieves. Discard them during the next Regroup Phase"),
         'imageindex' => 8,
         'heroclass' => "DRChieftain",
-        'commandText' => clienttranslate("Chieftain : Transform 2 Goblins into Thieves"),
+        'commandText' => clienttranslate("Chieftain : Transform up to 2 Goblins into Thieves"),
     ),
 
     "4_5" => array(
@@ -445,10 +445,10 @@ $this->card_types = array(
     "5_6" => array(
         'name' => clienttranslate("Beguiler"),
         'specialty' => clienttranslate("Scrolls may be used as any Companion"),
-        'ultimate' => clienttranslate("Transform 2 Monsters into 1 potion"),
+        'ultimate' => clienttranslate("Transform up to 2 Monsters into 1 potion"),
         'imageindex' => 12,
         'heroclass' => "DRBeguiler",
-        'commandText' => clienttranslate("Beguiler : Transform 2 Monsters into 1 potion"),
+        'commandText' => clienttranslate("Beguiler : Transform up to 2 Monsters into 1 potion"),
     ),
 
     "4_7" => array(
@@ -463,10 +463,10 @@ $this->card_types = array(
     "5_7" => array(
         'name' => clienttranslate("Necromancer"),
         'specialty' => clienttranslate("Clerics may be used as Mages and Mages may be used as Clerics"),
-        'ultimate' => clienttranslate("Transform 2 Skeleton into a Fighter. Discard it during the next Regroup Phase"),
+        'ultimate' => clienttranslate("Transform up to 2 Skeleton into a Fighter. Discard it during the next Regroup Phase"),
         'imageindex' => 14,
         'heroclass' => "DRNecromancer",
-        'commandText' => clienttranslate("Necromancer : Transform 2 Skeletons into a Fighter"),
+        'commandText' => clienttranslate("Necromancer : Transform up to 2 Skeletons into a Fighter"),
     ),
 
     "4_8" => array(
