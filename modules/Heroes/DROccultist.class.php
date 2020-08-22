@@ -75,7 +75,7 @@ class DROccultist extends DRStandardHero
         $skeletons = DRItem::setZone($skeletons, ZONE_BOX);
         $this->game->manager->updateItems($skeletons);
 
-        $fighters = $this->getFighterDice(1);
+        $fighters = $this->getFighterDice(sizeof($skeletons));
 
         $this->game->notif->ultimateOccultist(array_merge($fighters, $skeletons));
     }

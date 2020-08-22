@@ -463,10 +463,10 @@ $this->card_types = array(
     "5_7" => array(
         'name' => clienttranslate("Necromancer"),
         'specialty' => clienttranslate("Clerics may be used as Mages and Mages may be used as Clerics"),
-        'ultimate' => clienttranslate("Transform up to 2 Skeleton into a Fighter. Discard it during the next Regroup Phase"),
+        'ultimate' => clienttranslate("Transform up to 2 Skeletons into Fighters. Discard it during the next Regroup Phase"),
         'imageindex' => 14,
         'heroclass' => "DRNecromancer",
-        'commandText' => clienttranslate("Necromancer : Transform up to 2 Skeletons into a Fighter"),
+        'commandText' => clienttranslate("Necromancer : Transform up to 2 Skeletons into Fighters"),
     ),
 
     "4_8" => array(
