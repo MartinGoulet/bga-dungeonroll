@@ -161,8 +161,8 @@ $machinestates = array(
 
     STATE_CHOOSE_DIE => array(
         "name" => "quaffPotion",
-        "description" => clienttranslate('Quaff potion : ${actplayer} must choose which die to get (x${nbr})'),
-        "descriptionmyturn" => clienttranslate('Quaff phase : ${you} must choose which die to get (x${nbr})'),
+        "description" => clienttranslate('${actplayer} must choose which die to get (x${nbr})'),
+        "descriptionmyturn" => clienttranslate('${you} must choose which die to get (x${nbr})'),
         "type" => "activeplayer",
         "args" => "argQuaffPotion",
         "possibleactions" => array("chooseDieGain"),

@@ -252,7 +252,7 @@ class DRNotification extends APP_GameClass
     
     function ultimateMinstrel($dragons)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and discard all dice fromn the Dragon\'s Lair');
+        $message = clienttranslate('${player_name} uses ${hero_name} and discard all dice from the Dragon\'s Lair');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
