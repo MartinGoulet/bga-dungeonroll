@@ -105,8 +105,8 @@ $this->items_party_dice = array(
         'weight' => 11,
         'small_icon' => 'dice_mage',
         'tooltip' => array(
-            totranslate("May be used to defeat 1 Goblin, 1 Skeleton, or any number of Oozes"),
-            totranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to defeat 1 Goblin, 1 Skeleton, or any number of Oozes"),
+            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_CLERIC => array(
@@ -116,8 +116,8 @@ $this->items_party_dice = array(
         'weight' => 12,
         'small_icon' => 'dice_cleric',
         'tooltip' => array(
-            totranslate("May be used to defeat 1 Goblin, 1 Ooze, or any number of Skeletons"),
-            totranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to defeat 1 Goblin, 1 Ooze, or any number of Skeletons"),
+            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_FIGHTER => array(
@@ -127,8 +127,8 @@ $this->items_party_dice = array(
         'weight' => 13,
         'small_icon' => 'dice_fighter',
         'tooltip' => array(
-            totranslate("May be used to defeat 1 Skeleton, 1 Ooze, or any number of Goblins"),
-            totranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to defeat 1 Skeleton, 1 Ooze, or any number of Goblins"),
+            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_THIEF => array(
@@ -138,8 +138,8 @@ $this->items_party_dice = array(
         'weight' => 14,
         'small_icon' => 'dice_thief',
         'tooltip' => array(
-            totranslate("May be used to defeat 1 Goblin, 1 Skeleton or 1 Ooze"),
-            totranslate("May be used to open any number of chests or quaff any number of Potions"),
+            clienttranslate("May be used to defeat 1 Goblin, 1 Skeleton or 1 Ooze"),
+            clienttranslate("May be used to open any number of chests or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_CHAMPION => array(
@@ -149,8 +149,8 @@ $this->items_party_dice = array(
         'weight' => 15,
         'small_icon' => 'dice_champion',
         'tooltip' => array(
-            totranslate("May be used to defeat any number of Goblins, any number of Skeletons or any number of Oozes"),
-            totranslate("May be used to open any number of chests or quaff any number of Potions"),
+            clienttranslate("May be used to defeat any number of Goblins, any number of Skeletons or any number of Oozes"),
+            clienttranslate("May be used to open any number of chests or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_SCROLL => array(
@@ -160,9 +160,9 @@ $this->items_party_dice = array(
         'weight' => 16,
         'small_icon' => 'dice_scroll',
         'tooltip' => array(
-            totranslate("Scroll may be used to re-roll any number of Dungeon dice and Party dice"),
-            totranslate("Scroll may be used to quaff any number of Potions"),
-            totranslate("Scroll is not a Companion so you cannot use it to defeat Monster or Dragon"),
+            clienttranslate("Scroll may be used to re-roll any number of Dungeon dice and Party dice"),
+            clienttranslate("Scroll may be used to quaff any number of Potions"),
+            clienttranslate("Scroll is not a Companion so you cannot use it to defeat Monster or Dragon"),
         )
     ),
 );
@@ -174,8 +174,8 @@ $this->items_dungeon_dice = array(
         'image_index' => 5,
         'weight' => 1,
         'tooltip' => array(
-            totranslate("One Fighter or Champion may be used to defeat any number Goblins"),
-            totranslate("Any other Companion may be used to defeat 1 Goblin"),
+            clienttranslate("One Fighter or Champion may be used to defeat any number Goblins"),
+            clienttranslate("Any other Companion may be used to defeat 1 Goblin"),
         )
     ),
     TYPE_DUNGEON_DIE . '_' . DIE_OOZE => array(
@@ -184,8 +184,8 @@ $this->items_dungeon_dice = array(
         'image_index' => 2,
         'weight' => 2,
         'tooltip' => array(
-            totranslate("One Mage or Champion may be used to defeat any number Oozes"),
-            totranslate("Any other Companion may be used to defeat 1 Ooze"),
+            clienttranslate("One Mage or Champion may be used to defeat any number Oozes"),
+            clienttranslate("Any other Companion may be used to defeat 1 Ooze"),
         )
     ),
     TYPE_DUNGEON_DIE . '_' . DIE_SKELETON => array(
@@ -194,8 +194,8 @@ $this->items_dungeon_dice = array(
         'image_index' => 3,
         'weight' => 3,
         'tooltip' => array(
-            totranslate("One Cleric or Champion may be used to defeat any number Skeletons"),
-            totranslate("Any other Companion may be used to defeat 1 Skeleton"),
+            clienttranslate("One Cleric or Champion may be used to defeat any number Skeletons"),
+            clienttranslate("Any other Companion may be used to defeat 1 Skeleton"),
         )
     ),
     TYPE_DUNGEON_DIE . '_' . DIE_CHEST => array(
@@ -204,10 +204,10 @@ $this->items_dungeon_dice = array(
         'image_index' => 4,
         'weight' => 4,
         'tooltip' => array(
-            totranslate("One Thief or Champion may be used to open any number of Chests in the level"),
-            totranslate("Any other Companion may be used to open 1 Chest"),
-            totranslate("For each Chest opened, you get one Treasure token"),
-            totranslate("In the rare case that no Treasure token remain in the box, you receive 1 Experience instead"),
+            clienttranslate("One Thief or Champion may be used to open any number of Chests in the level"),
+            clienttranslate("Any other Companion may be used to open 1 Chest"),
+            clienttranslate("For each Chest opened, you get one Treasure token"),
+            clienttranslate("In the rare case that no Treasure token remain in the box, you receive 1 Experience instead"),
         )
     ),
     TYPE_DUNGEON_DIE . '_' . DIE_POTION => array(
@@ -216,9 +216,9 @@ $this->items_dungeon_dice = array(
         'image_index' => 1,
         'weight' => 5,
         'tooltip' => array(
-            totranslate("Any Party die (including Scrolls) can be used to Quaff any number of Potions"),
-            totranslate("For each Potion quaffed, you take 1 Party die from the Graveyard and adds it to her active party, choosing its face"),
-            totranslate("Unused Potion are returned to the available pool before moving onto the Dragon phase"),
+            clienttranslate("Any Party die (including Scrolls) can be used to Quaff any number of Potions"),
+            clienttranslate("For each Potion quaffed, you take 1 Party die from the Graveyard and adds it to her active party, choosing its face"),
+            clienttranslate("Unused Potion are returned to the available pool before moving onto the Dragon phase"),
         )
     ),
     TYPE_DUNGEON_DIE . '_' . DIE_DRAGON => array(
@@ -227,8 +227,8 @@ $this->items_dungeon_dice = array(
         'image_index' => 0,
         'weight' => 6,
         'tooltip' => array(
-            totranslate("Use three different types of Companions to defeat the Dragon. Treasure that act like a Companion may be used in this way"),
-            totranslate("After defeating the Dragon, you get 1 Treasure Token from the box and earn 1 Experience"),
+            clienttranslate("Use three different types of Companions to defeat the Dragon. Treasure that act like a Companion may be used in this way"),
+            clienttranslate("After defeating the Dragon, you get 1 Treasure Token from the box and earn 1 Experience"),
         )
     ),
 );
@@ -240,8 +240,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 0,
         'weight' => 29,
         'tooltip' => array(
-            totranslate("Transform all monsters into the Dragon faces and move those dice into the Dragon's Lair"),
-            totranslate("Number in the box : 4"),
+            clienttranslate("Transform all monsters into the Dragon faces and move those dice into the Dragon's Lair"),
+            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_RING_INVISIBILITY => array(
@@ -250,9 +250,9 @@ $this->items_treasure_tokens = array(
         'image_index' => 1,
         'weight' => 28,
         'tooltip' => array(
-            totranslate("Return all Dungeon dice from the Dragon's Lair to the active supply of Dungeon dice"),
-            totranslate("This does not count as Defeating the dragon - do not collect Experience or get Treasure"),
-            totranslate("Number in the box : 4"),
+            clienttranslate("Return all Dungeon dice from the Dragon's Lair to the active supply of Dungeon dice"),
+            clienttranslate("This does not count as Defeating the dragon - do not collect Experience or get Treasure"),
+            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_TOWN_PORTAL => array(
@@ -261,8 +261,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 2,
         'weight' => 27,
         'tooltip' => array(
-            totranslate("Collect Experience equal to the Level. The delve is over. If unused, Town Portal is worth 2 Experience at the end of the game instead of the usual 1"),
-            totranslate("Number in the box : 4"),
+            clienttranslate("Collect Experience equal to the Level. The delve is over. If unused, Town Portal is worth 2 Experience at the end of the game instead of the usual 1"),
+            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_DRAGON_SCALES => array(
@@ -271,8 +271,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 3,
         'weight' => 30,
         'tooltip' => array(
-            totranslate("At the end of the game, collect 2 additional Experiences for each pair of Dragon Scales you possess"),
-            totranslate("Number in the box : 6"),
+            clienttranslate("At the end of the game, collect 2 additional Experiences for each pair of Dragon Scales you possess"),
+            clienttranslate("Number in the box : 6"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_SCROLL => array(
@@ -281,8 +281,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 4,
         'weight' => 25,
         'tooltip' => array(
-            totranslate("Use as one Scroll die face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Use as one Scroll die face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_POTION => array(
@@ -291,8 +291,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 5,
         'weight' => 26,
         'tooltip' => array(
-            totranslate("Revive 1 Party die (return it from the Graveyard to your active party) and choose its face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Revive 1 Party die (return it from the Graveyard to your active party) and choose its face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_VORPAL_SWORD => array(
@@ -301,8 +301,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 6,
         'weight' => 21,
         'tooltip' => array(
-            totranslate("Use as one Fighter die face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Use as one Fighter die face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_TALISMAN => array(
@@ -311,8 +311,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 7,
         'weight' => 22,
         'tooltip' => array(
-            totranslate("Use as one Cleric die face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Use as one Cleric die face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_SCEPTER_OF_POWER => array(
@@ -321,8 +321,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 8,
         'weight' => 23,
         'tooltip' => array(
-            totranslate("Use as one Mage die face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Use as one Mage die face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_THIEVES => array(
@@ -331,8 +331,8 @@ $this->items_treasure_tokens = array(
         'image_index' => 9,
         'weight' => 24,
         'tooltip' => array(
-            totranslate("Use as one Thief die face"),
-            totranslate("Number in the box : 3"),
+            clienttranslate("Use as one Thief die face"),
+            clienttranslate("Number in the box : 3"),
         )
     ),
 );
@@ -618,25 +618,25 @@ $this->phases = array(
     'monsterPhase' => array(
         'name' => clienttranslate("Monster phase"),
         'tooltip' => array(
-            totranslate("You must defeat all monsters, <b>one type of Monster at a time</b>"),
+            clienttranslate("You must defeat all monsters, <b>one type of Monster at a time</b>"),
         ),
     ),
     'lootPhase' => array(
         'name' => clienttranslate("Loot phase"),
         'tooltip' => array(
-            totranslate("You may open Chests and quaff Potions"),
+            clienttranslate("You may open Chests and quaff Potions"),
         ),
     ),
     'dragonPhase' => array(
         'name' => clienttranslate("Dragon phase"),
         'tooltip' => array(
-            totranslate("You must defeat Dragons if 3 or more Dragons is present"),
+            clienttranslate("You must defeat Dragons if 3 or more Dragons is present"),
         ),
     ),
     'regroupPhase' => array(
         'name' => clienttranslate("Regroup phase"),
         'tooltip' => array(
-            totranslate("You must choose to continue or end the delve"),
+            clienttranslate("You must choose to continue or end the delve"),
         ),
     ),
 );
