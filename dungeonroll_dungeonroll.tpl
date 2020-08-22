@@ -137,7 +137,7 @@ var jstpl_hero_novice_tooltip = '\
         <br/><br/>\
         ${ultimate}\
         <br/><br/>\
-        <div class="keyword">{5_XP_LEVEL_UP}<div>\
+        ${xp_level_up}\
     </div>';
 
 var jstpl_item_tooltip = '\

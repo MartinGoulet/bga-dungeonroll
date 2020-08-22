@@ -142,12 +142,18 @@ define([
                 var gametext = "";
 
                 if (item.tooltip !== undefined) {
-                    gametext = item.tooltip.join("<br/><br/>");
+                    var textArray = [];
+
+                    item.tooltip.forEach(text => {
+                        textArray.push(_(text));
+                    });
+
+                    gametext = textArray.join("<br/><br/>");
                 }
 
                 var itemInfo = {
-                    'name': item.name,
-                    'text': gametext,
+                    'name': _(item.name),
+                    'text': _(gametext),
                 };
 
                 return this.format_block('jstpl_item_tooltip', itemInfo);
@@ -158,12 +164,13 @@ define([
                 var card = this.gamedatas.card_types[card_type_id];
 
                 var cardInfo = {
-                    'ultimate': '<div class="keyword">' + _('Ultimate') + ' : </div>' + card.ultimate,
-                    'specialty': '<div class="keyword">' + _('Specialty') + ' : </div>' + card.specialty,
-                    'name': card.name
+                    'ultimate': '<div class="keyword">' + _('Ultimate') + ' : </div>' + _(card.ultimate),
+                    'specialty': '<div class="keyword">' + _('Specialty') + ' : </div>' + _(card.specialty),
+                    'name': _(card.name)
                 };
 
                 if (card_type_id.split('_')[0] == this.ItemType.HeroNovice) {
+                    cardInfo['xp_level_up'] = '<div class="keyword">' + _('5 XP to Level up') + '</div>'
                     return this.format_block('jstpl_hero_novice_tooltip', cardInfo);
                 } else {
                     return this.format_block('jstpl_card_tooltip', cardInfo);
@@ -396,13 +403,13 @@ define([
                 commands.forEach(command => {
                     if (command.commands === undefined) {
                         if (command.button_color) {
-                            this.addActionButton('cmd_' + command.id, command.text, 'executeCommand', null, false, command.button_color);
+                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', null, false, command.button_color);
                         } else {
-                            this.addActionButton('cmd_' + command.id, command.text, 'executeCommand');
+                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand');
                         }
                     } else {
                         Object.keys(command.commands).forEach(key => {
-                            this.addActionButton('cmd_' + command.id + '_' + key, command.commands[key], 'executeCommand');
+                            this.addActionButton('cmd_' + command.id + '_' + key, _(command.commands[key]), 'executeCommand');
                         });
                     }
                 });
