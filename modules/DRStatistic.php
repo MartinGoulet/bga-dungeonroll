@@ -32,6 +32,26 @@ class DRStatistic
         }
     }
 
+    public function getLevelCompleted($player_id) {
+        return $this->game->getStat(STAT_XP_LEVEL, $player_id);
+    }
+
+    public function getExpTreasure($player_id) {
+        return $this->game->getStat(STAT_XP_TREASURE, $player_id);
+    }
+
+    public function getExpDragon($player_id) {
+        return $this->game->getStat(STAT_XP_DRAGON, $player_id);
+    }
+
+    public function getExpDragonScale($player_id) {
+        return $this->game->getStat(STAT_XP_DRAGON_SCALE, $player_id);
+    }
+
+    public function getExpTownPortal($player_id) {
+        return $this->game->getStat(STAT_XP_TOWN_PORTAL, $player_id);
+    }
+
     public function incLevelCompleted($nbr_level) {
         $player_id = $this->game->getActivePlayerId();
         $this->game->incStat($nbr_level, STAT_XP_LEVEL, $player_id);

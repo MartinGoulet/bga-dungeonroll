@@ -676,6 +676,8 @@ class DungeonRoll extends Table
 
         $this->notif->updatedScores();
 
+        $this->NTA_finalScoring();
+
         $this->gamestate->nextState('');
     }
 
@@ -758,6 +760,98 @@ class DungeonRoll extends Table
         ));
     }
 
+    function NTA_finalScoring()
+    {
+        $sql = 'SELECT player_id, player_score, player_name FROM player';
+        $players = self::getCollectionFromDB($sql);
+
+        
+        $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
+        $rowLevel = array('Levels completed');
+        $rowDragon = array('Dragon killed');
+        $rowTreasure = array('Treasures');
+        $rowScales = array('Dragon Scales');
+        $rowTownPortal = array('Town Portal');
+        $rowTotal = array('Total');
+        $rowRank = array('Rank');
+
+        foreach ($players as $player_id => $player) {
+            
+            $rowHeader[] = array(
+                'str' => '${player_name}',
+                'args' => array('player_name' => $player['player_name']),
+                'type' => 'header'
+            );
+
+            $rowLevel[] = $this->getValueWithStar($this->stats->getLevelCompleted($player_id), true);
+            $rowDragon[] = $this->getValueWithStar($this->stats->getExpDragon($player_id));
+            $rowTreasure[] = $this->getValueWithStar($this->stats->getExpTreasure($player_id));
+            $rowScales[] = $this->getValueWithStar($this->stats->getExpDragonScale($player_id));
+            $rowTownPortal[] = $this->getValueWithStar($this->stats->getExpTownPortal($player_id));
+
+            $total =
+                $this->stats->getLevelCompleted($player_id) +
+                $this->stats->getExpDragon($player_id) +
+                $this->stats->getExpTreasure($player_id) +
+                $this->stats->getExpDragonScale($player_id) +
+                $this->stats->getExpTownPortal($player_id);
+
+            $rowTotal[] = $this->getValueWithStar($total, true);
+            $rowRank[] = $this->getRank($total, $number);
+        }
+
+        $table = array($rowHeader, $rowLevel, $rowTreasure, $rowDragon, $rowScales, $rowTownPortal, $rowRank, $rowTotal);
+
+        foreach ($players as $player_id => $player) {
+            $total =
+                $this->stats->getLevelCompleted($player_id) +
+                $this->stats->getExpDragon($player_id) +
+                $this->stats->getExpTreasure($player_id) +
+                $this->stats->getExpDragonScale($player_id) +
+                $this->stats->getExpTownPortal($player_id);
+
+            $rank = $this->getRank($total, $number);
+
+            $prefix = clienttranslate('You have achieved the rank of');
+
+            $this->notifyPlayer($player_id, "tableWindow", '', array(
+                "id" => 'finalScoring',
+                "title" => clienttranslate("Final scoring"),
+                "table" => $table,
+                "closing" => clienttranslate("Close"),
+                "header" => "<div class=\"rank-text\">${prefix} <span class=\"rank-${number}\">${rank}</span></div>",
+            ));
+        }
+    }
+
+    function getValueWithStar($value, $zeroWithStar = false)
+    {
+        if ($value > 0 || $zeroWithStar) {
+            return $value . ' <i class="fa fa-star"></i>';
+        } else {
+            return '-';
+        }
+    }
+
+    function getRank($value, &$number)
+    {
+        if ($value <= 15) {
+            $number = 1;
+            return clienttranslate('Dragon Fodder');
+        } else if ($value <= 23) {
+            $number = 2;
+            return clienttranslate('Village Hero');
+        } else if ($value <= 29) {
+            $number = 3;
+            return clienttranslate('Seasoned Explorer');
+        } else if ($value <= 34) {
+            $number = 4;
+            return clienttranslate('Champion');
+        } else {
+            $number = 5;
+            return clienttranslate('Hero of Ages');
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////////////:
     ////////// DB upgrade

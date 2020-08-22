@@ -323,3 +323,42 @@
     content: ' ';
     display: block;
 }
+
+
+/* Table Window */
+
+.tableWindow table {
+    min-width: 100%;
+}
+
+.tableWindow table th {
+    text-align: center;
+}
+
+.tableWindow .rank-text {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.tableWindow .rank-1 {
+    color: red;
+}
+
+.tableWindow .rank-2 {
+    color: purple;
+}
+
+.tableWindow .rank-3 {
+    color: blue;
+}
+
+.tableWindow .rank-4 {
+    color: green;
+}
+
+.tableWindow .rank-5 {
+    color: goldenrod;
+}
