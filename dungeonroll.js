@@ -163,7 +163,12 @@ define([
                     'name': card.name
                 };
 
-                return this.format_block('jstpl_card_tooltip', cardInfo);
+                if (card_type_id.split('_')[0] == this.ItemType.HeroNovice) {
+                    return this.format_block('jstpl_hero_novice_tooltip', cardInfo);
+                } else {
+                    return this.format_block('jstpl_card_tooltip', cardInfo);
+                }
+
             },
 
             setupTooltipHeroes: function(card_div, card_type_id, card_id) {

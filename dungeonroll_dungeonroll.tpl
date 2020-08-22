@@ -129,6 +129,17 @@ var jstpl_card_tooltip = '\
         ${ultimate}\
     </div>';
 
+var jstpl_hero_novice_tooltip = '\
+    <div class="cardtooltip">\
+        <h3>${name}</h3>\
+        <hr/>\
+        ${specialty}\
+        <br/><br/>\
+        ${ultimate}\
+        <br/><br/>\
+        <div class="keyword">{5_XP_LEVEL_UP}<div>\
+    </div>';
+
 var jstpl_item_tooltip = '\
 <div class="itemtooltip">\
     <h3>${name}</h3>\

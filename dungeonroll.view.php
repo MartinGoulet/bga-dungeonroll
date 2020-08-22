@@ -48,6 +48,7 @@
         $this->tpl['ZONE_DUNGEON'] = self::_("Dungeon");
         $this->tpl['ZONE_DRAGON_LAIR'] = self::_("Dragon's Lair");
         $this->tpl['AVAILABLE_HEROES'] = self::_("Available heroes");
+        $this->tpl['5_XP_LEVEL_UP'] = self::_("5 XP to Level up");
 
         
 
