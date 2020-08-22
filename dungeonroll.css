@@ -300,6 +300,7 @@
 
 .player_board {
     font-size: 14px;
+    padding-left: 3px;
 }
 
 .player_board .player_hero {

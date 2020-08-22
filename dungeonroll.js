@@ -65,10 +65,16 @@ define([
                         'inventory': this.initStockInventory('player_inventory_' + player_id)
                     }
 
+                    if (gamedatas.heroes[player_id] === undefined) {
+                        dojo.style('player_hero_' + player_id, 'display', 'none');
+                    }
                 }
 
                 Object.keys(gamedatas.heroes).forEach(player_id => {
                     this.addItemsToZone([gamedatas.heroes[player_id]], this.player_board[player_id].hero)
+                });
+
+                Object.keys(gamedatas.inventories).forEach(player_id => {
                     this.addItemsToZone(gamedatas.inventories[player_id], this.player_board[player_id].inventory)
                 });
 
