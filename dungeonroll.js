@@ -145,6 +145,7 @@ define([
                     var textArray = [];
 
                     item.tooltip.forEach(text => {
+                        // Translate each tooltip
                         textArray.push(_(text));
                     });
 
@@ -153,7 +154,7 @@ define([
 
                 var itemInfo = {
                     'name': _(item.name),
-                    'text': _(gametext),
+                    'text': gametext,
                 };
 
                 return this.format_block('jstpl_item_tooltip', itemInfo);
