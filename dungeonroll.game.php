@@ -330,7 +330,7 @@ class DungeonRoll extends Table
 
         // It's impossible to move the dragon die
         DRUtils::userAssertTrue(
-            self::_("You can't move the dragon"),
+            self::_("You can't move a Dragon die"),
             !DRDungeonDice::isDragon($die)
         );
 
@@ -410,6 +410,16 @@ class DungeonRoll extends Table
     {
         return array(
             'commands' => $this->commands->getActiveCommands(),
+        );
+    }
+    
+
+    function argDragonPhasePlayerTurn()
+    {
+        $hero = $this->components->getActivePlayerHero();
+        return array(
+            'commands' => $this->commands->getActiveCommands(),
+            'nbr' => $hero->getCompanionCountDefeatDragon(),
         );
     }
 
@@ -562,7 +572,7 @@ class DungeonRoll extends Table
 
     function stPreDragonPhase()
     {
-        // Get all dragons dice in play
+        // Get all Dragon dice in play
         $dice = $this->components->getActivePlayerUsableItems();
         $dragons = DRDungeonDice::getDragonDice($dice);
 

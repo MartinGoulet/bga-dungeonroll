@@ -110,7 +110,7 @@ class DRNotification extends APP_GameClass
 
     function skipMonsterPhase()
     {
-        $message = clienttranslate('${player_name} skip the monster phase because no monster or scroll found');
+        $message = clienttranslate('${player_name} skip the monster phase because no monster or scroll');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -118,7 +118,7 @@ class DRNotification extends APP_GameClass
 
     function skipLootPhase()
     {
-        $message = clienttranslate('${player_name} skip the loot phase because no chest or potion found');
+        $message = clienttranslate('${player_name} skip the loot phase because no Chest or Potion');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -126,7 +126,7 @@ class DRNotification extends APP_GameClass
 
     function skipDragonPhase()
     {
-        $message = clienttranslate('${player_name} skip the dragon phase because less than 3 dragons found');
+        $message = clienttranslate('${player_name} skip the dragon phase because less than 3 Dragon dice');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -206,7 +206,7 @@ class DRNotification extends APP_GameClass
 
     function ultimateEnchantressBeguiler($dice, $nbr)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transform ${nbr} monster(s) into a potion');
+        $message = clienttranslate('${player_name} uses ${hero_name} and transform ${nbr} monster(s) into 1 Potion');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -229,7 +229,7 @@ class DRNotification extends APP_GameClass
 
     function ultimateKnightDragonSlayer($dragons)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transforms ${nbr} monster(s) to dragon(s)');
+        $message = clienttranslate('${player_name} uses ${hero_name} and transforms ${nbr} Monster(s) to Dragon');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -241,7 +241,7 @@ class DRNotification extends APP_GameClass
 
     function ultimateMercenary($monsters)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and kills 2 monsters');
+        $message = clienttranslate('${player_name} uses ${hero_name} and kills 2 Monsters');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),

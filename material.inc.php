@@ -106,7 +106,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_mage',
         'tooltip' => array(
             clienttranslate("May be used to defeat 1 Goblin, 1 Skeleton, or any number of Oozes"),
-            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_CLERIC => array(
@@ -117,7 +117,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_cleric',
         'tooltip' => array(
             clienttranslate("May be used to defeat 1 Goblin, 1 Ooze, or any number of Skeletons"),
-            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_FIGHTER => array(
@@ -128,7 +128,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_fighter',
         'tooltip' => array(
             clienttranslate("May be used to defeat 1 Skeleton, 1 Ooze, or any number of Goblins"),
-            clienttranslate("May be used to open 1 chest or quaff any number of Potions"),
+            clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_THIEF => array(
@@ -139,7 +139,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_thief',
         'tooltip' => array(
             clienttranslate("May be used to defeat 1 Goblin, 1 Skeleton or 1 Ooze"),
-            clienttranslate("May be used to open any number of chests or quaff any number of Potions"),
+            clienttranslate("May be used to open any number of Chests or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_CHAMPION => array(
@@ -150,7 +150,7 @@ $this->items_party_dice = array(
         'small_icon' => 'dice_champion',
         'tooltip' => array(
             clienttranslate("May be used to defeat any number of Goblins, any number of Skeletons or any number of Oozes"),
-            clienttranslate("May be used to open any number of chests or quaff any number of Potions"),
+            clienttranslate("May be used to open any number of Chests or quaff any number of Potions"),
         )
     ),
     TYPE_PARTY_DIE . '_' . DIE_SCROLL => array(
@@ -251,7 +251,7 @@ $this->items_treasure_tokens = array(
         'weight' => 28,
         'tooltip' => array(
             clienttranslate("Return all Dungeon dice from the Dragon's Lair to the active supply of Dungeon dice"),
-            clienttranslate("This does not count as Defeating the dragon - do not collect Experience or get Treasure"),
+            clienttranslate("This does not count as Defeating the Dragon - do not collect Experience or get Treasure"),
             clienttranslate("Number in the box : 4"),
         )
     ),
@@ -390,7 +390,7 @@ $this->card_types = array(
 
     "5_3" => array(
         'name' => clienttranslate("Dragon Slayer"),
-        'specialty' => clienttranslate("When Forming the Party, all Scrolls become Champions. Use 2 different companions to defeat Dragons (instead of 3)"),
+        'specialty' => clienttranslate("When Forming the Party, all Scrolls become Champions. Use 2 different companions to defeat the Dragon (instead of 3)"),
         'ultimate' => clienttranslate("Transform all Monsters to Dragon faces and move them to the Dragon's Lair"),
         'imageindex' => 6,
         'heroclass' => "DRDragonSlayer",
@@ -436,19 +436,19 @@ $this->card_types = array(
     "4_6" => array(
         'name' => clienttranslate("Enchantress"),
         'specialty' => clienttranslate("Scrolls may be used as any Companion"),
-        'ultimate' => clienttranslate("Transform 1 Monster into a potion"),
+        'ultimate' => clienttranslate("Transform 1 Monster into 1 Potion"),
         'imageindex' => 11,
         'heroclass' => "DREnchantress",
-        'commandText' => clienttranslate("Enchantress : Transform 1 Monster into a potion"),
+        'commandText' => clienttranslate("Enchantress : Transform 1 Monster into 1 Potion"),
     ),
 
     "5_6" => array(
         'name' => clienttranslate("Beguiler"),
         'specialty' => clienttranslate("Scrolls may be used as any Companion"),
-        'ultimate' => clienttranslate("Transform up to 2 Monsters into 1 potion"),
+        'ultimate' => clienttranslate("Transform up to 2 Monsters into 1 Potion"),
         'imageindex' => 12,
         'heroclass' => "DRBeguiler",
-        'commandText' => clienttranslate("Beguiler : Transform up to 2 Monsters into 1 potion"),
+        'commandText' => clienttranslate("Beguiler : Transform up to 2 Monsters into 1 Potion"),
     ),
 
     "4_7" => array(
@@ -488,7 +488,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 Treasure Token to defeat all Monsters, open all Chests, quaff all Potions and discard all dice in the Dragon's Lair"),
         'imageindex' => 16,
         'heroclass' => "DRPaladin",
-        'commandText' => clienttranslate("Paladin : Defeat Monsters, open chests, quaff potions and discard Dragons"),
+        'commandText' => clienttranslate("Paladin : Defeat Monsters, open Chests, quaff Potions and discard Dragon dice"),
     ),
 );
 
@@ -496,7 +496,7 @@ $this->command_infos = array(
 
     1 => array(
         'name' => 'useScroll',
-        'text' => clienttranslate('Use scroll'),
+        'text' => clienttranslate('Use Scroll'),
         'askConfirmation' => 'checkRerollPotion',
         'confirmation' => clienttranslate("Are you sure you want to re-roll Potion(s)?"),
         'php_class' => 'DRCommandUseScroll'
@@ -510,51 +510,51 @@ $this->command_infos = array(
 
     4 => array(
         'name' => 'dragonBait',
-        'text' => clienttranslate('Use dragon bait'),
+        'text' => clienttranslate('Use Dragon Bait'),
         'php_class' => 'DRCommandDragonBait'
     ),
 
     5 => array(
         'name' => 'townPortal',
-        'text' => clienttranslate('Use town portal'),
+        'text' => clienttranslate('Use Town Portal'),
         'php_class' => 'DRCommandTownPortal'
     ),
 
     6 => array(
         'name' => 'ringInvisibility',
-        'text' => clienttranslate('Use ring of invisibility'),
+        'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility'
     ),
 
     7 => array(
         'name' => 'seekGlory',
-        'text' => clienttranslate('Seek glory'),
+        'text' => clienttranslate('Seek Glory'),
         'php_class' => 'DRCommandSeekGlory'
     ),
 
     11 => array(
         'name' => 'fightDragon',
-        'text' => clienttranslate('Fight dragons'),
+        'text' => clienttranslate('Fight Dragon'),
         'php_class' => 'DRCommandFightDragon'
     ),
 
     12 => array(
         'name' => 'fightMonster',
-        'text' => clienttranslate('Fight monsters'),
+        'text' => clienttranslate('Fight Monsters'),
         'php_class' => 'DRCommandFightMonster'
     ),
 
 
     14 => array(
         'name' => 'quaffPotion',
-        'text' => clienttranslate('Quaff potion'),
+        'text' => clienttranslate('Quaff Potion'),
         'php_class' => 'DRCommandQuaffPotion'
     ),
 
 
     15 => array(
         'name' => 'usePotion',
-        'text' => clienttranslate('Use potion'),
+        'text' => clienttranslate('Use Potion'),
         'php_class' => 'DRCommandUsePotion'
     ),
 
@@ -630,7 +630,7 @@ $this->phases = array(
     'dragonPhase' => array(
         'name' => clienttranslate("Dragon phase"),
         'tooltip' => array(
-            clienttranslate("You must defeat Dragons if 3 or more Dragons is present"),
+            clienttranslate("You must defeat the Dragon if 3 or more Dragon dice is present"),
         ),
     ),
     'regroupPhase' => array(
