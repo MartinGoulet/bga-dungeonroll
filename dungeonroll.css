@@ -247,9 +247,19 @@
     margin-top: 14px;
 }
 
+.hero-tooltip {
+    display: flex;
+    flex-direction: row;
+}
+
 .cardtooltip {
     text-align: center;
-    max-width: 300px;
+    max-width: 250px;
+    flex-grow: 1;
+}
+
+.hero-tooltip>.cardtooltip+.cardtooltip {
+    margin-left: 10px;
 }
 
 .card-hero {

@@ -182,7 +182,13 @@ define([
             setupTooltipHeroes: function(card_div, card_type_id, card_id) {
 
                 if (card_type_id != 0 && card_type_id !== undefined) {
-                    var html = this.getCardTooltip(card_type_id);
+                    var card_hero_number = card_type_id.split('_')[1];
+                    var novice_number = this.ItemType.HeroNovice + '_' + card_hero_number;
+                    var master_number = this.ItemType.HeroMaster + '_' + card_hero_number;
+
+                    var htmlNovice = this.getCardTooltip(novice_number);
+                    var htmlMaster = this.getCardTooltip(master_number);
+                    var html = '<div class="hero-tooltip">' + htmlNovice + htmlMaster + '</div>';
                     this.addTooltipHtml(card_div.id, html, 100);
                 }
             },
