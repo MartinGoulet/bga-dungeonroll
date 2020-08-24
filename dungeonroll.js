@@ -165,8 +165,8 @@ define([
                 var card = this.gamedatas.card_types[card_type_id];
 
                 var cardInfo = {
-                    'ultimate': '<div class="keyword">' + _('Ultimate') + ' : </div>' + _(card.ultimate),
-                    'specialty': '<div class="keyword">' + _('Specialty') + ' : </div>' + _(card.specialty),
+                    'ultimate': '<div class="keyword">' + _('Ultimate') + ' <br/> </div>' + _(card.ultimate),
+                    'specialty': '<div class="keyword">' + _('Specialty') + ' <br/> </div>' + _(card.specialty),
                     'name': _(card.name)
                 };
 
