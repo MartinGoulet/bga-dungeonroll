@@ -241,7 +241,6 @@ $this->items_treasure_tokens = array(
         'weight' => 29,
         'tooltip' => array(
             clienttranslate("Transform all monsters into the Dragon faces and move those dice into the Dragon's Lair"),
-            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_RING_INVISIBILITY => array(
@@ -252,7 +251,6 @@ $this->items_treasure_tokens = array(
         'tooltip' => array(
             clienttranslate("Return all Dungeon dice from the Dragon's Lair to the active supply of Dungeon dice"),
             clienttranslate("This does not count as Defeating the Dragon - do not collect Experience or get Treasure"),
-            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_TOWN_PORTAL => array(
@@ -262,7 +260,6 @@ $this->items_treasure_tokens = array(
         'weight' => 27,
         'tooltip' => array(
             clienttranslate("Collect Experience equal to the Level. The delve is over. If unused, Town Portal is worth 2 Experience at the end of the game instead of the usual 1"),
-            clienttranslate("Number in the box : 4"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_DRAGON_SCALES => array(
@@ -272,7 +269,6 @@ $this->items_treasure_tokens = array(
         'weight' => 30,
         'tooltip' => array(
             clienttranslate("At the end of the game, collect 2 additional Experiences for each pair of Dragon Scales you possess"),
-            clienttranslate("Number in the box : 6"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_SCROLL => array(
@@ -282,7 +278,6 @@ $this->items_treasure_tokens = array(
         'weight' => 25,
         'tooltip' => array(
             clienttranslate("Use as one Scroll die face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_POTION => array(
@@ -292,7 +287,6 @@ $this->items_treasure_tokens = array(
         'weight' => 26,
         'tooltip' => array(
             clienttranslate("Revive 1 Party die (return it from the Graveyard to your active party) and choose its face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_VORPAL_SWORD => array(
@@ -302,7 +296,6 @@ $this->items_treasure_tokens = array(
         'weight' => 21,
         'tooltip' => array(
             clienttranslate("Use as one Fighter die face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_TALISMAN => array(
@@ -312,7 +305,6 @@ $this->items_treasure_tokens = array(
         'weight' => 22,
         'tooltip' => array(
             clienttranslate("Use as one Cleric die face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_SCEPTER_OF_POWER => array(
@@ -322,7 +314,6 @@ $this->items_treasure_tokens = array(
         'weight' => 23,
         'tooltip' => array(
             clienttranslate("Use as one Mage die face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
     TYPE_TREASURE_TOKEN . '_' . TOKEN_THIEVES => array(
@@ -332,7 +323,6 @@ $this->items_treasure_tokens = array(
         'weight' => 24,
         'tooltip' => array(
             clienttranslate("Use as one Thief die face"),
-            clienttranslate("Number in the box : 3"),
         )
     ),
 );
