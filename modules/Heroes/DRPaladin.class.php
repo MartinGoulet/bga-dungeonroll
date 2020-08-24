@@ -92,6 +92,8 @@ class DRPaladin extends DRCrusader
 
             $commandChest = $this->game->commands->getCommandByName('quaffPotion');
             $commandChest->execute(0);
+        } else {
+            $this->game->notif->updatePossibleActions();
         }
     }
 }
