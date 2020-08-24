@@ -193,7 +193,6 @@ define([
 
                 stock.setSelectionMode(0);
                 stock.image_items_per_row = 6;
-                stock.setOverlap(80, 0);
 
                 // Load images
                 Object.keys(this.gamedatas.items_treasure_tokens).forEach(key => {
@@ -257,6 +256,7 @@ define([
 
                 stock.setSelectionMode(0);
                 stock.image_items_per_row = 6;
+                stock.item_margin = 10;
 
                 // Load images
                 this.loadItemsToStock(stock, this.gamedatas.items_party_dice);
@@ -285,7 +285,9 @@ define([
 
                 var itemType = card_type_id.split("_")[0];
                 if (itemType == 1 || itemType == 2) {
-                    div.addClass("dice")
+                    div.addClass("die")
+                } else if (itemType == 3) {
+                    div.addClass("token")
                 }
 
                 var info = card_id.split("_")
