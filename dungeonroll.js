@@ -65,7 +65,7 @@ define([
                         'inventory': this.initStockInventory('player_inventory_' + player_id)
                     }
 
-                    if (gamedatas.heroes[player_id] === undefined) {
+                    if (gamedatas.useHero === false) {
                         dojo.style('player_hero_' + player_id, 'display', 'none');
                     }
                 }
@@ -88,6 +88,8 @@ define([
                     'zone_hero': this.initStockHero("zone_hero", true),
                     'zone_draft': this.initStockHero("draft_card", true, 'onSelectHero'),
                 }
+
+                this.items.zone_draft.item_margin = 20;
 
                 // Dungeon level counter && Delve counter
                 this.dungeon_level = this.initCounter('dungeon_level', this.gamedatas.level);

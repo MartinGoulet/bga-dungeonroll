@@ -139,6 +139,7 @@ class DungeonRoll extends Table
             'level' => $this->vars->getDungeonLevel(),
             'delve' => $this->getCurrentDelve(),
             'currentTurn' => $this->vars->getCurrentTurn(),
+            'useHero' => $this->vars->getGameOption() != GAME_OPTION_NO_HERO,
 
             'card_types' => $this->card_types,
             'items_party_dice' => $this->items_party_dice,
