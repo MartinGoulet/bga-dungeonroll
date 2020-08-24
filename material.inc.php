@@ -608,7 +608,7 @@ $this->phases = array(
     'monsterPhase' => array(
         'name' => clienttranslate("Monster phase"),
         'tooltip' => array(
-            clienttranslate("You must defeat all monsters, <b>one type of Monster at a time</b>"),
+            clienttranslate("You must defeat all monsters, <b>one fight at a time</b>"),
         ),
     ),
     'lootPhase' => array(
