@@ -310,6 +310,17 @@
 }
 
 
+/* Board */
+
+#zone_draft .stockitem,
+#zone_play .stockitem,
+#zone_dungeon .stockitem,
+#zone_party .stockitem,
+#zone_inventory .stockitem {
+    cursor: pointer !important;
+}
+
+
 /* Player Board */
 
 .player_board {

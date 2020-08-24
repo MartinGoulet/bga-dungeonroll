@@ -25,7 +25,7 @@
     Please REMOVE this comment before publishing your game on BGA
 -->
 
-<div id="draft_zone" style="display: none">
+<div id="zone_draft" style="display: none">
     <div class="whiteblock">
         <h3>{AVAILABLE_HEROES}</h3>
         <div id="draft_card"></div>

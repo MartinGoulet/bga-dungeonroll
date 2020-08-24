@@ -341,7 +341,7 @@ define([
                 switch (stateName) {
 
                     case 'draftHeroes':
-                        dojo.style('draft_zone', 'display', 'block');
+                        dojo.style('zone_draft', 'display', 'block');
                         dojo.style('board', 'display', 'none');
                         this.items['zone_draft'].removeAll();
                         args.args.heroes.forEach(hero => {
@@ -351,7 +351,7 @@ define([
                         break;
 
                     case 'initPlayerTurn':
-                        dojo.style('draft_zone', 'display', 'none');
+                        dojo.style('zone_draft', 'display', 'none');
                         dojo.style('board', 'display', 'block');
 
                     case 'dummmy':
