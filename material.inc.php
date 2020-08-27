@@ -493,21 +493,18 @@ $this->command_infos = array(
         'html_zone' => 'zone_actions'
     ),
 
-    2 => array(
-        'name' => 'useScroll',
-        'text' => clienttranslate('Use Scroll'),
-        'askConfirmation' => 'checkRerollPotion',
-        'confirmation' => clienttranslate("Are you sure you want to re-roll Potion(s)?"),
-        'php_class' => 'DRCommandUseScroll',
-        'always_visible' => true,
-        'html_zone' => 'zone_actions'
-    ),
     5 => array(
         'name' => 'openChest',
         'text' => clienttranslate('Open Chest'),
         'php_class' => 'DRCommandOpenChest',
         'always_visible' => true,
-        'html_zone' => 'zone_actions'
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'checkNonSelectedChest',
+                'confirmation' => clienttranslate("Are you sure you not want to open all chests?")
+            )
+        )
     ),
 
     6 => array(
@@ -534,12 +531,31 @@ $this->command_infos = array(
         'html_zone' => 'zone_actions'
     ),
 
+    15 => array(
+        'name' => 'useScroll',
+        'text' => clienttranslate('Use Scroll'),
+        'php_class' => 'DRCommandUseScroll',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'checkRerollPotion',
+                'confirmation' => clienttranslate("Are you sure you want to re-roll Potion(s)?")
+            ),
+            array(
+                'askConfirmation' => 'checkRerollDragon',
+                'confirmation' => clienttranslate("Dragon dice cannot be re-rolled. Are you sure you want to make this action?")
+            )
+        )
+    ),
+
 
 
     20 => array(
         'name' => 'dragonBait',
         'text' => clienttranslate('Use Dragon Bait'),
         'php_class' => 'DRCommandDragonBait',
+        'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
 
@@ -547,13 +563,15 @@ $this->command_infos = array(
         'name' => 'townPortal',
         'text' => clienttranslate('Use Town Portal'),
         'php_class' => 'DRCommandTownPortal',
+        'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
 
     22 => array(
         'name' => 'usePotion',
-        'text' => clienttranslate('Use Potion'),
+        'text' => clienttranslate('Use Potion token'),
         'php_class' => 'DRCommandUsePotion',
+        'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
 
@@ -561,6 +579,7 @@ $this->command_infos = array(
         'name' => 'ringInvisibility',
         'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility',
+        'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
 
@@ -617,16 +636,27 @@ $this->command_infos = array(
         'name' => 'fleeDungeon',
         'text' => clienttranslate('Flee the dungeon'),
         'button_color' => "red",
-        'confirmation' => clienttranslate("Are you sure to flee the dungeon?"),
         'php_class' => 'DRCommandFleeDungeon',
-        'html_zone' => 'zone_phases_actions'
+        'html_zone' => 'zone_phases_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => "always",
+                'confirmation' => clienttranslate("Are you sure to flee the dungeon?"),
+            )
+        )
     ),
 
     70 => array(
         'name' => 'heroUltimate',
         'text' => clienttranslate('Hero Ultimate'),
         'php_class' => 'DRCommandHeroUltimate',
-        'html_zone' => 'zone_actions'
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'checkRerollDragonCommander',
+                'confirmation' => clienttranslate("Dragon dice cannot be re-rolled. Are you sure you want to make this action?")
+            )
+        )
     ),
 
 );

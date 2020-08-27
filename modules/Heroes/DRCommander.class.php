@@ -9,7 +9,7 @@ class DRCommander extends DRStandardHero
 
     function isStateOk()
     {
-        $allowedStates = array('monsterPhase', 'lootPhase');
+        $allowedStates = array('monsterPhase', 'lootPhase', 'dragonPhase');
         return in_array($this->getState(), $allowedStates);
     }
 
@@ -64,8 +64,11 @@ class DRCommander extends DRStandardHero
 
     function executeUltimate($sub_command_id)
     {
-        // Get all items from play
+        // Get all items from play (except dragons)
         $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = DRUtils::filter($items, function($item) { 
+            return !DRDungeonDice::isDragon($item);
+        });
 
         // Reroll other dice
         $rolledDice = DRItem::rollDice($items);

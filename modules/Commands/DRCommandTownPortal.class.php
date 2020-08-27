@@ -9,7 +9,12 @@ class DRCommandTownPortal extends DRCommand
     }
 
     public function getAllowedStates() {
-        return array('monsterPhase', 'lootPhase', 'dragonPhase');
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $townPortal = DRUtils::filter($items, 'DRTreasureToken::isTownPortal');
+        if(sizeof($townPortal) == 0) {
+            return array();
+        }
+        return array('monsterPhase', 'dragonPhase');
     }
 
     public function canExecute()

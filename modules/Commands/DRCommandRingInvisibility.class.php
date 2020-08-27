@@ -9,6 +9,11 @@ class DRCommandRingInvisibility extends DRCommand
     }
 
     public function getAllowedStates() {
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $rings = DRUtils::filter($items, 'DRTreasureToken::isRingOfInvisibility');
+        if(sizeof($rings) == 0) {
+            return array();
+        }
         return array('dragonPhase');
     }
 

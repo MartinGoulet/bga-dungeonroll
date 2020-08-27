@@ -9,7 +9,12 @@ class DRCommandUseScroll extends DRCommand
     }
 
     public function getAllowedStates() {
-        return array('monsterPhase');
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $scrolls = DRUtils::filter($items, 'DRItem::isScroll');
+        if(sizeof($scrolls) == 0) {
+            return array();
+        }
+        return array('monsterPhase', 'lootPhase', 'dragonPhase');
     }
 
     public function canExecute()
@@ -50,6 +55,10 @@ class DRCommandUseScroll extends DRCommand
         $scroll = $scrolls[0];
         // Seperate the scroll from the other items
         $otherItems = DRItem::excludeItem($items, $scroll);
+
+        $otherItems = DRUtils::filter($otherItems, function($item) {
+            return DRItem::isPartyDie($item) || (DRItem::isDungeonDie($item) && !DRDungeonDice::isDragon($item));
+        });
 
         // Reroll other dice
         $rolledDice = DRItem::rollDice($otherItems);

@@ -483,19 +483,29 @@ define([
                         subCommand = info[1];
                     }
 
-                    if (command.confirmation !== undefined && this.canAskConfirmation(command)) {
+                    var askedConfirmation = false;
+                    if (command.confirmations !== undefined) {
+                        Object.keys(command.confirmations).forEach(key => {
 
-                        this.confirmationDialog(
-                            command.confirmation,
-                            dojo.hitch(this, function() {
-                                this.ajaxcall("/dungeonroll/dungeonroll/executeCommand.html", {
-                                    id: command.id,
-                                    sub: subCommand,
-                                    lock: true
-                                }, this, function(result) {});
-                            }));
+                            var question = command.confirmations[key];
+                            if (this.canAskConfirmation(question)) {
 
-                    } else {
+                                askedConfirmation = true;
+
+                                this.confirmationDialog(
+                                    question.confirmation,
+                                    dojo.hitch(this, function() {
+                                        this.ajaxcall("/dungeonroll/dungeonroll/executeCommand.html", {
+                                            id: command.id,
+                                            sub: subCommand,
+                                            lock: true
+                                        }, this, function(result) {});
+                                    }));
+                            }
+                        });
+                    }
+
+                    if (!askedConfirmation) {
                         this.ajaxcall("/dungeonroll/dungeonroll/executeCommand.html", {
                             id: command.id,
                             sub: subCommand,
@@ -503,20 +513,6 @@ define([
                         }, this, function(result) {});
                     }
                 }
-            },
-
-            canAskConfirmation: function(command) {
-                switch (command.askConfirmation) {
-                    case 'checkRerollPotion':
-                        return this.checkRerollPotion();
-                    default:
-                        return true;
-                }
-            },
-
-            checkRerollPotion: function() {
-                var item_types = this.items.zone_play.getPresentTypeList();
-                return item_types["2_2"] == 1; // Potions
             },
 
             chooseDieGain: function(evt) {
@@ -539,6 +535,53 @@ define([
             script.
              
             */
+
+            canAskConfirmation: function(command) {
+                switch (command.askConfirmation) {
+                    case 'checkRerollPotion':
+                        return this.checkRerollPotion();
+                    case 'checkRerollDragon':
+                        return this.checkRerollDragon();
+                    case 'checkRerollDragonCommander':
+                        return this.checkRerollDragonCommander();
+                    case 'checkNonSelectedChest':
+                        return this.checkNonSelectedChest();
+                    case 'always':
+                        return true;
+                    default:
+                        return false;
+                }
+            },
+
+            checkRerollPotion: function() {
+                var item_types = this.items.zone_play.getPresentTypeList();
+                return item_types["2_2"] == 1; // Potions
+            },
+
+            checkRerollDragon: function() {
+                var item_types = this.items.zone_play.getPresentTypeList();
+                return item_types["2_1"] == 1; // Dragons
+            },
+
+            checkRerollDragonCommander: function() {
+                var item_types = this.items.zone_play.getPresentTypeList();
+                var item_types_hero = this.items.zone_hero.getPresentTypeList();
+                debugger;
+                return item_types["2_1"] == 1 && // Dragons
+                    item_types_hero["5_2"] == 1; // Hero Master Commander
+            },
+
+            checkNonSelectedChest: function() {
+                var item_types_play = this.items.zone_play.getPresentTypeList();
+                var item_types_dungeon = this.items.zone_dungeon.getPresentTypeList();
+                var thiefOrChampionPresent =
+                    item_types_play["1_5"] == 1 || // Thief
+                    item_types_play["3_4"] == 1 || // Thieves (token)
+                    item_types_play["1_6"] == 1; // Champion
+                return item_types_dungeon["2_5"] == 1 && // Chest
+                    thiefOrChampionPresent;
+            },
+
             showSpecialty: function(card_type_id) {
                 var card = this.gamedatas.card_types[card_type_id];
                 var gametext = "<span>" + _(card.specialty) + "</span>";

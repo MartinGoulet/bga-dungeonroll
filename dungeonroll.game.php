@@ -378,7 +378,7 @@ class DungeonRoll extends Table
     }
 
     // TODO To remove before production
-    // function debug()
+    // function cheat()
     // {
 
     //     //$this->vars->setIsHeroActivated(false);
@@ -387,12 +387,13 @@ class DungeonRoll extends Table
     //     // $monsters = DRUtils::filter($monsters, 'DRDungeonDice::isSkeleton');
 
     //     foreach ($monsters as &$monster) {
-    //         $monster['value'] = DIE_CHEST;
+    //         $monster['value'] = DIE_DRAGON;
     //     }
-    //     // $monsters = DRItem::setZone($monsters, ZONE_DUNGEON);
+    //     $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
 
     //     $this->manager->updateItems($monsters);
     //     $this->NTA_itemMove($monsters);
+    //     $this->notif->updatePossibleActions();
     // }
 
 

@@ -10,6 +10,11 @@ class DRCommandDragonBait extends DRCommand
 
     public function getAllowedStates()
     {
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $baits = DRUtils::filter($items, 'DRTreasureToken::isDragonBait');
+        if(sizeof($baits) == 0) {
+            return array();
+        }
         return array('monsterPhase');
     }
 

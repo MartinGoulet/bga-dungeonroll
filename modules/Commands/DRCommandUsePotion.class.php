@@ -9,6 +9,11 @@ class DRCommandUsePotion extends DRCommand
     }
 
     public function getAllowedStates() {
+        $items = $this->game->components->getActivePlayerUsableItems();
+        $potions = DRUtils::filter($items, 'DRTreasureToken::isPotion');
+        if(sizeof($potions) == 0) {
+            return array();
+        }
         return array('monsterPhase', 'lootPhase', 'dragonPhase');
     }
 
