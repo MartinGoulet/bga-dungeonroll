@@ -80,7 +80,7 @@ $gameinfos = array(
 
 
 // Complexity of the game, from 0 (extremely simple) to 5 (extremely complex)
-'complexity' => 1,    
+'complexity' => 2,    
 
 // Luck of the game, from 0 (absolutely no luck in this game) to 5 (totally luck driven)
 'luck' => 4,    
@@ -115,7 +115,7 @@ $gameinfos = array(
     //  default: null (ie: no limit, the game interface is as big as the player's screen allows it).
     //  maximum possible value: unlimited
     //  minimum possible value: 740
-    'max' => 860
+    'max' => 1024
 ),
 
 // Game presentation
