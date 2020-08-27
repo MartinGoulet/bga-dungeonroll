@@ -63,8 +63,10 @@ class DRCommandManager
     function getActiveCommands() {
         $commands = array();
         foreach ($this->getAllCommands() as $command) {
-            if ($command->canExecute()) {
-                $commands[] = $command->getCommandInfo();
+            if ($command->isAllowedState()) {
+                $info =  $command->getCommandInfo();
+                $info['isActive'] = $command->canExecute();
+                $commands[] = $info;
             }
         }
         return $commands;

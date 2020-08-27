@@ -33,25 +33,40 @@
 </div>
 
 <div id="board">
-
     <div class="row">
-        <div class="col_1 mr3" style="display: flex">
-            <div class="whiteblock" style="flex: 1">
-                <div class="card-hero mt14">
+        <div class="col_4 whiteblock" style="padding: 0px">
+            <div id="zone_actions"></div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: -5px;">
+        <div class="col_1 mr3" style="min-width: 230px">
+
+            <div class="row">
+                <div class="col_1 whiteblock h82">
+                    <h3 style="margin-top: 0px;">{ZONE_SPECIALTY}</h3>
+                    <div id="zone_specialty"></div>
+                </div>
+            </div>
+
+        
+            <div class="whiteblock mt0">
+                <div class="card-hero">
                     <div id="zone_hero"></div>
                 </div>
             </div>
         </div>
 
-        <div class="col_4 ml3 mr3">
+        <div class="col_2 ml3 mr3">
 
-            <div class="whiteblock h52">
+            <div class="whiteblock h82">
                 <ul class="navigation">
                     <li id="nav_monsterPhase" class="phase monster"></li>
                     <li id="nav_lootPhase" class="phase loot"></li>
                     <li id="nav_dragonPhase" class="phase dragon"></li>
                     <li id="nav_regroupPhase" class="phase regroup"></li>
                 </ul>
+                <div id="zone_phases_actions"></div>
             </div>
 
             <div class="whiteblock">
@@ -61,16 +76,16 @@
 
         </div>
 
-        <div class="col_2 ml3">
+        <div class="col_1 ml3" style="min-width: 230px">
 
             <div class="row">
-                <div class="col_1 mr3 whiteblock h52">
+                <div class="col_1 mr3 whiteblock h82">
                     <h3 style="margin-top: 0px;">{ZONE_DELVE}</h3>
                     <h3 class="counter">
                         <span id="delve_counter">1</span>
                     </h3>
                 </div>
-                <div class="col_1 ml3 whiteblock h52">
+                <div class="col_1 ml3 whiteblock h82">
                     <h3 style="margin-top: 0px;">{ZONE_LEVEL}</h3>
                     <h3 class="counter">
                         <span id="dungeon_level">1</span>
@@ -153,7 +168,7 @@ var jstpl_player_board = '\
         <div id="player_hero_${id}" class="col_1"></div>\
     </div>\
     <div class="player_info">\
-        <div class="player_delve">Delve # <span id="player_delve_${id}">0</span></div>\
+        <div class="player_delve">{ZONE_DELVE} <span id="player_delve_${id}">0</span></div>\
         <div id="player_inventory_${id}"></div>\
     </div>\
 </div>\

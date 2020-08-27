@@ -106,6 +106,13 @@ define([
 
                 // Set hero activation
                 this.setIsHeroActivated(gamedatas.isHeroActivated);
+
+                // Show specialty
+                if (gamedatas.heroes && gamedatas.heroes[this.getActivePlayerId()]) {
+                    var hero = gamedatas.heroes[this.getActivePlayerId()];
+                    var type = hero.type + '_' + hero.value;
+                    this.showSpecialty(type);
+                }
             },
 
             setIsHeroActivated: function(isActivated) {
@@ -181,6 +188,10 @@ define([
 
             },
 
+            setupHeroes: function(card_div, card_type_id, card_id) {
+                this.setupTooltipHeroes(card_div, card_type_id, card_id);
+            },
+
             setupTooltipHeroes: function(card_div, card_type_id, card_id) {
 
                 if (card_type_id != 0 && card_type_id !== undefined) {
@@ -232,7 +243,7 @@ define([
                 });
 
                 if (callback == undefined) {
-                    heroZone.onItemCreate = dojo.hitch(this, 'setupTooltipHeroes');
+                    heroZone.onItemCreate = dojo.hitch(this, 'setupHeroes');
                 } else {
                     heroZone.onItemCreate = dojo.hitch(this, function(card_div, card_type_id, card_id) {
                         this.setupTooltipHeroes(card_div, card_type_id, card_id);
@@ -374,7 +385,6 @@ define([
             //        
             onUpdateActionButtons: function(stateName, args) {
 
-                this.removeActionButtons();
                 dojo.query("li.selected").removeClass("selected");
                 dojo.query("#nav_" + stateName).addClass("selected");
 
@@ -390,38 +400,54 @@ define([
 
                         case 'quaffPotion':
                             dojo.query("#nav_" + args.currentPhase).addClass("selected");
+                            this.showCommands(args.commands);
                             this.showDiceButton();
                     }
                 }
             },
 
             showDiceButton: function() {
-                this.removeActionButtons();
-
                 Object.keys(this.gamedatas.items_party_dice).forEach(key => {
                     var die = this.gamedatas.items_party_dice[key];
-                    this.addActionButton('dice_' + key, '<div class="sicon ' + die.small_icon + '"></div>', 'chooseDieGain', false, null, 'gray');
+                    this.addActionButton('dice_' + key, '<div class="sicon ' + die.small_icon + '"></div>', 'chooseDieGain', 'zone_actions', null, 'gray');
                 });
 
             },
 
             showCommands: function(commands) {
 
-                this.removeActionButtons();
+                dojo.empty('zone_phases_actions');
+                dojo.empty('zone_actions');
 
                 if (commands === undefined) return;
 
                 commands.forEach(command => {
-                    if (command.commands === undefined) {
-                        if (command.button_color) {
-                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', null, false, command.button_color);
+
+                    if (command.isActive) {
+                        if (command.commands === undefined) {
+                            if (command.button_color) {
+                                this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', command['html_zone'], false, command.button_color);
+                            } else {
+                                this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', command['html_zone']);
+                            }
                         } else {
-                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand');
+                            Object.keys(command.commands).forEach(key => {
+                                this.addActionButton('cmd_' + command.id + '_' + key, _(command.commands[key]), 'executeCommand', command['html_zone']);
+                            });
                         }
-                    } else {
-                        Object.keys(command.commands).forEach(key => {
-                            this.addActionButton('cmd_' + command.id + '_' + key, _(command.commands[key]), 'executeCommand');
-                        });
+                        if (command['isActive'] == false) {
+                            dojo.query('#cmd_' + command.id).addClass("disabled");
+                        }
+                    } else if (command.always_visible) {
+                        if (command.button_color) {
+                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', command['html_zone'], false, command.button_color);
+                        } else {
+                            this.addActionButton('cmd_' + command.id, _(command.text), 'executeCommand', command['html_zone']);
+                        }
+
+                        if (command.isActive !== true) {
+                            dojo.addClass('cmd_' + command.id, "disabled");
+                        }
                     }
                 });
             },
@@ -480,7 +506,6 @@ define([
             },
 
             canAskConfirmation: function(command) {
-                debugger;
                 switch (command.askConfirmation) {
                     case 'checkRerollPotion':
                         return this.checkRerollPotion();
@@ -514,6 +539,12 @@ define([
             script.
              
             */
+            showSpecialty: function(card_type_id) {
+                var card = this.gamedatas.card_types[card_type_id];
+                var gametext = "<span>" + _(card.specialty) + "</span>";
+                dojo.empty('zone_specialty');
+                dojo.place(gametext, 'zone_specialty');
+            },
 
             ///////////////////////////////////////////////////
             //// Player's action
@@ -535,7 +566,6 @@ define([
             },
 
             moveDice: function(die_id) {
-                this.removeActionButtons();
                 if (this.checkAction('moveItem')) {
                     this.ajaxcall("/dungeonroll/dungeonroll/moveItem.html", {
                         die_id: die_id,
@@ -571,6 +601,7 @@ define([
                 dojo.subscribe('onSelectHero', this, "notif_onSelectHero");
 
                 this.notifqueue.setSynchronous('onDiceRolled', 1250);
+                this.notifqueue.setSynchronous('onHeroLevelUp', 2500);
 
             },
 
@@ -607,6 +638,10 @@ define([
                         this.items['zone_' + item.previous_zone].removeFromStockById(item.id);
                     }
 
+                    if (item.type == this.ItemType.HeroNovice || item.type == this.ItemType.HeroMaster) {
+                        this.showSpecialty(item_type);
+                    }
+
                 });
 
                 // Add tooltips to items
@@ -618,6 +653,7 @@ define([
                 var from = $(heroZone.getItemDivId(notif.args.hero_novice['id']));
                 heroZone.addToStockWithId("5_" + notif.args.hero_master['value'], notif.args.hero_master['id'], from);
                 heroZone.removeFromStockById(notif.args.hero_novice['id']);
+                this.showSpecialty("5_" + notif.args.hero_master['value']);
             },
 
             notif_updatePossibleActions: function(notif) {
@@ -637,6 +673,7 @@ define([
             notif_onNewPlayerTurn: function(notif) {
                 this.addItemsToBoard([]);
                 this.setIsHeroActivated(false);
+                this.showCommands([]);
             },
 
             notif_onNewLevel: function(notif) {

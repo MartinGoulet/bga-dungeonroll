@@ -48,6 +48,7 @@
         $this->tpl['ZONE_DUNGEON'] = self::_("Dungeon");
         $this->tpl['ZONE_DRAGON_LAIR'] = self::_("Dragon's Lair");
         $this->tpl['AVAILABLE_HEROES'] = self::_("Available heroes");
+        $this->tpl['ZONE_SPECIALTY'] = self::_("Specialty");
 
         /*
         

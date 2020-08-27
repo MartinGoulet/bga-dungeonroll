@@ -484,108 +484,133 @@ $this->card_types = array(
 
 $this->command_infos = array(
 
+
     1 => array(
+        'name' => 'fightMonster',
+        'text' => clienttranslate('Fight Monsters'),
+        'php_class' => 'DRCommandFightMonster',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    2 => array(
         'name' => 'useScroll',
         'text' => clienttranslate('Use Scroll'),
         'askConfirmation' => 'checkRerollPotion',
         'confirmation' => clienttranslate("Are you sure you want to re-roll Potion(s)?"),
-        'php_class' => 'DRCommandUseScroll'
+        'php_class' => 'DRCommandUseScroll',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
     ),
-
-    3 => array(
+    5 => array(
         'name' => 'openChest',
         'text' => clienttranslate('Open Chest'),
-        'php_class' => 'DRCommandOpenChest'
-    ),
-
-    4 => array(
-        'name' => 'dragonBait',
-        'text' => clienttranslate('Use Dragon Bait'),
-        'php_class' => 'DRCommandDragonBait'
-    ),
-
-    5 => array(
-        'name' => 'townPortal',
-        'text' => clienttranslate('Use Town Portal'),
-        'php_class' => 'DRCommandTownPortal'
+        'php_class' => 'DRCommandOpenChest',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
     ),
 
     6 => array(
-        'name' => 'ringInvisibility',
-        'text' => clienttranslate('Use Ring of Invisibility'),
-        'php_class' => 'DRCommandRingInvisibility'
-    ),
-
-    7 => array(
-        'name' => 'seekGlory',
-        'text' => clienttranslate('Seek Glory'),
-        'php_class' => 'DRCommandSeekGlory'
-    ),
-
-    11 => array(
-        'name' => 'fightDragon',
-        'text' => clienttranslate('Fight Dragon'),
-        'php_class' => 'DRCommandFightDragon'
-    ),
-
-    12 => array(
-        'name' => 'fightMonster',
-        'text' => clienttranslate('Fight Monsters'),
-        'php_class' => 'DRCommandFightMonster'
-    ),
-
-
-    14 => array(
         'name' => 'quaffPotion',
         'text' => clienttranslate('Quaff Potion'),
-        'php_class' => 'DRCommandQuaffPotion'
+        'php_class' => 'DRCommandQuaffPotion',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    10 => array(
+        'name' => 'fightDragon',
+        'text' => clienttranslate('Fight Dragon'),
+        'php_class' => 'DRCommandFightDragon',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    13 => array(
+        'name' => 'rollFormingPartyPhase',
+        'text' => clienttranslate('Re-roll dice'),
+        'php_class' => 'DRCommandRollFormingPartyPhase',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
     ),
 
 
-    15 => array(
+
+    20 => array(
+        'name' => 'dragonBait',
+        'text' => clienttranslate('Use Dragon Bait'),
+        'php_class' => 'DRCommandDragonBait',
+        'html_zone' => 'zone_actions'
+    ),
+
+    21 => array(
+        'name' => 'townPortal',
+        'text' => clienttranslate('Use Town Portal'),
+        'php_class' => 'DRCommandTownPortal',
+        'html_zone' => 'zone_actions'
+    ),
+
+    22 => array(
         'name' => 'usePotion',
         'text' => clienttranslate('Use Potion'),
-        'php_class' => 'DRCommandUsePotion'
+        'php_class' => 'DRCommandUsePotion',
+        'html_zone' => 'zone_actions'
     ),
 
-    16 => array(
-        'name' => 'rollFormingPartyPhase',
-        'text' => clienttranslate('Roll dice'),
-        'php_class' => 'DRCommandRollFormingPartyPhase'
+    23 => array(
+        'name' => 'ringInvisibility',
+        'text' => clienttranslate('Use Ring of Invisibility'),
+        'php_class' => 'DRCommandRingInvisibility',
+        'html_zone' => 'zone_actions'
     ),
-
 
 
     50 => array(
         'name' => 'endFormingPartyPhase',
         'text' => clienttranslate('Next phase'),
-        'php_class' => 'DRCommandEndFormingPartyPhase'
+        'php_class' => 'DRCommandEndFormingPartyPhase',
+        'always_visible' => true,
+        'html_zone' => 'zone_phases_actions'
     ),
 
 
     51 => array(
         'name' => 'endMonsterPhase',
         'text' => clienttranslate('Next phase'),
-        'php_class' => 'DRCommandEndMonsterPhase'
+        'php_class' => 'DRCommandEndMonsterPhase',
+        'always_visible' => true,
+        'html_zone' => 'zone_phases_actions'
     ),
 
     52 => array(
         'name' => 'endLootPhase',
         'text' => clienttranslate('Next phase'),
-        'php_class' => 'DRCommandEndLootPhase'
+        'php_class' => 'DRCommandEndLootPhase',
+        'always_visible' => true,
+        'html_zone' => 'zone_phases_actions'
     ),
 
     53 => array(
         'name' => 'endDragonPhase',
         'text' => clienttranslate('Next phase'),
-        'php_class' => 'DRCommandEndDragonPhase'
+        'php_class' => 'DRCommandEndDragonPhase',
+        'always_visible' => true,
+        'html_zone' => 'zone_phases_actions'
+    ),
+
+    54 => array(
+        'name' => 'seekGlory',
+        'text' => clienttranslate('Seek Glory'),
+        'php_class' => 'DRCommandSeekGlory',
+        'html_zone' => 'zone_phases_actions'
     ),
 
     60 => array(
         'name' => 'retireTavern',
         'text' => clienttranslate('Retire to the tavern'),
         'button_color' => "red",
-        'php_class' => 'DRCommandRetireTavern'
+        'php_class' => 'DRCommandRetireTavern',
+        'html_zone' => 'zone_phases_actions'
     ),
 
     61 => array(
@@ -593,13 +618,15 @@ $this->command_infos = array(
         'text' => clienttranslate('Flee the dungeon'),
         'button_color' => "red",
         'confirmation' => clienttranslate("Are you sure to flee the dungeon?"),
-        'php_class' => 'DRCommandFleeDungeon'
+        'php_class' => 'DRCommandFleeDungeon',
+        'html_zone' => 'zone_phases_actions'
     ),
 
     70 => array(
         'name' => 'heroUltimate',
         'text' => clienttranslate('Hero Ultimate'),
-        'php_class' => 'DRCommandHeroUltimate'
+        'php_class' => 'DRCommandHeroUltimate',
+        'html_zone' => 'zone_actions'
     ),
 
 );

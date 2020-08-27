@@ -146,23 +146,23 @@
 }
 
 .col_1 {
+    flex-basis: 25%;
     flex-grow: 1;
 }
 
 .col_2 {
-    flex-grow: 2;
+    flex-basis: 50%;
+    flex-grow: 1;
 }
 
 .col_3 {
-    flex-grow: 3;
+    flex-basis: 75%;
+    flex-grow: 1;
 }
 
 .col_4 {
-    flex-grow: 4;
-}
-
-.col_5 {
-    flex-grow: 5;
+    flex-basis: 100%;
+    flex-grow: 1;
 }
 
 .dicezone2 {
@@ -185,7 +185,6 @@
     list-style: none;
     padding-bottom: 5px;
     height: 40px;
-    padding: 5px 0 7px 0;
 }
 
 .navigation>li {
@@ -233,14 +232,16 @@
     flex-direction: column;
 }
 
-.h52 {
-    height: 52px;
+.h82 {
+    height: 82px;
     text-align: center;
 }
 
-.h52 .counter {
-    font-size: 24px;
+.h82 .counter {
+    font-size: 30px;
     font-weight: bold;
+    line-height: 60px;
+    vertical-align: middle;
 }
 
 .mt14 {
@@ -263,8 +264,7 @@
 }
 
 .card-hero {
-    width: 100px;
-    padding-left: 20px;
+    /* padding-left: 20px; */
 }
 
 .cardtooltip .keyword {
@@ -293,6 +293,19 @@
 
 /* Hero zone */
 
+#zone_hero .stockitem {
+    /* Safari and Chrome */
+    -webkit-transform: scale(0.77);
+    /* Firefox */
+    -moz-transform: scale(0.77);
+    /* IE 9 */
+    -ms-transform: scale(0.77);
+    /* Opera */
+    -o-transform: scale(0.77);
+    transform: scale(0.77);
+    transform-origin: top left;
+}
+
 #zone_hero.activated .stockitem {
     /* Safari and Chrome */
     -webkit-transform: rotate(90deg) scale(0.9);
@@ -303,10 +316,19 @@
     /* Opera */
     -o-transform: rotate(90deg) scale(0.9);
     transform: rotate(90deg) scale(0.9);
+    transform-origin: top left;
+    margin: 12px 140px;
 }
 
 #draft_card {
     margin: 10px 0 0 10px;
+}
+
+.card-hero {
+    position: relative;
+    height: 132px;
+    max-width: 97px;
+    padding: 0 25%;
 }
 
 
@@ -335,18 +357,6 @@
 
 .player_board .player_info {
     overflow: hidden;
-}
-
-
-/* Override BGA */
-
-#page-title {
-    min-height: 68px;
-}
-
-#generalactions::before {
-    content: ' ';
-    display: block;
 }
 
 
@@ -390,9 +400,35 @@
 
 #board .stockitem,
 #draft_card .stockitem {
-    box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7);
+    /* box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7); */
+    filter: drop-shadow(-1px 2px 5px rgb(0, 0, 0, 0.7))
 }
 
 #board .stockitem.token {
     border-radius: 25px;
+}
+
+
+/* Nav buttons */
+
+#zone_phases_actions a+a {
+    margin-left: 20px;
+}
+
+#zone_actions {
+    text-align: center;
+    min-height: 50px;
+}
+
+
+/* Hero icons */
+
+.icon-specialty {
+    width: 90px;
+    height: 60px;
+    background-color: red;
+}
+
+#zone_specialty {
+    font-size: 13px;
 }
