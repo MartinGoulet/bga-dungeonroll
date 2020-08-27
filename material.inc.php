@@ -354,10 +354,10 @@ $this->card_types = array(
     "4_2" => array(
         'name' => clienttranslate("Mercenary"),
         'specialty' => clienttranslate("When Forming the Party you may re-roll any number of Party dice"),
-        'ultimate' => clienttranslate("Defeat any 2 Monsters"),
+        'ultimate' => clienttranslate("Defeat up to 2 Monsters"),
         'imageindex' => 3,
         'heroclass' => "DRMercenary",
-        'commandText' => clienttranslate("Mercenary : Defeat any 2 Monsters"),
+        'commandText' => clienttranslate("Mercenary : Defeat up to 2 Monsters"),
     ),
 
     "5_2" => array(

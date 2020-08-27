@@ -22,7 +22,7 @@ class DRMercenary extends DRStandardHero
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        return sizeof($monsters) == 2;
+        return sizeof($monsters) >= 1 && sizeof($monsters) <= 2;
     }
 
     function executeUltimate($sub_command_id)
