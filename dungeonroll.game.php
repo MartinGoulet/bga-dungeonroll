@@ -559,6 +559,19 @@ class DungeonRoll extends Table
         $this->gamestate->nextState();
     }
 
+    function stPreMonsterPhase()
+    {
+        $dice = $this->components->getActivePlayerUsableItems();
+        $monsters = DRDungeonDice::getMonsterDices($dice);
+
+        if (sizeof($monsters) == 0) {
+            $this->notif->skipMonsterPhase();
+            $this->gamestate->nextState('preLootPhase');
+        } else {
+            $this->gamestate->nextState('monsterPhase');
+        }
+    }
+
     function stPreLootPhase()
     {
         $dice = $this->components->getActivePlayerUsableItems();

@@ -56,7 +56,7 @@ class DRCommandFightMonster extends DRCommand
         $this->game->manager->updateItems($items);
         $this->game->NTA_itemMove($items);
 
-        $this->game->notif->updatePossibleActions();
+        $this->game->gamestate->nextState('fight');
     }
 
     static function getMonsterFightResult($items)

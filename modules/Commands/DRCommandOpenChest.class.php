@@ -101,7 +101,6 @@ class DRCommandOpenChest extends DRCommand
         $this->game->NTA_itemMove($partyUpdate);
         $this->game->notif->newTokens($treasures);
 
-        $this->game->notif->updatePossibleActions();
-
+        $this->game->gamestate->nextState('chest');
     }
 }

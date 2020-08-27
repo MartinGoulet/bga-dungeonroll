@@ -502,7 +502,7 @@ $this->command_infos = array(
         'confirmations' => array(
             array(
                 'askConfirmation' => 'checkNonSelectedChest',
-                'confirmation' => clienttranslate("Are you sure you not want to open all chests?")
+                'confirmation' => clienttranslate("Are you sure you not want to open all Chests?")
             )
         )
     ),
@@ -512,7 +512,13 @@ $this->command_infos = array(
         'text' => clienttranslate('Quaff Potion'),
         'php_class' => 'DRCommandQuaffPotion',
         'always_visible' => true,
-        'html_zone' => 'zone_actions'
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'checkNonSelectedPotion',
+                'confirmation' => clienttranslate("Are you sure you not want to quaff all Potions?")
+            )
+        )
     ),
 
     10 => array(

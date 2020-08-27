@@ -123,7 +123,14 @@ $machinestates = array(
         "name" => "nextDungeonLevel",
         "type" => "game",
         "action" => "stRollDungeonDice",
-        "transitions" => array("" => STATE_MONSTER_PHASE)
+        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+    ),
+
+    STATE_PRE_MONSTER_PHASE=> array(
+        "name" => "preMonsterPhase",
+        "type" => "game",
+        "action" => "stPreMonsterPhase",
+        "transitions" => array("monsterPhase" => STATE_MONSTER_PHASE, "preLootPhase" => STATE_PRE_LOOT_PHASE)
     ),
 
     STATE_MONSTER_PHASE => array(
@@ -135,6 +142,7 @@ $machinestates = array(
         "possibleactions" => array("moveItem", "executeCommand"),
         "updateGameProgression" => true,
         "transitions" => array(
+            "fight" => STATE_PRE_MONSTER_PHASE,
             "nextPhase" => STATE_PRE_LOOT_PHASE,
             "fleeDungeon" => STATE_NEXT_PLAYER,
             "townPortal" => STATE_NEXT_PLAYER,
@@ -156,7 +164,7 @@ $machinestates = array(
         "type" => "activeplayer",
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("moveItem", "executeCommand"),
-        "transitions" => array("end" => STATE_PRE_DRAGON_PHASE, "townPortal" => STATE_NEXT_PLAYER, "chooseDie" => STATE_CHOOSE_DIE)
+        "transitions" => array("chest" => STATE_PRE_LOOT_PHASE, "end" => STATE_PRE_DRAGON_PHASE, "townPortal" => STATE_NEXT_PLAYER, "chooseDie" => STATE_CHOOSE_DIE)
     ),
 
     STATE_CHOOSE_DIE => array(
@@ -169,7 +177,7 @@ $machinestates = array(
         "transitions" => array(
             "next" => STATE_CHOOSE_DIE,
             "monsterPhase" => STATE_MONSTER_PHASE,
-            "lootPhase" => STATE_LOOT_PHASE,
+            "lootPhase" => STATE_PRE_LOOT_PHASE,
             "dragonPhase" => STATE_DRAGON_PHASE,
             "regroupPhase" => STATE_REGROUP_PHASE
         )

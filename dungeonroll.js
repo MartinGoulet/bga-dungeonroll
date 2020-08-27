@@ -546,6 +546,8 @@ define([
                         return this.checkRerollDragonCommander();
                     case 'checkNonSelectedChest':
                         return this.checkNonSelectedChest();
+                    case 'checkNonSelectedPotion':
+                        return this.checkNonSelectedPotion();
                     case 'always':
                         return true;
                     default:
@@ -580,6 +582,11 @@ define([
                     item_types_play["1_6"] == 1; // Champion
                 return item_types_dungeon["2_5"] == 1 && // Chest
                     thiefOrChampionPresent;
+            },
+
+            checkNonSelectedPotion: function() {
+                var item_types_dungeon = this.items.zone_dungeon.getPresentTypeList();
+                return item_types_dungeon["2_2"] == 1; // Potion
             },
 
             showSpecialty: function(card_type_id) {
