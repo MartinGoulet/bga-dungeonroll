@@ -34,5 +34,7 @@ class DRMercenary extends DRStandardHero
         $monsters = DRItem::setZone($monsters, ZONE_BOX);
         $this->game->manager->updateItems($monsters);
         $this->game->notif->ultimateMercenary($monsters);
+
+        $this->game->gamestate->nextState('fight');
     }
 }
