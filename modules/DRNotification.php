@@ -110,7 +110,7 @@ class DRNotification extends APP_GameClass
 
     function skipMonsterPhase()
     {
-        $message = clienttranslate('${player_name} skip the monster phase because no monster or scroll');
+        $message = clienttranslate('${player_name} move to the next phase because no monster');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -118,7 +118,7 @@ class DRNotification extends APP_GameClass
 
     function skipLootPhase()
     {
-        $message = clienttranslate('${player_name} skip the loot phase because no Chest or Potion');
+        $message = clienttranslate('${player_name} move to the next phase because no Chest or Potion');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
@@ -126,7 +126,7 @@ class DRNotification extends APP_GameClass
 
     function skipDragonPhase()
     {
-        $message = clienttranslate('${player_name} skip the dragon phase because less than 3 Dragon dice');
+        $message = clienttranslate('${player_name} move to the next phase because less than 3 Dragon dice');
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName()
         ]);
