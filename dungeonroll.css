@@ -411,10 +411,6 @@
 
 /* Nav buttons */
 
-#zone_phases_actions a+a {
-    margin-left: 20px;
-}
-
 #zone_actions {
     text-align: center;
     min-height: 50px;
