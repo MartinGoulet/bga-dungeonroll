@@ -400,8 +400,8 @@
 
 #board .stockitem,
 #draft_card .stockitem {
-    /* box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7); */
-    filter: drop-shadow(-1px 2px 5px rgb(0, 0, 0, 0.7))
+    box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7);
+    /* filter: drop-shadow(-1px 2px 5px rgb(0, 0, 0, 0.7)) */
 }
 
 #board .stockitem.token {
