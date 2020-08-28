@@ -39,8 +39,8 @@
 
         /*********** Place your code below:  ************/
 
-        $this->tpl['ZONE_DELVE'] = self::_("Delve #");
-        $this->tpl['ZONE_LEVEL'] = self::_("Level #");
+        $this->tpl['ZONE_DELVE'] = self::_("Delve");
+        $this->tpl['ZONE_LEVEL'] = self::_("Level");
         $this->tpl['ZONE_PLAYING_AREA'] = self::_("Playing Area");
         $this->tpl['ZONE_GRAVEYARD'] = self::_("Graveyard");
         $this->tpl['ZONE_PARTY'] = self::_("Party");

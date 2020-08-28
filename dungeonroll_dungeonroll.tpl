@@ -50,7 +50,7 @@
             </div>
 
         
-            <div class="whiteblock mt0">
+            <div class="whiteblock mt0" style="min-height: 152px">
                 <div class="card-hero">
                     <div id="zone_hero"></div>
                 </div>
@@ -69,7 +69,7 @@
                 <div id="zone_phases_actions"></div>
             </div>
 
-            <div class="whiteblock">
+            <div class="whiteblock" style="min-height: 152px">
                 <h3>{ZONE_PLAYING_AREA}</h3>
                 <div class="dicezone2" id="zone_play"></div>
             </div>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="whiteblock mt0">
+            <div class="whiteblock mt0" style="min-height: 152px">
                 <h3>{ZONE_GRAVEYARD}</h3>
                 <div class="dicezone2" id="zone_graveyard"></div>
             </div>
@@ -168,7 +168,7 @@ var jstpl_player_board = '\
         <div id="player_hero_${id}" class="col_1"></div>\
     </div>\
     <div class="player_info">\
-        <div class="player_delve">{ZONE_DELVE} <span id="player_delve_${id}">0</span></div>\
+        <div class="player_delve">${delve} # <span id="player_delve_${id}">0</span></div>\
         <div id="player_inventory_${id}"></div>\
     </div>\
 </div>\

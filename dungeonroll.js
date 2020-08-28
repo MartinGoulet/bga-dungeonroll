@@ -57,7 +57,11 @@ define([
 
                     // Setting up players boards if needed
                     var player_board_div = $('player_board_' + player_id);
-                    dojo.place(this.format_block('jstpl_player_board', player), player_board_div);
+                    var html = this.format_block('jstpl_player_board', {
+                        id: player.id,
+                        delve: _('Delve')
+                    })
+                    dojo.place(html, player_board_div);
 
                     this.player_board[player_id] = {
                         'hero': this.initStockHero('player_hero_' + player_id, false),
