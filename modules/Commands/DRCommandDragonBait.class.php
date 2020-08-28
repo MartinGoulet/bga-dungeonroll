@@ -44,6 +44,6 @@ class DRCommandDragonBait extends DRCommand
         $this->game->NTA_itemMove($itemsUpdate);
 
         // Go to the next state
-        $this->game->notif->updatePossibleActions();
+        $this->game->gamestate->nextState("dragonBait");
     }
 }
