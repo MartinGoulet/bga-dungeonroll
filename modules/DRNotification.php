@@ -50,6 +50,15 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function defeatDragon()
+    {
+        $message = clienttranslate('${player_name} defeat the Dragon and receive 1 Experience');
+
+        $this->game->notifyAllPlayers("message", $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+    }
+
     function newDelve()
     {
         $message = clienttranslate('${player_name} starts the delve #${delve_number}');
@@ -98,6 +107,15 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function rollingDice($dice)
+    {
+        // Notify the discard of the scroll
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, '', array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $dice,
+        ));
+    }
+
     function selectHero($hero)
     {
         $message = clienttranslate('${player_name} select ${hero_name}');
@@ -105,30 +123,6 @@ class DRNotification extends APP_GameClass
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'hero' => $hero
-        ]);
-    }
-
-    function skipMonsterPhase()
-    {
-        $message = clienttranslate('${player_name} move to the next phase because no Monster is found');
-        $this->game->notifyAllPlayers("message", $message, [
-            'player_name' => $this->game->getActivePlayerName()
-        ]);
-    }
-
-    function skipLootPhase()
-    {
-        $message = clienttranslate('${player_name} move to the next phase because no Chest or Potion is found');
-        $this->game->notifyAllPlayers("message", $message, [
-            'player_name' => $this->game->getActivePlayerName()
-        ]);
-    }
-
-    function skipDragonPhase()
-    {
-        $message = clienttranslate('${player_name} move to the next phase because less than 3 Dragon dice');
-        $this->game->notifyAllPlayers("message", $message, [
-            'player_name' => $this->game->getActivePlayerName()
         ]);
     }
 

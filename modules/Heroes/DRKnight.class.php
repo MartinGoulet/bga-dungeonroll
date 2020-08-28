@@ -34,6 +34,8 @@ class DRKnight extends DRStandardHero
 
         $this->game->manager->updateItems($dragons);
         $this->game->notif->ultimateKnightDragonSlayer($dragons);
+
+        $this->game->gamestate->nextState('ultimate');
     }
 
     /**

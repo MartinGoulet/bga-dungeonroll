@@ -142,6 +142,7 @@ $machinestates = array(
         "possibleactions" => array("moveItem", "executeCommand"),
         "updateGameProgression" => true,
         "transitions" => array(
+            "ultimate" => STATE_PRE_MONSTER_PHASE,
             "fight" => STATE_PRE_MONSTER_PHASE,
             "chest" => STATE_PRE_MONSTER_PHASE, // For Paladin
             "dragonBait" => STATE_PRE_LOOT_PHASE,
@@ -166,7 +167,13 @@ $machinestates = array(
         "type" => "activeplayer",
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("moveItem", "executeCommand"),
-        "transitions" => array("chest" => STATE_PRE_LOOT_PHASE, "end" => STATE_PRE_DRAGON_PHASE, "townPortal" => STATE_NEXT_PLAYER, "chooseDie" => STATE_CHOOSE_DIE)
+        "transitions" => array(
+            "ultimate" => STATE_PRE_LOOT_PHASE,
+            "fleeDungeon" => STATE_NEXT_PLAYER,
+            "chest" => STATE_PRE_LOOT_PHASE, 
+            "end" => STATE_PRE_DRAGON_PHASE, 
+            "townPortal" => STATE_NEXT_PLAYER, 
+            "chooseDie" => STATE_CHOOSE_DIE)
     ),
 
     STATE_CHOOSE_DIE => array(
@@ -200,6 +207,7 @@ $machinestates = array(
         "args" => "argDragonPhasePlayerTurn",
         "possibleactions" => array("moveItem", "executeCommand"),
         "transitions" => array(
+            "ultimate" => STATE_PRE_DRAGON_PHASE,
             "killDragons" => STATE_PRE_REGROUP_PHASE,
             "fleeDungeon" => STATE_NEXT_PLAYER,
             "townPortal" => STATE_NEXT_PLAYER,

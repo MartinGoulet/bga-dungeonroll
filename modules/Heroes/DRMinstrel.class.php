@@ -78,5 +78,8 @@ class DRMinstrel extends DRStandardHero
         $dragons = DRItem::setZone($dragons, ZONE_BOX);
         $this->game->manager->updateItems($dragons);
         $this->game->notif->ultimateMinstrel($dragons);
+
+        $this->game->gamestate->nextState('ultimate');
+
     }
 }

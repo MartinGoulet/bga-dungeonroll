@@ -82,5 +82,7 @@ class DREnchantress extends DRStandardHero
         // Return potion to the dungeon zone
         $this->game->manager->updateItems($monsters);
         $this->game->notif->ultimateEnchantressBeguiler($monsters, 1);
+
+        $this->game->gamestate->nextState('ultimate');
     }
 }

@@ -544,6 +544,10 @@ class DungeonRoll extends Table
         // Roll dice
         $rolledDice = DRItem::rollDice($dungeonDiceToRoll);
 
+        // For animation to show the dice
+        $rolledDice = DRItem::setZone($rolledDice, ZONE_PLAY);
+        $this->notif->rollingDice($rolledDice);
+
         $dragonsDice = DRDungeonDice::getDragonDice($rolledDice);
         $rolledDragonDice = DRItem::setZone($dragonsDice, ZONE_DRAGON_LAIR);
         $this->manager->updateItems($rolledDragonDice);
@@ -565,7 +569,6 @@ class DungeonRoll extends Table
         $monsters = DRDungeonDice::getMonsterDices($dice);
 
         if (sizeof($monsters) == 0) {
-            $this->notif->skipMonsterPhase();
             $this->gamestate->nextState('preLootPhase');
         } else {
             $this->gamestate->nextState('monsterPhase');
@@ -578,7 +581,6 @@ class DungeonRoll extends Table
         $dungeon = DRDungeonDice::getDungeonDiceWithoutDragon($dice);
 
         if (sizeof($dungeon) == 0) {
-            $this->notif->skipLootPhase();
             $this->gamestate->nextState('preDragonPhase');
         } else {
             $this->gamestate->nextState('lootPhase');
@@ -600,7 +602,6 @@ class DungeonRoll extends Table
             // Next state
             $this->gamestate->nextState("dragonPhase");
         } else {
-            $this->notif->skipDragonPhase();
             // Next state
             $this->gamestate->nextState('regroupPhase');
         }

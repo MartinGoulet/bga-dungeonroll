@@ -78,6 +78,8 @@ class DROccultist extends DRStandardHero
         $fighters = $this->getFighterDice(sizeof($skeletons));
 
         $this->game->notif->ultimateOccultist(array_merge($fighters, $skeletons));
+
+        $this->game->gamestate->nextState('ultimate');
     }
 
     protected function getNumberSkeletonToFighter() {

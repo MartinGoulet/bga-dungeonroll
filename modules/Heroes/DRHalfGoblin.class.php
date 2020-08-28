@@ -40,6 +40,8 @@ class DRHalfGoblin extends DRStandardHero
         $thieves = $this->getThieveDice(sizeof($goblins));
 
         $this->game->notif->ultimateHalfGoblin(array_merge($thieves, $goblins));
+
+        $this->game->gamestate->nextState('ultimate');
     }
 
     protected function getNumberGoblinsToThief() {
