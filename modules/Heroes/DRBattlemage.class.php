@@ -31,6 +31,8 @@ class DRBattlemage extends DRSpellsword
         $dungeons = DRItem::setZone($dungeons, ZONE_BOX);
         $this->game->manager->updateItems($dungeons);
         $this->game->notif->ultimateBattlemage($dungeons);
+        
+        $this->game->gamestate->nextState('ultimate');
     }
 
 }
