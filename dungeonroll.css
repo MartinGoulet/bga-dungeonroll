@@ -295,14 +295,14 @@
 
 #zone_hero .stockitem {
     /* Safari and Chrome */
-    -webkit-transform: scale(0.77);
+    -webkit-transform: scale(0.87);
     /* Firefox */
-    -moz-transform: scale(0.77);
+    -moz-transform: scale(0.87);
     /* IE 9 */
-    -ms-transform: scale(0.77);
+    -ms-transform: scale(0.87);
     /* Opera */
-    -o-transform: scale(0.77);
-    transform: scale(0.77);
+    -o-transform: scale(0.87);
+    transform: scale(0.87);
     transform-origin: top left;
 }
 
