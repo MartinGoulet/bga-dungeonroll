@@ -64,7 +64,7 @@ class DRTreasureToken
 
     static function isPotion($item)
     {
-        return $item['value'] == TOKEN_POTION && DRItem::isTreasureToken($item);
+        return $item['value'] == TOKEN_ELIXIR && DRItem::isTreasureToken($item);
     }
 
     static function isTownPortal($item)

@@ -43,7 +43,7 @@ define('TOKEN_THIEVES', 4);
 define('TOKEN_SCROLL', 5);
 define('TOKEN_RING_INVISIBILITY', 6);
 define('TOKEN_DRAGON_SCALES', 7);
-define('TOKEN_POTION', 8);
+define('TOKEN_ELIXIR', 8);
 define('TOKEN_DRAGON_BAIT', 9);
 define('TOKEN_TOWN_PORTAL', 10);
 

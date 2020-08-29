@@ -79,8 +79,8 @@ $this->items = array(
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_POTION,
-        'name' => 'Potion',
+        'value' => TOKEN_ELIXIR,
+        'name' => 'Elixir',
         'number' => 3
     ),
     array(
@@ -280,8 +280,8 @@ $this->items_treasure_tokens = array(
             clienttranslate("Use as one Scroll die face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_POTION => array(
-        'name' => clienttranslate("Potion"),
+    TYPE_TREASURE_TOKEN . '_' . TOKEN_ELIXIR => array(
+        'name' => clienttranslate("Elixir"),
         'image_file' => 'img/treasures.png',
         'image_index' => 5,
         'weight' => 26,
@@ -575,7 +575,7 @@ $this->command_infos = array(
 
     22 => array(
         'name' => 'usePotion',
-        'text' => clienttranslate('Use Potion token'),
+        'text' => clienttranslate('Use Elixir'),
         'php_class' => 'DRCommandUsePotion',
         'always_visible' => true,
         'html_zone' => 'zone_actions'
