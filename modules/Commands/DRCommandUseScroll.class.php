@@ -87,6 +87,8 @@ class DRCommandUseScroll extends DRCommand
 
         $this->game->notif->useScroll($scrolls, $rolledDice);
         $this->game->notif->updatePossibleActions();
+
+        $this->game->gamestate->nextState('scroll');
     }
 
     function getItemsInPlay()
