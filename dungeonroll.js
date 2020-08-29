@@ -572,7 +572,6 @@ define([
             checkRerollDragonCommander: function() {
                 var item_types = this.items.zone_play.getPresentTypeList();
                 var item_types_hero = this.items.zone_hero.getPresentTypeList();
-                debugger;
                 return item_types["2_1"] == 1 && // Dragons
                     item_types_hero["5_2"] == 1; // Hero Master Commander
             },
