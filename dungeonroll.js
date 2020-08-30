@@ -654,7 +654,6 @@ define([
                 dojo.subscribe('onSelectHero', this, "notif_onSelectHero");
 
                 this.notifqueue.setSynchronous('onDiceRolled', 1250);
-                this.notifqueue.setSynchronous('onHeroLevelUp', 2500);
 
             },
 
@@ -702,11 +701,29 @@ define([
             },
 
             notif_onHeroLevelUp: function(notif) {
+                var masterHeroType = "5_" + notif.args.hero_master['value'];
+
                 var heroZone = this.player_board[notif.args.player_id].hero;
                 var from = $(heroZone.getItemDivId(notif.args.hero_novice['id']));
-                heroZone.addToStockWithId("5_" + notif.args.hero_master['value'], notif.args.hero_master['id'], from);
+                heroZone.addToStockWithId(masterHeroType, notif.args.hero_master['id'], from);
                 heroZone.removeFromStockById(notif.args.hero_novice['id']);
-                this.showSpecialty("5_" + notif.args.hero_master['value']);
+                this.showSpecialty(masterHeroType);
+
+                // if the player who hero level up is the current player
+                if (notif.args.player_id == this.player_id) {
+                    // // Display
+                    var card = this.gamedatas.card_types[masterHeroType];
+                    var index = toint(card.imageindex) - 1;
+                    var args = {
+                        artx: 297 * (index % 8),
+                        arty: 425 * (Math.floor(index / 8)),
+                        title: _("Your hero level up")
+                    };
+
+                    var html = this.format_block('jstpl_hero_level_up', args);
+                    dojo.place(html, 'board', 'first');
+                    this.fadeOutAndDestroy('dlg', 1000, 3000)
+                }
             },
 
             notif_updatePossibleActions: function(notif) {

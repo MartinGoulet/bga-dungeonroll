@@ -134,6 +134,11 @@
 
 <script type="text/javascript">
     // Javascript HTML templates
+var jstpl_hero_level_up = '\
+<div id="dlg" class="dlg_hero_level_up">\
+    <div class="title">${title}</div>\
+    <div><div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div></div>\
+</div>';
 
 var jstpl_card_tooltip = '\
     <div class="cardtooltip">\
