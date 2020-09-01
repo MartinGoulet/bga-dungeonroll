@@ -139,6 +139,34 @@ class DRNotification extends APP_GameClass
         ));
     }
 
+    function useDragonBait($items)
+    {
+        $message = clienttranslate('${player_name} uses Dragon Bait to transform ${nbr} Monster(s) into Dragon');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'nbr' => sizeof($items),
+        ]);
+    }
+
+    function useRingInvisibility()
+    {
+        $message = clienttranslate('${player_name} uses Ring of Invisibility to remove all Dragon dice');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+    }
+
+    function useTownPortal()
+    {
+        $message = clienttranslate('${player_name} uses Town Portal to leave the dungeon');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+    }
+
     function useScroll($scrolls, $otherDice)
     {
         $message = clienttranslate('${player_name} uses a scroll to re-rolls ${nbr} dice');

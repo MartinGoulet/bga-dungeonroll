@@ -40,6 +40,8 @@ class DRCommandTownPortal extends DRCommand
         $this->game->incPlayerScore($points);
         $this->game->notif->updatedScores();
 
+        $this->game->notif->useTownPortal();
+
         // Stats
         $this->game->stats->incLevelCompleted($points);
 

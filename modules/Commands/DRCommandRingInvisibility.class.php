@@ -43,6 +43,8 @@ class DRCommandRingInvisibility extends DRCommand
         $this->game->manager->updateItems($itemsUpdate);
         $this->game->NTA_itemMove($itemsUpdate);
 
+        $this->game->notif->useRingInvisibility();
+        
         // Go to the next state
         $this->game->gamestate->nextState('ringInvisibility');
     }
