@@ -24,7 +24,7 @@
  *
  */
 
-require_once ('modules/constants.inc.php');
+require_once('modules/constants.inc.php');
 
 $game_options = array(
 
@@ -68,8 +68,61 @@ $game_options = array(
                 'tmdisplay' => totranslate('No hero')
             )
         )
+    ),
+
+    GV_GAME_EXPANSION_ID => array(
+        'name' => totranslate('Expansions'),
+        'values' => array(
+            GAME_EXPANSION_BASE => array(
+                'name' => totranslate('Base game'),
+                'tmdisplay' => totranslate('Base game')
+            ),
+            // GAME_EXPANSION_PACK_1 => array(
+            //     'name' => totranslate('Hero pack #1'),
+            //     'tmdisplay' => totranslate('Hero pack #1')
+            // ),
+            // GAME_EXPANSION_BASE_PACK_1 => array(
+            //     'name' => totranslate('Base + Hero pack #1'),
+            //     'tmdisplay' => totranslate('Base + Hero pack #1')
+            // ),
+            ),
+        'displaycondition' => array(
+            array(
+                'type' => 'otheroption',
+                'id' => GV_GAME_OPTION_ID,
+                'value' => array(GAME_OPTION_RANDOM_HERO, GAME_OPTION_SELECT_HERO)
+            ),
+        ),
+    ),
+
+    GV_GAME_MIRROR_ID => array(
+        'name' => totranslate('Mirror match'),
+        'values' => array(
+            GAME_MIRROR_NO => array(
+                'name' => totranslate('No')
+            ),
+            GAME_MIRROR_YES => array(
+                'name' => totranslate('Yes'),
+                'tmdisplay' => totranslate('Mirror match')
+            ),
+        ),
+        'displaycondition' => array(
+            array(
+                'type' => 'otheroption',
+                'id' => GV_GAME_OPTION_ID,
+                'value' => array(GAME_OPTION_RANDOM_HERO, GAME_OPTION_SELECT_HERO)
+            ),
+        ),
+        'startcondition' => array(
+            GAME_MIRROR_NO => array(),
+            GAME_MIRROR_YES => array(
+                array(
+                    'type' => 'minplayers',
+                    'value' => 2,
+                    'message' => totranslate('Mirror match is available for 2 or more players.')
+                )
+            ),
+        )
     )
 
 );
-
-

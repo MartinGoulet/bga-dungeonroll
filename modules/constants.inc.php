@@ -93,6 +93,7 @@ define('STATE_GAME_OPTION', 2);
 define('STATE_RANDOM_HERO', 3);
 define('STATE_SELECT_HERO', 5);
 define('STATE_NEXT_PLAYER_HERO', 6);
+define('STATE_SETUP_MIRROR_GAME', 7);
 
 define('STATE_INIT_PLAYER_TURN', 10);
 define('STATE_FORMING_PARTY', 12);
@@ -141,6 +142,12 @@ define('GL_CHOOSE_DIE_STATE', 'choose_die_state');
 define('GV_GAME_OPTION_ID', 100);
 define('GV_GAME_OPTION', 'gameOption');
 
+define('GV_GAME_EXPANSION_ID', 101);
+define('GV_GAME_EXPANSION', 'Expansion');
+
+define('GV_GAME_MIRROR_ID', 102);
+define('GV_GAME_MIRROR', 'Mirror match');
+
 /*
  * Game options 
  */
@@ -148,3 +155,11 @@ define('GV_GAME_OPTION', 'gameOption');
 define('GAME_OPTION_RANDOM_HERO', 1);
 define('GAME_OPTION_SELECT_HERO', 2);
 define('GAME_OPTION_NO_HERO', 3);
+
+define('GAME_EXPANSION_BASE', 1);
+define('GAME_EXPANSION_PACK_1', 2);
+define('GAME_EXPANSION_BASE_PACK_1', 99);
+
+define('GAME_MIRROR_NO', 1);
+define('GAME_MIRROR_YES', 2);
+

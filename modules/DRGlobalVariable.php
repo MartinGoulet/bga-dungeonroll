@@ -69,6 +69,16 @@ class DRGlobalVariable
         return $this->game->getGameStateValue(GV_GAME_OPTION);
     }
 
+    function getGameExpansion()
+    {
+        return $this->game->getGameStateValue(GV_GAME_EXPANSION);
+    }
+
+    function getIsGameMirror()
+    {
+        return $this->game->getGameStateValue(GV_GAME_MIRROR) == GAME_MIRROR_YES;
+    }
+
     function getIsHeroActivated()
     {
         return $this->game->getGameStateValue(GL_HERO_ACTIVATED) == 1;

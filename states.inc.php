@@ -72,7 +72,10 @@ $machinestates = array(
         "name" => "randomHero",
         "type" => "game",
         "action" => "stRandomHero",
-        "transitions" => array("" => STATE_INIT_PLAYER_TURN)
+        "transitions" => array(
+            "mirror" => STATE_SETUP_MIRROR_GAME,
+            "" => STATE_INIT_PLAYER_TURN
+        )
     ),
 
     STATE_SELECT_HERO => array(
@@ -90,7 +93,18 @@ $machinestates = array(
         "name" => "nextDraftHero",
         "type" => "game",
         "action" => "stNextDraftHero",
-        "transitions" => array("next" => STATE_SELECT_HERO, "end" => STATE_INIT_PLAYER_TURN)
+        "transitions" => array(
+            "mirror" => STATE_SETUP_MIRROR_GAME,
+            "next" => STATE_SELECT_HERO, 
+            "end" => STATE_INIT_PLAYER_TURN,
+        )
+    ),
+
+    STATE_SETUP_MIRROR_GAME =>array(
+        "name" => "setupMirrorGame",
+        "type" => "game",
+        "action" => "stSetupMirrorGame",
+        "transitions" => array("" => STATE_INIT_PLAYER_TURN)
     ),
 
 

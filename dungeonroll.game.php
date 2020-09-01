@@ -60,7 +60,9 @@ class DungeonRoll extends Table
             GL_CHOOSE_DIE_COUNT => GL_CHOOSE_DIE_COUNT_ID,
             GL_CHOOSE_DIE_STATE => GL_CHOOSE_DIE_STATE_ID,
             // Game variants
-            GV_GAME_OPTION => GV_GAME_OPTION_ID
+            GV_GAME_OPTION => GV_GAME_OPTION_ID,
+            GV_GAME_EXPANSION => GV_GAME_EXPANSION_ID,
+            GV_GAME_MIRROR => GV_GAME_MIRROR_ID,
         ));
 
         // Initialize helper class
@@ -222,7 +224,10 @@ class DungeonRoll extends Table
     function heroLevelUp()
     {
         $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO);
-        $heroMaster = $this->components->getItemsByTypeAndValue(TYPE_MASTER_HERO, $heroNovice[0]['value']);
+        $heroMaster = array(
+            // Master hero is always the next item in de database
+            $this->components->getItemById($heroNovice[0]['id'] + 1)
+        );
 
         $heroNovice = DRItem::setZone($heroNovice, ZONE_BOX);
         $heroNovice = DRItem::setOwner($heroNovice, null);
@@ -310,6 +315,14 @@ class DungeonRoll extends Table
 
     function stNextDraftHero()
     {
+        if ($this->vars->getIsGameMirror()) {
+            // Give more time to the player
+            self::giveExtraTime($this->getActivePlayerId());
+            // Next state
+            $this->gamestate->nextState('mirror');
+            return;
+        }
+
         // Activate next player
         $player_id = self::activeNextPlayer();
         // Give more time to the player
@@ -457,23 +470,73 @@ class DungeonRoll extends Table
 
         $selectedHeroes = array();
         foreach ($players as $player_id => $dummy) {
-            // Get a random index in the array
-            $index = bga_rand(0, sizeof($noviceHeroes) - 1);
-            // Retrieve hero
-            $hero = $noviceHeroes[$index];
-            // Remove hero from the array (for the next player)
-            unset($noviceHeroes[$index]);
-            $noviceHeroes = array_values($noviceHeroes);
+            // Assign an hero if it's not a game Mirror or if it is than this is the active player
+            if (!$this->vars->getIsGameMirror() || $player_id == $this->getActivePlayerId()) {
+                // Get a random index in the array
+                $index = bga_rand(0, sizeof($noviceHeroes) - 1);
+                // Retrieve hero
+                $hero = $noviceHeroes[$index];
+                // Remove hero from the array (for the next player)
+                unset($noviceHeroes[$index]);
+                $noviceHeroes = array_values($noviceHeroes);
 
-            $hero['owner'] = $player_id;
-            $hero['zone'] = ZONE_HERO;
-            $selectedHeroes[] = $hero;
+                $hero['owner'] = $player_id;
+                $hero['zone'] = ZONE_HERO;
+                $selectedHeroes[] = $hero;
+            }
         }
 
         // Update selected hero in the database
         $this->manager->updateItems($selectedHeroes);
 
-        // Next state
+        if ($this->vars->getIsGameMirror()) {
+            // Next state
+            $this->gamestate->nextState('mirror');
+        } else {
+            // Next state
+            $this->gamestate->nextState();
+        }
+    }
+
+    function stSetupMirrorGame()
+    {
+        $players = $this->loadPlayersBasicInfos();
+        $active_player_id = $this->getActivePlayerId();
+
+        $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO)[0];
+        $heroMaster = $this->components->getItemsByTypeAndValue(TYPE_MASTER_HERO, $heroNovice['value'])[0];
+
+        $newHeroes = array();
+
+        foreach ($players as $player_id => $player) {
+            // The current player already have an hero
+            if ($player_id != $active_player_id) {
+                // Clone item
+                $newNoviceHero = $heroNovice;
+                $newMasterHero = $heroMaster;
+                // Set the new owner (for the novice hero)
+                $newNoviceHero['owner'] = $player_id;
+                // Add new components
+                $newHeroes[] = $newNoviceHero;
+                $newHeroes[] = $newMasterHero;
+            }
+        }
+
+        $this->manager->addNewHero($newHeroes);
+
+        // Get heroes for each player (except the one who has already an hero)
+        $newHeroes = $this->components->getHeroesByPlayer();
+        // $newHeroes = DRUtils::filter($newHeroes, function ($hero) use ($active_player_id) {
+        //     return $hero['owner'] != $active_player_id;
+        // });
+
+        foreach ($newHeroes as $hero) {
+            if ($hero['owner'] != $active_player_id) {
+                $this->notif->selectHero($hero);
+            }
+        }
+
+        // Move to the next step
         $this->gamestate->nextState();
     }
 

@@ -23,7 +23,12 @@ class DRItemManager extends APP_GameClass
             }
         }
 
-        foreach ($cards as $card_id => $card) {
+        $gameExpansion = $this->game->vars->getGameExpansion();
+        $filteredCards = array_filter($cards, function($card) use($gameExpansion) {
+            return in_array($gameExpansion, $card['expansions']);
+        });
+
+        foreach ($filteredCards as $card_id => $card) {
             $card_type = explode("_", $card_id)[0];
             $card_value = explode("_", $card_id)[1];
             $card_nane = $card['name'];
@@ -32,6 +37,29 @@ class DRItemManager extends APP_GameClass
 
         $sql .= implode(',', $sql_values);
         self::DbQuery($sql);
+    }
+
+    function addNewHero($heroes) {
+
+        $sql = "INSERT INTO item (item_type, item_value, item_zone, owner_id) VALUES ";
+        $sql_values = array();
+
+        foreach ($heroes as $hero) {
+            $card_type = $hero['type'];
+            $card_value = $hero['value'];
+            $card_zone = $hero['zone'];
+            $card_owner = $hero['owner'];
+            if($hero['owner'] == null) {
+                $card_owner = 'null';
+            }
+            $sql_values[] = "($card_type, $card_value, '$card_zone', $card_owner)";
+        }
+
+        $sql .= implode(',', $sql_values);
+        self::DbQuery($sql);
+
+        $this->game->components->updateItems();
+
     }
 
     function getAllItems()

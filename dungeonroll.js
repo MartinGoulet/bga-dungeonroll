@@ -774,9 +774,15 @@ define([
 
             notif_onSelectHero: function(notif) {
                 var hero = notif.args.hero;
-                var from = $(this.items['zone_' + hero.previous_zone].getItemDivId(hero.id));
-                this.player_board[hero['owner']].hero.addToStockWithId(hero.type + "_" + hero.value, hero.id, from);
-                this.items['zone_' + hero.previous_zone].removeFromStockById(hero.from);
+                if (hero.previous_zone !== undefined) {
+                    // Happen in standard game (or the player you select his hero)
+                    var from = $(this.items['zone_' + hero.previous_zone].getItemDivId(hero.id));
+                    this.player_board[hero['owner']].hero.addToStockWithId(hero.type + "_" + hero.value, hero.id, from);
+                    this.items['zone_' + hero.previous_zone].removeFromStockById(hero.from);
+                } else {
+                    // Happen in mirror game for others players that not select his hero
+                    this.player_board[hero['owner']].hero.addToStockWithId(hero.type + "_" + hero.value, hero.id);
+                }
             },
 
             isStringEmpty: function(value) {
