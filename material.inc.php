@@ -518,7 +518,7 @@ $this->command_infos = array(
         'confirmations' => array(
             array(
                 'askConfirmation' => 'checkNonSelectedChest',
-                'confirmation' => clienttranslate("Are you sure you not want to open all Chests?")
+                'confirmation' => clienttranslate("Are you sure you do not want to open all Chests?")
             )
         )
     ),
@@ -532,7 +532,7 @@ $this->command_infos = array(
         'confirmations' => array(
             array(
                 'askConfirmation' => 'checkNonSelectedPotion',
-                'confirmation' => clienttranslate("Are you sure you not want to quaff all Potions?")
+                'confirmation' => clienttranslate("Are you sure you do not want to quaff all Potions?")
             )
         )
     ),
