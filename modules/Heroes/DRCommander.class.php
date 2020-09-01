@@ -87,6 +87,8 @@ class DRCommander extends DRStandardHero
 
         $this->game->manager->updateItems($rolledDice);
         $this->game->notif->ultimateCommander($rolledDice);
-        $this->game->notif->updatePossibleActions();
+        
+        // His ultimate is considered to be a scroll (and can move back to monster phase)
+        $this->game->gamestate->nextState('scroll');
     }
 }
