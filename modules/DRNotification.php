@@ -15,9 +15,29 @@ class DRNotification extends APP_GameClass
         $this->vars = $vars;
     }
 
+    function changeChestToPotion($dice)
+    {
+        $message = clienttranslate('${player_name} changes ${nbr} Chest(s) into Potion(s) with their hero');
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'nbr' => sizeof($dice),
+            'items' => $dice
+        ]);
+    }
+
     function changeScrollToChampion($dice)
     {
         $message = clienttranslate('${player_name} changes ${nbr} Scrolls into Champions with their hero');
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'nbr' => sizeof($dice),
+            'items' => $dice
+        ]);
+    }
+
+    function changeSkeletonToPotion($dice)
+    {
+        $message = clienttranslate('${player_name} changes ${nbr} Skeleton(s) into Potion(s) with their hero');
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'nbr' => sizeof($dice),
@@ -272,7 +292,7 @@ class DRNotification extends APP_GameClass
         ]);
     }
     
-    function ultimateMinstrel($dragons)
+    function ultimateDiscardDragon($dragons)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} and discard all dice from the Dragon\'s Lair');
 

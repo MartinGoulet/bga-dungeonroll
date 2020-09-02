@@ -81,11 +81,11 @@ $game_options = array(
             //     'name' => totranslate('Hero pack #1'),
             //     'tmdisplay' => totranslate('Hero pack #1')
             // ),
-            // GAME_EXPANSION_BASE_PACK_1 => array(
-            //     'name' => totranslate('Base + Hero pack #1'),
-            //     'tmdisplay' => totranslate('Base + Hero pack #1')
-            // ),
+            GAME_EXPANSION_BASE_PACK_1 => array(
+                'name' => totranslate('Base game + Hero pack #1'),
+                'tmdisplay' => totranslate('Base game + Hero pack #1')
             ),
+        ),
         'displaycondition' => array(
             array(
                 'type' => 'otheroption',

@@ -427,7 +427,7 @@ class DungeonRoll extends Table
             'commands' => $this->commands->getActiveCommands(),
         );
     }
-    
+
 
     function argDragonPhasePlayerTurn()
     {
@@ -578,9 +578,12 @@ class DungeonRoll extends Table
         $rolledDice = DRItem::rollDice($party_dices);
         $rolledDice = DRItem::setZone($rolledDice, ZONE_PARTY);
 
+        $hero = $this->components->getActivePlayerHero();
+
+        $hero->stateBeforeFormingParty($rolledDice);
+
         $this->notif->rollPartyDice($rolledDice);
 
-        $hero = $this->components->getActivePlayerHero();
         $hero->stateAfterFormingParty($rolledDice);
 
         $this->manager->updateItems($rolledDice);
@@ -621,6 +624,9 @@ class DungeonRoll extends Table
 
         // Notify for the move
         $this->NTA_itemMove(array_merge($rolledDragonDice, $rolledDungeonDice));
+
+        $hero = $this->components->getActivePlayerHero();
+        $hero->stateAfterDungeonDiceRoll($rolledDungeonDice);
 
         // Next state
         $this->gamestate->nextState();
@@ -854,7 +860,7 @@ class DungeonRoll extends Table
         $sql = 'SELECT player_id, player_score, player_name FROM player';
         $players = self::getCollectionFromDB($sql);
 
-        
+
         $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
         $rowLevel = array('Levels completed');
         $rowDragon = array('Dragon killed');
@@ -865,7 +871,7 @@ class DungeonRoll extends Table
         $rowRank = array('Rank');
 
         foreach ($players as $player_id => $player) {
-            
+
             $rowHeader[] = array(
                 'str' => '${player_name}',
                 'args' => array('player_name' => $player['player_name']),

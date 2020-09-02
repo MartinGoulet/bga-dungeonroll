@@ -94,7 +94,18 @@ class DRStandardHero extends APP_GameClass
      * States
      */
 
+    function stateBeforeFormingParty(&$dice)
+    {
+
+    }
+
     function stateAfterFormingParty(&$dice)
     {
+
+    }
+
+    function stateAfterDungeonDiceRoll($dice)
+    {
+        
     }
 }

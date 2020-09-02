@@ -3,6 +3,11 @@
 
 require_once('Heroes/DRStandardHero.class.php');
 
+/* 
+ * Base Game Heroes
+ */
+
+
 /* Novice */
 require_once('Heroes/DRSpellsword.class.php');
 require_once('Heroes/DRKnight.class.php');
@@ -23,6 +28,20 @@ require_once('Heroes/DRBeguiler.class.php');
 require_once('Heroes/DRNecromancer.class.php');
 require_once('Heroes/DRPaladin.class.php');
 
+/* 
+ * Heroes Pack 1 
+ */
+
+/* Novice */
+require_once('HeroesPackOne/DRAlchemist.class.php');
+require_once('HeroesPackOne/DRViking.class.php');
+
+
+/* Master */
+require_once('HeroesPackOne/DRThaumaturge.class.php');
+require_once('HeroesPackOne/DRUndeadViking.class.php');
+
+
 class DRHeroesManager
 {
     static function getHero($heroComponent, $game)
@@ -30,7 +49,6 @@ class DRHeroesManager
         if ($heroComponent == null) {
             return new DRStandardHero($game, null);
         } else {
-            
             $hero_type = $heroComponent['type'] . '_' . $heroComponent['value'];
             $card = $game->card_types[$hero_type];
             $class = $game->card_types[$hero_type]['heroclass'];
@@ -38,13 +56,3 @@ class DRHeroesManager
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

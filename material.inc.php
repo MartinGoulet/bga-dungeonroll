@@ -496,6 +496,46 @@ $this->card_types = array(
         'heroclass' => "DRPaladin",
         'commandText' => clienttranslate("Paladin : Defeat Monsters, open Chests, quaff Potions and discard Dragon dice"),
     ),
+
+    "4_9" => array(
+        'name' => clienttranslate("Viking"),
+        'specialty' => clienttranslate("When Forming the Party, remove 2 Party dice from the game and take 5 Champions instead of rolling"),
+        'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
+        'imageindex' => 3,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRViking",
+        'commandText' => clienttranslate("Viking : Discard all Dragon dice"),
+    ),
+
+    "5_9" => array(
+        'name' => clienttranslate("Undead Viking"),
+        'specialty' => clienttranslate("When Forming the Party, remove 2 Party dice from the game and take 5 Champions instead of rolling. All Skeletons become Potions"),
+        'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
+        'imageindex' => 4,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRUndeadViking",
+        'commandText' => clienttranslate("Undead Viking : Discard all Dragon dice"),
+    ),
+
+    "4_10" => array(
+        'name' => clienttranslate("Alchemist"),
+        'specialty' => clienttranslate("All Chests become Potions"),
+        'ultimate' => clienttranslate("Roll 1 Party die from the Graveyard and add it to your Party"),
+        'imageindex' => 11,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRAlchemist",
+        'commandText' => clienttranslate("Alchemist : Roll 1 die from the Graveyard"),
+    ),
+
+    "5_10" => array(
+        'name' => clienttranslate("Thaumaturge"),
+        'specialty' => clienttranslate("All Chests become Potions"),
+        'ultimate' => clienttranslate("Roll 2 dice from the Graveyard and add them to your Party"),
+        'imageindex' => 12,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRThaumaturge",
+        'commandText' => clienttranslate("Thaumaturge : Roll 2 dice from the Graveyard"),
+    ),
 );
 
 $this->command_infos = array(
