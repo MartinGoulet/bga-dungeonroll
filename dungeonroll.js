@@ -203,9 +203,27 @@ define([
                     var novice_number = this.ItemType.HeroNovice + '_' + card_hero_number;
                     var master_number = this.ItemType.HeroMaster + '_' + card_hero_number;
 
-                    var htmlNovice = this.getCardTooltip(novice_number);
-                    var htmlMaster = this.getCardTooltip(master_number);
-                    var html = '<div class="hero-tooltip">' + htmlNovice + htmlMaster + '</div>';
+                    var card = this.gamedatas.card_types[card_type_id];
+                    var index = toint(card.imageindex) - 1;
+
+                    var cardNovice = this.gamedatas.card_types[novice_number];
+                    var cardMaster = this.gamedatas.card_types[master_number];
+
+                    var args = {
+                        artx: 297 * (index % 8),
+                        arty: 425 * (Math.floor(index / 8)),
+                        'specialty': _('Specialty'),
+                        'ultimate': _('Ultimate'),
+                        'specialty_novice': _(cardNovice.specialty),
+                        'ultimate_novice': _(cardNovice.ultimate),
+                        'name_novice': _(cardNovice.name),
+                        'specialty_master': _(cardMaster.specialty),
+                        'ultimate_master': _(cardMaster.ultimate),
+                        'name_master': _(cardMaster.name)
+                    };
+
+                    var html = this.format_block('jstpl_hero_tooltip', args);
+
                     this.addTooltipHtml(card_div.id, html, 100);
                 }
             },
@@ -711,7 +729,7 @@ define([
 
                 // if the player who hero level up is the current player
                 if (notif.args.player_id == this.player_id) {
-                    // // Display
+                    // Display
                     var card = this.gamedatas.card_types[masterHeroType];
                     var index = toint(card.imageindex) - 1;
                     var args = {
