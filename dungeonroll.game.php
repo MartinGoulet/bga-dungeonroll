@@ -350,8 +350,26 @@ class DungeonRoll extends Table
 
         // Check where the die can go
         $location = self::getZoneAfterClickDice($die, $this->gamestate->state()['name']);
+
+        $dice = array($die);
+
+        // If a dungeon die goes in play, try to move all same dice in play
+        if($location == ZONE_PLAY && DRItem::isDungeonDie($die)) {
+            // Get dungeon dice into play
+            $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+            $dungeonDiceInPlay = DRDungeonDice::getDungeonDice($itemsInPlay);
+            // If no dungeon dice is found in play
+            if(sizeof($dungeonDiceInPlay) == 0) {
+                // Get all same dice and move them.
+                $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
+                $dice = DRUtils::filter($dungeonDice, function($item) use($die) {
+                    return $item['value'] == $die['value'];
+                });
+            }
+        }
+        
         // Change the location of the die
-        $dice = DRItem::setZone(array($die), $location);
+        $dice = DRItem::setZone($dice, $location);
         // Update the change
         $this->manager->updateItems($dice);
         // Notify all players for the move
