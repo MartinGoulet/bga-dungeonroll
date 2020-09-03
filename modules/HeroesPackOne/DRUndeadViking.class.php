@@ -20,22 +20,22 @@ class DRUndeadViking extends DRViking
      */
     function stateAfterDungeonDiceRoll($dice)
     {
-        // When rolling Dungeon dice, all Skeletons become Potions
-        $changes = array();
-        // &$die : Alter the die in parameter
-        foreach ($dice as &$die) {
-            if (DRDungeonDice::isSkeleton($die)) {
-                $die['value'] = DIE_POTION;
-                $changes[] = $die;
-            }
-        }
 
-        // Notify the modification
-        if (sizeof($changes) > 0) {
-            $this->game->manager->updateItems($dice);
+        // All Skeletons become Potions
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isSkeleton', DIE_POTION);
+        if (sizeof($changes)) {
             $this->game->notif->changeSkeletonToPotion($changes);
-        }
+        };
 
+    }
+
+    function actionAfterRollingDiceWithScroll($dice) 
+    {
+        // All Skeletons become Potions
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isSkeleton', DIE_POTION);
+        if (sizeof($changes)) {
+            $this->game->notif->changeSkeletonToPotion($changes);
+        };
     }
 
 }

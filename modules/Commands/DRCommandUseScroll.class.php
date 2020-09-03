@@ -82,10 +82,15 @@ class DRCommandUseScroll extends DRCommand
 
         $rolledDice = array_merge($dragons, $partys, $dungeons);
 
+        $hero = $this->game->components->getActivePlayerHero();
+
         $itemsUpdate = array_merge($scrolls, $rolledDice);
         $this->game->manager->updateItems($itemsUpdate);
 
         $this->game->notif->useScroll($scrolls, $rolledDice);
+
+        $hero->actionAfterRollingDiceWithScroll($rolledDice);
+
         $this->game->notif->updatePossibleActions();
 
         $this->game->gamestate->nextState('scroll');

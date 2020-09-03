@@ -6,7 +6,7 @@ class DRAlchemist extends DRStandardHero
     {
         parent::__construct($game, $cardinfo);
     }
-    
+
     /**
      * Game breaking rules
      */
@@ -20,27 +20,25 @@ class DRAlchemist extends DRStandardHero
      */
     function stateAfterDungeonDiceRoll($dice)
     {
-        // When rolling Dungeon dice, all Chests become Potions
-        $changes = array();
-        // &$die : Alter the die in parameter
-        foreach ($dice as &$die) {
-            if (DRDungeonDice::isChest($die)) {
-                $die['value'] = DIE_POTION;
-                $changes[] = $die;
-            }
-        }
-
-        // Notify the modification
-        if (sizeof($changes) > 0) {
-            $this->game->manager->updateItems($dice);
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DIE_POTION);
+        if (sizeof($changes)) {
             $this->game->notif->changeChestToPotion($changes);
-        }
+        };
+    }
+
+    function actionAfterRollingDiceWithScroll($dice) 
+    {
+        // All Skeletons become Potions
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DIE_POTION);
+        if (sizeof($changes)) {
+            $this->game->notif->changeChestToPotion($changes);
+        };
     }
 
     /**
      * Must Overrides
      */
-    function canExecuteUltimate() 
+    function canExecuteUltimate()
     {
         $items = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
         return sizeof($items) >= 1;
@@ -56,13 +54,13 @@ class DRAlchemist extends DRStandardHero
         $dice = DRItem::setZone($dice, ZONE_PLAY);
 
         $this->game->manager->updateItems($dice);
-        
+
         $this->game->NTA_itemMove($dice);
         $this->game->notif->updatePossibleActions();
-
     }
 
-    protected function getNumberDiceFromGraveyard() {
+    protected function getNumberDiceFromGraveyard()
+    {
         return 1;
     }
 }

@@ -108,4 +108,35 @@ class DRStandardHero extends APP_GameClass
     {
         
     }
+
+    function actionAfterRollingDiceWithScroll($dice) 
+    {
+
+    }
+
+    /**
+     * Protected methods
+     */
+
+
+
+    protected function allDungeonDiceXBecomeY(&$dice, $fncCheckDie, $dieTo)
+    {
+        // When rolling Dungeon dice, all Chests become Potions
+        $changes = array();
+        // &$die : Alter the die in parameter
+        foreach ($dice as &$die) {
+            if ($fncCheckDie($die)) {
+                $die['value'] = $dieTo;
+                $changes[] = $die;
+            }
+        }
+
+        // Notify the modification
+        if (sizeof($changes) > 0) {
+            $this->game->manager->updateItems($dice);
+        }
+        
+        return $changes;
+    }
 }
