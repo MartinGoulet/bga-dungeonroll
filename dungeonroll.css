@@ -347,6 +347,19 @@
     cursor: pointer !important;
 }
 
+#zone_draft .stockitem,
+#zone_hero .stockitem {
+    background-size: 992px 344px;
+}
+
+.player_board .player_hero .stockitem {
+    background-size: 400px 140px;
+}
+
+.player_board .player_inventory .stockitem {
+    background-size: 150px 50px;
+}
+
 
 /* Player Board */
 
@@ -456,12 +469,12 @@
     -webkit-background-size: 150px;
     -webkit-background-clip: text;
     -webkit-animation-name: shine;
-    -webkit-animation-duration: 3s;
+    -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     background-size: 150px;
     background-clip: text;
     animation-name: shine;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
     text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5);
 }
@@ -500,7 +513,7 @@
 /* Hero tooltip */
 
 .midSizeDialog {
-    max-width: 600px !important;
+    max-width: 700px !important;
 }
 
 .herotooltip {
@@ -514,28 +527,32 @@
     width: 297px;
     height: 425px;
     min-width: 297px;
+    box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7);
 }
 
 .herotooltip .right-panel {
     width: 403px;
-    padding: 0 10px;
+    padding-left: 10px;
 }
 
 .herotooltip h3 {
     font-weight: bold;
     font-size: 20px;
-    padding: 10px 0;
+    padding: 7px 0;
     text-align: center;
+    border-radius: 3px;
+    box-shadow: -1px 2px 5px 1px rgb(0, 0, 0, 0.7);
+    color: white;
 }
 
 .herotooltip h3.novice {
-    border: 3px solid #543418;
+    border: 7px solid #543418;
     background-color: #b9b480;
 }
 
 .herotooltip h3.master {
     margin-top: 20px;
-    border: 3px solid #44526d;
+    border: 7px solid #44526d;
     background-color: #bdc1c4;
 }
 

@@ -49,6 +49,14 @@ define([
             */
 
             setup: function(gamedatas) {
+
+                /* Old images (must find a way to remove them) */
+                this.dontPreloadImage('voiddice.png');
+                this.dontPreloadImage('level_tracker.jpg');
+                this.dontPreloadImage('cards.jpg');
+                this.dontPreloadImage('smallcards.jpg');
+                this.dontPreloadImage('smalltreasures.png');
+
                 this.player_board = {};
 
                 // Setting up player boards
@@ -238,7 +246,7 @@ define([
                 // Load images
                 Object.keys(this.gamedatas.items_treasure_tokens).forEach(key => {
                     var die = this.gamedatas.items_treasure_tokens[key];
-                    stock.addItemType(key, die.weight, g_gamethemeurl + 'img/smalltreasures.png', die.image_index);
+                    stock.addItemType(key, die.weight, g_gamethemeurl + 'img/treasures.png', die.image_index);
                 });
 
                 return stock;
@@ -257,11 +265,7 @@ define([
 
                 Object.keys(this.gamedatas.card_types).forEach(card_type => {
                     var card = this.gamedatas.card_types[card_type];
-                    if (sizeNormal == true) {
-                        heroZone.addItemType(card_type, 1, g_gamethemeurl + 'img/cards.jpg', card.imageindex - 1);
-                    } else {
-                        heroZone.addItemType(card_type, 1, g_gamethemeurl + 'img/smallcards.jpg', card.imageindex - 1);
-                    }
+                    heroZone.addItemType(card_type, 1, g_gamethemeurl + 'img/bigcards.jpg', card.imageindex - 1);
                 });
 
                 if (callback == undefined) {

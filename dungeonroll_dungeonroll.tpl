@@ -189,7 +189,7 @@ var jstpl_player_board = '\
     </div>\
     <div class="player_info">\
         <div class="player_delve">${delve} # <span id="player_delve_${id}">0</span></div>\
-        <div id="player_inventory_${id}"></div>\
+        <div class="player_inventory" id="player_inventory_${id}"></div>\
     </div>\
 </div>\
 ';
