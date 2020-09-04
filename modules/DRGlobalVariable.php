@@ -107,6 +107,11 @@ class DRGlobalVariable
         return $this->game->incGameStateValue(GL_CHOOSE_DIE_COUNT, -1);
     }
 
+    function decDungeonLevel()
+    {
+        return $this->game->incGameStateValue(GL_CURRENT_LEVEL, -1);
+    }
+
     /**
      * Setters
      */

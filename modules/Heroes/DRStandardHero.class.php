@@ -36,6 +36,16 @@ class DRStandardHero extends APP_GameClass
         return $this->game->gamestate->state()['name'];
     }
 
+    public function getDiceForRollDungeonStep()
+    {
+        return null;
+    }
+
+    public function canSkipMonsterPhase() 
+    {
+        return true;
+    }
+
     /**
      * Game breaking rule
      */

@@ -120,17 +120,34 @@ $machinestates = array(
         "name" => "formingParty",
         "type" => "game",
         "action" => "stFormingParty",
-        "transitions" => array("mercenary" => STATE_POST_FORMING_PARTY, "dungeon" => STATE_DUNGEON_ROLL)
+        "transitions" => array(
+            "mercenary" => STATE_POST_FORMING_PARTY_MERCENARY, 
+            "scout" => STATE_POST_FORMING_PARTY_SCOUT,
+            "dungeon" => STATE_DUNGEON_ROLL
+        )
     ),
 
-    STATE_POST_FORMING_PARTY => array(
-        "name" => "postFormingParty",
+    STATE_POST_FORMING_PARTY_MERCENARY => array(
+        "name" => "postFormingPartyMercenary",
         "description" => clienttranslate('Forming party : ${actplayer} may re-roll any number of Party dice'),
         "descriptionmyturn" => clienttranslate('Forming party : ${you} may re-roll any number of Party dice'),
         "type" => "activeplayer",
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
         "transitions" => array("" => STATE_DUNGEON_ROLL)
+    ),
+
+    STATE_POST_FORMING_PARTY_SCOUT => array(
+        "name" => "postFormingPartyScout",
+        "description" => clienttranslate('Forming party : ${actplayer} must choose ${nbr} dungeon dice for level ${nbr}'),
+        "descriptionmyturn" => clienttranslate('Forming party : ${you} must choose ${nbr} dungeon dice for level ${nbr}'),
+        "type" => "activeplayer",
+        "args" => "argScoutPhasePlayerTurn",
+        "possibleactions" => array("executeCommand", "moveItem"),
+        "transitions" => array(
+            "next" => STATE_POST_FORMING_PARTY_SCOUT,
+            "end" => STATE_DUNGEON_ROLL,
+        )
     ),
 
     STATE_DUNGEON_ROLL => array(

@@ -20,6 +20,7 @@ require_once('Commands/DRCommandHeroUltimate.class.php');
 require_once('Commands/DRCommandQuaffPotion.class.php');
 require_once('Commands/DRCommandUsePotion.class.php');
 require_once('Commands/DRCommandEndFormingPartyPhase.class.php');
+require_once('Commands/DRCommandEndFormingPartyPhaseScout.class.php');
 require_once('Commands/DRCommandRollFormingPartyPhase.class.php');
 
 class DRCommandManager

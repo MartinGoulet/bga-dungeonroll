@@ -345,7 +345,14 @@ class DungeonRoll extends Table
         // It's impossible to move the dragon die
         DRUtils::userAssertTrue(
             self::_("You can't move a Dragon die"),
-            !DRDungeonDice::isDragon($die)
+            !DRDungeonDice::isDragon($die) ||
+            $this->gamestate->state()['name'] == "postFormingPartyScout"
+        );
+
+        DRUtils::userAssertFalse(
+            self::_("You can't move your party dice"),
+            $this->gamestate->state()['name'] == "postFormingPartyScout" &&
+                DRItem::isPartyDie($die)
         );
 
         // Check where the die can go
@@ -354,20 +361,20 @@ class DungeonRoll extends Table
         $dice = array($die);
 
         // If a dungeon die goes in play, try to move all same dice in play
-        if($location == ZONE_PLAY && DRItem::isDungeonDie($die)) {
+        if ($location == ZONE_PLAY && DRItem::isDungeonDie($die)) {
             // Get dungeon dice into play
             $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
             $dungeonDiceInPlay = DRDungeonDice::getDungeonDice($itemsInPlay);
             // If no dungeon dice is found in play
-            if(sizeof($dungeonDiceInPlay) == 0) {
+            if (sizeof($dungeonDiceInPlay) == 0) {
                 // Get all same dice and move them.
                 $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
-                $dice = DRUtils::filter($dungeonDice, function($item) use($die) {
+                $dice = DRUtils::filter($dungeonDice, function ($item) use ($die) {
                     return $item['value'] == $die['value'];
                 });
             }
         }
-        
+
         // Change the location of the die
         $dice = DRItem::setZone($dice, $location);
         // Update the change
@@ -431,6 +438,22 @@ class DungeonRoll extends Table
     //////////////////////////////////////////////////////////////////////////////
     //////////// Game state arguments
     ////////////
+
+    function argScoutPhasePlayerTurn()
+    {
+        $items = $this->components->getActivePlayerUsableItems();
+        $items = DRDungeonDice::getDungeonDice($items);
+
+        $nbr = 2;
+        if (sizeof($items) == 6) {
+            $nbr = 1;
+        }
+
+        return array(
+            'commands' => $this->commands->getActiveCommands(),
+            'nbr' => $nbr,
+        );
+    }
 
     function argDraftHeroes()
     {
@@ -609,6 +632,19 @@ class DungeonRoll extends Table
         if ($hero instanceof DRMercenary) {
             // Next state
             $this->gamestate->nextState('mercenary');
+        } else if ($hero instanceof DRScout) {
+            // Get all available dungeon dice to roll
+            $dice = $this->components->getItemsByType(TYPE_DUNGEON_DIE);
+            // Get 6 dungeon dice
+            $dice = array_slice($dice, 0, 6);
+            // Roll dice and move them to dungeon zone
+            $dice = DRItem::rollDice($dice);
+            $dice = DRItem::setZone($dice, ZONE_DUNGEON);
+            // Update UI
+            $this->manager->updateItems($dice);
+            $this->NTA_itemMove($dice);
+            // Next state
+            $this->gamestate->nextState('scout');
         } else {
             // Next state
             $this->gamestate->nextState('dungeon');
@@ -621,12 +657,17 @@ class DungeonRoll extends Table
         $level = $this->vars->incDungeonLevel();
         $this->notif->newDungeonLevel($level);
 
-        // Get all available dungeon dice to roll
-        $dungeonDiceAvailable = $this->components->getItemsByTypeAndZone(TYPE_DUNGEON_DIE, ZONE_BOX);
-        // Select a number of dungeon dice equal to the maximum of the level
-        $dungeonDiceToRoll = array_slice($dungeonDiceAvailable, 0, min(sizeof($dungeonDiceAvailable), $level));
-        // Roll dice
-        $rolledDice = DRItem::rollDice($dungeonDiceToRoll);
+        $hero = $this->components->getActivePlayerHero();
+        $rolledDice = $hero->getDiceForRollDungeonStep();
+
+        if ($rolledDice == null) {
+            // Get all available dungeon dice to roll
+            $dungeonDiceAvailable = $this->components->getItemsByTypeAndZone(TYPE_DUNGEON_DIE, ZONE_BOX);
+            // Select a number of dungeon dice equal to the maximum of the level
+            $dungeonDiceToRoll = array_slice($dungeonDiceAvailable, 0, min(sizeof($dungeonDiceAvailable), $level));
+            // Roll dice
+            $rolledDice = DRItem::rollDice($dungeonDiceToRoll);
+        }
 
         // For animation to show the dice
         $rolledDice = DRItem::setZone($rolledDice, ZONE_PLAY);
@@ -643,7 +684,6 @@ class DungeonRoll extends Table
         // Notify for the move
         $this->NTA_itemMove(array_merge($rolledDragonDice, $rolledDungeonDice));
 
-        $hero = $this->components->getActivePlayerHero();
         $hero->stateAfterDungeonDiceRoll($rolledDungeonDice);
 
         // Next state
@@ -655,7 +695,9 @@ class DungeonRoll extends Table
         $dice = $this->components->getActivePlayerUsableItems();
         $monsters = DRDungeonDice::getMonsterDices($dice);
 
-        if (sizeof($monsters) == 0) {
+        $hero = $this->components->getActivePlayerHero();
+
+        if (sizeof($monsters) == 0 && $hero->canSkipMonsterPhase()) {
             $this->gamestate->nextState('preLootPhase');
         } else {
             $this->gamestate->nextState('monsterPhase');

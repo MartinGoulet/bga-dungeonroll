@@ -417,6 +417,7 @@ define([
                 if (this.isCurrentPlayerActive()) {
                     switch (stateName) {
                         case 'postFormingParty':
+                        case 'postFormingPartyScout':
                         case 'monsterPhase':
                         case 'lootPhase':
                         case 'regroupPhase':
@@ -775,6 +776,7 @@ define([
             notif_onNewDelve: function(notif) {
                 this.delve_counter.setValue(notif.args.delve_number);
                 this.player_board[notif.args.player_id].delve.setValue(notif.args.delve_number);
+                this.dungeon_level.setValue(1);
             },
 
             notif_onNewTokens: function(notif) {

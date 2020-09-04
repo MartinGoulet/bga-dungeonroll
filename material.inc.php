@@ -536,6 +536,27 @@ $this->card_types = array(
         'heroclass' => "DRThaumaturge",
         'commandText' => clienttranslate("Thaumaturge : Roll 2 dice from the Graveyard"),
     ),
+
+    "4_11" => array(
+        'name' => clienttranslate("Scout"),
+        'specialty' => clienttranslate("When Forming the Party, roll 6 Dungeon dice and assign them to levels 1, 2 and 3"),
+        'ultimate' => clienttranslate("During the Monster phase, Reduce the Level die by 1 and Retire immediately. Collect Experience equal to the Level die"),
+        'imageindex' => 13,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRScout",
+        'commandText' => clienttranslate("Scout : Reduce Level by 1 and Town Portal"),
+    ),
+
+    "5_11" => array(
+        'name' => clienttranslate("Dungeoneer"),
+        'specialty' => clienttranslate("When Forming the Party, roll 6 Dungeon dice and assign them to levels 1, 2 and 3"),
+        'ultimate' => clienttranslate("Retire immediately. Collect Experience equal to the Level die"),
+        'imageindex' => 14,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRDungeoneer",
+        'commandText' => clienttranslate("Dungeoneer : Town Portal"),
+    ),
+
 );
 
 $this->command_infos = array(
@@ -641,6 +662,14 @@ $this->command_infos = array(
         'name' => 'ringInvisibility',
         'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    49 => array(
+        'name' => 'endFormingPartyPhaseScout',
+        'text' => clienttranslate('Confirm the selection'),
+        'php_class' => 'DRCommandEndFormingPartyPhaseScout',
         'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
