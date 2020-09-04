@@ -32,7 +32,39 @@ define([
                     Token: 3,
                     HeroNovice: 4,
                     HeroMaster: 5
+                };
+
+                this.PartyType = {
+                    Scroll: "1_1",
+                    Mage: "1_2",
+                    Cleric: "1_3",
+                    Fighter: "1_4",
+                    Thief: "1_5",
+                    Champion: "1_6",
                 }
+
+                this.DungeonType = {
+                    Dragon: "2_1",
+                    Potion: "2_2",
+                    Ooze: "2_3",
+                    Skeleton: "2_4",
+                    Chest: "2_5",
+                    Goblin: "2_6",
+                };
+
+                this.InventoryType = {
+                    VorpalSword: "3_1",
+                    Talisman: "3_2",
+                    ScepterOfPower: "3_3",
+                    Thieves: "3_4",
+                    Scroll: "3_5",
+                    RingInvisibility: "3_6",
+                    DragonScales: "3_7",
+                    Elixir: "3_8",
+                    DragonBait: "3_9",
+                    TownPortal: "3_10",
+                };
+
             },
 
             /*
@@ -575,6 +607,12 @@ define([
                         return this.checkNonSelectedChest();
                     case 'checkNonSelectedPotion':
                         return this.checkNonSelectedPotion();
+                    case 'checkFightGoblin':
+                        return this.checkFightGoblin();
+                    case 'checkFightOoze':
+                        return this.checkFightOoze();
+                    case 'checkFightSkeleton':
+                        return this.checkFightSkeleton();
                     case 'always':
                         return true;
                     default:
@@ -584,18 +622,18 @@ define([
 
             checkRerollPotion: function() {
                 var item_types = this.items.zone_play.getPresentTypeList();
-                return item_types["2_2"] == 1; // Potions
+                return item_types[this.DungeonType.Dragon] == 1; // Potions
             },
 
             checkRerollDragon: function() {
                 var item_types = this.items.zone_play.getPresentTypeList();
-                return item_types["2_1"] == 1; // Dragons
+                return item_types[this.DungeonType.Dragon] == 1; // Dragons
             },
 
             checkRerollDragonCommander: function() {
                 var item_types = this.items.zone_play.getPresentTypeList();
                 var item_types_hero = this.items.zone_hero.getPresentTypeList();
-                return item_types["2_1"] == 1 && // Dragons
+                return item_types[this.DungeonType.Dragon] == 1 &&
                     item_types_hero["5_2"] == 1; // Hero Master Commander
             },
 
@@ -603,16 +641,59 @@ define([
                 var item_types_play = this.items.zone_play.getPresentTypeList();
                 var item_types_dungeon = this.items.zone_dungeon.getPresentTypeList();
                 var thiefOrChampionPresent =
-                    item_types_play["1_5"] == 1 || // Thief
-                    item_types_play["3_4"] == 1 || // Thieves (token)
-                    item_types_play["1_6"] == 1; // Champion
-                return item_types_dungeon["2_5"] == 1 && // Chest
+                    item_types_play[this.PartyType.Thief] == 1 ||
+                    item_types_play[this.InventoryType.Thieves] == 1 ||
+                    item_types_play[this.PartyType.Champion] == 1;
+                return item_types_dungeon[this.DungeonType.Chest] == 1 &&
                     thiefOrChampionPresent;
+            },
+
+            checkFightGoblin: function() {
+                var item_types_play = this.items.zone_play.getPresentTypeList();
+
+                return Object.keys(item_types_play).length == 2 &&
+                    this.diceInPlayAndDungeon(this.DungeonType.Goblin) &&
+                    (
+                        item_types_play[this.PartyType.Champion] == 1 ||
+                        item_types_play[this.PartyType.Fighter] == 1 ||
+                        item_types_play[this.InventoryType.VorpalSword] == 1
+                    );
+            },
+
+            checkFightOoze: function() {
+                var item_types_play = this.items.zone_play.getPresentTypeList();
+
+                return Object.keys(item_types_play).length == 2 &&
+                    this.diceInPlayAndDungeon(this.DungeonType.Ooze) &&
+                    (
+                        item_types_play[this.PartyType.Champion] == 1 ||
+                        item_types_play[this.PartyType.Mage] == 1 ||
+                        item_types_play[this.InventoryType.ScepterOfPower] == 1
+                    );
+            },
+
+            checkFightSkeleton: function() {
+                var item_types_play = this.items.zone_play.getPresentTypeList();
+
+                return Object.keys(item_types_play).length == 2 &&
+                    this.diceInPlayAndDungeon(this.DungeonType.Skeleton) &&
+                    (
+                        item_types_play[this.PartyType.Champion] == 1 ||
+                        item_types_play[this.PartyType.Cleric] == 1 ||
+                        item_types_play[this.InventoryType.Talisman] == 1
+                    );
+            },
+
+            diceInPlayAndDungeon: function(dungeonType) {
+                var item_types_play = this.items.zone_play.getPresentTypeList();
+                var item_types_dungeon = this.items.zone_dungeon.getPresentTypeList();
+
+                return item_types_play[dungeonType] == 1 && item_types_dungeon[dungeonType] == 1;
             },
 
             checkNonSelectedPotion: function() {
                 var item_types_dungeon = this.items.zone_dungeon.getPresentTypeList();
-                return item_types_dungeon["2_2"] == 1; // Potion
+                return item_types_dungeon[this.DungeonType.Potion] == 1;
             },
 
             showSpecialty: function(card_type_id) {

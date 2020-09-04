@@ -567,7 +567,21 @@ $this->command_infos = array(
         'text' => clienttranslate('Fight Monsters'),
         'php_class' => 'DRCommandFightMonster',
         'always_visible' => true,
-        'html_zone' => 'zone_actions'
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'checkFightGoblin',
+                'confirmation' => clienttranslate("Are you sure you do not want to fight all Goblins?")
+            ),
+            array(
+                'askConfirmation' => 'checkFightOoze',
+                'confirmation' => clienttranslate("Are you sure you do not want to fight all Oozes?")
+            ),
+            array(
+                'askConfirmation' => 'checkFightSkeleton',
+                'confirmation' => clienttranslate("Are you sure you do not want to fight all Skeletons?")
+            ),
+        )
     ),
 
     5 => array(
