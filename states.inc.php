@@ -128,7 +128,7 @@ $machinestates = array(
     ),
 
     STATE_POST_FORMING_PARTY_MERCENARY => array(
-        "name" => "postFormingPartyMercenary",
+        "name" => "postFormingParty",
         "description" => clienttranslate('Forming party : ${actplayer} may re-roll any number of Party dice'),
         "descriptionmyturn" => clienttranslate('Forming party : ${you} may re-roll any number of Party dice'),
         "type" => "activeplayer",

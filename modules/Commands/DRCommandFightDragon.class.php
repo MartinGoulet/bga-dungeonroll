@@ -89,7 +89,7 @@ class DRCommandFightDragon extends DRCommand
         $this->game->notif->updatedScores();
 
         // Next state
-        $this->game->notif->defeatDragon();
+        $this->game->notif->defeatDragon(array_merge($party, $tokens), $treasures);
         $this->game->gamestate->nextState('killDragons');
     }
 }

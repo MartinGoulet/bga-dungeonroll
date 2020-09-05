@@ -54,7 +54,7 @@ class DRCommandFightMonster extends DRCommand
 
         $items = array_merge($companions, $monsters, $tokens);
         $this->game->manager->updateItems($items);
-        $this->game->NTA_itemMove($items);
+        $this->game->notif->defeatMonsters($monsters, array_merge($companions, $tokens));
 
         $this->game->gamestate->nextState('fight');
     }

@@ -595,6 +595,66 @@ define([
              
             */
 
+            /** Override this function to inject html for log items  */
+
+            /* @Override */
+            format_string_recursive: function(log, args) {
+                try {
+                    if (log && args && !args.processed) {
+                        args.processed = true;
+
+                        var keys = ['items_log', 'items_log_1'];
+
+                        for (var i in keys) {
+                            var key = keys[i];
+                            if (Array.isArray(args[key])) {
+                                args[key] = this.getDiceDiv(args[key]);
+                            }
+                        }
+
+                    }
+                } catch (e) {
+                    console.error(log, args, "Exception thrown", e.stack);
+                }
+                return this.inherited(arguments);
+            },
+
+            getDiceDiv: function(items) {
+                var html = [];
+                var infoItems = [];
+
+                items.forEach(item => {
+                    infoItems.push(this.getItemInfo(item));
+                });
+
+                infoItems = infoItems.sort(function(a, b) {
+                    if (a.weight > b.weight) return 1;
+                    if (a.weight < b.weight) return -1;
+                    return 0;
+                });
+
+                infoItems.forEach(info => {
+                    html.push('<span class="item item_' + info.type + '">' + _(info.name) + '</span>')
+                });
+
+                return html.join(", ");
+            },
+
+            getItemInfo(item) {
+                var typeValue = item.type + '_' + item.value;
+                switch (item.type) {
+
+                    case "1":
+                        return Object.assign({ type: typeValue }, this.gamedatas.items_party_dice[typeValue]);
+
+                    case "2":
+                        return Object.assign({ type: typeValue }, this.gamedatas.items_dungeon_dice[typeValue]);
+
+                    case "3":
+                        return Object.assign({ type: typeValue }, this.gamedatas.items_treasure_tokens[typeValue]);
+                }
+            },
+
             canAskConfirmation: function(command) {
                 switch (command.askConfirmation) {
                     case 'checkRerollPotion':

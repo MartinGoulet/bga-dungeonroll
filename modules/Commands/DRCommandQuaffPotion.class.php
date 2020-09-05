@@ -72,7 +72,7 @@ class DRCommandQuaffPotion extends DRCommand
         $itemsUpdate = array_merge($partyDice, $tokens, $potions);
         $this->game->manager->updateItems($itemsUpdate);
         // Notify for the move
-        $this->game->NTA_itemMove($itemsUpdate);
+        $this->game->notif->quaffPotion($itemsUpdate, sizeof($potions));
 
         // Set the number of die to retrieve from the graveyard
         $this->game->vars->setChooseDieCount(sizeof($potions));

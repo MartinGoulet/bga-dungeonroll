@@ -561,3 +561,60 @@
     text-decoration: underline;
     padding: 10px 0;
 }
+
+
+/* Logging */
+
+.log .item {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.log .item.item_1_1,
+.log .item.item_2_2,
+.log .item.item_3_5,
+.log .item.item_3_8 {
+    color: orange;
+}
+
+.log .item.item_1_2,
+.log .item.item_2_3,
+.log .item.item_3_3 {
+    color: royalblue;
+}
+
+.log .item.item_1_3,
+.log .item.item_2_4,
+.log .item.item_3_2 {
+    color: gray;
+}
+
+.log .item.item_1_4,
+.log .item.item_2_6,
+.log .item.item_3_1 {
+    color: green;
+}
+
+.log .item.item_1_5,
+.log .item.item_2_5,
+.log .item.item_3_4 {
+    color: purple;
+}
+
+.log .item.item_1_6,
+.log .item.item_3_7 {
+    color: darkgoldenrod
+}
+
+.log .item.item_2_1,
+.log .item.item_3_9 {
+    color: red
+}
+
+.log .item.item_3_6 {
+    color: darkorange
+}
+
+.log .item.item_3_6 {
+    color: cornflowerblue
+}

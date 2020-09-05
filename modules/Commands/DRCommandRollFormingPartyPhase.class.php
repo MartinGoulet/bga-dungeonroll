@@ -30,7 +30,7 @@ class DRCommandRollFormingPartyPhase extends DRCommand
         // Roll all party dice
         $rolledDice = DRItem::rollDice($party_dice);
         $rolledDice = DRItem::setZone($rolledDice, ZONE_PARTY);
-        $this->game->notif->rollPartyDice($rolledDice);
+        $this->game->notif->rerollPartyDice($party_dice, $rolledDice);
         $this->game->manager->updateItems($rolledDice);
 
         // Next state

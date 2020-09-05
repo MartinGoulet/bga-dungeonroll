@@ -403,7 +403,7 @@ class DungeonRoll extends Table
 
         // Update database and notify players
         $this->manager->updateItems($updatedDice);
-        $this->NTA_itemMove($updatedDice);
+        $this->notif->revivePartyDice($updatedDice);
 
         $count = $this->vars->decChooseDieCount();
 
@@ -671,7 +671,7 @@ class DungeonRoll extends Table
 
         // For animation to show the dice
         $rolledDice = DRItem::setZone($rolledDice, ZONE_PLAY);
-        $this->notif->rollingDice($rolledDice);
+        $this->notif->rollingDungeonDice($rolledDice);
 
         $dragonsDice = DRDungeonDice::getDragonDice($rolledDice);
         $rolledDragonDice = DRItem::setZone($dragonsDice, ZONE_DRAGON_LAIR);

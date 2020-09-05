@@ -70,12 +70,26 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
-    function defeatDragon()
+    function defeatDragon($with, $treasures)
     {
-        $message = clienttranslate('${player_name} defeat the Dragon and receive 1 Experience');
+        $message = clienttranslate('${player_name} defeat the Dragon with ${items_log}, receive 1 Experience and get ${items_log_1} in reward');
 
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName(),
+            'items_log' => $with,
+            'items_log_1' => $treasures,
+        ]);
+    }
+
+    function defeatMonsters($monsters, $with)
+    {
+        $message = clienttranslate('${player_name} defeat ${items_log} with ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items_log' => $monsters,
+            'items_log_1' => $with,
+            'items' => array_merge($monsters, $with),
         ]);
     }
 
@@ -105,10 +119,39 @@ class DRNotification extends APP_GameClass
         $this->game->notifyAllPlayers("onNewPlayerTurn", '', array());
     }
 
-    function newTokens($tokens)
+    function openChest($tokens)
     {
-        $this->game->notifyAllPlayers("onNewTokens", '', array('tokens' => $tokens));
+        $message = clienttranslate('${player_name} opens Chest and get ${items_log}');
+
+        $this->game->notifyAllPlayers("onNewTokens", $message, array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'tokens' => $tokens,
+            'items_log' => $tokens,
+        ));
     }
+
+    function quaffPotion($items, $nbrPotions)
+    {
+        $message = clienttranslate('${player_name} quaffs ${nbr} Potion(s)');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $items,
+            'nbr' => $nbrPotions,
+        ));
+    }
+
+    function revivePartyDice($items)
+    {
+        $message = clienttranslate('${player_name} revive a ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $items,
+            'items_log' => $items,
+        ));
+    }
+    
 
     function retireTavern()
     {
@@ -118,21 +161,35 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
-    function rollPartyDice($dice)
+    function rerollPartyDice($diceBefore, $diceAfter)
     {
-        $message = clienttranslate('${player_name} rolls all party dice');
+        $message = clienttranslate('${player_name} re-rolls ${items_log} and get ${items_log_1}');
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'items' => $dice
+            'items' => $diceAfter,
+            'items_log' => $diceBefore,
+            'items_log_1' => $diceAfter,
         ]);
     }
 
-    function rollingDice($dice)
+    function rollPartyDice($dice)
     {
-        // Notify the discard of the scroll
-        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, '', array(
+        $message = clienttranslate('${player_name} rolls ${items_log}');
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'items' => $dice,
+            'items_log' => $dice,
+        ]);
+    }
+
+    function rollingDungeonDice($dice)
+    {
+        $message = clienttranslate('${player_name} encounter ${items_log}');
+        // Notify the discard of the scroll
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $dice,
+            'items_log' => $dice,
         ));
     }
 
@@ -283,12 +340,13 @@ class DRNotification extends APP_GameClass
 
     function ultimateMercenary($monsters)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and kills 2 Monsters');
+        $message = clienttranslate('${player_name} uses ${hero_name} and kills ${items_log}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
-            'items' => $monsters
+            'items' => $monsters,
+            'items_log' => $monsters,
         ]);
     }
     
