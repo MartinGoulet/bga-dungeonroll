@@ -349,11 +349,11 @@
 
 #zone_draft .stockitem,
 #zone_hero .stockitem {
-    background-size: 992px 344px;
+    background-size: 992px 688px;
 }
 
 .player_board .player_hero .stockitem {
-    background-size: 400px 140px;
+    background-size: 400px 280px;
 }
 
 .player_board .player_inventory .stockitem {
@@ -498,7 +498,7 @@
 .dlg_hero_level_up .img_hero {
     background-image: url("img/bigcards.jpg");
     background-repeat: none;
-    background-size: 2376px 850px;
+    background-size: 2376px 1700px;
     width: 297px;
     height: 425px;
     border-radius: 25px;
@@ -523,7 +523,7 @@
 .herotooltip .img_hero {
     background-image: url("img/bigcards.jpg");
     background-repeat: none;
-    background-size: 2376px 850px;
+    background-size: 2376px 1700px;
     width: 297px;
     height: 425px;
     min-width: 297px;
