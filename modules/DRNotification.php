@@ -15,33 +15,36 @@ class DRNotification extends APP_GameClass
         $this->vars = $vars;
     }
 
-    function changeChestToPotion($dice)
+    function changeChestToPotion($potions, $chests)
     {
-        $message = clienttranslate('${player_name} changes ${nbr} Chest(s) into Potion(s) with their hero');
+        $message = clienttranslate('${player_name} changes ${items_log} into ${items_log_1} with their hero');
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'nbr' => sizeof($dice),
-            'items' => $dice
+            'items' => $potions,
+            'items_log' => $chests,
+            'items_log_1' => $potions,
         ]);
     }
 
-    function changeScrollToChampion($dice)
+    function changeScrollToChampion($dice, $scrolls)
     {
-        $message = clienttranslate('${player_name} changes ${nbr} Scrolls into Champions with their hero');
+        $message = clienttranslate('${player_name} changes ${items_log} into ${items_log_1} with their hero');
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'nbr' => sizeof($dice),
-            'items' => $dice
+            'items' => $dice,
+            'items_log' => $scrolls,
+            'items_log_1' => $dice,
         ]);
     }
 
-    function changeSkeletonToPotion($dice)
+    function changeSkeletonToPotion($dice, $skeletons)
     {
-        $message = clienttranslate('${player_name} changes ${nbr} Skeleton(s) into Potion(s) with their hero');
+        $message = clienttranslate('${player_name} changes ${items_log} into ${items_log_1} with their hero');
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'nbr' => sizeof($dice),
-            'items' => $dice
+            'items' => $dice,
+            'items_log' => $skeletons,
+            'items_log_1' => $dice,
         ]);
     }
 
@@ -81,15 +84,26 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
-    function defeatMonsters($monsters, $with)
+    function defeatMonsters($items, $monsters, $with)
     {
-        $message = clienttranslate('${player_name} defeat ${items_log} with ${items_log_1}');
+        $message = clienttranslate('${player_name} uses ${items_log} to defeat ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'items_log' => $monsters,
-            'items_log_1' => $with,
+            'items_log' => $with,
+            'items_log_1' => $monsters,
             'items' => array_merge($monsters, $with),
+        ]);
+    }
+
+    function discardTemporaryItem($items)
+    {
+        $message = clienttranslate('${player_name} discards ${items_log} during the Regroup Phase');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $items,
+            'items_log' => $items,
         ]);
     }
 
@@ -119,24 +133,38 @@ class DRNotification extends APP_GameClass
         $this->game->notifyAllPlayers("onNewPlayerTurn", '', array());
     }
 
-    function openChest($tokens)
+    function openChest($party, $chests, $tokens)
     {
-        $message = clienttranslate('${player_name} opens Chest and get ${items_log}');
+        $message = clienttranslate('${player_name} use %s to open ${items_log_1} and get ${items_log_2}');
+
+        if (sizeof($party) > 0) {
+            $message = sprintf($message, '${items_log}');
+        } else {
+            $message = sprintf($message, '${hero_name}');
+        }
 
         $this->game->notifyAllPlayers("onNewTokens", $message, array(
             'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'tokens' => $tokens,
-            'items_log' => $tokens,
+            'items_log' => $party,
+            'items_log_1' => $chests,
+            'items_log_2' => $tokens,
         ));
     }
 
     function quaffPotion($items, $nbrPotions)
     {
-        $message = clienttranslate('${player_name} quaffs ${nbr} Potion(s)');
+        $message = clienttranslate('${player_name} use ${items_log} to quaffs ${nbr} Potion(s)');
+
+        $use = DRUtils::filter($items, function($item) {
+            return !DRDungeonDice::isPotion($item);
+        });
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, array(
             'player_name' => $this->game->getActivePlayerName(),
             'items' => $items,
+            'items_log' => $use,
             'nbr' => $nbrPotions,
         ));
     }
@@ -151,7 +179,7 @@ class DRNotification extends APP_GameClass
             'items_log' => $items,
         ));
     }
-    
+
 
     function retireTavern()
     {
@@ -203,6 +231,15 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function sorceressDiscardDragon($dragons)
+    {
+        $message = clienttranslate('${player_name} discard all Dragon dice because 3 or more dice in the Dragon\'s Lair');
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $dragons
+        ]);
+    }
+
     function updatePossibleActions()
     {
         $args = $this->game->argGenericPhasePlayerTurn();
@@ -216,42 +253,74 @@ class DRNotification extends APP_GameClass
         ));
     }
 
-    function useDragonBait($items)
+    function useDragonBait($dragonBait, $monsters, $dragons)
     {
-        $message = clienttranslate('${player_name} uses Dragon Bait to transform ${nbr} Monster(s) into Dragon');
+        $message = clienttranslate('${player_name} uses ${items_log} to transform ${items_log_1} into ${items_log_2}');
 
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'nbr' => sizeof($items),
+            'items_log' => $dragonBait,
+            'items_log_1' => $monsters,
+            'items_log_2' => $dragons,
+        ]);
+    }
+
+    function useElixir($elixirToken)
+    {
+        $message = clienttranslate('${player_name} uses ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $elixirToken,
+            'items_log' => $elixirToken,
         ]);
     }
 
     function useRingInvisibility()
     {
-        $message = clienttranslate('${player_name} uses Ring of Invisibility to remove all Dragon dice');
+        $message = clienttranslate('${player_name} uses ${items_log} to remove all Dragon dice');
 
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
+            'items_log' => array(DRTreasureToken::getToken(TOKEN_RING_INVISIBILITY)),
         ]);
     }
 
     function useTownPortal()
     {
-        $message = clienttranslate('${player_name} uses Town Portal to leave the dungeon');
+        $message = clienttranslate('${player_name} uses ${items_log} to leave the dungeon');
 
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
+            'items_log' => array(DRTreasureToken::getToken(TOKEN_TOWN_PORTAL)),
         ]);
     }
 
-    function useScroll($scrolls, $otherDice)
+    function useScroll($scrolls, $beforeRollDice, $afterRollDice)
     {
-        $message = clienttranslate('${player_name} uses a scroll to re-rolls ${nbr} dice');
+        $message = clienttranslate('${player_name} uses ${items_log} to re-rolls ${items_log_1} into ${items_log_2}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'items' => array_merge($scrolls, $otherDice),
-            'nbr' => sizeof($otherDice)
+            'items' => array_merge($scrolls, $afterRollDice),
+            'items_log' => $scrolls,
+            'items_log_1' => $beforeRollDice,
+            'items_log_2' => $afterRollDice,
+        ]);
+    }
+
+    /**
+     * Specialty
+     */
+
+    function scoutSelectDungeonDice($dice)
+    {
+        $message = clienttranslate('${player_name} selects ${items_log} for level #${level}');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items_log' => $dice,
+            'level' => sizeof($dice),
         ]);
     }
 
@@ -265,6 +334,18 @@ class DRNotification extends APP_GameClass
         $this->game->notifyAllPlayers("onHeroUltimate", "", []);
     }
 
+    function ultimateAlchemist($dice)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to revive a ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => $dice,
+        ]);
+    }
+
     function ultimateBattlemage($dungeon_dice)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} and discard all dungeon dice');
@@ -276,71 +357,73 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
-    function ultimateCommander($dice)
+    function ultimateCommander($dice, $before)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and reroll ${nbr} dice');
+        $message = clienttranslate('${player_name} uses ${hero_name} to re-roll ${items_log} into ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
-            'nbr' => sizeof($dice)
+            'items_log' => $before,
+            'items_log_1' => $dice,
         ]);
     }
 
     function ultimateCrusader($die)
     {
-        if($die['value'] == DIE_FIGHTER) {
-            $message = clienttranslate('${player_name} uses ${hero_name} as a Fighter');
-        } else {
-            $message = clienttranslate('${player_name} uses ${hero_name} as a Cleric');
-        }
+        $message = clienttranslate('${player_name} uses ${hero_name} as a ${items_log}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => array($die),
+            'items_log' => array($die),
         ]);
     }
 
-    function ultimateEnchantressBeguiler($dice, $nbr)
+    function ultimateEnchantressBeguiler($dice, $diceBefore)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transform ${nbr} monster(s) into 1 Potion');
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
-            'nbr' => $nbr
+            'items_log' => $diceBefore,
+            'items_log_1' => array(DRDungeonDice::getDie(DIE_POTION)),
         ]);
     }
 
-    function ultimateHalfGoblin($dice)
+    function ultimateHalfGoblin($thieves, $goblins)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transforms 1 Goblin into a Thief');
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
-            'items' => $dice,
+            'items' => array_merge($thieves, $goblins),
+            'items_log' => $goblins,
+            'items_log_1' => $thieves,
         ]);
     }
 
-    function ultimateKnightDragonSlayer($dragons)
+    function ultimateKnightDragonSlayer($dragons, $monsters)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transforms ${nbr} Monster(s) to Dragon');
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dragons,
-            'nbr' => sizeof($dragons)
+            'items_log' => $monsters,
+            'items_log_1' => $dragons,
         ]);
     }
 
     function ultimateMercenary($monsters)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and kills ${items_log}');
+        $message = clienttranslate('${player_name} uses ${hero_name} to defeat ${items_log}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -349,7 +432,7 @@ class DRNotification extends APP_GameClass
             'items_log' => $monsters,
         ]);
     }
-    
+
     function ultimateDiscardDragon($dragons)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} and discard all dice from the Dragon\'s Lair');
@@ -360,19 +443,21 @@ class DRNotification extends APP_GameClass
             'items' => $dragons
         ]);
     }
-    
 
-    function ultimateOccultist($dice)
+
+    function ultimateOccultist($fighters, $skeletons)
     {
-        $message = clienttranslate('${player_name} uses ${hero_name} and transforms 1 Skeleton into a Fighter');
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
-            'items' => $dice,
+            'items' => array_merge($fighters, $skeletons),
+            'items_log' => $skeletons,
+            'items_log_1' => $fighters,
         ]);
     }
-    
+
     function ultimatePaladin()
     {
         $message = clienttranslate('${player_name} uses ${hero_name} to defeat all Monsters, open all Chests, quaff all Potions and discard all dice in the Dragon\'s Lair');
@@ -383,19 +468,29 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function ultimateSorceress($monsters)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $monsters,
+            'items_log' => $monsters
+        ]);
+    }
+
     function ultimateSpellSword($die)
     {
-        if($die['value'] == DIE_FIGHTER) {
-            $message = clienttranslate('${player_name} uses ${hero_name} as a Fighter');
-        } else {
-            $message = clienttranslate('${player_name} uses ${hero_name} as a Mage');
-        }
+
+        $message = clienttranslate('${player_name} uses ${hero_name} as ${items_log}');
+
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => array($die),
+            'items_log' => array($die),
         ]);
     }
-
 }

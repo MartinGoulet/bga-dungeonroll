@@ -36,12 +36,14 @@ require_once('Heroes/DRPaladin.class.php');
 require_once('HeroesPackOne/DRAlchemist.class.php');
 require_once('HeroesPackOne/DRViking.class.php');
 require_once('HeroesPackOne/DRScout.class.php');
+require_once('HeroesPackOne/DRSorceress.class.php');
 
 
 /* Master */
 require_once('HeroesPackOne/DRThaumaturge.class.php');
 require_once('HeroesPackOne/DRUndeadViking.class.php');
 require_once('HeroesPackOne/DRDungeoneer.class.php');
+require_once('HeroesPackOne/DRDrakeKin.class.php');
 
 
 class DRHeroesManager

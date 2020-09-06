@@ -52,9 +52,15 @@ class DRCommandFightMonster extends DRCommand
         $companions = DRItem::setZone($companions, ZONE_GRAVEYARD);
         $tokens = DRItem::setZone($tokens, ZONE_BOX);
 
+        foreach ($companions as &$companion) {
+            if(DRItem::isTemporaryAbility($companion) || DRItem::isTemporaryItem($companion)) {
+                $companion['zone'] = ZONE_BOX;
+            }
+        }
+
         $items = array_merge($companions, $monsters, $tokens);
         $this->game->manager->updateItems($items);
-        $this->game->notif->defeatMonsters($monsters, array_merge($companions, $tokens));
+        $this->game->notif->defeatMonsters($items, $monsters, array_merge($companions, $tokens));
 
         $this->game->gamestate->nextState('fight');
     }

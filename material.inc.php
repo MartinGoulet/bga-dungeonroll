@@ -557,6 +557,26 @@ $this->card_types = array(
         'commandText' => clienttranslate("Dungeoneer : Town Portal"),
     ),
 
+    "4_12" => array(
+        'name' => clienttranslate("Sorceress"),
+        'specialty' => clienttranslate("As soon as there are 3 or more dice in the Dragon's Lair, discard all dice in the Dragon's Lair"),
+        'ultimate' => clienttranslate("For each die in the Dragon's Lair, discard 1 Monster"),
+        'imageindex' => 23,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRSorceress",
+        'commandText' => clienttranslate("Sorceress : Dicard 1 Monster for each Dragon"),
+    ),
+
+    "5_12" => array(
+        'name' => clienttranslate("Drake Kin"),
+        'specialty' => clienttranslate("As soon as there are 3 or more dice in the Dragon's Lair, discard all dice in the Dragon's Lair"),
+        'ultimate' => clienttranslate("For each die in the Dragon's Lair, discard all Monsters of 1 type"),
+        'imageindex' => 24,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRDRakeKin",
+        'commandText' => clienttranslate("Sorceress : Dicard all Monsters of 1 type for each Dragon"),
+    ),
+
 );
 
 $this->command_infos = array(

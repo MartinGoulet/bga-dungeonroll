@@ -87,7 +87,7 @@ class DRCommandUseScroll extends DRCommand
         $itemsUpdate = array_merge($scrolls, $rolledDice);
         $this->game->manager->updateItems($itemsUpdate);
 
-        $this->game->notif->useScroll($scrolls, $rolledDice);
+        $this->game->notif->useScroll($scrolls, $otherItems, $rolledDice);
 
         $hero->actionAfterRollingDiceWithScroll($rolledDice);
 

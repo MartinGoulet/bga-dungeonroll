@@ -745,7 +745,7 @@ class DungeonRoll extends Table
 
         if (sizeof($itemsTemporary) >= 1) {
             $this->components->updateItems($itemsTemporary);
-            $this->NTA_itemMove($itemsTemporary);
+            $this->notif->discardTemporaryItem($itemsTemporary);
         }
 
         $this->manager->deleteTemporaryItem();

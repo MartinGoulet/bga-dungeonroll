@@ -45,7 +45,7 @@ class DRCommandUsePotion extends DRCommand
         // Update database
         $this->game->manager->updateItems($potionToken);
         // Notify for the move
-        $this->game->NTA_itemMove($potionToken);
+        $this->game->notif->useElixir($potionToken);
 
         // Set the number of die to retrieve from the graveyard
         $this->game->vars->setChooseDieCount(1);

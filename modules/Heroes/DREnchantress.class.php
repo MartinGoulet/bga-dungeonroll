@@ -72,6 +72,7 @@ class DREnchantress extends DRStandardHero
     function executeUltimate($sub_command_id)
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $before = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsters = DRItem::setZone($monsters, ZONE_BOX);
 
@@ -81,7 +82,7 @@ class DREnchantress extends DRStandardHero
 
         // Return potion to the dungeon zone
         $this->game->manager->updateItems($monsters);
-        $this->game->notif->ultimateEnchantressBeguiler($monsters, 1);
+        $this->game->notif->ultimateEnchantressBeguiler($monsters, $before);
 
         $this->game->gamestate->nextState('ultimate');
     }

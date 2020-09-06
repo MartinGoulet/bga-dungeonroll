@@ -124,6 +124,11 @@ class DRStandardHero extends APP_GameClass
 
     }
 
+    function afterDragonBait() 
+    {
+        
+    }
+
     /**
      * Protected methods
      */

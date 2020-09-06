@@ -33,7 +33,7 @@ class DRKnight extends DRStandardHero
         $dragons = $this->game->transformMonstersToDragons($monsters);
 
         $this->game->manager->updateItems($dragons);
-        $this->game->notif->ultimateKnightDragonSlayer($dragons);
+        $this->game->notif->ultimateKnightDragonSlayer($dragons, $monsters);
 
         $this->game->gamestate->nextState('ultimate');
     }
@@ -44,19 +44,12 @@ class DRKnight extends DRStandardHero
 
     function stateAfterFormingParty(&$dice)
     {
-        // When Forming the Party, all Scrolls become Champions
-        $changes = array();
-        // &$die : Alter the die in parameter
-        foreach ($dice as &$die) {
-            if (DRPartyDice::isScroll($die)) {
-                $die['value'] = DIE_CHAMPION;
-                $changes[] = $die;
-            }
-        }
-
-        // Notify the modification
-        if (sizeof($changes) > 0) {
-            $this->game->notif->changeScrollToChampion($changes);
-        }
+        // All Chests become Potions
+        $scrolls = DRItem::getSameAs($dice, DRPartyDice::getDie(DIE_SCROLL));
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRPartyDice::isScroll', DIE_CHAMPION);
+        if (sizeof($changes)) {
+            $this->game->notif->changeScrollToChampion($changes, $scrolls);
+        };
+        
     }
 }

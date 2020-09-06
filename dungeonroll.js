@@ -603,7 +603,7 @@ define([
                     if (log && args && !args.processed) {
                         args.processed = true;
 
-                        var keys = ['items_log', 'items_log_1'];
+                        var keys = ['items_log', 'items_log_1', 'items_log_2'];
 
                         for (var i in keys) {
                             var key = keys[i];
@@ -634,24 +634,30 @@ define([
                 });
 
                 infoItems.forEach(info => {
-                    html.push('<span class="item item_' + info.type + '">' + _(info.name) + '</span>')
+                    var additionalClass = "";
+                    if (info.id >= 1000 && info.id < 2000) {
+                        additionalClass = "temp-item";
+                    } else if (info.id >= 2000 && info.id <= 3000) {
+                        additionalClass = "temp-ability";
+                    }
+                    html.push('<span class="item item_' + info.type + ' ' + additionalClass + '">' + _(info.name) + '</span>')
                 });
 
-                return html.join(", ");
+                return html.join(" ");
             },
 
             getItemInfo(item) {
                 var typeValue = item.type + '_' + item.value;
-                switch (item.type) {
+                switch (parseInt(item.type)) {
 
-                    case "1":
-                        return Object.assign({ type: typeValue }, this.gamedatas.items_party_dice[typeValue]);
+                    case 1:
+                        return Object.assign({ type: typeValue, id: item.id }, this.gamedatas.items_party_dice[typeValue]);
 
-                    case "2":
-                        return Object.assign({ type: typeValue }, this.gamedatas.items_dungeon_dice[typeValue]);
+                    case 2:
+                        return Object.assign({ type: typeValue, id: item.id }, this.gamedatas.items_dungeon_dice[typeValue]);
 
-                    case "3":
-                        return Object.assign({ type: typeValue }, this.gamedatas.items_treasure_tokens[typeValue]);
+                    case 3:
+                        return Object.assign({ type: typeValue, id: item.id }, this.gamedatas.items_treasure_tokens[typeValue]);
                 }
             },
 

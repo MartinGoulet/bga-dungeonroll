@@ -32,18 +32,23 @@ class DRCommandDragonBait extends DRCommand
         $dragonBaits = DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT));
 
         $items    = $this->game->components->getActivePlayerItems();
+        $monstersBefore = DRDungeonDice::getMonsterDices($items);
         $monsters = DRDungeonDice::getMonsterDices($items);
+        $dragons = $this->game->transformMonstersToDragons($monsters);
 
         // Discard the token
         $itemsUpdate = array_merge(
             $dragonBaits = DRItem::setZone($dragonBaits, ZONE_BOX),
-            $this->game->transformMonstersToDragons($monsters)
+            $dragons
         );
 
         $this->game->manager->updateItems($itemsUpdate);
         $this->game->NTA_itemMove($itemsUpdate);
 
-        $this->game->notif->useDragonBait($monsters);
+        $this->game->notif->useDragonBait($dragonBaits, $monstersBefore, $dragons);
+
+        $hero = $this->game->components->getActivePlayerHero();
+        $hero->afterDragonBait();
 
         // Go to the next state
         $this->game->gamestate->nextState("dragonBait");

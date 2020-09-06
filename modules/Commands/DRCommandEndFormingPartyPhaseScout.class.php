@@ -31,6 +31,7 @@ class DRCommandEndFormingPartyPhaseScout extends DRCommand
 
         $items = DRItem::setZone($items, "LEVEL_" . sizeof($items));
         $this->game->manager->updateItems($items);
+        $this->game->notif->scoutSelectDungeonDice($items, sizeof($items));
 
         // All remaining dice will go for the level 3
         if (sizeof($items) == 2) {
@@ -41,6 +42,8 @@ class DRCommandEndFormingPartyPhaseScout extends DRCommand
 
             $dungeon = DRItem::setZone($dungeon, "LEVEL_" . sizeof($dungeon));
             $this->game->manager->updateItems($dungeon);
+            $this->game->notif->scoutSelectDungeonDice($dungeon, sizeof($dungeon));
+
         }
 
         // Go to the next state

@@ -20,20 +20,24 @@ class DRAlchemist extends DRStandardHero
      */
     function stateAfterDungeonDiceRoll($dice)
     {
+        $this->applySpecialty($dice);
+    }
+
+    function actionAfterRollingDiceWithScroll($dice)
+    {
+        $this->applySpecialty($dice);
+    }
+
+    function applySpecialty($dice)
+    {
+        // All Chests become Potions
+        $chests = DRItem::getSameAs($dice, DRDungeonDice::getDie(DIE_CHEST));
         $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DIE_POTION);
         if (sizeof($changes)) {
-            $this->game->notif->changeChestToPotion($changes);
+            $this->game->notif->changeChestToPotion($changes, $chests);
         };
     }
 
-    function actionAfterRollingDiceWithScroll($dice) 
-    {
-        // All Skeletons become Potions
-        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DIE_POTION);
-        if (sizeof($changes)) {
-            $this->game->notif->changeChestToPotion($changes);
-        };
-    }
 
     /**
      * Must Overrides
@@ -55,8 +59,9 @@ class DRAlchemist extends DRStandardHero
 
         $this->game->manager->updateItems($dice);
 
-        $this->game->NTA_itemMove($dice);
-        $this->game->notif->updatePossibleActions();
+        $this->game->notif->ultimateAlchemist($dice);
+
+        $this->game->gamestate->nextState('ultimate');
     }
 
     protected function getNumberDiceFromGraveyard()

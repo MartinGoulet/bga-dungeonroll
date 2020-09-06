@@ -563,58 +563,152 @@
 }
 
 
-/* Logging */
+/* Logging with icons*/
 
 .log .item {
-    font-style: italic;
-    font-weight: bold;
+    background-size: 150px 25px;
+    font-size: 0px;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 3px;
 }
+
+.log .item.temp-item {
+    border: 1px dashed red !important;
+}
+
+.log .item.temp-ability {
+    border: 1px dashed blue !important;
+}
+
+
+/* Logging Party Dice */
 
 .log .item.item_1_1,
-.log .item.item_2_2,
-.log .item.item_3_5,
-.log .item.item_3_8 {
-    color: orange;
-}
-
 .log .item.item_1_2,
-.log .item.item_2_3,
-.log .item.item_3_3 {
-    color: royalblue;
-}
-
 .log .item.item_1_3,
-.log .item.item_2_4,
-.log .item.item_3_2 {
-    color: gray;
-}
-
 .log .item.item_1_4,
-.log .item.item_2_6,
-.log .item.item_3_1 {
-    color: green;
-}
-
 .log .item.item_1_5,
-.log .item.item_2_5,
-.log .item.item_3_4 {
-    color: purple;
+.log .item.item_1_6 {
+    background-image: url(img/dice_party.jpg);
+    border: 1px solid lightgray;
 }
 
-.log .item.item_1_6,
-.log .item.item_3_7 {
-    color: darkgoldenrod
+.log .item.item_1_1 {
+    background-position: 0% 0%;
 }
+
+.log .item.item_1_2 {
+    background-position: -100% 0%;
+}
+
+.log .item.item_1_3 {
+    background-position: -200% 0%;
+}
+
+.log .item.item_1_4 {
+    background-position: -300% 0%;
+}
+
+.log .item.item_1_5 {
+    background-position: -400% 0%;
+}
+
+.log .item.item_1_6 {
+    background-position: -500% 0%;
+}
+
+
+/* Logging Dungeon Dice */
 
 .log .item.item_2_1,
+.log .item.item_2_2,
+.log .item.item_2_3,
+.log .item.item_2_4,
+.log .item.item_2_5,
+.log .item.item_2_6 {
+    background-image: url(img/dice_dungeon.jpg);
+}
+
+.log .item.item_2_1 {
+    background-position: 0% 0%;
+}
+
+.log .item.item_2_2 {
+    background-position: -100% 0%;
+}
+
+.log .item.item_2_3 {
+    background-position: -200% 0%;
+}
+
+.log .item.item_2_4 {
+    background-position: -300% 0%;
+}
+
+.log .item.item_2_5 {
+    background-position: -400% 0%;
+}
+
+.log .item.item_2_6 {
+    background-position: -500% 0%;
+}
+
+
+/* Logging Treasure Tokens */
+
+.log .item.item_3_1,
+.log .item.item_3_2,
+.log .item.item_3_3,
+.log .item.item_3_4,
+.log .item.item_3_5,
+.log .item.item_3_6,
+.log .item.item_3_7,
+.log .item.item_3_8,
+.log .item.item_3_9,
+.log .item.item_3_10 {
+    background-image: url(img/treasures.png);
+    background-size: 150px 50px;
+}
+
+.log .item.item_3_1 {
+    background-position: 0 -100%;
+}
+
+.log .item.item_3_2 {
+    background-position: -100% -100%;
+}
+
+.log .item.item_3_3 {
+    background-position: -200% -100%;
+}
+
+.log .item.item_3_4 {
+    background-position: -300% -100%;
+}
+
+.log .item.item_3_5 {
+    background-position: -400% 0;
+}
+
+.log .item.item_3_6 {
+    background-position: -100% 0;
+}
+
+.log .item.item_3_7 {
+    background-position: -300% -0%;
+}
+
+.log .item.item_3_8 {
+    background-position: -500% -0%;
+}
+
 .log .item.item_3_9 {
-    color: red
+    background-position: -0% -0%;
 }
 
-.log .item.item_3_6 {
-    color: darkorange
-}
-
-.log .item.item_3_6 {
-    color: cornflowerblue
+.log .item.item_3_10 {
+    background-position: -200% -0%;
 }
