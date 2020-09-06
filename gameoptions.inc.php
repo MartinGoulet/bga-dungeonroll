@@ -77,10 +77,10 @@ $game_options = array(
                 'name' => totranslate('Base game'),
                 'tmdisplay' => totranslate('Base game')
             ),
-            // GAME_EXPANSION_PACK_1 => array(
-            //     'name' => totranslate('Hero pack #1'),
-            //     'tmdisplay' => totranslate('Hero pack #1')
-            // ),
+            GAME_EXPANSION_PACK_1 => array(
+                'name' => totranslate('Hero pack #1'),
+                'tmdisplay' => totranslate('Hero pack #1')
+            ),
             GAME_EXPANSION_BASE_PACK_1 => array(
                 'name' => totranslate('Base game + Hero pack #1'),
                 'tmdisplay' => totranslate('Base game + Hero pack #1')

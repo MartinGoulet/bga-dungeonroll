@@ -135,7 +135,7 @@ class DRNotification extends APP_GameClass
 
     function openChest($party, $chests, $tokens)
     {
-        $message = clienttranslate('${player_name} use %s to open ${items_log_1} and get ${items_log_2}');
+        $message = clienttranslate('${player_name} uses %s to open ${items_log_1} and get ${items_log_2}');
 
         if (sizeof($party) > 0) {
             $message = sprintf($message, '${items_log}');
@@ -153,9 +153,9 @@ class DRNotification extends APP_GameClass
         ));
     }
 
-    function quaffPotion($items, $nbrPotions)
+    function quaffPotion($items, $potions)
     {
-        $message = clienttranslate('${player_name} use ${items_log} to quaffs ${nbr} Potion(s)');
+        $message = clienttranslate('${player_name} uses ${items_log} to quaffs ${items_log_1}');
 
         $use = DRUtils::filter($items, function($item) {
             return !DRDungeonDice::isPotion($item);
@@ -165,7 +165,7 @@ class DRNotification extends APP_GameClass
             'player_name' => $this->game->getActivePlayerName(),
             'items' => $items,
             'items_log' => $use,
-            'nbr' => $nbrPotions,
+            'items_log_1' => $potions,
         ));
     }
 
