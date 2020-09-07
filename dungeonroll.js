@@ -612,6 +612,8 @@ define([
                             }
                         }
 
+                        args['experience'] = '<i class="fa fa-star"></i>';
+
                     }
                 } catch (e) {
                     console.error(log, args, "Exception thrown", e.stack);

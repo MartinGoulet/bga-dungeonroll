@@ -75,7 +75,7 @@ class DRNotification extends APP_GameClass
 
     function defeatDragon($with, $treasures)
     {
-        $message = clienttranslate('${player_name} defeat the Dragon with ${items_log}, receive 1 Experience and get ${items_log_1} in reward');
+        $message = clienttranslate('${player_name} defeat the Dragon with ${items_log}, receive 1 ${experience} and get ${items_log_1} in reward');
 
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName(),
