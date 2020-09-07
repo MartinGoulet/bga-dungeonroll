@@ -29,7 +29,7 @@ class DRScout extends DRStandardHero
 
     function isReduceLevel()
     {
-        return false;
+        return true;
     }
 
     public function canSkipMonsterPhase() 
