@@ -74,7 +74,7 @@ $machinestates = array(
         "action" => "stRandomHero",
         "transitions" => array(
             "mirror" => STATE_SETUP_MIRROR_GAME,
-            "" => STATE_INIT_PLAYER_TURN
+            "standard" => STATE_INIT_PLAYER_TURN
         )
     ),
 

@@ -535,7 +535,7 @@ class DungeonRoll extends Table
             $this->gamestate->nextState('mirror');
         } else {
             // Next state
-            $this->gamestate->nextState();
+            $this->gamestate->nextState('standard');
         }
     }
 
