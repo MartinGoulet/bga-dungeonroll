@@ -14,6 +14,9 @@ class DRCommandRetireTavern extends DRCommand
 
     public function execute($sub_command_id)
     {
+        // Show the message before the update score point
+        $this->game->notif->retireTavern();
+
         $points = $this->game->vars->getDungeonLevel();
         $this->game->incPlayerScore($points);
         $this->game->notif->updateScorePlayer($points);
@@ -22,7 +25,6 @@ class DRCommandRetireTavern extends DRCommand
         // Stats
         $this->game->stats->incLevelCompleted($points);
 
-        $this->game->notif->retireTavern();
 
         // Next state
         $this->game->gamestate->nextState('retireTavern');

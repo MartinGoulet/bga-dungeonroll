@@ -27,6 +27,9 @@ class DRCommandTownPortal extends DRCommand
 
     public function execute($sub_command_id)
     {
+        // Show the message before the update score point
+        $this->game->notif->useTownPortal();
+
         $items   = $this->game->components->getActivePlayerUsableItems();
         $portals = DRItem::getSameAs($items, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
 
@@ -40,8 +43,6 @@ class DRCommandTownPortal extends DRCommand
         $this->game->incPlayerScore($points);
         $this->game->notif->updateScorePlayer($points);
         $this->game->notif->updatedScores();
-
-        $this->game->notif->useTownPortal();
 
         // Stats
         $this->game->stats->incLevelCompleted($points);
