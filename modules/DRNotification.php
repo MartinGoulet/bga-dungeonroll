@@ -53,6 +53,7 @@ class DRNotification extends APP_GameClass
         $message = clienttranslate('${player_name} decides to flee the dungeon and scores 0 ${experience}');
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
+            'experience' => clienttranslate('Experience'),
         ]);
     }
 
@@ -81,6 +82,7 @@ class DRNotification extends APP_GameClass
             'player_name' => $this->game->getActivePlayerName(),
             'items_log' => $with,
             'items_log_1' => $treasures,
+            'experience' => clienttranslate('Experience'),
         ]);
     }
 
@@ -252,6 +254,7 @@ class DRNotification extends APP_GameClass
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'nbr' => $nbr,
+            'experience' => clienttranslate('Experience'),
         ]);
     }
 
