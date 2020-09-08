@@ -145,8 +145,10 @@ define([
                 // Setup game notifications to handle (see "setupNotifications" method below)
                 this.setupNotifications();
 
-                // Add tooltips to items
-                this.addTooltipItems();
+                // Add tooltips to navigation
+                Object.keys(this.gamedatas.phases).forEach(phase => {
+                    this.addTooltipHtml("nav_" + phase, this.getItemTooltip(this.gamedatas.phases[phase]))
+                });
 
                 // Set hero activation
                 this.setIsHeroActivated(gamedatas.isHeroActivated);
@@ -166,21 +168,6 @@ define([
                 } else {
                     div.removeClass("activated");
                 }
-            },
-
-            addTooltipItems: function() {
-                Object.keys(this.gamedatas.items_party_dice).forEach(type => {
-                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_party_dice[type]), 750);
-                });
-                Object.keys(this.gamedatas.items_dungeon_dice).forEach(type => {
-                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_dungeon_dice[type]), 750);
-                });
-                Object.keys(this.gamedatas.items_treasure_tokens).forEach(type => {
-                    this.addTooltipHtmlToClass("item_" + type, this.getItemTooltip(this.gamedatas.items_treasure_tokens[type]), 750);
-                });
-                Object.keys(this.gamedatas.phases).forEach(phase => {
-                    this.addTooltipHtml("nav_" + phase, this.getItemTooltip(this.gamedatas.phases[phase]))
-                });
             },
 
             initCounter(div_name, initialValue) {
@@ -366,6 +353,22 @@ define([
                 } else if (itemType == 3) {
                     div.addClass("token")
                 }
+
+                var itemType = "";
+                switch (card_type_id.split("_")[0]) {
+                    case "1":
+                        itemType = this.gamedatas.items_party_dice[card_type_id];
+                        break;
+                    case "2":
+                        itemType = this.gamedatas.items_dungeon_dice[card_type_id];
+                        break;
+                    case "3":
+                        itemType = this.gamedatas.items_treasure_tokens[card_type_id];
+                        break;
+                }
+
+                var html = this.getItemTooltip(itemType);
+                this.addTooltipHtml(card_id, html, 1000);
 
                 var info = card_id.split("_")
                 var idItem = info[info.length - 1];
@@ -868,8 +871,6 @@ define([
 
                 });
 
-                // Add tooltips to items
-                this.addTooltipItems();
             },
 
             notif_onHeroLevelUp: function(notif) {
@@ -908,8 +909,6 @@ define([
                     this.items['zone_' + die.zone].removeFromStockById(die.id);
                     this.items['zone_' + die.zone].addToStockWithId(die_type, die.id);
                 });
-                // Add tooltips to items
-                this.addTooltipItems();
             },
 
             notif_onNewPlayerTurn: function(notif) {
@@ -937,8 +936,6 @@ define([
                     this.items['zone_' + token.zone].addToStockWithId(token.type + "_" + token.value, token.id, from);
                     this.items['zone_' + token.previous_zone].removeFromStockById(token.from);
                 });
-                // Add tooltips to items
-                this.addTooltipItems();
             },
 
             notif_onHeroUltimate: function(notif) {
