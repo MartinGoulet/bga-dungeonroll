@@ -30,7 +30,7 @@ class DRCommandTownPortal extends DRCommand
         // Show the message before the update score point
         $this->game->notif->useTownPortal();
 
-        $items   = $this->game->components->getActivePlayerUsableItems();
+        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
         $portals = DRItem::getSameAs($items, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
 
         // Discard the token
