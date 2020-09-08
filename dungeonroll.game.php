@@ -719,14 +719,17 @@ class DungeonRoll extends Table
     function stPreDragonPhase()
     {
         // Get all Dragon dice in play
-        $dice = $this->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+        $dice = $this->components->getActivePlayerUsableItems();
         $dragons = DRDungeonDice::getDragonDice($dice);
 
         // If 3 or more dragons is found, the player must fight them
         if (sizeof($dragons) >= 3) {
-            $dragons = DRItem::setZone($dragons, ZONE_PLAY);
-            $this->manager->updateItems($dragons);
-            $this->NTA_itemMove($dragons);
+            $dragons = $this->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+            if (sizeof($dragons) > 0) {
+                $dragons = DRItem::setZone($dragons, ZONE_PLAY);
+                $this->manager->updateItems($dragons);
+                $this->NTA_itemMove($dragons);
+            }
 
             // Next state
             $this->gamestate->nextState("dragonPhase");
