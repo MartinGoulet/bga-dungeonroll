@@ -890,7 +890,7 @@ define([
                     var args = {
                         artx: 297 * (index % 8),
                         arty: 425 * (Math.floor(index / 8)),
-                        title: _("Your hero level up")
+                        title: _("Your hero leveled up")
                     };
 
                     var html = this.format_block('jstpl_hero_level_up', args);
