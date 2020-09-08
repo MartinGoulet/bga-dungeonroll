@@ -61,6 +61,7 @@ class DRScout extends DRStandardHero
         }
         // Scoring
         $this->game->incPlayerScore($points);
+        $this->game->notif->updateScorePlayer($points);
         $this->game->notif->updatedScores();
 
         // Stats

@@ -16,6 +16,7 @@ class DRCommandRetireTavern extends DRCommand
     {
         $points = $this->game->vars->getDungeonLevel();
         $this->game->incPlayerScore($points);
+        $this->game->notif->updateScorePlayer($points);
         $this->game->notif->updatedScores();
 
         // Stats

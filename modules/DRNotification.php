@@ -50,7 +50,7 @@ class DRNotification extends APP_GameClass
 
     function fleeDungeon()
     {
-        $message = clienttranslate('${player_name} decides to flee the dungeon');
+        $message = clienttranslate('${player_name} decides to flee the dungeon and scores 0 ${experience}');
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
         ]);
@@ -75,7 +75,7 @@ class DRNotification extends APP_GameClass
 
     function defeatDragon($with, $treasures)
     {
-        $message = clienttranslate('${player_name} defeat the Dragon with ${items_log}, receive 1 ${experience} and get ${items_log_1} in reward');
+        $message = clienttranslate('${player_name} defeats the Dragon with ${items_log}, receive 1 ${experience} and get ${items_log_1} in reward');
 
         $this->game->notifyAllPlayers("message", $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -135,7 +135,7 @@ class DRNotification extends APP_GameClass
 
     function openChest($party, $chests, $tokens)
     {
-        $message = clienttranslate('${player_name} uses %s to open ${items_log_1} and get ${items_log_2}');
+        $message = clienttranslate('${player_name} uses %s to open ${items_log_1} and gets ${items_log_2}');
 
         if (sizeof($party) > 0) {
             $message = sprintf($message, '${items_log}');
@@ -171,7 +171,7 @@ class DRNotification extends APP_GameClass
 
     function revivePartyDice($items)
     {
-        $message = clienttranslate('${player_name} revive a ${items_log}');
+        $message = clienttranslate('${player_name} revives a ${items_log}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, array(
             'player_name' => $this->game->getActivePlayerName(),
@@ -212,7 +212,7 @@ class DRNotification extends APP_GameClass
 
     function rollingDungeonDice($dice)
     {
-        $message = clienttranslate('${player_name} encounter ${items_log}');
+        $message = clienttranslate('${player_name} encounters ${items_log}');
         // Notify the discard of the scroll
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, array(
             'player_name' => $this->game->getActivePlayerName(),
@@ -223,7 +223,7 @@ class DRNotification extends APP_GameClass
 
     function selectHero($hero)
     {
-        $message = clienttranslate('${player_name} select ${hero_name}');
+        $message = clienttranslate('${player_name} selects ${hero_name}');
         $this->game->notifyAllPlayers("onSelectHero", $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
@@ -244,6 +244,15 @@ class DRNotification extends APP_GameClass
     {
         $args = $this->game->argGenericPhasePlayerTurn();
         $this->game->notifyPlayer($this->game->getActivePlayerId(), "updatePossibleActions", '', $args);
+    }
+
+    function updateScorePlayer($nbr) 
+    {
+        $message = clienttranslate('${player_name} scores ${nbr} ${experience}');
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'nbr' => $nbr,
+        ]);
     }
 
     function updatedScores()
