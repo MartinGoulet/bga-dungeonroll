@@ -39,61 +39,61 @@ $this->items = array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_VORPAL_SWORD,
         'name' => 'VorpalSword',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_TALISMAN,
         'name' => 'Talisman',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_SCEPTER_OF_POWER,
         'name' => 'ScepterOfPower',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_THIEVES,
         'name' => 'Thieves',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_SCROLL,
         'name' => 'Scroll',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_RING_INVISIBILITY,
         'name' => 'RingOfInvisibility',
-        'number' => 4
+        'number' => 8
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_DRAGON_SCALES,
         'name' => 'DragonScales',
-        'number' => 6
+        'number' => 12
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_ELIXIR,
         'name' => 'Elixir',
-        'number' => 3
+        'number' => 6
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_DRAGON_BAIT,
         'name' => 'DragonBait',
-        'number' => 4
+        'number' => 8
     ),
     array(
         'type' => TYPE_TREASURE_TOKEN,
         'value' => TOKEN_TOWN_PORTAL,
         'name' => 'TownPortal',
-        'number' => 4
+        'number' => 8
     ),
 );
 
