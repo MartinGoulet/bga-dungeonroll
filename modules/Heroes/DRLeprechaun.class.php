@@ -84,7 +84,7 @@ class DRLeprechaun extends DRStandardHero
 
         // Return potion to the dungeon zone
         $this->game->manager->updateItems($monsters);
-        $this->game->notif->ultimateEnchantressBeguiler($monsters, $before);
+        $this->game->notif->ultimateLeprechaun($monsters, $before);
 
         $this->game->gamestate->nextState('ultimate');
     }

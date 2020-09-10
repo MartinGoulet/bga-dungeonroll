@@ -488,6 +488,19 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function ultimateLeprechaun($dice, $diceBefore)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => $diceBefore,
+            'items_log_1' => array(DRDungeonDice::getDie(DIE_CHEST)),
+        ]);
+    }
+
     function ultimateMercenary($monsters)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} to defeat ${items_log}');
