@@ -712,3 +712,10 @@
 .log .item.item_3_10 {
     background-position: -200% -0%;
 }
+
+
+/* General logging */
+
+.log .hero-name {
+    font-weight: bold;
+}

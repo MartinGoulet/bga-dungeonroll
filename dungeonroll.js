@@ -614,6 +614,16 @@ define([
 
                         args['experience'] = '<i class="fa fa-star"></i>';
 
+                        debugger;
+                        var keys2 = ['hero_name', 'hero_novice_name', 'hero_master_name'];
+
+                        for (var i in keys2) {
+                            var key = keys2[i];
+                            if (typeof args[key] == 'string') {
+                                args[key] = '<span class="hero-name">' + args[key] + '</span>';
+                            }
+                        }
+
                     }
                 } catch (e) {
                     console.error(log, args, "Exception thrown", e.stack);
