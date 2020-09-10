@@ -9,7 +9,8 @@ class DRCommandHeroUltimate extends DRCommand
     }
 
     public function getAllowedStates() {
-        return array('monsterPhase', 'lootPhase', 'dragonPhase');
+        $hero = $this->game->components->getActivePlayerHero();
+        return $hero->getUltimateAllowedStates();
     }
 
     function getCommandInfo()

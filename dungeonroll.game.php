@@ -221,6 +221,11 @@ class DungeonRoll extends Table
         }
     }
 
+    function isLastTurn() {
+        $delveNumber = $this->getCurrentDelve();
+        return $delveNumber == 3;
+    }
+
     function heroLevelUp()
     {
         $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO);
@@ -346,7 +351,7 @@ class DungeonRoll extends Table
         DRUtils::userAssertTrue(
             self::_("You can't move a Dragon die"),
             !DRDungeonDice::isDragon($die) ||
-            $this->gamestate->state()['name'] == "postFormingPartyScout"
+                $this->gamestate->state()['name'] == "postFormingPartyScout"
         );
 
         DRUtils::userAssertFalse(
@@ -484,6 +489,15 @@ class DungeonRoll extends Table
         return array(
             'currentPhase' => $this->vars->getChooseDieState(),
             'nbr' => $this->vars->getChooseDieCount()
+        );
+    }
+
+    function argDiscardTreasure()
+    {
+        return array(
+            'currentPhase' => $this->vars->getChooseDieState(),
+            'commands' => $this->commands->getActiveCommands(),
+            'nbr' => $this->components->getActivePlayerHero()->getNumberTreasureTokenToDiscard()
         );
     }
 
@@ -755,6 +769,16 @@ class DungeonRoll extends Table
 
         // Next state
         $this->gamestate->nextState();
+    }
+
+    function stPreNextPlayer()
+    {
+        $hero = $this->components->getActivePlayerHero();
+
+        $nextState = $hero->statePreNextPlayer();
+
+        $this->gamestate->nextState($nextState);
+
     }
 
     function stNextPlayer()

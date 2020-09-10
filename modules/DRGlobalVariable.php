@@ -46,6 +46,8 @@ class DRGlobalVariable
             case STATE_REGROUP_PHASE:
                 return 'regroupPhase';
 
+            case STATE_NEXT_PLAYER:
+                return 'nextPlayer';
         }
     }
 
@@ -141,6 +143,9 @@ class DRGlobalVariable
                 $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_REGROUP_PHASE);
                 break;
 
+            case 'nextPlayer':
+                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_NEXT_PLAYER);
+                break;
         }
     }
 

@@ -26,6 +26,17 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function changePotionToChest($chests, $potions)
+    {
+        $message = clienttranslate('${player_name} changes ${items_log} into ${items_log_1} with their hero');
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $chests,
+            'items_log' => $potions,
+            'items_log_1' => $chests,
+        ]);
+    }
+
     function changeScrollToChampion($dice, $scrolls)
     {
         $message = clienttranslate('${player_name} changes ${items_log} into ${items_log_1} with their hero');
@@ -59,7 +70,7 @@ class DRNotification extends APP_GameClass
 
     function heroLevelUp($heroNovice, $heroMaster)
     {
-        $message = clienttranslate('${player_name} level up ${hero_novice_name} to ${hero_master_name}');
+        $message = clienttranslate('${player_name} levels up ${hero_novice_name} to ${hero_master_name}');
 
         $heroNoviceCard = $this->game->card_types["4_" . $heroNovice['value']];
         $heroMasterCard = $this->game->card_types["5_" . $heroMaster['value']];
@@ -95,6 +106,17 @@ class DRNotification extends APP_GameClass
             'items_log' => $with,
             'items_log_1' => $monsters,
             'items' => array_merge($monsters, $with),
+        ]);
+    }
+
+    function discardTreasure($items)
+    {
+        $message = clienttranslate('${player_name} discards ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'items' => $items,
+            'items_log' => $items,
         ]);
     }
 
@@ -159,7 +181,7 @@ class DRNotification extends APP_GameClass
     {
         $message = clienttranslate('${player_name} uses ${items_log} to quaffs ${items_log_1}');
 
-        $use = DRUtils::filter($items, function($item) {
+        $use = DRUtils::filter($items, function ($item) {
             return !DRDungeonDice::isPotion($item);
         });
 
@@ -248,7 +270,7 @@ class DRNotification extends APP_GameClass
         $this->game->notifyPlayer($this->game->getActivePlayerId(), "updatePossibleActions", '', $args);
     }
 
-    function updateScorePlayer($nbr) 
+    function updateScorePlayer($nbr)
     {
         $message = clienttranslate('${player_name} scores ${nbr} ${experience}');
         $this->game->notifyAllPlayers('message', $message, [
@@ -325,6 +347,27 @@ class DRNotification extends APP_GameClass
      * Specialty
      */
 
+    function archaeologistDiscard()
+    {
+        $message = clienttranslate('${player_name} must discards 6 Treasures Tokens at the end of the game');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+    }
+
+    function leprechaunEndGame($treasures)
+    {
+        $message = clienttranslate('${player_name} dicards ${items_log} at the end of the game');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $treasures,
+            'items_log' => $treasures,
+        ]);
+    }
+
     function scoutSelectDungeonDice($dice)
     {
         $message = clienttranslate('${player_name} selects ${items_log} for level #${level}');
@@ -336,6 +379,18 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+
+    function archaeologistDrawTreasure($treasures)
+    {
+        $message = clienttranslate('${player_name} draws ${items_log} with ${hero_name}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $treasures,
+            'items_log' => $treasures,
+        ]);
+    }
 
     /**
      * Ultimates

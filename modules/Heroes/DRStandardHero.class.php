@@ -46,12 +46,21 @@ class DRStandardHero extends APP_GameClass
         return true;
     }
 
+    public function getUltimateAllowedStates() {
+        return array('monsterPhase', 'lootPhase', 'dragonPhase');
+    }
+
     /**
      * Game breaking rule
      */
     function getCompanionCountDefeatDragon()
     {
         return 3;
+    }
+
+    function getNumberTreasureTokenToDiscard()
+    {
+        return 0;
     }
 
     function canDefeatMonster()
@@ -122,6 +131,12 @@ class DRStandardHero extends APP_GameClass
     function actionAfterRollingDiceWithScroll($dice) 
     {
 
+    }
+
+    function statePreNextPlayer()
+    {
+        // Move to the next player
+        return 'next';
     }
 
     function afterDragonBait() 

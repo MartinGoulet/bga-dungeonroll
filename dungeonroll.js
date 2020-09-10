@@ -451,19 +451,16 @@ define([
 
                 if (this.isCurrentPlayerActive()) {
                     switch (stateName) {
-                        case 'postFormingParty':
-                        case 'postFormingPartyScout':
-                        case 'monsterPhase':
-                        case 'lootPhase':
-                        case 'regroupPhase':
-                        case 'dragonPhase':
-                            this.showCommands(args.commands);
-                            break;
-
                         case 'quaffPotion':
                             dojo.query("#nav_" + args.currentPhase).addClass("selected");
                             this.showCommands(args.commands);
                             this.showDiceButton();
+                            break;
+
+                        default:
+                            if (args.commands !== undefined) {
+                                this.showCommands(args.commands);
+                            }
                     }
                 }
             },

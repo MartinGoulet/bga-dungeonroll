@@ -22,6 +22,7 @@ require_once('Commands/DRCommandUsePotion.class.php');
 require_once('Commands/DRCommandEndFormingPartyPhase.class.php');
 require_once('Commands/DRCommandEndFormingPartyPhaseScout.class.php');
 require_once('Commands/DRCommandRollFormingPartyPhase.class.php');
+require_once('Commands/DRCommandDiscardTreasure.class.php');
 
 class DRCommandManager
 {

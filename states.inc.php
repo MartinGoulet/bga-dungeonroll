@@ -179,8 +179,9 @@ $machinestates = array(
             "chest" => STATE_PRE_MONSTER_PHASE, // For Paladin
             "dragonBait" => STATE_PRE_LOOT_PHASE,
             "nextPhase" => STATE_PRE_LOOT_PHASE,
-            "fleeDungeon" => STATE_NEXT_PLAYER,
-            "townPortal" => STATE_NEXT_PLAYER,
+            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
+            "townPortal" => STATE_PRE_NEXT_PLAYER,
+            'discardTreasures' => STATE_DISCARD_TREASURE,
             "chooseDie" => STATE_CHOOSE_DIE,
         )
     ),
@@ -202,10 +203,11 @@ $machinestates = array(
         "transitions" => array(
             "scroll" => STATE_PRE_MONSTER_PHASE,
             "ultimate" => STATE_PRE_LOOT_PHASE,
-            "fleeDungeon" => STATE_NEXT_PLAYER,
+            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
             "chest" => STATE_PRE_LOOT_PHASE, 
             "end" => STATE_PRE_DRAGON_PHASE, 
-            "townPortal" => STATE_NEXT_PLAYER, 
+            "townPortal" => STATE_PRE_NEXT_PLAYER, 
+            'discardTreasures' => STATE_DISCARD_TREASURE,
             "chooseDie" => STATE_CHOOSE_DIE)
     ),
 
@@ -243,10 +245,11 @@ $machinestates = array(
             "scroll" => STATE_DRAGON_PHASE,
             "ultimate" => STATE_PRE_DRAGON_PHASE,
             "killDragons" => STATE_PRE_REGROUP_PHASE,
-            "fleeDungeon" => STATE_NEXT_PLAYER,
-            "townPortal" => STATE_NEXT_PLAYER,
+            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
+            "townPortal" => STATE_PRE_NEXT_PLAYER,
             "ringInvisibility" => STATE_PRE_REGROUP_PHASE,
             "chooseDie" => STATE_CHOOSE_DIE,
+            'discardTreasures' => STATE_DISCARD_TREASURE,
             "end" => STATE_PRE_LOOT_PHASE,
         )
     ),
@@ -266,9 +269,21 @@ $machinestates = array(
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
         "transitions" => array(
-            "retireTavern" => STATE_NEXT_PLAYER,
+            "retireTavern" => STATE_PRE_NEXT_PLAYER,
+            'discardTreasures' => STATE_DISCARD_TREASURE,
             "seekGlory" => STATE_DUNGEON_ROLL,
             "chooseDie" => STATE_CHOOSE_DIE,
+        )
+    ),
+
+    // Next player
+    STATE_PRE_NEXT_PLAYER => array(
+        "name" => "preNextPlayer",
+        "type" => "game",
+        "action" => "stPreNextPlayer",
+        "transitions" => array(
+            "next" => STATE_NEXT_PLAYER, 
+            "discardTreasures" => STATE_DISCARD_TREASURE
         )
     ),
 
@@ -279,6 +294,22 @@ $machinestates = array(
         "action" => "stNextPlayer",
         "updateGameProgression" => true,
         "transitions" => array("endGame" => STATE_FINAL_SCORING, "formingParty" => STATE_INIT_PLAYER_TURN)
+    ),
+
+    STATE_DISCARD_TREASURE => array(
+        "name" => "discardTreasure",
+        "description" => clienttranslate('${actplayer} must choose which Treasure Token to discard (x${nbr})'),
+        "descriptionmyturn" => clienttranslate('${you} must choose which Treasure Token to discard (x${nbr})'),
+        "type" => "activeplayer",
+        "args" => "argDiscardTreasure",
+        "possibleactions" => array("executeCommand", "moveItem"),
+        "transitions" => array(
+            "monsterPhase" => STATE_MONSTER_PHASE,
+            "lootPhase" => STATE_PRE_LOOT_PHASE,
+            "dragonPhase" => STATE_PRE_DRAGON_PHASE,
+            "regroupPhase" => STATE_PRE_REGROUP_PHASE,
+            "nextPlayer" => STATE_NEXT_PLAYER,
+        )
     ),
 
 

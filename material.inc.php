@@ -577,6 +577,46 @@ $this->card_types = array(
         'commandText' => clienttranslate("Sorceress : Dicard all Monsters of 1 type for each Dragon"),
     ),
 
+    "4_13" => array(
+        'name' => clienttranslate("Archaeologist"),
+        'specialty' => clienttranslate("When Forming the Party, draw 2 Treasure Tokens. Discard 6 Treasure Tokens at game end."),
+        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then disard 2 Treasure Tokens"),
+        'imageindex' => 25,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRArchaeologist",
+        'commandText' => clienttranslate("Archaeologist : Draw 2 Treasure Tokens, Discard 2 Treasure Tokens"),
+    ),
+
+    "5_13" => array(
+        'name' => clienttranslate("Tomb Raider"),
+        'specialty' => clienttranslate("When Forming the Party, draw 2 Treasure Tokens. Discard 6 Treasure Tokens at game end."),
+        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then disard 1 Treasure Token"),
+        'imageindex' => 26,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRTombRaider",
+        'commandText' => clienttranslate("Tomb Raider : Draw 2 Treasure Tokens, Discard 1 Treasure Token"),
+    ),
+
+    "4_14" => array(
+        'name' => clienttranslate("Leprechaun"),
+        'specialty' => clienttranslate("All Potions become Chests. Discard all Treasure Tokens at game end."),
+        'ultimate' => clienttranslate("Transform 1 Monster into a Chest"),
+        'imageindex' => 27,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRLeprechaun",
+        'commandText' => clienttranslate("Leprechaun : Transform 1 Monster into a Chest"),
+    ),
+
+    "5_14" => array(
+        'name' => clienttranslate("Clurichaun"),
+        'specialty' => clienttranslate("All Potions become Chests. Discard all Treasure Tokens at game end."),
+        'ultimate' => clienttranslate("Transform 2 Monsters into 1 Chest"),
+        'imageindex' => 28,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRClurichaun",
+        'commandText' => clienttranslate("Clurichaun : Transform 2 Monsters into 1 Chest"),
+    ),
+
 );
 
 $this->command_infos = array(
@@ -696,6 +736,14 @@ $this->command_infos = array(
         'name' => 'ringInvisibility',
         'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    48 => array(
+        'name' => 'discardTreasure',
+        'text' => clienttranslate('Confirm the selection'),
+        'php_class' => 'DRCommandDiscardTreasure',
         'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),
