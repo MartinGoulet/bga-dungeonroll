@@ -773,27 +773,35 @@ class DungeonRoll extends Table
 
     function stPreNextPlayer()
     {
-        $hero = $this->components->getActivePlayerHero();
-
-        $nextState = $hero->statePreNextPlayer();
-
-        $this->gamestate->nextState($nextState);
-
-    }
-
-    function stNextPlayer()
-    {
-
         $items = $this->components->getActivePlayerUsableItems();
         $temporaryAbilities = DRUtils::filter($items, 'DRItem::isTemporaryAbility');
         $temporaryAbilities = DRItem::setZone($temporaryAbilities, ZONE_BOX);
+        
+        $dice = DRUtils::filter($items, function($die) {
+            return DRItem::isDungeonDie($die) || DRItem::isPartyDie($die);
+        });
+        $dice = DRItem::setZone($dice, ZONE_BOX);
 
         if (sizeof($temporaryAbilities) >= 1) {
             $this->components->updateItems($temporaryAbilities);
             $this->NTA_itemMove($temporaryAbilities);
         }
 
+        if(sizeof($dice) >= 1) {
+            $this->components->updateItems($dice);
+            $this->NTA_itemMove($dice);
+        }
+
         $this->manager->deleteTemporaryAbility();
+
+        $hero = $this->components->getActivePlayerHero();
+        $nextState = $hero->statePreNextPlayer();
+        $this->gamestate->nextState($nextState);
+
+    }
+
+    function stNextPlayer()
+    {
 
         // Move tokens in Playing Area into the right area
         $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);

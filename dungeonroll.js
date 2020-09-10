@@ -614,7 +614,6 @@ define([
 
                         args['experience'] = '<i class="fa fa-star"></i>';
 
-                        debugger;
                         var keys2 = ['hero_name', 'hero_novice_name', 'hero_master_name'];
 
                         for (var i in keys2) {
@@ -846,21 +845,22 @@ define([
             },
 
             notif_onItemsMoved: function(notif) {
-                var board = this.player_board[this.getActivePlayerId()];
 
                 notif.args.items.forEach(item => {
                     var item_type = item.type + "_" + item.value;
 
                     if (item.previous_zone == 'box' || this.isStringEmpty(item.previous_zone)) {
                         this.items['zone_' + item.zone].addToStockWithId(item_type, item.id, $("zone_graveyard"));
-                        if (item.type == this.ItemType.Token && board) {
+                        if (item.type == this.ItemType.Token && item.owner) {
+                            var board = this.player_board[item.owner];
                             board.inventory.addToStockWithId(item_type, item.id);
                         }
                     } else if (item.zone == 'box' || this.isStringEmpty(item.zone)) {
                         var from = $(this.items['zone_' + item.previous_zone].getItemDivId(item.id));
                         this.slideToObjectAndDestroy(from, $("zone_graveyard"), 1000, 0);
                         this.items['zone_' + item.previous_zone].removeFromStockById(item.id);
-                        if (item.type == this.ItemType.Token && board) {
+                        if (item.type == this.ItemType.Token && item.owner) {
+                            var board = this.player_board[item.owner];
                             board.inventory.removeFromStockById(item.id);
                         }
                     } else if (item.previous_zone == item.zone) {
