@@ -379,6 +379,19 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function trackerRerollGoblin($reroll, $goblin)
+    {
+        $message = clienttranslate('${player_name} reroll ${items_log} with ${hero_name} and get ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $reroll,
+            'items_log' => $goblin,
+            'items_log_1' => $reroll,
+        ]);
+    }
+
 
     function archaeologistDrawTreasure($treasures)
     {
@@ -571,6 +584,18 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => array($die),
             'items_log' => array($die),
+        ]);
+    }
+
+    function ultimateTracker($monsters)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $monsters,
+            'items_log' => $monsters,
         ]);
     }
 }

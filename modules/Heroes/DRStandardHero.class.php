@@ -16,6 +16,11 @@ class DRStandardHero extends APP_GameClass
         return $this->cardinfo['commandText'];
     }
 
+    public function getCommandSpecialty()
+    {
+        return $this->cardinfo['commandSpecialty'];
+    }
+
     public function getCommands()
     {
         return $this->cardinfo['commands'];
@@ -48,6 +53,10 @@ class DRStandardHero extends APP_GameClass
 
     public function getUltimateAllowedStates() {
         return array('monsterPhase', 'lootPhase', 'dragonPhase');
+    }
+
+    public function getSpecialtyAllowedStates() {
+        return array();
     }
 
     /**
@@ -106,6 +115,15 @@ class DRStandardHero extends APP_GameClass
     }
 
     function executeUltimate($sub_command_id)
+    {
+    }
+
+    function canExecuteSpecialty()
+    {
+        return false;
+    }
+
+    function executeSpecialty()
     {
     }
 

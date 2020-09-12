@@ -144,6 +144,9 @@ define('GL_CHOOSE_DIE_COUNT', 'choose_die_count');
 define('GL_CHOOSE_DIE_STATE_ID', 15);
 define('GL_CHOOSE_DIE_STATE', 'choose_die_state');
 
+define('GL_SPECIALTY_ONCE_PER_LEVEL_ID', 15);
+define('GL_SPECIALTY_ONCE_PER_LEVEL', 'specialty_per_level');
+
 define('GV_GAME_OPTION_ID', 100);
 define('GV_GAME_OPTION', 'gameOption');
 

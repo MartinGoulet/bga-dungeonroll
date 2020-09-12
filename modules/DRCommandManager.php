@@ -17,6 +17,7 @@ require_once('Commands/DRCommandEndDragonPhase.class.php');
 require_once('Commands/DRCommandFightDragon.class.php');
 require_once('Commands/DRCommandFightMonster.class.php');
 require_once('Commands/DRCommandHeroUltimate.class.php');
+require_once('Commands/DRCommandHeroSpecialty.class.php');
 require_once('Commands/DRCommandQuaffPotion.class.php');
 require_once('Commands/DRCommandUsePotion.class.php');
 require_once('Commands/DRCommandEndFormingPartyPhase.class.php');

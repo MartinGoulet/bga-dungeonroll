@@ -617,6 +617,28 @@ $this->card_types = array(
         'commandText' => clienttranslate("Clurichaun : Transform 2 Monsters into 1 Chest"),
     ),
 
+    "4_16" => array(
+        'name' => clienttranslate("Tracker"),
+        'specialty' => clienttranslate("Once per level, you may re-roll 1 Goblin"),
+        'ultimate' => clienttranslate("Discard 1 Monster of any type"),
+        'imageindex' => 31,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRTracker",
+        'commandText' => clienttranslate("Tracker : Discard 1 Monster"),
+        'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Goblin'),
+    ),
+
+    "5_16" => array(
+        'name' => clienttranslate("Ranger"),
+        'specialty' => clienttranslate("Once per level, you may re-roll 1 Goblin"),
+        'ultimate' => clienttranslate("Discard 1 Monster of each type"),
+        'imageindex' => 32,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRRanger",
+        'commandText' => clienttranslate("Ranger : Discard 1 Monster of each type"),
+        'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Goblin'),
+    ),
+
 );
 
 $this->command_infos = array(
@@ -817,6 +839,13 @@ $this->command_infos = array(
                 'confirmation' => clienttranslate("Are you sure to flee the dungeon?"),
             )
         )
+    ),
+
+    69 => array(
+        'name' => 'heroSpecialty',
+        'text' => 'Hero Specialty',
+        'php_class' => 'DRCommandHeroSpecialty',
+        'html_zone' => 'zone_actions',
     ),
 
     70 => array(

@@ -39,6 +39,7 @@ require_once('Heroes/DRScout.class.php');
 require_once('Heroes/DRSorceress.class.php');
 require_once('Heroes/DRArchaeologist.class.php');
 require_once('Heroes/DRLeprechaun.class.php');
+require_once('Heroes/DRTracker.class.php');
 
 
 /* Master */
@@ -48,6 +49,7 @@ require_once('Heroes/DRDungeoneer.class.php');
 require_once('Heroes/DRDrakeKin.class.php');
 require_once('Heroes/DRTombRaider.class.php');
 require_once('Heroes/DRClurichaun.class.php');
+require_once('Heroes/DRRanger.class.php');
 
 
 class DRHeroesManager

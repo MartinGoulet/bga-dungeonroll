@@ -18,6 +18,8 @@ class DRGlobalVariable
         $this->game->setGameStateInitialValue(GL_MAX_TURN, sizeof($players) * 3);
         $this->game->setGameStateInitialValue(GL_CHOOSE_DIE_COUNT, 0);
         $this->game->setGameStateInitialValue(GL_CHOOSE_DIE_STATE, STATE_LOOT_PHASE);
+        $this->game->setGameStateInitialValue(GL_HERO_ACTIVATED, 0);
+        $this->game->setGameStateInitialValue(GL_SPECIALTY_ONCE_PER_LEVEL, 0);
     }
 
     /**
@@ -84,6 +86,11 @@ class DRGlobalVariable
     function getIsHeroActivated()
     {
         return $this->game->getGameStateValue(GL_HERO_ACTIVATED) == 1;
+    }
+
+    function getIsSpecialtyActivated()
+    {
+        return $this->game->getGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL) == 1;
     }
 
     /**
@@ -162,5 +169,15 @@ class DRGlobalVariable
             $value = 0;
         }
         $this->game->setGameStateValue(GL_HERO_ACTIVATED, $value);
+    }
+
+    function setIsSpecialtyActivated($isActivated)
+    {
+        if ($isActivated) {
+            $value = 1;
+        } else {
+            $value = 0;
+        }
+        $this->game->setGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL, $value);
     }
 }
