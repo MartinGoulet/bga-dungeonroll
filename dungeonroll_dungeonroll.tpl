@@ -151,7 +151,6 @@ var jstpl_card_tooltip = '\
 
 var jstpl_hero_tooltip = '\
 <div class="herotooltip">\
-<div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div>\
 <div class="right-panel">\
     <h3 class="novice">${name_novice}</h3>\
     <div class="keyword">${specialty}</div>${specialty_novice}\
@@ -161,6 +160,7 @@ var jstpl_hero_tooltip = '\
     <div class="keyword">${specialty}</div>${specialty_master}\
     <div class="keyword">${ultimate}</div>${ultimate_master}\
 </div>\
+<div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div>\
 </div>\
 ';
 
