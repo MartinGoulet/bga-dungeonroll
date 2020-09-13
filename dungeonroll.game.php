@@ -60,6 +60,7 @@ class DungeonRoll extends Table
             GL_CHOOSE_DIE_COUNT => GL_CHOOSE_DIE_COUNT_ID,
             GL_CHOOSE_DIE_STATE => GL_CHOOSE_DIE_STATE_ID,
             GL_SPECIALTY_ONCE_PER_LEVEL => GL_SPECIALTY_ONCE_PER_LEVEL_ID,
+            GL_DRAGON_KILLED_THIS_TURN => GL_DRAGON_KILLED_THIS_TURN_ID,
             
             // Game variants
             GV_GAME_OPTION => GV_GAME_OPTION_ID,
@@ -674,6 +675,8 @@ class DungeonRoll extends Table
 
     function stRollDungeonDice()
     {
+        $this->vars->setIsDragonKilledThisTurn(false);
+
         // The player moves one level further into the dungeon
         $level = $this->vars->incDungeonLevel();
         $this->notif->newDungeonLevel($level);

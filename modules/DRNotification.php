@@ -356,6 +356,30 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function dwarfStartTurn() {
+
+        $message = clienttranslate('${player_name} starts with 2 Party dice in the Graveyard');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+        ]);
+
+    }
+
+    function dwarfRerollChampion($champion, $newdice) {
+
+        $message = clienttranslate('${player_name} reroll ${items_log} into ${items_log_1} instead of dicarding it with the ${hero_name}');
+
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $newdice,
+            'items_log' => $champion,
+            'items_log_1' => $newdice,
+        ]);
+
+    }
+
     function leprechaunEndGame($treasures)
     {
         $message = clienttranslate('${player_name} dicards ${items_log} at the end of the game');
@@ -437,6 +461,18 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function ultimateBerserker($dice)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to roll ${items_log} from the Graveyard and add them to the Party');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => $dice,
+        ]);
+    }
+
     function ultimateCommander($dice, $before)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} to re-roll ${items_log} into ${items_log_1}');
@@ -459,6 +495,18 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => array($die),
             'items_log' => array($die),
+        ]);
+    }
+
+    function ultimateDwarf($monsters)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $monsters,
+            'items_log' => $monsters,
         ]);
     }
 

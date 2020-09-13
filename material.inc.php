@@ -580,7 +580,7 @@ $this->card_types = array(
     "4_13" => array(
         'name' => clienttranslate("Archaeologist"),
         'specialty' => clienttranslate("When Forming the Party, draw 2 Treasure Tokens. Discard 6 Treasure Tokens at game end."),
-        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then disard 2 Treasure Tokens"),
+        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then discard 2 Treasure Tokens"),
         'imageindex' => 25,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRArchaeologist",
@@ -590,7 +590,7 @@ $this->card_types = array(
     "5_13" => array(
         'name' => clienttranslate("Tomb Raider"),
         'specialty' => clienttranslate("When Forming the Party, draw 2 Treasure Tokens. Discard 6 Treasure Tokens at game end."),
-        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then disard 1 Treasure Token"),
+        'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then discard 1 Treasure Token"),
         'imageindex' => 26,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRTombRaider",
@@ -615,6 +615,26 @@ $this->card_types = array(
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRClurichaun",
         'commandText' => clienttranslate("Clurichaun : Transform 2 Monsters into 1 Chest"),
+    ),
+
+    "4_15" => array(
+        'name' => clienttranslate("Dwarf"),
+        'specialty' => clienttranslate("Start with 2 Party dice in the Graveyard. Whenever a Champion defeats 2+ Monsters, re-roll it instead of discarding."),
+        'ultimate' => clienttranslate("Discard 1 Monster for each Champion in your Party, then re-roll all Champions in your Party"),
+        'imageindex' => 29,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRDwarf",
+        'commandText' => clienttranslate("Dwarf : Discard 1 Monster for each Champion in your Party"),
+    ),
+
+    "5_15" => array(
+        'name' => clienttranslate("Berkerser"),
+        'specialty' => clienttranslate("Start with 2 Party dice in the Graveyard. Whenever a Champion defeats 2+ Monsters, re-roll it instead of discarding."),
+        'ultimate' => clienttranslate("Roll 4 Party dice from the Graveyard and add them to your party. For the rest of the delve, you may not choose to Retire during Regroup phase unless you defeated a Dragon on that level or reach level 10."),
+        'imageindex' => 30,
+        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRBerserker",
+        'commandText' => clienttranslate("Berkerser : Roll 4 Party dice from the Graveyard"),
     ),
 
     "4_16" => array(
@@ -824,6 +844,7 @@ $this->command_infos = array(
         'text' => clienttranslate('Retire to the tavern'),
         'button_color' => "red",
         'php_class' => 'DRCommandRetireTavern',
+        'always_visible' => true,
         'html_zone' => 'zone_phases_actions'
     ),
 

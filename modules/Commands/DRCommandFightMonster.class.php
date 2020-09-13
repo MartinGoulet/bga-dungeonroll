@@ -62,6 +62,9 @@ class DRCommandFightMonster extends DRCommand
         $this->game->manager->updateItems($items);
         $this->game->notif->defeatMonsters($items, $monsters, array_merge($companions, $tokens));
 
+        $hero = $this->game->components->getActivePlayerHero();
+        $hero->afterDefeatMonster(array_merge($companions, $tokens), $monsters);
+
         $this->game->gamestate->nextState('fight');
     }
 

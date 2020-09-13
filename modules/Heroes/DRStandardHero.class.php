@@ -127,6 +127,11 @@ class DRStandardHero extends APP_GameClass
     {
     }
 
+    function canRetire() 
+    {
+        return true;
+    }
+
     /**
      * States
      */
@@ -158,6 +163,11 @@ class DRStandardHero extends APP_GameClass
     }
 
     function afterDragonBait() 
+    {
+        
+    }
+
+    function afterDefeatMonster($party, $monsters)
     {
         
     }

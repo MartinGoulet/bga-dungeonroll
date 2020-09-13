@@ -144,8 +144,11 @@ define('GL_CHOOSE_DIE_COUNT', 'choose_die_count');
 define('GL_CHOOSE_DIE_STATE_ID', 15);
 define('GL_CHOOSE_DIE_STATE', 'choose_die_state');
 
-define('GL_SPECIALTY_ONCE_PER_LEVEL_ID', 15);
+define('GL_SPECIALTY_ONCE_PER_LEVEL_ID', 16);
 define('GL_SPECIALTY_ONCE_PER_LEVEL', 'specialty_per_level');
+
+define('GL_DRAGON_KILLED_THIS_TURN_ID', 17);
+define('GL_DRAGON_KILLED_THIS_TURN', 'dragon_killed_this_turn');
 
 define('GV_GAME_OPTION_ID', 100);
 define('GV_GAME_OPTION', 'gameOption');

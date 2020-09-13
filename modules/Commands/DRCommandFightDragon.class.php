@@ -88,6 +88,8 @@ class DRCommandFightDragon extends DRCommand
         $this->game->incPlayerScore(1);
         $this->game->notif->updatedScores();
 
+        $this->game->vars->setIsDragonKilledThisTurn(true);
+
         // Next state
         $this->game->notif->defeatDragon(array_merge($party, $tokens), $treasures);
         $this->game->gamestate->nextState('killDragons');

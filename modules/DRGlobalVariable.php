@@ -20,6 +20,7 @@ class DRGlobalVariable
         $this->game->setGameStateInitialValue(GL_CHOOSE_DIE_STATE, STATE_LOOT_PHASE);
         $this->game->setGameStateInitialValue(GL_HERO_ACTIVATED, 0);
         $this->game->setGameStateInitialValue(GL_SPECIALTY_ONCE_PER_LEVEL, 0);
+        $this->game->setGameStateInitialValue(GL_DRAGON_KILLED_THIS_TURN, 0);
     }
 
     /**
@@ -91,6 +92,11 @@ class DRGlobalVariable
     function getIsSpecialtyActivated()
     {
         return $this->game->getGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL) == 1;
+    }
+
+    function getIsDragonKilledThisTurn()
+    {
+        return $this->game->getGameStateValue(GL_DRAGON_KILLED_THIS_TURN) == 1;
     }
 
     /**
@@ -180,4 +186,15 @@ class DRGlobalVariable
         }
         $this->game->setGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL, $value);
     }
+
+    function setIsDragonKilledThisTurn($isActivated)
+    {
+        if ($isActivated) {
+            $value = 1;
+        } else {
+            $value = 0;
+        }
+        $this->game->setGameStateValue(GL_DRAGON_KILLED_THIS_TURN, $value);
+    }
+
 }

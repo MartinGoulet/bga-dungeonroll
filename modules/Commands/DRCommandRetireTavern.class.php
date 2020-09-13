@@ -12,6 +12,12 @@ class DRCommandRetireTavern extends DRCommand
         return array('regroupPhase');
     }
 
+    public function canExecute()
+    {
+        $hero = $this->game->components->getActivePlayerHero();
+        return $hero->canRetire();
+    }
+
     public function execute($sub_command_id)
     {
         // Show the message before the update score point
