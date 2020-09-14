@@ -699,7 +699,7 @@ define([
 
             checkRerollPotion: function() {
                 var item_types = this.items.zone_play.getPresentTypeList();
-                return item_types[this.DungeonType.Dragon] == 1; // Potions
+                return item_types[this.DungeonType.Potion] == 1; // Potions
             },
 
             checkRerollDragon: function() {
