@@ -82,8 +82,9 @@ $game_options = array(
                 'tmdisplay' => totranslate('Hero pack #1')
             ),
             GAME_EXPANSION_BASE_PACK_1 => array(
-                'name' => totranslate('Base game + Hero pack #1'),
-                'tmdisplay' => totranslate('Base game + Hero pack #1')
+                'name' => totranslate('All heroes'),
+                'tmdisplay' => totranslate('All heroes'),
+                'description' => totranslate('Base game, Hero pack #1 and Promo')
             ),
         ),
         'displaycondition' => array(
@@ -103,7 +104,8 @@ $game_options = array(
             ),
             GAME_MIRROR_YES => array(
                 'name' => totranslate('Yes'),
-                'tmdisplay' => totranslate('Mirror match')
+                'tmdisplay' => totranslate('Mirror match'),
+                'description' => totranslate('All players will use the same hero')
             ),
         ),
         'displaycondition' => array(
