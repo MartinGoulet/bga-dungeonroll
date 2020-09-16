@@ -39,6 +39,17 @@
         </div>
     </div>
 
+    <div id="divUltimateLeader">
+        <div class="whiteblock">
+            <div id="divLeaderParty">
+                <div class="dicezone" id="zone_leader_party"></div>
+            </div>
+            <div id="divLeaderDungeon">
+                <div class="dicezone" id="zone_leader_dungeon"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="row" style="margin-top: -5px;">
         <div class="col_1 mr3" style="min-width: 230px">
 

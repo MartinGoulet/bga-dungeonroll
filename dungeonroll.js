@@ -127,11 +127,21 @@ define([
                     'zone_dungeon': this.initStockItemsGameDungeon("zone_dungeon", 'onClickItem'),
                     'zone_play': this.initStockItemsGameDungeon("zone_play", 'onClickItem'),
                     'zone_graveyard': this.initStockItemsGameDungeon("zone_graveyard", 'onCreateItem'),
-                    'zone_dragon_lair': this.initStockItemsGameDungeon("zone_dragon_lair", 'onCreateItem'),
+                    'zone_dragon_lair': this.initStockItemsGameDungeon("zone_dragon_lair", 'onClickItem'),
                     'zone_inventory': this.initStockItemsGameDungeon("zone_inventory", 'onClickItem'),
                     'zone_hero': this.initStockHero("zone_hero", true),
                     'zone_draft': this.initStockHero("draft_card", true, 'onSelectHero'),
                 }
+
+                this.guildLeader = {
+                    'party': this.initStockItemsGameDungeon("zone_leader_party", 'onCreateItem'),
+                    'dungeon': this.initStockItemsGameDungeon("zone_leader_dungeon", 'onCreateItem'),
+                }
+
+                this.guildLeader.party.setSelectionMode(1);
+                this.guildLeader.party.setSelectionAppearance('class');
+                this.guildLeader.dungeon.setSelectionMode(1);
+                this.guildLeader.dungeon.setSelectionAppearance('class');
 
                 this.items.zone_draft.item_margin = 20;
 
@@ -425,6 +435,14 @@ define([
                     case 'initPlayerTurn':
                         dojo.style('zone_draft', 'display', 'none');
                         dojo.style('board', 'display', 'block');
+                        break;
+
+                    case 'guildLeaderUltimate':
+                        if (this.isCurrentPlayerActive()) {
+                            dojo.style('divUltimateLeader', 'display', 'block');
+                            this.showUltimateLeaderButtons(args.args);
+                        }
+                        break;
 
                     case 'dummmy':
                         break;
@@ -436,6 +454,11 @@ define([
             //
             onLeavingState: function(stateName) {
                 switch (stateName) {
+                    case 'guildLeaderUltimate':
+                        dojo.style('divUltimateLeader', 'display', 'none');
+                        dojo.removeClass('divLeaderParty', 'hide');
+                        dojo.removeClass('divLeaderDungeon', 'hide');
+
                     case 'dummmy':
                         break;
                 }
@@ -451,6 +474,11 @@ define([
 
                 if (this.isCurrentPlayerActive()) {
                     switch (stateName) {
+                        case 'guildLeaderUltimate':
+                            dojo.empty('zone_phases_actions');
+                            dojo.empty('zone_actions');
+                            this.addActionButton('cmdGuildLeaderSelction', _("Confirm the selection"), 'guildLeaderSelection', 'zone_actions');
+                            break;
                         case 'quaffPotion':
                             dojo.query("#nav_" + args.currentPhase).addClass("selected");
                             this.showCommands(args.commands);
@@ -463,6 +491,30 @@ define([
                             }
                     }
                 }
+            },
+
+            showUltimateLeaderButtons: function(args) {
+
+                this.guildLeader.party.removeAll();
+                this.guildLeader.dungeon.removeAll();
+
+                for (let index = 1; index <= 6; index++) {
+                    this.guildLeader.party.addToStockWithId(this.ItemType.Party + '_' + index, index);
+                    this.guildLeader.dungeon.addToStockWithId(this.ItemType.Dungeon + '_' + index, index);
+                }
+
+                if (args.party[0] !== null && args.party[0] !== undefined) {
+                    this.guildLeader.party.selectItem(args.party[0].value);
+                } else {
+                    dojo.addClass('divLeaderParty', 'hide');
+                }
+
+                if (args.dungeon[0] !== null && args.dungeon[0] !== undefined) {
+                    this.guildLeader.dungeon.selectItem(args.dungeon[0].value);
+                } else {
+                    dojo.addClass('divLeaderDungeon', 'hide');
+                }
+
             },
 
             showDiceButton: function() {
@@ -582,6 +634,27 @@ define([
                         value: diceType.split("_")[1],
                         lock: true
                     }, this, function(result) {});
+                }
+            },
+
+            guildLeaderSelection: function(evt) {
+                if (this.checkAction('selectGuildLeaderDice')) {
+
+                    var args = {
+                        party: 0,
+                        dungeon: 0,
+                        lock: true
+                    };
+
+                    if (this.guildLeader.party.getSelectedItems()[0] !== undefined) {
+                        args.party = this.guildLeader.party.getSelectedItems()[0].id
+                    }
+
+                    if (this.guildLeader.dungeon.getSelectedItems()[0] !== undefined) {
+                        args.dungeon = this.guildLeader.dungeon.getSelectedItems()[0].id
+                    }
+
+                    this.ajaxcall("/dungeonroll/dungeonroll/selectGuildLeaderDice.html", args, this, function(result) {});
                 }
             },
 
@@ -856,17 +929,27 @@ define([
                             board.inventory.addToStockWithId(item_type, item.id);
                         }
                     } else if (item.zone == 'box' || this.isStringEmpty(item.zone)) {
+                        var divId = this.items['zone_' + item.previous_zone].getItemDivId(item.id);
+                        this.removeTooltip(divId);
+
                         var from = $(this.items['zone_' + item.previous_zone].getItemDivId(item.id));
                         this.slideToObjectAndDestroy(from, $("zone_graveyard"), 1000, 0);
                         this.items['zone_' + item.previous_zone].removeFromStockById(item.id);
+
                         if (item.type == this.ItemType.Token && item.owner) {
                             var board = this.player_board[item.owner];
                             board.inventory.removeFromStockById(item.id);
                         }
                     } else if (item.previous_zone == item.zone) {
+                        var divId = this.items['zone_' + item.zone].getItemDivId(item.id);
+                        this.removeTooltip(divId);
+
                         this.items['zone_' + item.zone].removeFromStockById(item.id);
                         this.items['zone_' + item.zone].addToStockWithId(item_type, item.id);
                     } else {
+                        var divId = this.items['zone_' + item.previous_zone].getItemDivId(item.id);
+                        this.removeTooltip(divId);
+
                         var from = $(this.items['zone_' + item.previous_zone].getItemDivId(item.id));
                         this.items['zone_' + item.zone].addToStockWithId(item_type, item.id, from);
                         this.items['zone_' + item.previous_zone].removeFromStockById(item.id);

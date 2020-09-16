@@ -183,6 +183,7 @@ $machinestates = array(
             "townPortal" => STATE_PRE_NEXT_PLAYER,
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "chooseDie" => STATE_CHOOSE_DIE,
+            "guildLeader" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -208,7 +209,9 @@ $machinestates = array(
             "end" => STATE_PRE_DRAGON_PHASE, 
             "townPortal" => STATE_PRE_NEXT_PLAYER, 
             'discardTreasures' => STATE_DISCARD_TREASURE,
-            "chooseDie" => STATE_CHOOSE_DIE)
+            "guildLeader" => STATE_SELECTION_DICE,
+            "chooseDie" => STATE_CHOOSE_DIE
+        )
     ),
 
     STATE_CHOOSE_DIE => array(
@@ -251,6 +254,7 @@ $machinestates = array(
             "chooseDie" => STATE_CHOOSE_DIE,
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "end" => STATE_PRE_LOOT_PHASE,
+            "guildLeader" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -312,6 +316,29 @@ $machinestates = array(
         )
     ),
 
+    STATE_SELECTION_DICE => array(
+        "name" => "selectionDice",
+        "description" => clienttranslate('${actplayer} must select ${selection}'),
+        "descriptionmyturn" => clienttranslate('${you} must select ${selection}'),
+        "type" => "activeplayer",
+        "args" => "argSelectionDice",
+        "possibleactions" => array("moveItem", "executeCommand"),
+        "transitions" => array(
+            "" => STATE_ULTIMATE_GUILD_LEADER,
+        )
+    ),
+
+    STATE_ULTIMATE_GUILD_LEADER => array(
+        "name" => "guildLeaderUltimate",
+        "description" => clienttranslate('${actplayer} must choose which face to get'),
+        "descriptionmyturn" => clienttranslate('${you} must choose which face to get'),
+        "type" => "activeplayer",
+        "args" => "argUltimateGuildLeader",
+        "possibleactions" => array("selectGuildLeaderDice"),
+        "transitions" => array(
+            "" => STATE_PRE_MONSTER_PHASE,
+        )
+    ),
 
     STATE_FINAL_SCORING => array(
         "name" => "finalScoring",

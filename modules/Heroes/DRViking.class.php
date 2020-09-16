@@ -10,6 +10,10 @@ class DRViking extends DRStandardHero
     /**
      * Game breaking rules
      */
+    function getTotalPartyDice() {
+        return 5;
+    }
+
     function canLevelUp()
     {
         return true;
@@ -21,9 +25,6 @@ class DRViking extends DRStandardHero
 
     function stateBeforeFormingParty(&$dice)
     {
-        // When Forming the Party, remove 2 Party dice from the game
-        $dice = array_slice($dice, 0, 5);
-
         // Take 5 Champions instead of rolling
         for ($i=0; $i < 5; $i++) { 
             $dice[$i]['value'] = DIE_CHAMPION;

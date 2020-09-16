@@ -75,4 +75,13 @@ class action_dungeonroll extends APP_GameAction
         self::ajaxResponse();
     }
     
+    public function selectGuildLeaderDice()
+    {
+        self::setAjaxMode();
+        $this->game->checkAction('selectGuildLeaderDice');
+        $party = self::getArg("party", AT_posint, true);
+        $dungeon = self::getArg("dungeon", AT_posint, true);
+        $this->game->selectGuildLeaderDice($party, $dungeon);
+        self::ajaxResponse();
+    }
 }

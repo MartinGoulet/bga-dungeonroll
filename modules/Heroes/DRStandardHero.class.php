@@ -62,6 +62,10 @@ class DRStandardHero extends APP_GameClass
     /**
      * Game breaking rule
      */
+    function getTotalPartyDice() {
+        return 7;
+    }
+
     function getCompanionCountDefeatDragon()
     {
         return 3;

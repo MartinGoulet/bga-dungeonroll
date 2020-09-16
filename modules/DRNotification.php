@@ -523,6 +523,19 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function ultimateGuildLeader($before, $after)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $after,
+            'items_log' => $before,
+            'items_log_1' => $after,
+        ]);
+    }
+
     function ultimateHalfGoblin($thieves, $goblins)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');

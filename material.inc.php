@@ -27,7 +27,7 @@ $this->items = array(
         'type' => TYPE_PARTY_DIE,
         'value' => 0,
         'name' => '',
-        'number' => 7
+        'number' => 8
     ),
     array(
         'type' => TYPE_DUNGEON_DIE,
@@ -659,6 +659,46 @@ $this->card_types = array(
         'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Goblin'),
     ),
 
+    "4_17" => array(
+        'name' => clienttranslate("Guild Leader"),
+        'specialty' => clienttranslate("When Forming the Party, roll 8 Party dice instead of 7"),
+        'ultimate' => clienttranslate("Set 1 Party die or 1 Dungeon die to any face"),
+        'imageindex' => 33,
+        'expansions' => array(GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRGuildLeader",
+        'commandText' => clienttranslate("Guild Leader : Set 1 Party die or 1 Dungeon die to any face"),
+    ),
+
+    "5_17" => array(
+        'name' => clienttranslate("Guild Master"),
+        'specialty' => clienttranslate("When Forming the Party, roll 8 Party dice instead of 7"),
+        'ultimate' => clienttranslate("Set 1 Party die and 1 Dungeon die to any face"),
+        'imageindex' => 34,
+        'expansions' => array(GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRGuildMaster",
+        'commandText' => clienttranslate("Guild Master : Set 1 Party die and 1 Dungeon die to any face"),
+    ),
+
+    "4_18" => array(
+        'name' => clienttranslate("Time Traveler"),
+        'specialty' => clienttranslate("Instead of rolling Party dice at the start of each of your delve, set them so that you have one Fighter, Cleric, Mage, Thief, and Scroll, and two Champions"),
+        'ultimate' => clienttranslate("Discard one of your Treasures to defeat a Dragon"),
+        'imageindex' => 35,
+        'expansions' => array(GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRTimeTraveler",
+        'commandText' => clienttranslate("Time Traveler : Defeat a Dragon"),
+    ),
+
+    "5_18" => array(
+        'name' => clienttranslate("Time Lady"),
+        'specialty' => clienttranslate("Instead of rolling Party dice at the start of each of your delve, set them so that you have one Fighter, Cleric, Mage, Thief, and Scroll, and two Champions"),
+        'ultimate' => clienttranslate("Discard one of your Treasures or Scroll to defeat a Dragon"),
+        'imageindex' => 36,
+        'expansions' => array(GAME_EXPANSION_BASE_PACK_1),
+        'heroclass' => "DRTimeLady",
+        'commandText' => clienttranslate("Time Lady : Defeat a Dragon"),
+    ),
+
 );
 
 $this->command_infos = array(
@@ -778,6 +818,14 @@ $this->command_infos = array(
         'name' => 'ringInvisibility',
         'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+
+    47 => array(
+        'name' => 'selectionDice',
+        'text' => clienttranslate('Confirm the selection'),
+        'php_class' => 'DRCommandDiceSelection',
         'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),

@@ -53,6 +53,15 @@ require_once('Heroes/DRClurichaun.class.php');
 require_once('Heroes/DRBerserker.class.php');
 require_once('Heroes/DRRanger.class.php');
 
+/* 
+ * Promo
+ */
+require_once('Heroes/DRGuildLeader.class.php');
+require_once('Heroes/DRTimeTraveler.class.php');
+
+
+require_once('Heroes/DRGuildMaster.class.php');
+require_once('Heroes/DRTimeLady.class.php');
 
 class DRHeroesManager
 {

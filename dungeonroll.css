@@ -99,7 +99,7 @@
 }
 
 .dice_thief {
-    background-position: -141px 0px;
+    background-position: -140px 0px;
 }
 
 .dice_champion {
@@ -347,13 +347,17 @@
     cursor: pointer !important;
 }
 
+.stockitem.die {
+    background-size: 252px 42px;
+}
+
 #zone_draft .stockitem,
 #zone_hero .stockitem {
-    background-size: 992px 688px;
+    background-size: 992px 860px;
 }
 
 .player_board .player_hero .stockitem {
-    background-size: 400px 280px;
+    background-size: 400px 350px;
 }
 
 .player_board .player_inventory .stockitem {
@@ -498,7 +502,7 @@
 .dlg_hero_level_up .img_hero {
     background-image: url("img/bigcards.jpg");
     background-repeat: none;
-    background-size: 2376px 1700px;
+    background-size: 2376px 2125px;
     width: 297px;
     height: 425px;
     border-radius: 25px;
@@ -523,12 +527,12 @@
 .herotooltip .img_hero {
     background-image: url("img/bigcards.jpg");
     background-repeat: none;
-    background-size: 2376px 1700px;
+    background-size: 2376px 2125px;
     width: 297px;
     height: 425px;
     min-width: 297px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.7);
-    transform: perspective(20em) rotateY(-10deg) scale(0.9);
+    transform: perspective(20em) rotateY(-5deg) scale(0.9);
     margin-right: -50px;
     border-radius: 25px;
     border: 1px solid black;
@@ -577,6 +581,7 @@
     display: inline-block;
     vertical-align: middle;
     border-radius: 3px;
+    margin-bottom: 3px;
 }
 
 .log .item.temp-item {
@@ -722,4 +727,32 @@
 
 .log .hero-name {
     font-weight: bold;
+}
+
+
+/* Guild Leader Ultimate */
+
+#divUltimateLeader .stockitem_selected {
+    border: 2px dashed red;
+    box-sizing: content-box;
+}
+
+#divUltimateLeader {
+    margin-top: -5px;
+    display: none;
+}
+
+#divUltimateLeader .whiteblock {
+    text-align: center;
+}
+
+#divUltimateLeader .whiteblock>div {
+    height: 48px;
+    width: 335px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#divUltimateLeader .hide {
+    display: none !important;
 }
