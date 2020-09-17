@@ -564,7 +564,7 @@ $this->card_types = array(
         'imageindex' => 23,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRSorceress",
-        'commandText' => clienttranslate("Sorceress : Dicard 1 Monster for each Dragon"),
+        'commandText' => clienttranslate("Sorceress : Discard 1 Monster for each Dragon"),
     ),
 
     "5_12" => array(
@@ -574,7 +574,7 @@ $this->card_types = array(
         'imageindex' => 24,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRDRakeKin",
-        'commandText' => clienttranslate("Sorceress : Dicard all Monsters of 1 type for each Dragon"),
+        'commandText' => clienttranslate("Sorceress : Discard all Monsters of 1 type for each Dragon"),
     ),
 
     "4_13" => array(

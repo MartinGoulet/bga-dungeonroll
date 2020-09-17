@@ -257,7 +257,7 @@ class DRNotification extends APP_GameClass
 
     function sorceressDiscardDragon($dragons)
     {
-        $message = clienttranslate('${player_name} discard all Dragon dice because 3 or more dice in the Dragon\'s Lair');
+        $message = clienttranslate('${player_name} discards all Dragon dice because 3 or more dice in the Dragon\'s Lair');
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
             'items' => $dragons
@@ -368,7 +368,7 @@ class DRNotification extends APP_GameClass
 
     function dwarfRerollChampion($champion, $newdice) {
 
-        $message = clienttranslate('${player_name} reroll ${items_log} into ${items_log_1} instead of dicarding it with the ${hero_name}');
+        $message = clienttranslate('${player_name} re-rolls ${items_log} into ${items_log_1} instead of discarding it with the ${hero_name}');
 
         $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -382,7 +382,7 @@ class DRNotification extends APP_GameClass
 
     function leprechaunEndGame($treasures)
     {
-        $message = clienttranslate('${player_name} dicards ${items_log} at the end of the game');
+        $message = clienttranslate('${player_name} discards ${items_log} at the end of the game');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
@@ -405,7 +405,7 @@ class DRNotification extends APP_GameClass
 
     function trackerRerollGoblin($reroll, $goblin)
     {
-        $message = clienttranslate('${player_name} reroll ${items_log} with ${hero_name} and get ${items_log_1}');
+        $message = clienttranslate('${player_name} re-rolls ${items_log} with ${hero_name} and get ${items_log_1}');
 
         $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
             'player_name' => $this->game->getActivePlayerName(),
