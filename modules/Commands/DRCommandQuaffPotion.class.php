@@ -34,18 +34,13 @@ class DRCommandQuaffPotion extends DRCommand
                    DRTreasureToken::isScroll($item);
         }));
 
-        $party_dice_play_zone = DRUtils::filter(DRPartyDice::getPartyDice($itemsInPlay), function($item) {
-            return !DRItem::isTemporaryAbility($item) && !DRItem::isTemporaryItem($item);
-        });     
-        $items_graveyard = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
-
         if (sizeof($potions) == 0) {
             return false;
         } else if (sizeof($party_items) != 1) {
             return false;
         }
 
-        return sizeof($party_dice_play_zone) + sizeof($items_graveyard) >= sizeof($potions);
+        return true;
     }
 
     public function execute($sub_command_id)
@@ -54,6 +49,12 @@ class DRCommandQuaffPotion extends DRCommand
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
         // Get chests items
         $potions = DRItem::getSameAs($itemsInPlay, DRDungeonDice::getDie(DIE_POTION));
+
+        DRUtils::userAssertTrue(
+            clienttranslate('Not enough dice in your graveyard for the number of potions you want to quaff.'),
+            $this->hasEnoughDiceInGraveyard($itemsInPlay, $potions)
+        );
+
         // Get any party dice or "companion" tokens or scroll.
         $party_items = array_values(array_filter($itemsInPlay, function ($item) {
             return DRItem::isPartyDie($item) || 
@@ -80,5 +81,16 @@ class DRCommandQuaffPotion extends DRCommand
         // Move to next state
         $this->game->gamestate->nextState('chooseDie');
 
+    }
+
+    function hasEnoughDiceInGraveyard($itemsInPlay, $potions) 
+    {
+        $party_dice_play_zone = DRUtils::filter(DRPartyDice::getPartyDice($itemsInPlay), function($item) {
+            return !DRItem::isTemporaryAbility($item) && !DRItem::isTemporaryItem($item);
+        });     
+
+        $items_graveyard = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+
+        return sizeof($party_dice_play_zone) + sizeof($items_graveyard) >= sizeof($potions);
     }
 }

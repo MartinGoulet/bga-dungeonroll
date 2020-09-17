@@ -439,28 +439,28 @@ class DungeonRoll extends Table
     }
 
     // TODO To remove before production
-    function cheat()
-    {
+    // function cheat()
+    // {
 
-        //$this->vars->setIsHeroActivated(false);
+    //     //$this->vars->setIsHeroActivated(false);
 
-        $monsters = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
-        // $monsters = DRUtils::filter($monsters, 'DRDungeonDice::isSkeleton');
+    //     $monsters = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
+    //     // $monsters = DRUtils::filter($monsters, 'DRDungeonDice::isSkeleton');
 
-        $monsters[0]['value'] = DIE_GOBLIN;
-        $monsters[1]['value'] = DIE_GOBLIN;
-        // $monsters[2]['value'] = DIE_OOZE;
-        // $monsters[3]['value'] = DIE_SKELETON;
+    //     // $monsters[0]['value'] = DIE_POTION;
+    //     // $monsters[1]['value'] = DIE_POTION;
+    //     // $monsters[2]['value'] = DIE_OOZE;
+    //     // $monsters[3]['value'] = DIE_SKELETON;
 
-        // foreach ($monsters as &$monster) {
-        //     $monster['value'] = DIE_DRAGON;
-        // }
-        // $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
+    //     foreach ($monsters as &$monster) {
+    //         $monster['value'] = DIE_POTION;
+    //     }
+    //     // $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
 
-        $this->manager->updateItems($monsters);
-        $this->NTA_itemMove($monsters);
-        $this->notif->updatePossibleActions();
-    }
+    //     $this->manager->updateItems($monsters);
+    //     $this->NTA_itemMove($monsters);
+    //     $this->notif->updatePossibleActions();
+    // }
 
 
     //////////////////////////////////////////////////////////////////////////////
