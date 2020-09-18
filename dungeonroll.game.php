@@ -274,7 +274,7 @@ class DungeonRoll extends Table
                 return ZONE_PARTY;
             } else if (DRItem::isTreasureToken($dice)) {
                 return ZONE_INVENTORY;
-            } else if (DRDungeonDice::isDragon($dice)) {
+            } else if (DRDungeonDice::isDragon($dice) && $state != 'postFormingPartyScout') {
                 return ZONE_DRAGON_LAIR;
             } else {
                 return ZONE_DUNGEON;
@@ -373,19 +373,22 @@ class DungeonRoll extends Table
 
         $dice = array($die);
 
+        $stateSkip = 
+            $this->gamestate->state()['name'] == "selectionDice" ||
+            (
+                $this->gamestate->state()['name'] == "postFormingPartyScout" &&
+                DRDungeonDice::isDragon($die)
+            );
+
         // If a dungeon die goes in play, try to move all same dice in play
-        if ($location == ZONE_PLAY && DRItem::isDungeonDie($die) && $this->gamestate->state()['name'] != "selectionDice") {
+        if ($location == ZONE_PLAY && DRItem::isDungeonDie($die) && !$stateSkip) {
             // Get dungeon dice into play
             $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
             $dungeonDiceInPlay = DRDungeonDice::getDungeonDice($itemsInPlay);
             // If no dungeon dice is found in play
             if (sizeof($dungeonDiceInPlay) == 0) {
                 // Get all same dice and move them.
-                if (DRDungeonDice::isDragon($die)) {
-                    $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
-                } else {
-                    $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
-                }
+                $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
                 $dice = DRUtils::filter($dungeonDice, function ($item) use ($die) {
                     return $item['value'] == $die['value'];
                 });
