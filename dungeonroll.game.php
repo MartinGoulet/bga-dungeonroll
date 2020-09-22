@@ -719,6 +719,9 @@ class DungeonRoll extends Table
     {
         $this->vars->setIsDragonKilledThisTurn(false);
 
+        // Give more time to the player
+        self::giveExtraTime($this->getActivePlayerId());
+
         // The player moves one level further into the dungeon
         $level = $this->vars->incDungeonLevel();
         $this->notif->newDungeonLevel($level);
