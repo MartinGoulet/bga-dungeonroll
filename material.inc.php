@@ -544,7 +544,7 @@ $this->card_types = array(
         'imageindex' => 21,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRScout",
-        'commandText' => clienttranslate("Scout : Reduce Level by 1 and Town Portal"),
+        'commandText' => clienttranslate("Scout : Reduce Level by 1 and Retire to the tavern"),
     ),
 
     "5_11" => array(
@@ -554,7 +554,7 @@ $this->card_types = array(
         'imageindex' => 22,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRDungeoneer",
-        'commandText' => clienttranslate("Dungeoneer : Town Portal"),
+        'commandText' => clienttranslate("Dungeoneer : Retire to the tavern"),
     ),
 
     "4_12" => array(
@@ -574,7 +574,7 @@ $this->card_types = array(
         'imageindex' => 24,
         'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_BASE_PACK_1),
         'heroclass' => "DRDRakeKin",
-        'commandText' => clienttranslate("Sorceress : Discard all Monsters of 1 type for each Dragon"),
+        'commandText' => clienttranslate("Drake Kin : Discard all Monsters of 1 type for each Dragon"),
     ),
 
     "4_13" => array(
