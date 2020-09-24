@@ -967,9 +967,8 @@ define([
                 var masterHeroType = "5_" + notif.args.hero_master['value'];
 
                 var heroZone = this.player_board[notif.args.player_id].hero;
-                var from = $(heroZone.getItemDivId(notif.args.hero_novice['id']));
-                heroZone.addToStockWithId(masterHeroType, notif.args.hero_master['id'], from);
-                heroZone.removeFromStockById(notif.args.hero_novice['id']);
+                heroZone.removeAll();
+                heroZone.addToStockWithId(masterHeroType, notif.args.hero_master['id']);
                 this.showSpecialty(masterHeroType);
 
                 // if the player who hero level up is the current player
