@@ -16,7 +16,7 @@ class DRCommandEndMonsterPhase extends DRCommand
     {        
         if (!parent::canExecute()) return false;
 
-        $items = $this->game->components->getActivePlayerItems();
+        $items = $this->game->components->getActivePlayerUsableItems();
         $monsters = DRDungeonDice::getMonsterDices($items);
         return sizeof($monsters) == 0;
     }

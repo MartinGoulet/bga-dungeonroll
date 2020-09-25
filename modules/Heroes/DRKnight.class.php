@@ -21,14 +21,14 @@ class DRKnight extends DRStandardHero
     function canExecuteUltimate()
     {
         // True if at least 1 monster
-        $items = $this->game->components->getActivePlayerItems();
+        $items = $this->game->components->getActivePlayerUsableItems();
         $monsters = DRDungeonDice::getMonsterDices($items);
         return sizeof($monsters) >= 1;
     }
 
     function executeUltimate($sub_command_id)
     {
-        $items = $this->game->components->getActivePlayerItems();
+        $items = $this->game->components->getActivePlayerUsableItems();
         $monsters = DRDungeonDice::getMonsterDices($items);
         $dragons = $this->game->transformMonstersToDragons($monsters);
 
