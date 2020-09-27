@@ -29,7 +29,7 @@ class DRCommandDragonBait extends DRCommand
     public function execute($sub_command_id)
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $dragonBaits = DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT));
+        $dragonBaits = array_slice(DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT)), 0, 1);
 
         $items    = $this->game->components->getActivePlayerUsableItems();
         $monstersBefore = DRDungeonDice::getMonsterDices($items);
