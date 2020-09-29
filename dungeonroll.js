@@ -693,7 +693,7 @@ define([
                         for (var i in keys2) {
                             var key = keys2[i];
                             if (typeof args[key] == 'string') {
-                                args[key] = '<span class="hero-name">' + args[key] + '</span>';
+                                args[key] = '<span class="hero-name">' + _(args[key]) + '</span>';
                             }
                         }
 
