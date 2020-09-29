@@ -1,0 +1,78 @@
+<?php
+
+class DRCommandScoring extends DRCommand
+{
+
+    public function __construct($game, $command_info)
+    {
+        parent::__construct($game, $command_info);
+    }
+
+    public function getAllowedStates() {
+        return array('regroupPhase');
+    }
+
+    public function execute($sub_command_id)
+    {
+        $players = $this->game->getPlayerScoringInfo();
+
+        $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
+        $rowLevel = array('Levels completed');
+        $rowDragon = array('Dragon killed');
+        $rowTreasure = array('Treasures');
+        $rowScales = array('Dragon Scales');
+        $rowTownPortal = array('Town Portal');
+        $rowTotal = array('Total');
+
+        foreach ($players as $player_id => $player) {
+
+            $rowHeader[] = array(
+                'str' => '${player_name}',
+                'args' => array('player_name' => $player['player_name']),
+                'type' => 'header'
+            );
+
+            $treasures = $this->game->components->getItemsByPlayerAndType($player_id, TYPE_TREASURE_TOKEN);
+            $treasures = DRUtils::filter($treasures, function($token) {
+                return $token['zone'] == ZONE_INVENTORY;
+            });
+            
+            $townPortal = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
+            $dragonScales = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_DRAGON_SCALES));
+
+            $nbrLevel = $this->game->stats->getLevelCompleted($player_id);
+            if($player_id == $this->game->getActivePlayerId()) {
+                $nbrLevel += $this->game->vars->getDungeonLevel();
+            }
+
+            $nbrTreasures = sizeof($treasures);
+            $nbrXpTownPortal = sizeof($townPortal);
+            $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2;
+
+            $rowLevel[] = $this->game->getValueWithStar($nbrLevel, true);
+            $rowDragon[] = $this->game->getValueWithStar($this->game->stats->getExpDragon($player_id));
+            $rowTreasure[] = $this->game->getValueWithStar($nbrTreasures);
+            $rowScales[] = $this->game->getValueWithStar($nbrXpDragonScales);
+            $rowTownPortal[] = $this->game->getValueWithStar($nbrXpTownPortal);
+
+            $total =
+                $nbrLevel +
+                $this->game->stats->getExpDragon($player_id) +
+                $nbrTreasures +
+                $nbrXpDragonScales +
+                $nbrXpTownPortal;
+
+            $rowTotal[] = $this->game->getValueWithStar($total, true);
+        }
+
+        $table = array($rowHeader, $rowLevel, $rowTreasure, $rowDragon, $rowScales, $rowTownPortal, $rowTotal);
+
+        $this->game->notifyPlayer($this->game->getActivePlayerId(), "tableWindow", '', array(
+            "id" => 'finalScoring',
+            "title" => clienttranslate("Scores"),
+            "table" => $table,
+            "footer" => "<h4>* " . clienttranslate("The player with the fewest Treasure tokens is the winner") . "</h4>", 
+            "closing" => clienttranslate("Close"),
+        ));
+    }
+}

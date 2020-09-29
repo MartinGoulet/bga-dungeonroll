@@ -529,6 +529,7 @@ define([
 
                 dojo.empty('zone_phases_actions');
                 dojo.empty('zone_actions');
+                this.removeActionButtons();
 
                 if (commands === undefined) return;
 

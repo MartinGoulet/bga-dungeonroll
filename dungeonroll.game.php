@@ -1012,11 +1012,15 @@ class DungeonRoll extends Table
         ));
     }
 
-    function NTA_finalScoring()
-    {
+    function getPlayerScoringInfo() {
         $sql = 'SELECT player_id, player_score, player_name FROM player';
         $players = self::getCollectionFromDB($sql);
+        return $players;
+    }
 
+    function NTA_finalScoring()
+    {
+        $players = $this->getPlayerScoringInfo();
 
         $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
         $rowLevel = array('Levels completed');
