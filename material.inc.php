@@ -748,7 +748,8 @@ $this->command_infos = array(
         'html_zone' => 'zone_actions',
         'confirmations' => array(
             array(
-                'askConfirmation' => 'checkNonSelectedPotion',
+                // 'askConfirmation' => 'checkNonSelectedPotion',
+                'askConfirmation' => 'false',
                 'confirmation' => clienttranslate("Are you sure you do not want to quaff all Potions?")
             )
         )
