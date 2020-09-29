@@ -159,12 +159,11 @@ class DRNotification extends APP_GameClass
 
     function openChest($party, $chests, $tokens)
     {
-        $message = clienttranslate('${player_name} uses %s to open ${items_log_1} and gets ${items_log_2}');
 
         if (sizeof($party) > 0) {
-            $message = sprintf($message, '${items_log}');
+            $message = clienttranslate('${player_name} uses ${items_log} to open ${items_log_1} and gets ${items_log_2}');
         } else {
-            $message = sprintf($message, '${hero_name}');
+            $message = clienttranslate('${player_name} uses ${hero_name} to open ${items_log_1} and gets ${items_log_2}');
         }
 
         $this->game->notifyAllPlayers("onNewTokens", $message, array(
