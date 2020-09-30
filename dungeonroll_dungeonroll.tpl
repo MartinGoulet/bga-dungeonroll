@@ -1,6 +1,6 @@
 {OVERALL_GAME_HEADER}
 
-<div id="dr_board" style="max-width: 1200px; margin: auto">
+<div id="dr_board" style="max-width: 1200px; margin: auto; position: relative">
     <div id="zone_draft" style="display: none">
         <div class="whiteblock">
             <h3>{AVAILABLE_HEROES}</h3>
@@ -123,7 +123,7 @@
 <script type="text/javascript">
     // Javascript HTML templates
 var jstpl_hero_level_up = '\
-<div id="dlg" class="dlg_hero_level_up">\
+<div id="dlg" class="dlg_hero_level_up" style="position: absolute">\
     <div class="title">${title}</div>\
     <div><div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div></div>\
 </div>';
