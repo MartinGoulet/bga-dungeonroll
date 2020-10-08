@@ -699,6 +699,87 @@ $this->card_types = array(
         'commandText' => clienttranslate("Time Lady : Defeat a Dragon"),
     ),
 
+    "4_19" => array(
+        'name' => clienttranslate("Cassandra, The Cursed"),
+        'specialty' => clienttranslate("Begin each delve exhausted. While Cassandra is exhausted, all companions defeat 1 additionnal monster. When quaffing potions, refresh Cassandra, The Cursed"),
+        'ultimate' => clienttranslate("Discard 1 chest or potion (there must be a chest or potion to discard)"),
+        'imageindex' => 37,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRCassandra",
+        'commandText' => clienttranslate("Cassandra : Discard 1 chest or potion"),
+    ),
+
+    "4_20" => array(
+        'name' => clienttranslate("Marpesia, Amazon Queen"),
+        'specialty' => clienttranslate("Requires 4 dragon faces (instead of 3) before the Dragon arrives. Champions kill only 1 monster and open only 1 chest"),
+        'ultimate' => clienttranslate("Roll all dice from the graveyard, discard any scrolls, and add the rest to your party"),
+        'imageindex' => 38,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRMarpesia",
+        'commandText' => clienttranslate("Marpesia : Roll all dice from the graveyard"),
+    ),
+
+    "4_21" => array(
+        'name' => clienttranslate("Tou'lak, Minotaur Chieftain"),
+        'specialty' => clienttranslate("You may re-roll 1 dungeon die (not a dragon face) each level"),
+        'ultimate' => clienttranslate("Discard all monsters on the current level"),
+        'imageindex' => 39,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRToulak",
+        'commandText' => clienttranslate("Tou'lak : Discard all monsters on the current level"),
+        'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Dungeon die'),
+    ),
+
+    "4_22" => array(
+        'name' => clienttranslate("Amar-Suen, King of the Ancients"),
+        'specialty' => clienttranslate("Thieves defeat 1 additional monster"),
+        'ultimate' => clienttranslate("Discard all monsters of 1 type. Draw 1 treasure for each monster discarded this way"),
+        'imageindex' => 40,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRAmarSuen",
+        'commandText' => clienttranslate("Amar-Suen : Discard all monsters of 1 type and draw treasures"),
+    ),
+
+    "4_23" => array(
+        'name' => clienttranslate("Tristan, Lone Mercenary"),
+        'specialty' => clienttranslate("When defeating 2 or more monsters with 1 companion, draw 1 treasure from the box. Discard 1 treasure to refresh Tristan, Lone Mercenary"),
+        'ultimate' => clienttranslate("Re-roll any number of dungeon dice (including dice in the dragon's lair)."),
+        'imageindex' => 41,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRTristan",
+        'commandText' => clienttranslate("Tristan : Re-roll any number of dungeon dice"),
+    ),
+
+    "4_24" => array(
+        'name' => clienttranslate("Loeg Yllavyre, Dragon Lord"),
+        'specialty' => clienttranslate("When forming the party, set 2 dice to scrolls. Discard a scroll to transform a monster into a dragon face. When facing all 3 monster types, refresh Loeg Yllavyre"),
+        'ultimate' => clienttranslate("Take control of all dice in the dragon's lair. They count as companions (defeat 1 monster, open 1 chest, or quaff all potions). Discard them duging the next regroup phase"),
+        'imageindex' => 42,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRLoegYllavyre",
+        'commandText' => clienttranslate("Loeg Yllavyre : Take control of all dice in the dragon's lair"),
+    ),
+
+    "4_25" => array(
+        'name' => clienttranslate("Alexandra, Keeper of Knowledge"),
+        'specialty' => clienttranslate("You may use scrolls as champions. Discard any party die to re-roll any number of party and dungeon dice"),
+        'ultimate' => clienttranslate("Discard a scroll (instead of 3 different companions) to defeat a dragon during the dragon phase"),
+        'imageindex' => 43,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRAlexandra",
+        'commandText' => clienttranslate("Alexandra : Discard a scroll to defeat a dragon"),
+    ),
+
+    "4_26" => array(
+        'name' => clienttranslate("Szopin, Infamous Warlord"),
+        'specialty' => clienttranslate("When defeating 2 or more monsters with 1 companion, refresh Szopin"),
+        'ultimate' => clienttranslate("Discard up to 2 dungeon dice (including dice in the dragon's lair)"),
+        'imageindex' => 44,
+        'expansions' => array(GAME_EXPANSION_PACK_2),
+        'heroclass' => "DRSzopin",
+        'commandText' => clienttranslate("Szopin : Select up to 2 dungeon dice to discard"),
+    ),
+
 );
 
 $this->command_infos = array(

@@ -401,6 +401,19 @@ class DRNotification extends APP_GameClass
             'level' => sizeof($dice),
         ]);
     }
+    
+    function toulakRerollDungeonDie($reroll, $monster)
+    {
+        $message = clienttranslate('${player_name} re-rolls ${items_log} with ${hero_name} and get ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $reroll,
+            'items_log' => $monster,
+            'items_log_1' => $reroll,
+        ]);
+    }
 
     function trackerRerollGoblin($reroll, $goblin)
     {
@@ -432,6 +445,16 @@ class DRNotification extends APP_GameClass
      * Ultimates
      */
 
+    function refreshSzopin($monsters)
+    {
+        $message = clienttranslate('${player_name} refreshes ${hero_name} after defeating ${items_log}');
+        $this->game->notifyAllPlayers("onHeroRefresh", $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items_log' => $monsters,
+        ]);
+    }
+
     function heroUltimate()
     {
         $this->game->notifyAllPlayers("onHeroUltimate", "", []);
@@ -447,6 +470,19 @@ class DRNotification extends APP_GameClass
             'items' => $dice,
             'items_log' => $dice,
         ]);
+    }
+
+    function ultimateAmarSuen($monsters, $tokens)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log} and draws ${items_log_1}');
+
+        $this->game->notifyAllPlayers("onNewTokens", $message, array(
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'tokens' => $tokens,
+            'items_log' => $monsters,
+            'items_log_1' => $tokens,
+        ));
     }
 
     function ultimateBattlemage($dungeon_dice)
@@ -647,7 +683,31 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function ultimateSzopin($dungeon_dice)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} and discards ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dungeon_dice,
+            'items_log' => $dungeon_dice,
+        ]);
+    }
+
     function ultimateTracker($monsters)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $monsters,
+            'items_log' => $monsters,
+        ]);
+    }
+
+    function ultimateToulak($monsters)
     {
         $message = clienttranslate('${player_name} uses ${hero_name} to discard ${items_log}');
 

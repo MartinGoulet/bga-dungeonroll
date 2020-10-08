@@ -59,9 +59,22 @@ require_once('Heroes/DRRanger.class.php');
 require_once('Heroes/DRGuildLeader.class.php');
 require_once('Heroes/DRTimeTraveler.class.php');
 
-
 require_once('Heroes/DRGuildMaster.class.php');
 require_once('Heroes/DRTimeLady.class.php');
+
+/* 
+ * Heroes Pack 2
+ */
+
+require_once('Heroes2/DRAlexandra.class.php');
+require_once('Heroes2/DRAmarSuen.class.php');
+require_once('Heroes2/DRCassandra.class.php');
+require_once('Heroes2/DRLoegYllavyre.class.php');
+require_once('Heroes2/DRMarpesia.class.php');
+require_once('Heroes2/DRSzopin.class.php');
+require_once('Heroes2/DRToulak.class.php');
+require_once('Heroes2/DRTristan.class.php');
+
 
 class DRHeroesManager
 {

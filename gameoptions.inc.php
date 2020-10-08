@@ -86,6 +86,10 @@ $game_options = array(
                 'tmdisplay' => totranslate('All heroes'),
                 'description' => totranslate('Base game, Hero pack #1 and Promo')
             ),
+            GAME_EXPANSION_PACK_2 => array(
+                'name' => totranslate('Hero pack #2'),
+                'tmdisplay' => totranslate('Hero pack #2')
+            ),
         ),
         'displaycondition' => array(
             array(

@@ -239,29 +239,45 @@ define([
                     var card_hero_number = card_type_id.split('_')[1];
                     var novice_number = this.ItemType.HeroNovice + '_' + card_hero_number;
                     var master_number = this.ItemType.HeroMaster + '_' + card_hero_number;
-
                     var card = this.gamedatas.card_types[card_type_id];
                     var index = toint(card.imageindex) - 1;
 
                     var cardNovice = this.gamedatas.card_types[novice_number];
                     var cardMaster = this.gamedatas.card_types[master_number];
 
-                    var args = {
-                        artx: 297 * (index % 8),
-                        arty: 425 * (Math.floor(index / 8)),
-                        'specialty': _('Specialty'),
-                        'ultimate': _('Ultimate'),
-                        'specialty_novice': _(cardNovice.specialty),
-                        'ultimate_novice': _(cardNovice.ultimate),
-                        'name_novice': _(cardNovice.name),
-                        'specialty_master': _(cardMaster.specialty),
-                        'ultimate_master': _(cardMaster.ultimate),
-                        'name_master': _(cardMaster.name)
-                    };
+                    if (cardMaster !== undefined) {
+                        var args = {
+                            artx: 297 * (index % 8),
+                            arty: 425 * (Math.floor(index / 8)),
+                            'specialty': _('Specialty'),
+                            'ultimate': _('Ultimate'),
+                            'specialty_novice': _(cardNovice.specialty),
+                            'ultimate_novice': _(cardNovice.ultimate),
+                            'name_novice': _(cardNovice.name),
+                            'specialty_master': _(cardMaster.specialty),
+                            'ultimate_master': _(cardMaster.ultimate),
+                            'name_master': _(cardMaster.name)
+                        };
 
-                    var html = this.format_block('jstpl_hero_tooltip', args);
+                        var html = this.format_block('jstpl_hero_tooltip', args);
 
-                    this.addTooltipHtml(card_div.id, html, 100);
+                        this.addTooltipHtml(card_div.id, html, 100);
+                    } else {
+
+                        var args = {
+                            artx: 297 * (index % 8),
+                            arty: 425 * (Math.floor(index / 8)),
+                            'specialty': _('Specialty'),
+                            'ultimate': _('Ultimate'),
+                            'specialty_novice': _(cardNovice.specialty),
+                            'ultimate_novice': _(cardNovice.ultimate),
+                            'name_novice': _(cardNovice.name),
+                        };
+
+                        var html = this.format_block('jstpl_hero_golden_tooltip', args);
+
+                        this.addTooltipHtml(card_div.id, html, 100);
+                    }
                 }
             },
 
@@ -906,6 +922,7 @@ define([
                 dojo.subscribe('onNewDelve', this, "notif_onNewDelve");
                 dojo.subscribe('onHeroLevelUp', this, "notif_onHeroLevelUp");
                 dojo.subscribe('onHeroUltimate', this, "notif_onHeroUltimate");
+                dojo.subscribe('onHeroRefresh', this, "notif_onHeroRefresh");
                 dojo.subscribe('onSelectHero', this, "notif_onSelectHero");
 
                 this.notifqueue.setSynchronous('onDiceRolled', 1250);
@@ -1030,6 +1047,10 @@ define([
 
             notif_onHeroUltimate: function(notif) {
                 this.setIsHeroActivated(true);
+            },
+
+            notif_onHeroRefresh: function(notif) {
+                this.setIsHeroActivated(false);
             },
 
             notif_onSelectHero: function(notif) {

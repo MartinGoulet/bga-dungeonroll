@@ -31,8 +31,8 @@ class DRItemManager extends APP_GameClass
         foreach ($filteredCards as $card_id => $card) {
             $card_type = explode("_", $card_id)[0];
             $card_value = explode("_", $card_id)[1];
-            $card_nane = $card['name'];
-            $sql_values[] = "($card_type, $card_value, '$card_nane', 'box')";
+            $card_name = str_replace("'", "\'", $card['name']);
+            $sql_values[] = "($card_type, $card_value, '$card_name', 'box')";
         }
 
         $sql .= implode(',', $sql_values);

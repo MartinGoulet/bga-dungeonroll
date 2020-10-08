@@ -933,6 +933,11 @@ class DungeonRoll extends Table
         $this->gamestate->nextState('');
     }
 
+    function stUltimateSzopin()
+    {
+        $hero = $this->components->getActivePlayerHero();
+        $hero->discardDice();
+    }
 
 
     //////////////////////////////////////////////////////////////////////////////

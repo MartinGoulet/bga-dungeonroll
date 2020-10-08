@@ -184,6 +184,7 @@ $machinestates = array(
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "chooseDie" => STATE_CHOOSE_DIE,
             "guildLeader" => STATE_SELECTION_DICE,
+            "szopin" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -210,6 +211,7 @@ $machinestates = array(
             "townPortal" => STATE_PRE_NEXT_PLAYER, 
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "guildLeader" => STATE_SELECTION_DICE,
+            "szopin" => STATE_SELECTION_DICE,
             "chooseDie" => STATE_CHOOSE_DIE
         )
     ),
@@ -255,6 +257,7 @@ $machinestates = array(
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "end" => STATE_PRE_LOOT_PHASE,
             "guildLeader" => STATE_SELECTION_DICE,
+            "szopin" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -324,7 +327,17 @@ $machinestates = array(
         "args" => "argSelectionDice",
         "possibleactions" => array("moveItem", "executeCommand"),
         "transitions" => array(
-            "" => STATE_ULTIMATE_GUILD_LEADER,
+            "szopin" => STATE_ULTIMATE_SZOPIN,
+            "guildLeader" => STATE_ULTIMATE_GUILD_LEADER,
+        )
+    ),
+
+    STATE_ULTIMATE_SZOPIN => array(
+        "name" => "szopinUltimate",
+        "type" => "game",
+        "action" => "stUltimateSzopin",
+        "transitions" => array(
+            "" => STATE_PRE_MONSTER_PHASE,
         )
     ),
 
