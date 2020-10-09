@@ -41,7 +41,7 @@ class DRArchaeologist extends DRStandardHero
     {
         // When forming the party, draw 2 Treasures Tokens.      
         $treasures = $this->drawTreasures(2);
-        $this->game->notif->archaeologistDrawTreasure($treasures);
+        $this->game->notif->heroDrawTreasure($treasures);
 
         $this->game->vars->setChooseDieState($this->getState());
         $this->game->gamestate->nextState('discardTreasures');
@@ -55,7 +55,7 @@ class DRArchaeologist extends DRStandardHero
     {
         // When forming the party, draw 2 Treasures Tokens.      
         $treasures = $this->drawTreasures(2);
-        $this->game->notif->archaeologistDrawTreasure($treasures);
+        $this->game->notif->heroDrawTreasure($treasures);
     }
 
     function statePreNextPlayer()
@@ -67,16 +67,5 @@ class DRArchaeologist extends DRStandardHero
         } else {
             return parent::statePreNextPlayer();
         }
-    }
-
-
-    function drawTreasures($nbr)
-    {
-        $treasures = $this->game->components->getItemsByTypeAndZone(TYPE_TREASURE_TOKEN, ZONE_BOX);
-        $treasures = DRUtils::random_item($treasures, $nbr);
-        $treasures = DRItem::setOwner($treasures, $this->game->getActivePlayerId());
-        $treasures = DRItem::setZone($treasures, ZONE_INVENTORY);
-        $this->game->manager->updateItems($treasures);
-        return $treasures;
     }
 }

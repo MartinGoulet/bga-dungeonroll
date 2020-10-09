@@ -176,6 +176,16 @@ class DRStandardHero extends APP_GameClass
         
     }
 
+    function afterOpenChest()
+    {
+
+    }
+
+    function afterQuaffPotion()
+    {
+
+    }
+
     /**
      * Protected methods
      */
@@ -200,5 +210,24 @@ class DRStandardHero extends APP_GameClass
         }
         
         return $changes;
+    }
+
+    protected function groupByDiceValue($dice) {
+        $arr = array();
+
+        foreach ($dice as $item) {
+            $arr[$item['value']][] = $item;
+        }
+
+        return $arr;
+    }
+    protected function drawTreasures($nbr)
+    {
+        $treasures = $this->game->components->getItemsByTypeAndZone(TYPE_TREASURE_TOKEN, ZONE_BOX);
+        $treasures = DRUtils::random_item($treasures, $nbr);
+        $treasures = DRItem::setOwner($treasures, $this->game->getActivePlayerId());
+        $treasures = DRItem::setZone($treasures, ZONE_INVENTORY);
+        $this->game->manager->updateItems($treasures);
+        return $treasures;
     }
 }

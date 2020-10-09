@@ -101,6 +101,9 @@ class DRCommandOpenChest extends DRCommand
         $this->game->NTA_itemMove($partyUpdate);
         $this->game->notif->openChest(array_merge($partyDice, $partyToken), $dungeonDice, $treasures);
 
+        $hero = $this->game->components->getActivePlayerHero();
+        $hero->afterOpenChest();
+
         $this->game->gamestate->nextState('chest');
     }
 }

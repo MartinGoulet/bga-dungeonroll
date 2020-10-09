@@ -429,7 +429,7 @@ class DRNotification extends APP_GameClass
     }
 
 
-    function archaeologistDrawTreasure($treasures)
+    function heroDrawTreasure($treasures)
     {
         $message = clienttranslate('${player_name} draws ${items_log} with ${hero_name}');
 
@@ -445,6 +445,16 @@ class DRNotification extends APP_GameClass
      * Ultimates
      */
 
+    function refreshCassandra($die)
+    {
+        $message = clienttranslate('${player_name} refreshes ${hero_name} after discarding ${items_log}');
+        $this->game->notifyAllPlayers("onHeroRefresh", $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items_log' => array($die),
+        ]);
+    }
+
     function refreshSzopin($monsters)
     {
         $message = clienttranslate('${player_name} refreshes ${hero_name} after defeating ${items_log}');
@@ -452,6 +462,16 @@ class DRNotification extends APP_GameClass
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items_log' => $monsters,
+        ]);
+    }
+    
+    function refreshTristan($treasures)
+    {
+        $message = clienttranslate('${player_name} refreshes ${hero_name} after discarding ${items_log}');
+        $this->game->notifyAllPlayers("onHeroRefresh", $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items_log' => $treasures,
         ]);
     }
 
@@ -505,6 +525,18 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
             'items_log' => $dice,
+        ]);
+    }
+
+    function ultimateCassandra($dungeon_dice)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} and discards ${items_log}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dungeon_dice,
+            'items_log' => $dungeon_dice,
         ]);
     }
 
@@ -704,6 +736,19 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $monsters,
             'items_log' => $monsters,
+        ]);
+    }
+
+    function ultimateTristan($dice, $before)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to re-roll ${items_log} into ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => $before,
+            'items_log_1' => $dice,
         ]);
     }
 

@@ -15,16 +15,6 @@ class DRDrakeKin extends DRSorceress
         return false;
     }
 
-    function groupByDiceValue($dice) {
-        $arr = array();
-
-        foreach ($dice as $item) {
-            $arr[$item['value']][] = $item;
-        }
-
-        return $arr;
-    }
-
     /**
      * Must Overrides
      */

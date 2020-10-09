@@ -78,6 +78,10 @@ class DRCommandQuaffPotion extends DRCommand
         // Set the number of die to retrieve from the graveyard
         $this->game->vars->setChooseDieCount(sizeof($potions));
         $this->game->vars->setChooseDieState($this->getState());
+
+        $hero = $this->game->components->getActivePlayerHero();
+        $hero->afterQuaffPotion();
+
         // Move to next state
         $this->game->gamestate->nextState('chooseDie');
 

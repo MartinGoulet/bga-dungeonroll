@@ -7,16 +7,6 @@ class DRAmarSuen extends DRStandardHero
         parent::__construct($game, $cardinfo);
     }
 
-    function groupByDiceValue($dice) {
-        $arr = array();
-
-        foreach ($dice as $item) {
-            $arr[$item['value']][] = $item;
-        }
-
-        return $arr;
-    }
-
     /**
      * Game breaking rules
      */

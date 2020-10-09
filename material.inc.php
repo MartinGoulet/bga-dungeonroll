@@ -747,7 +747,8 @@ $this->card_types = array(
         'imageindex' => 41,
         'expansions' => array(GAME_EXPANSION_PACK_2),
         'heroclass' => "DRTristan",
-        'commandText' => clienttranslate("Tristan : Re-roll any number of dungeon dice"),
+        'commandText' => clienttranslate("Tristan : Select any number of dungeon dice to re-roll"),
+        'commandSpecialty' => clienttranslate('Specialty : Discard 1 treasure to Refresh'),
     ),
 
     "4_24" => array(

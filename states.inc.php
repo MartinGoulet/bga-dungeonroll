@@ -185,6 +185,7 @@ $machinestates = array(
             "chooseDie" => STATE_CHOOSE_DIE,
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
+            "tristan" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -212,6 +213,7 @@ $machinestates = array(
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
+            "tristan" => STATE_SELECTION_DICE,
             "chooseDie" => STATE_CHOOSE_DIE
         )
     ),
@@ -258,6 +260,7 @@ $machinestates = array(
             "end" => STATE_PRE_LOOT_PHASE,
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
+            "tristan" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -329,6 +332,7 @@ $machinestates = array(
         "transitions" => array(
             "szopin" => STATE_ULTIMATE_SZOPIN,
             "guildLeader" => STATE_ULTIMATE_GUILD_LEADER,
+            "tristan" => STATE_ULTIMATE_TRISTAN,
         )
     ),
 
@@ -336,9 +340,14 @@ $machinestates = array(
         "name" => "szopinUltimate",
         "type" => "game",
         "action" => "stUltimateSzopin",
-        "transitions" => array(
-            "" => STATE_PRE_MONSTER_PHASE,
-        )
+        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+    ),
+
+    STATE_ULTIMATE_TRISTAN => array(
+        "name" => "tristanUltimate",
+        "type" => "game",
+        "action" => "stUltimateTristan",
+        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
     ),
 
     STATE_ULTIMATE_GUILD_LEADER => array(

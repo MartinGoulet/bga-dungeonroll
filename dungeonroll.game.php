@@ -456,9 +456,9 @@ class DungeonRoll extends Table
     //     // $monsters[3]['value'] = DIE_SKELETON;
 
     //     foreach ($monsters as &$monster) {
-    //         $monster['value'] = DIE_POTION;
+    //         $monster['value'] = DIE_DRAGON;
     //     }
-    //     // $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
+    //     $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
 
     //     $this->manager->updateItems($monsters);
     //     $this->NTA_itemMove($monsters);
@@ -937,6 +937,12 @@ class DungeonRoll extends Table
     {
         $hero = $this->components->getActivePlayerHero();
         $hero->discardDice();
+    }
+
+    function stUltimateTristan()
+    {
+        $hero = $this->components->getActivePlayerHero();
+        $hero->rerollDice();
     }
 
 
