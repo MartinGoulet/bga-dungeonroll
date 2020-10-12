@@ -709,6 +709,8 @@ class DungeonRoll extends Table
             $this->NTA_itemMove($dice);
             // Next state
             $this->gamestate->nextState('scout');
+        } else if ($hero instanceof DRLoegYllavyre) {
+            $this->gamestate->nextState('loeg_yllavyre');
         } else {
             // Next state
             $this->gamestate->nextState('dungeon');
@@ -765,6 +767,7 @@ class DungeonRoll extends Table
         $monsters = DRDungeonDice::getMonsterDices($dice);
 
         $hero = $this->components->getActivePlayerHero();
+        $hero->statePreMonsterPhase();
 
         if (sizeof($monsters) == 0 && $hero->canSkipMonsterPhase()) {
             $this->gamestate->nextState('preLootPhase');
@@ -789,10 +792,11 @@ class DungeonRoll extends Table
     {
         // Get all Dragon dice in play
         $dice = $this->components->getActivePlayerUsableItems();
+        $hero = $this->components->getActivePlayerHero();
         $dragons = DRDungeonDice::getDragonDice($dice);
 
         // If 3 or more dragons is found, the player must fight them
-        if (sizeof($dragons) >= 3) {
+        if (sizeof($dragons) >= $hero->getNumberOfDragonRequiredForDragonPhase()) {
             $dragons = $this->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
             if (sizeof($dragons) > 0) {
                 $dragons = DRItem::setZone($dragons, ZONE_PLAY);

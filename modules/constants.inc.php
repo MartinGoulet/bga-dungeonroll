@@ -20,6 +20,7 @@ define('DIE_CLERIC', 3);
 define('DIE_FIGHTER', 4);
 define('DIE_THIEF', 5);
 define('DIE_CHAMPION', 6);
+define('DIE_GENERIC_DRAGON', 7);
 
 /*
  * Dungeon Dice
@@ -99,6 +100,7 @@ define('STATE_INIT_PLAYER_TURN', 10);
 define('STATE_FORMING_PARTY', 12);
 define('STATE_POST_FORMING_PARTY_MERCENARY', 13);
 define('STATE_POST_FORMING_PARTY_SCOUT', 14);
+define('STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE', 16);
 
 define('STATE_DUNGEON_ROLL', 15);
 

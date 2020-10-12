@@ -26,6 +26,7 @@ require_once('Commands/DRCommandRollFormingPartyPhase.class.php');
 require_once('Commands/DRCommandDiscardTreasure.class.php');
 require_once('Commands/DRCommandDiceSelection.class.php');
 require_once('Commands/DRCommandScoring.class.php');
+require_once('Commands/DRCommandSelectScrollPartyPhase.class.php');
 
 class DRCommandManager
 {

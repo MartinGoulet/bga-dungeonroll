@@ -80,4 +80,9 @@ class DRPartyDice
     {
         return $dice['value'] == DIE_CHAMPION && DRItem::isPartyDie($dice);
     }
+
+    static function isGenericDragon($die)
+    {
+        return $die['value'] == DIE_GENERIC_DRAGON && DRItem::isPartyDie($die);
+    }
 }

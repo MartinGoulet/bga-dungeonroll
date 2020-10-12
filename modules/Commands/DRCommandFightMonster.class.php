@@ -37,7 +37,7 @@ class DRCommandFightMonster extends DRCommand
         }
 
         return DRDungeonDice::getMonsterTypeCount($monsters) == 1 &&
-            self::getMonsterFightResult($itemsInPlay);
+            self::getMonsterFightResult($itemsInPlay, $hero);
     }
 
     public function execute($sub_command_id)
@@ -68,7 +68,7 @@ class DRCommandFightMonster extends DRCommand
         $this->game->gamestate->nextState('fight');
     }
 
-    static function getMonsterFightResult($items)
+    static function getMonsterFightResult($items, $hero)
     {
 
         $monsterDices = DRDungeonDice::getMonsterDices($items);
@@ -91,7 +91,7 @@ class DRCommandFightMonster extends DRCommand
 
                 // Champion kill every type of monsters
                 if (DRPartyDice::isChampion($companionDices[0])) {
-                    return true;
+                    return $hero->isChampionKillMultipleMonsters();
                 }
                 // Fighter kill all goblins (or vorpal sword)
                 if (DRItem::isFighter($companionDices[0]) && DRDungeonDice::isGoblin($monsterDices[0])) {

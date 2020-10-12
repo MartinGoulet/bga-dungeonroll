@@ -119,7 +119,8 @@ class DRItem
                 self::isMage($item) ||
                 self::isCleric($item) ||
                 self::isThief($item) ||
-                DRPartyDice::isChampion($item);
+                DRPartyDice::isChampion($item) ||
+                DRPartyDice::isGenericDragon($item);
         }));
     }
 

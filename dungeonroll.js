@@ -41,6 +41,7 @@ define([
                     Fighter: "1_4",
                     Thief: "1_5",
                     Champion: "1_6",
+                    Generic_Dragon: "1_7",
                 }
 
                 this.DungeonType = {
@@ -374,8 +375,12 @@ define([
                 div.addClass("item_" + card_type_id);
 
                 var itemType = card_type_id.split("_")[0];
-                if (itemType == 1 || itemType == 2) {
+                if (itemType == 1) {
                     div.addClass("die")
+                    div.addClass("party")
+                } else if (itemType == 2) {
+                    div.addClass("die")
+                    div.addClass("dungeon")
                 } else if (itemType == 3) {
                     div.addClass("token")
                 }
@@ -536,7 +541,9 @@ define([
             showDiceButton: function() {
                 Object.keys(this.gamedatas.items_party_dice).forEach(key => {
                     var die = this.gamedatas.items_party_dice[key];
-                    this.addActionButton('dice_' + key, '<div class="sicon ' + die.small_icon + '"></div>', 'chooseDieGain', 'zone_actions', null, 'gray');
+                    if (die.small_icon !== undefined) {
+                        this.addActionButton('dice_' + key, '<div class="sicon ' + die.small_icon + '"></div>', 'chooseDieGain', 'zone_actions', null, 'gray');
+                    }
                 });
 
             },

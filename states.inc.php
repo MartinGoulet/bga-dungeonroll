@@ -123,6 +123,7 @@ $machinestates = array(
         "transitions" => array(
             "mercenary" => STATE_POST_FORMING_PARTY_MERCENARY, 
             "scout" => STATE_POST_FORMING_PARTY_SCOUT,
+            "loeg_yllavyre" => STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE,
             "dungeon" => STATE_DUNGEON_ROLL
         )
     ),
@@ -148,6 +149,16 @@ $machinestates = array(
             "next" => STATE_POST_FORMING_PARTY_SCOUT,
             "end" => STATE_DUNGEON_ROLL,
         )
+    ),
+
+    STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE => array(
+        "name" => "postFormingPartyLeogYllavyre",
+        "description" => clienttranslate('Forming party : ${actplayer} must select 2 dice to set to scrolls'),
+        "descriptionmyturn" => clienttranslate('Forming party : ${you} must select 2 dice to set to scrolls'),
+        "type" => "activeplayer",
+        "args" => "argGenericPhasePlayerTurn",
+        "possibleactions" => array("executeCommand", "moveItem"),
+        "transitions" => array("" => STATE_DUNGEON_ROLL)
     ),
 
     STATE_DUNGEON_ROLL => array(
@@ -283,6 +294,7 @@ $machinestates = array(
             'discardTreasures' => STATE_DISCARD_TREASURE,
             "seekGlory" => STATE_DUNGEON_ROLL,
             "chooseDie" => STATE_CHOOSE_DIE,
+            "ultimate" => STATE_PRE_MONSTER_PHASE,
         )
     ),
 

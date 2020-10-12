@@ -46,7 +46,7 @@ class DRStandardHero extends APP_GameClass
         return null;
     }
 
-    public function canSkipMonsterPhase() 
+    public function canSkipMonsterPhase()
     {
         return true;
     }
@@ -67,6 +67,11 @@ class DRStandardHero extends APP_GameClass
     }
 
     function getCompanionCountDefeatDragon()
+    {
+        return 3;
+    }
+
+    function getNumberOfDragonRequiredForDragonPhase()
     {
         return 3;
     }
@@ -109,6 +114,16 @@ class DRStandardHero extends APP_GameClass
         return true;
     }
 
+    function isChampionKillMultipleMonsters()
+    {
+        return true;
+    }
+
+    function isChampionOpenMultipleChests()
+    {
+        return true;
+    }
+
     /**
      * Must Overrides
      */
@@ -131,7 +146,7 @@ class DRStandardHero extends APP_GameClass
     {
     }
 
-    function canRetire() 
+    function canRetire()
     {
         return true;
     }
@@ -152,12 +167,15 @@ class DRStandardHero extends APP_GameClass
 
     function stateAfterDungeonDiceRoll($dice)
     {
-        
+
     }
 
-    function actionAfterRollingDiceWithScroll($dice) 
+    function actionAfterRollingDiceWithScroll($dice)
     {
+    }
 
+    function statePreMonsterPhase()
+    {
     }
 
     function statePreNextPlayer()
@@ -166,14 +184,14 @@ class DRStandardHero extends APP_GameClass
         return 'next';
     }
 
-    function afterDragonBait() 
+    function afterDragonBait()
     {
-        
+
     }
 
     function afterDefeatMonster($party, $monsters)
     {
-        
+
     }
 
     function afterOpenChest()
@@ -208,7 +226,7 @@ class DRStandardHero extends APP_GameClass
         if (sizeof($changes) > 0) {
             $this->game->manager->updateItems($dice);
         }
-        
+
         return $changes;
     }
 

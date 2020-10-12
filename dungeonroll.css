@@ -78,7 +78,7 @@
     border-radius: 5px;
     width: 35px;
     height: 35px;
-    background-size: 210px 35px;
+    background-size: 210px 70px;
     margin: -5px -11px;
 }
 
@@ -351,6 +351,10 @@
     background-size: 252px 42px;
 }
 
+.stockitem.die.party {
+    background-size: 252px 84px;
+}
+
 #zone_draft .stockitem,
 #zone_hero .stockitem {
     background-size: 992px 1032px;
@@ -606,9 +610,11 @@
 .log .item.item_1_3,
 .log .item.item_1_4,
 .log .item.item_1_5,
-.log .item.item_1_6 {
+.log .item.item_1_6,
+.log .item.item_1_7 {
     background-image: url(img/dice_party.jpg);
     border: 1px solid lightgray;
+    background-size: 150px 50px;
 }
 
 .log .item.item_1_1 {
@@ -633,6 +639,10 @@
 
 .log .item.item_1_6 {
     background-position: -500% 0%;
+}
+
+.log .item.item_1_7 {
+    background-position: 0% -100%;
 }
 
 

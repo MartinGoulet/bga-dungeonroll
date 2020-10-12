@@ -165,6 +165,16 @@ $this->items_party_dice = array(
             clienttranslate("Scroll is not a Companion so you cannot use it to defeat Monster or Dragon"),
         )
     ),
+    TYPE_PARTY_DIE . '_' . DIE_GENERIC_DRAGON => array(
+        'name' => clienttranslate("Companion"),
+        'image_file' => 'img/dice_party.jpg',
+        'image_index' => 6,
+        'weight' => 17,
+        'tooltip' => array(
+            clienttranslate("May be used to defeat 1 Goblin, 1 Skeleton or 1 Ooze"),
+            clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
+        )
+    ),
 );
 
 $this->items_dungeon_dice = array(
@@ -759,6 +769,7 @@ $this->card_types = array(
         'expansions' => array(GAME_EXPANSION_PACK_2),
         'heroclass' => "DRLoegYllavyre",
         'commandText' => clienttranslate("Loeg Yllavyre : Take control of all dice in the dragon's lair"),
+        'commandSpecialty' => clienttranslate('Specialty : Discard a Scroll to transform a Monster into a Dragon'),
     ),
 
     "4_25" => array(
@@ -901,6 +912,14 @@ $this->command_infos = array(
         'name' => 'ringInvisibility',
         'text' => clienttranslate('Use Ring of Invisibility'),
         'php_class' => 'DRCommandRingInvisibility',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions'
+    ),
+    
+    46 => array(
+        'name' => 'endFormingPartyPhaseLoegYllavyre',
+        'text' => clienttranslate('Confirm the selection'),
+        'php_class' => 'DRCommandSelectScrollPartyPhase',
         'always_visible' => true,
         'html_zone' => 'zone_actions'
     ),

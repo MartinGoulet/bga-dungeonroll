@@ -48,8 +48,11 @@ class DRCommandOpenChest extends DRCommand
         // If there are more chest than companions
         if (sizeof($companions) < sizeof($chests)) {
 
-            $partyCanOpenAllChests = array_values(array_filter($items, function ($item) {
-                return DRItem::isThief($item) || DRPartyDice::isChampion($item);
+            $partyCanOpenAllChests = array_values(array_filter($items, function ($item) use($hero) {
+                return DRItem::isThief($item) || 
+                (
+                    DRPartyDice::isChampion($item) && $hero->isChampionOpenMultipleChests()
+                );
             }));
 
             // If only 1 companion found, check if he can open all chest

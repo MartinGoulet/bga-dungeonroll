@@ -212,6 +212,13 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function rerollDiceWithoutMessage($dice) 
+    {
+        $this->game->notifyAllPlayers(NOTIF_DICE_ROLL, '', [
+            'items' => $dice,
+        ]);
+    }
+
     function rerollPartyDice($diceBefore, $diceAfter)
     {
         $message = clienttranslate('${player_name} re-rolls ${items_log} and get ${items_log_1}');
@@ -428,6 +435,19 @@ class DRNotification extends APP_GameClass
         ]);
     }
 
+    function loegYllavyreTransformDragon($dice, $monster)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} and discards ${items_log} to transform ${items_log_1} into ${items_log_2}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => array(DRPartyDice::getDie(DIE_SCROLL)),
+            'items_log_1' => $monster,
+            'items_log_2' => array(DRDungeonDice::getDie(DIE_DRAGON)),
+        ]);
+    }
 
     function heroDrawTreasure($treasures)
     {
@@ -438,6 +458,19 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $treasures,
             'items_log' => $treasures,
+        ]);
+    }
+
+    function heroTransformDice($from, $to)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $to,
+            'items_log' => $from,
+            'items_log_1' => $to,
         ]);
     }
 
@@ -454,7 +487,17 @@ class DRNotification extends APP_GameClass
             'items_log' => array($die),
         ]);
     }
-
+    
+    function refreshLoegYllavyre($monsters)
+    {
+        $message = clienttranslate('${player_name} refreshes ${hero_name} after facing ${items_log}');
+        $this->game->notifyAllPlayers("onHeroRefresh", $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items_log' => array($monsters),
+        ]);
+    }
+    
     function refreshSzopin($monsters)
     {
         $message = clienttranslate('${player_name} refreshes ${hero_name} after defeating ${items_log}');
@@ -664,7 +707,36 @@ class DRNotification extends APP_GameClass
             'items' => $dragons
         ]);
     }
+    
+    function ultimateLoegYllavyre($dragons, $generic)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to transform ${items_log} into ${items_log_1}');
 
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => array_merge($dragons, $generic),
+            'items_log' => $dragons,
+            'items_log_1' => $generic,
+        ]);
+    }
+
+    function ultimateMarpesia($dice, $scrolls)
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to revive a ${items_log}');
+
+        if(sizeof($scrolls) > 0) {
+            $message = clienttranslate('${player_name} uses ${hero_name} to revive a ${items_log} and discards ${items_log_1}');
+        }
+
+        $this->game->notifyAllPlayers(NOTIF_ITEM_MOVE, $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+            'items' => $dice,
+            'items_log' => $dice,
+            'items_log_1' => $scrolls
+        ]);
+    }
 
     function ultimateOccultist($fighters, $skeletons)
     {
