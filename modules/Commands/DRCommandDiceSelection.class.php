@@ -26,6 +26,8 @@ class DRCommandDiceSelection extends DRCommand
             $this->game->gamestate->nextState("szopin");
         } elseif ($hero instanceof DRTristan) {
             $this->game->gamestate->nextState("tristan");
+        } else if ($hero instanceof DRAlexandra) {
+            $this->game->gamestate->nextState('alexandra');
         } elseif ($hero instanceof DRGuildLeader || $hero instanceof DRGuildMaster) {
             $this->game->gamestate->nextState("guildLeader");
         }

@@ -197,6 +197,7 @@ $machinestates = array(
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
             "tristan" => STATE_SELECTION_DICE,
+            "alexandra" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -225,6 +226,7 @@ $machinestates = array(
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
             "tristan" => STATE_SELECTION_DICE,
+            "alexandra" => STATE_SELECTION_DICE,
             "chooseDie" => STATE_CHOOSE_DIE
         )
     ),
@@ -272,6 +274,7 @@ $machinestates = array(
             "guildLeader" => STATE_SELECTION_DICE,
             "szopin" => STATE_SELECTION_DICE,
             "tristan" => STATE_SELECTION_DICE,
+            "alexandra" => STATE_SELECTION_DICE,
         )
     ),
 
@@ -345,6 +348,7 @@ $machinestates = array(
             "szopin" => STATE_ULTIMATE_SZOPIN,
             "guildLeader" => STATE_ULTIMATE_GUILD_LEADER,
             "tristan" => STATE_ULTIMATE_TRISTAN,
+            "alexandra" => STATE_SPECIALTY_ALEXANDRA,
         )
     ),
 
@@ -372,6 +376,13 @@ $machinestates = array(
         "transitions" => array(
             "" => STATE_PRE_MONSTER_PHASE,
         )
+    ),
+
+    STATE_SPECIALTY_ALEXANDRA => array(
+        "name" => "aleandraSpecialty",
+        "type" => "game",
+        "action" => "stSpecialtyAlexandra",
+        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
     ),
 
     STATE_FINAL_SCORING => array(

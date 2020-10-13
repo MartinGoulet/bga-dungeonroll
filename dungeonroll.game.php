@@ -949,6 +949,12 @@ class DungeonRoll extends Table
         $hero->rerollDice();
     }
 
+    function stSpecialtyAlexandra()
+    {
+        $hero = $this->components->getActivePlayerHero();
+        $hero->rerollDice();
+    }
+
 
     //////////////////////////////////////////////////////////////////////////////
     //////////// Zombie

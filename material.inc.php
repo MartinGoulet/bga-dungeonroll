@@ -780,6 +780,7 @@ $this->card_types = array(
         'expansions' => array(GAME_EXPANSION_PACK_2),
         'heroclass' => "DRAlexandra",
         'commandText' => clienttranslate("Alexandra : Discard a scroll to defeat a dragon"),
+        'commandSpecialty' => clienttranslate('Specialty : Discard a Party Die to re-roll Party and Dungeon dice'),
     ),
 
     "4_26" => array(
