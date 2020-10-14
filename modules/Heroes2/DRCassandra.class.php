@@ -16,12 +16,6 @@ class DRCassandra extends DRStandardHero
         $this->game->notif->heroUltimate();
     }
 
-    function afterOpenChest()
-    {
-        $this->game->vars->setIsHeroActivated(false);
-        $this->game->notif->refreshCassandra(DRDungeonDice::getDie(DIE_CHEST));
-    }
-
     function afterQuaffPotion()
     {
         $this->game->vars->setIsHeroActivated(false);
