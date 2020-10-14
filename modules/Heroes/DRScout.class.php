@@ -51,8 +51,9 @@ class DRScout extends DRStandardHero
     function executeUltimate($sub_command_id)
     {
 
-        // Ultimate like a town portal
-        
+        // Ultimate like a Town Portal
+        $this->game->notif->ultimateScout();
+
         // Reduce level dungeon by 1
         if($this->isReduceLevel()) {
             $points = $this->game->vars->decDungeonLevel();

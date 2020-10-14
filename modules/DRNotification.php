@@ -760,6 +760,16 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
         ]);
     }
+    
+    function ultimateScout()
+    {
+        $message = clienttranslate('${player_name} uses ${hero_name} to retire to the tavern');
+
+        $this->game->notifyAllPlayers('message', $message, [
+            'player_name' => $this->game->getActivePlayerName(),
+            'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
+        ]);
+    }
 
     function ultimateSorceress($monsters)
     {
