@@ -81,14 +81,19 @@ $game_options = array(
                 'name' => totranslate('Hero pack #1'),
                 'tmdisplay' => totranslate('Hero pack #1')
             ),
-            GAME_EXPANSION_BASE_PACK_1 => array(
-                'name' => totranslate('All heroes'),
-                'tmdisplay' => totranslate('All heroes'),
-                'description' => totranslate('Base game, Hero pack #1 and Promo')
-            ),
             GAME_EXPANSION_PACK_2 => array(
                 'name' => totranslate('Hero pack #2'),
                 'tmdisplay' => totranslate('Hero pack #2')
+            ),
+            GAME_EXPANSION_KICKSTARTER => array(
+                'name' => totranslate("Kickstarter's heroes"),
+                'tmdisplay' => totranslate("Kickstarter's heroes"),
+                'description' => totranslate('Base game, Hero pack #1 and Promo')
+            ),
+            GAME_EXPANSION_ALL => array(
+                'name' => totranslate('All heroes'),
+                'tmdisplay' => totranslate('All heroes'),
+                'description' => totranslate('Base game, Hero pack #1 and #2 and Promo')
             ),
         ),
         'displaycondition' => array(

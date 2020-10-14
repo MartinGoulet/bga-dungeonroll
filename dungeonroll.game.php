@@ -1043,14 +1043,14 @@ class DungeonRoll extends Table
     {
         $players = $this->getPlayerScoringInfo();
 
-        $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
-        $rowLevel = array('Levels completed');
-        $rowDragon = array('Dragon killed');
-        $rowTreasure = array('Treasures');
-        $rowScales = array('Dragon Scales');
-        $rowTownPortal = array('Town Portal');
-        $rowTotal = array('Total');
-        $rowRank = array('Rank');
+        $rowHeader = array(array('str' => clienttranslate('Points'), 'args' => array(), 'type' => 'header'));
+        $rowLevel = array(array('str' => clienttranslate('Levels completed'), 'args' => array()));
+        $rowDragon = array(array('str' => clienttranslate('Dragon killed'), 'args' => array()));
+        $rowTreasure = array(array('str' => clienttranslate('Treasures'), 'args' => array()));
+        $rowScales = array(array('str' => clienttranslate('Dragon Scales'), 'args' => array()));
+        $rowTownPortal = array(array('str' => clienttranslate('Town Portal'), 'args' => array()));
+        $rowTotal = array(array('str' => clienttranslate('Total'), 'args' => array()));
+        $rowRank = array(array('str' => clienttranslate('Rank'), 'args' => array()));
 
         foreach ($players as $player_id => $player) {
 
@@ -1089,14 +1089,19 @@ class DungeonRoll extends Table
 
             $rank = $this->getRank($total, $number);
 
-            $prefix = clienttranslate('You have achieved the rank of');
-
             $this->notifyPlayer($player_id, "tableWindow", '', array(
                 "id" => 'finalScoring',
                 "title" => clienttranslate("Final scoring"),
                 "table" => $table,
                 "closing" => clienttranslate("Close"),
-                "header" => "<div class=\"rank-text\">${prefix} <span class=\"rank-${number}\">${rank}</span></div>",
+                "header" => array(
+                    'str' => '<div class="rank-text">${prefix_tr} <span class="rank-${number}">${rank_tr}</span></div>',
+                    'args' => array(
+                        'prefix_tr' => clienttranslate('You have achieved the rank of'),
+                        'number' => $number,
+                        'rank_tr' => $rank['str'],
+                    ),
+                ),
             ));
         }
     }
@@ -1112,22 +1117,29 @@ class DungeonRoll extends Table
 
     function getRank($value, &$number)
     {
+
         if ($value <= 15) {
             $number = 1;
-            return clienttranslate('Dragon Fodder');
+            $text = clienttranslate('Dragon Fodder');
         } else if ($value <= 23) {
             $number = 2;
-            return clienttranslate('Village Hero');
+            $text = clienttranslate('Village Hero');
         } else if ($value <= 29) {
             $number = 3;
-            return clienttranslate('Seasoned Explorer');
+            $text = clienttranslate('Seasoned Explorer');
         } else if ($value <= 34) {
             $number = 4;
-            return clienttranslate('Champion');
+            $text = clienttranslate('Champion');
         } else {
             $number = 5;
-            return clienttranslate('Hero of Ages');
+            $text = clienttranslate('Hero of Ages');
         }
+
+        return array(
+            'str' => $text,
+            'args' => array(),
+        );
+
     }
 
     ///////////////////////////////////////////////////////////////////////////////////:

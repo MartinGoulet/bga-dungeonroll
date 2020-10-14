@@ -211,12 +211,20 @@ define([
                 return this.format_block('jstpl_item_tooltip', itemInfo);
             },
 
+            getUltimateName: function(card) {
+                var textUltimate = _('Ultimate');
+                if (card.ultimate_name !== undefined) {
+                    textUltimate = _(card.ultimate_name);
+                }
+                return textUltimate;
+            },
+
             getCardTooltip: function(card_type_id) {
 
                 var card = this.gamedatas.card_types[card_type_id];
 
                 var cardInfo = {
-                    'ultimate': '<div class="keyword">' + _('Ultimate') + ' <br/> </div>' + _(card.ultimate),
+                    'ultimate': '<div class="keyword">' + this.getUltimateName(card) + ' <br/> </div>' + _(card.ultimate),
                     'specialty': '<div class="keyword">' + _('Specialty') + ' <br/> </div>' + _(card.specialty),
                     'name': _(card.name)
                 };
@@ -252,6 +260,8 @@ define([
                             arty: 425 * (Math.floor(index / 8)),
                             'specialty': _('Specialty'),
                             'ultimate': _('Ultimate'),
+                            'ultimate_name_novice': this.getUltimateName(cardNovice),
+                            'ultimate_name_master': this.getUltimateName(cardMaster),
                             'specialty_novice': _(cardNovice.specialty),
                             'ultimate_novice': _(cardNovice.ultimate),
                             'name_novice': _(cardNovice.name),
@@ -270,6 +280,7 @@ define([
                             arty: 425 * (Math.floor(index / 8)),
                             'specialty': _('Specialty'),
                             'ultimate': _('Ultimate'),
+                            'ultimate_name': this.getUltimateName(cardNovice),
                             'specialty_novice': _(cardNovice.specialty),
                             'ultimate_novice': _(cardNovice.ultimate),
                             'name_novice': _(cardNovice.name),
@@ -719,6 +730,12 @@ define([
                                 args[key] = '<span class="hero-name">' + _(args[key]) + '</span>';
                             }
                         }
+                        // Normal translate
+                        Object.keys(args).forEach(key => {
+                            if (key.endsWith('_tr')) {
+                                args[key] = _(args[key])
+                            }
+                        });
 
                     }
                 } catch (e) {

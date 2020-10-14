@@ -142,11 +142,11 @@ var jstpl_hero_tooltip = '\
 <div class="right-panel">\
     <h3 class="novice">${name_novice}</h3>\
     <div class="keyword">${specialty}</div>${specialty_novice}\
-    <div class="keyword">${ultimate}</div>${ultimate_novice}\
+    <div class="keyword">${ultimate}</div><b>${ultimate_name_novice} : </b>${ultimate_novice}\
     \
     <h3 class="master">${name_master}</h3>\
     <div class="keyword">${specialty}</div>${specialty_master}\
-    <div class="keyword">${ultimate}</div>${ultimate_master}\
+    <div class="keyword">${ultimate}</div><b>${ultimate_name_master} : </b>${ultimate_master}\
 </div>\
 <div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div>\
 </div>\
@@ -157,7 +157,7 @@ var jstpl_hero_golden_tooltip = '\
 <div class="right-panel">\
     <h3 class="golden">${name_novice}</h3>\
     <div class="keyword">${specialty}</div>${specialty_novice}\
-    <div class="keyword">${ultimate}</div>${ultimate_novice}\
+    <div class="keyword">${ultimate}</div><b>${ultimate_name} : </b>${ultimate_novice}\
 </div>\
 <div class="img_hero master" style="background-position: -${artx}px -${arty}px;"></div>\
 </div>\

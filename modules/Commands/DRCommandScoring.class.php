@@ -8,7 +8,8 @@ class DRCommandScoring extends DRCommand
         parent::__construct($game, $command_info);
     }
 
-    public function getAllowedStates() {
+    public function getAllowedStates()
+    {
         return array('regroupPhase');
     }
 
@@ -16,13 +17,13 @@ class DRCommandScoring extends DRCommand
     {
         $players = $this->game->getPlayerScoringInfo();
 
-        $rowHeader = array(array('str' => 'Points', 'args' => array(), 'type' => 'header'));
-        $rowLevel = array('Levels completed');
-        $rowDragon = array('Dragon killed');
-        $rowTreasure = array('Treasures');
-        $rowScales = array('Dragon Scales');
-        $rowTownPortal = array('Town Portal');
-        $rowTotal = array('Total');
+        $rowHeader = array(array('str' => clienttranslate('Points'), 'args' => array(), 'type' => 'header'));
+        $rowLevel = array(array('str' => clienttranslate('Levels completed'), 'args' => array()));
+        $rowDragon = array(array('str' => clienttranslate('Dragon killed'), 'args' => array()));
+        $rowTreasure = array(array('str' => clienttranslate('Treasures'), 'args' => array()));
+        $rowScales = array(array('str' => clienttranslate('Dragon Scales'), 'args' => array()));
+        $rowTownPortal = array(array('str' => clienttranslate('Town Portal'), 'args' => array()));
+        $rowTotal = array(array('str' => clienttranslate('Total'), 'args' => array()));
 
         foreach ($players as $player_id => $player) {
 
@@ -33,15 +34,15 @@ class DRCommandScoring extends DRCommand
             );
 
             $treasures = $this->game->components->getItemsByPlayerAndType($player_id, TYPE_TREASURE_TOKEN);
-            $treasures = DRUtils::filter($treasures, function($token) {
+            $treasures = DRUtils::filter($treasures, function ($token) {
                 return $token['zone'] == ZONE_INVENTORY;
             });
-            
+
             $townPortal = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
             $dragonScales = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_DRAGON_SCALES));
 
             $nbrLevel = $this->game->stats->getLevelCompleted($player_id);
-            if($player_id == $this->game->getActivePlayerId()) {
+            if ($player_id == $this->game->getActivePlayerId()) {
                 $nbrLevel += $this->game->vars->getDungeonLevel();
             }
 
@@ -71,7 +72,13 @@ class DRCommandScoring extends DRCommand
             "id" => 'finalScoring',
             "title" => clienttranslate("Scores"),
             "table" => $table,
-            "footer" => "<h4>* " . clienttranslate("The player with the fewest Treasure tokens is the winner") . "</h4>", 
+            "header" => array(
+                'str' => '* <b>${tiebreaker_tr}</b> : ${reminder_tr}',
+                'args' => array(
+                    'tiebreaker_tr' => clienttranslate("Tiebreaker"),
+                    'reminder_tr' => clienttranslate("The player with the fewest Treasure tokens is the winner"),
+                ),
+            ),
             "closing" => clienttranslate("Close"),
         ));
     }
