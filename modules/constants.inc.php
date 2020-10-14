@@ -157,6 +157,9 @@ define('GL_SPECIALTY_ONCE_PER_LEVEL', 'specialty_per_level');
 define('GL_DRAGON_KILLED_THIS_TURN_ID', 17);
 define('GL_DRAGON_KILLED_THIS_TURN', 'dragon_killed_this_turn');
 
+define('GL_BERSERKER_ULTIMATE_ID', 18);
+define('GL_BERSERKER_ULTIMATE', 'berserker_ultimate');
+
 define('GV_GAME_OPTION_ID', 100);
 define('GV_GAME_OPTION', 'gameOption');
 

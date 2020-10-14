@@ -61,6 +61,7 @@ class DungeonRoll extends Table
             GL_CHOOSE_DIE_STATE => GL_CHOOSE_DIE_STATE_ID,
             GL_SPECIALTY_ONCE_PER_LEVEL => GL_SPECIALTY_ONCE_PER_LEVEL_ID,
             GL_DRAGON_KILLED_THIS_TURN => GL_DRAGON_KILLED_THIS_TURN_ID,
+            GL_BERSERKER_ULTIMATE => GL_BERSERKER_ULTIMATE_ID,
             
             // Game variants
             GV_GAME_OPTION => GV_GAME_OPTION_ID,

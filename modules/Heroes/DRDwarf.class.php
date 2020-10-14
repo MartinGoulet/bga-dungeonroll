@@ -24,6 +24,8 @@ class DRDwarf extends DRStandardHero
         $dice[0]['zone'] = ZONE_GRAVEYARD;
         $dice[1]['zone'] = ZONE_GRAVEYARD;
         $this->game->notif->dwarfStartTurn();
+
+        $this->game->vars->setIsBerserkerUltimate(false);
     }
 
     function afterDefeatMonster($party, $monsters)

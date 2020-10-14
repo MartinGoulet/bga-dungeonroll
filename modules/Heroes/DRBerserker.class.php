@@ -21,6 +21,10 @@ class DRBerserker extends DRDwarf
             return true;
         }
 
+        if($this->game->vars->getIsBerserkerUltimate() == false) {
+            return true;
+        }
+
         return $this->game->vars->getIsDragonKilledThisTurn() ||
                $this->game->vars->getDungeonLevel() == 10;
     }
@@ -45,6 +49,7 @@ class DRBerserker extends DRDwarf
         $this->game->manager->updateItems($dice);
 
         $this->game->notif->ultimateBerserker($dice);
+        $this->game->vars->setIsBerserkerUltimate(true);
 
         $this->game->gamestate->nextState('ultimate');
     }

@@ -21,6 +21,7 @@ class DRGlobalVariable
         $this->game->setGameStateInitialValue(GL_HERO_ACTIVATED, 0);
         $this->game->setGameStateInitialValue(GL_SPECIALTY_ONCE_PER_LEVEL, 0);
         $this->game->setGameStateInitialValue(GL_DRAGON_KILLED_THIS_TURN, 0);
+        $this->game->setGameStateInitialValue(GL_BERSERKER_ULTIMATE, 0);
     }
 
     /**
@@ -97,6 +98,11 @@ class DRGlobalVariable
     function getIsDragonKilledThisTurn()
     {
         return $this->game->getGameStateValue(GL_DRAGON_KILLED_THIS_TURN) == 1;
+    }
+
+    function getIsBerserkerUltimate()
+    {
+        return $this->game->getGameStateValue(GL_BERSERKER_ULTIMATE) == 1;
     }
 
     /**
@@ -195,6 +201,16 @@ class DRGlobalVariable
             $value = 0;
         }
         $this->game->setGameStateValue(GL_DRAGON_KILLED_THIS_TURN, $value);
+    }
+
+    function setIsBerserkerUltimate($isActivated)
+    {
+        if ($isActivated) {
+            $value = 1;
+        } else {
+            $value = 0;
+        }
+        $this->game->setGameStateValue(GL_BERSERKER_ULTIMATE, $value);
     }
 
 }
