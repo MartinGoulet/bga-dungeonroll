@@ -73,7 +73,7 @@ class DRCommandScoring extends DRCommand
             "title" => clienttranslate("Scores"),
             "table" => $table,
             "header" => array(
-                'str' => '* <b>${tiebreaker_tr}</b> : ${reminder_tr}',
+                'str' => '<i class="fa fa-star tiebreaker"></i> : ${tiebreaker_tr} : ${reminder_tr}',
                 'args' => array(
                     'tiebreaker_tr' => clienttranslate("Tiebreaker"),
                     'reminder_tr' => clienttranslate("The player with the fewest Treasure tokens is the winner"),
