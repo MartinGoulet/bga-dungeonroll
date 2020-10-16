@@ -605,7 +605,7 @@ class DungeonRoll extends Table
         $active_player_id = $this->getActivePlayerId();
 
         $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO)[0];
-        $heroMaster = $this->components->getItemsByTypeAndValue(TYPE_MASTER_HERO, $heroNovice['value'])[0];
+        $heroMasters = $this->components->getItemsByTypeAndValue(TYPE_MASTER_HERO, $heroNovice['value']);
 
         $newHeroes = array();
 
@@ -614,12 +614,17 @@ class DungeonRoll extends Table
             if ($player_id != $active_player_id) {
                 // Clone item
                 $newNoviceHero = $heroNovice;
-                $newMasterHero = $heroMaster;
                 // Set the new owner (for the novice hero)
                 $newNoviceHero['owner'] = $player_id;
                 // Add new components
                 $newHeroes[] = $newNoviceHero;
-                $newHeroes[] = $newMasterHero;
+                
+                if(sizeof($heroMasters) == 1) {
+                    // Clone item
+                    $newMasterHero = $heroMasters[0];
+                    // Add new components
+                    $newHeroes[] = $newMasterHero;                   
+                }
             }
         }
 
