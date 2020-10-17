@@ -841,23 +841,31 @@ define([
 
             checkFightGoblin: function() {
                 var item_types_play = this.items.zone_play.getPresentTypeList();
+                var item_types_hero = this.items.zone_hero.getPresentTypeList();
 
                 return Object.keys(item_types_play).length == 2 &&
                     this.diceInPlayAndDungeon(this.DungeonType.Goblin) &&
                     (
-                        item_types_play[this.PartyType.Champion] == 1 ||
+                        (
+                            item_types_play[this.PartyType.Champion] == 1 &&
+                            item_types_hero["4_20"] !== 1 // Marpesia, Amazon Queen
+                        ) ||
                         item_types_play[this.PartyType.Fighter] == 1 ||
                         item_types_play[this.InventoryType.VorpalSword] == 1
                     );
             },
 
             checkFightOoze: function() {
+                var item_types_hero = this.items.zone_hero.getPresentTypeList();
                 var item_types_play = this.items.zone_play.getPresentTypeList();
 
                 return Object.keys(item_types_play).length == 2 &&
                     this.diceInPlayAndDungeon(this.DungeonType.Ooze) &&
                     (
-                        item_types_play[this.PartyType.Champion] == 1 ||
+                        (
+                            item_types_play[this.PartyType.Champion] == 1 &&
+                            item_types_hero["4_20"] !== 1 // Marpesia, Amazon Queen
+                        ) ||
                         item_types_play[this.PartyType.Mage] == 1 ||
                         item_types_play[this.InventoryType.ScepterOfPower] == 1
                     );
@@ -865,11 +873,15 @@ define([
 
             checkFightSkeleton: function() {
                 var item_types_play = this.items.zone_play.getPresentTypeList();
+                var item_types_hero = this.items.zone_hero.getPresentTypeList();
 
                 return Object.keys(item_types_play).length == 2 &&
                     this.diceInPlayAndDungeon(this.DungeonType.Skeleton) &&
                     (
-                        item_types_play[this.PartyType.Champion] == 1 ||
+                        (
+                            item_types_play[this.PartyType.Champion] == 1 &&
+                            item_types_hero["4_20"] !== 1 // Marpesia, Amazon Queen
+                        ) ||
                         item_types_play[this.PartyType.Cleric] == 1 ||
                         item_types_play[this.InventoryType.Talisman] == 1
                     );
