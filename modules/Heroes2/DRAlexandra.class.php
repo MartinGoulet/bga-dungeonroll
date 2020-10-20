@@ -75,6 +75,23 @@ class DRAlexandra extends DRStandardHero
         return $monstersTypeCount == 1 && sizeof($scrolls) == 1;
     }
 
+    function canDefeatDragon()
+    {
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+
+        $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
+            return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
+        });
+        
+        $companions = DRItem::getCompanions($itemsInPlay);
+        $champions = DRUtils::filter($itemsInPlay, 'DRPartyDice::isChampion');
+        $distinctType = array_unique(DRItem::getCompanionTypes($companions));
+
+        return sizeof($companions) + sizeof($scrolls) == 3 &&
+               sizeof($scrolls) + sizeof($champions) <= 1 &&
+               sizeof($distinctType) == sizeof($companions);
+    }
+
     function canOpenAllChests()
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
