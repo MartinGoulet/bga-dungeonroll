@@ -93,7 +93,7 @@ class DRCommandQuaffPotion extends DRCommand
             return !DRItem::isTemporaryAbility($item) && !DRItem::isTemporaryItem($item);
         });     
 
-        $items_graveyard = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $items_graveyard = DRPartyDice::getPartyDice($this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD));
 
         return sizeof($party_dice_play_zone) + sizeof($items_graveyard) >= sizeof($potions);
     }

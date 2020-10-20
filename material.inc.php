@@ -893,6 +893,14 @@ $this->command_infos = array(
         )
     ),
 
+    7 => array(
+        'name' => 'endQuaffPhase',
+        'text' => clienttranslate('Next phase'),
+        'php_class' => 'DRCommandEndQuaffPhase',
+        'always_visible' => false,
+        'html_zone' => 'zone_phases_actions'
+    ),
+
     10 => array(
         'name' => 'fightDragon',
         'text' => clienttranslate('Fight Dragon'),

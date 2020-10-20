@@ -54,7 +54,11 @@ class DRLoegYllavyre extends DRStandardHero
 
         $monster[0]['value'] = DIE_DRAGON;
         
-        $scroll = DRItem::setZone($scroll, ZONE_GRAVEYARD);
+        if(DRItem::isPartyDie($scroll[0])) {
+            $scroll = DRItem::setZone($scroll, ZONE_GRAVEYARD);
+        } else {
+            $scroll = DRItem::setZone($scroll, ZONE_BOX);
+        }
         $monster = DRItem::setZone($monster, ZONE_DRAGON_LAIR);
 
         $updateItems = array_merge($scroll, $monster);

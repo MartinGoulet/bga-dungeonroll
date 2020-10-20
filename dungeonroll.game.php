@@ -514,6 +514,7 @@ class DungeonRoll extends Table
     function argQuaffPotion()
     {
         return array(
+            'commands' => $this->commands->getActiveCommands(),
             'currentPhase' => $this->vars->getChooseDieState(),
             'nbr' => $this->vars->getChooseDieCount()
         );
