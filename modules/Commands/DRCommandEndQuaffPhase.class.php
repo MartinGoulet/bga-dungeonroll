@@ -16,7 +16,7 @@ class DRCommandEndQuaffPhase extends DRCommand
     {        
         if (!parent::canExecute()) return false;
 
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         $party = DRPartyDice::getPartyDice($items);
         return sizeof($party) == 0;
     }

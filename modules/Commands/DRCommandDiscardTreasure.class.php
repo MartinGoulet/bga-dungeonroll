@@ -15,7 +15,7 @@ class DRCommandDiscardTreasure extends DRCommand
     public function canExecute()
     {
         $itemsInPlay = $this->getTokensInPlay();
-        $itemsInInventory = $this->game->components->getActivePlayerItemsByZone(ZONE_INVENTORY);
+        $itemsInInventory = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_INVENTORY);
         $hero = $this->game->components->getActivePlayerHero();
         return sizeof($itemsInPlay) == $hero->getNumberTreasureTokenToDiscard() ||
                sizeof($itemsInInventory) == 0;
@@ -24,7 +24,7 @@ class DRCommandDiscardTreasure extends DRCommand
     public function execute($sub_command_id)
     {
         $itemsInPlay = $this->getTokensInPlay();
-        $itemsInPlay = DRItem::setZone($itemsInPlay, ZONE_BOX);
+        $itemsInPlay = DRItem::setZone($itemsInPlay, DR_ZONE_BOX);
 
         $this->game->manager->updateItems($itemsInPlay);
         $this->game->notif->discardTreasure($itemsInPlay);
@@ -36,7 +36,7 @@ class DRCommandDiscardTreasure extends DRCommand
 
     public function getTokensInPlay()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $itemsInPlay = DRUtils::filter($itemsInPlay, function($item) {
             return DRItem::isTreasureToken($item);
         });

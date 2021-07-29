@@ -21,8 +21,8 @@ class DRCommandTownPortal extends DRCommand
     {
         if (!parent::canExecute()) return false;
         
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        return DRItem::containsSameAs($items, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        return DRItem::containsSameAs($items, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
     }
 
     public function execute($sub_command_id)
@@ -30,11 +30,11 @@ class DRCommandTownPortal extends DRCommand
         // Show the message before the update score point
         $this->game->notif->useTownPortal();
 
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $portals = DRItem::getSameAs($items, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $portals = DRItem::getSameAs($items, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
 
         // Discard the token
-        $itemsUpdate = DRItem::setZone(array($portals[0]), ZONE_BOX);
+        $itemsUpdate = DRItem::setZone(array($portals[0]), DR_ZONE_BOX);
         $this->game->manager->updateItems($itemsUpdate);
         $this->game->NTA_itemMove($itemsUpdate);
 

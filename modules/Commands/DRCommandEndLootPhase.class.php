@@ -18,7 +18,7 @@ class DRCommandEndLootPhase extends DRCommand
         $dice = $this->game->components->getActivePlayerUsableItems();
         $dungeon_dice = DRDungeonDice::getDungeonDiceWithoutDragon($dice);
         // Move dungeon dice outside the game
-        $dungeon_dice = DRItem::setZone($dungeon_dice, ZONE_BOX);
+        $dungeon_dice = DRItem::setZone($dungeon_dice, DR_ZONE_BOX);
         // Notify all players for the move
         $this->game->manager->updateItems($dungeon_dice);
         $this->game->NTA_itemMove($dungeon_dice);

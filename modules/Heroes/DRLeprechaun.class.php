@@ -39,7 +39,7 @@ class DRLeprechaun extends DRStandardHero
             // Discard all treasures
             $items = $this->game->components->getActivePlayerUsableItems();
             $tokens = DRTreasureToken::getTreasureTokens($items);
-            $tokens = DRItem::setZone($tokens, ZONE_BOX);
+            $tokens = DRItem::setZone($tokens, DR_ZONE_BOX);
 
             $this->game->manager->updateItems($tokens);
             $this->game->notif->leprechaunEndGame($tokens);
@@ -53,8 +53,8 @@ class DRLeprechaun extends DRStandardHero
     function applySpecialty($dice)
     {
         // All Potions become Chests
-        $potions = DRItem::getSameAs($dice, DRDungeonDice::getDie(DIE_POTION));
-        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isPotion', DIE_CHEST);
+        $potions = DRItem::getSameAs($dice, DRDungeonDice::getDie(DR_DIE_POTION));
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isPotion', DR_DIE_CHEST);
         if (sizeof($changes)) {
             $this->game->notif->changePotionToChest($changes, $potions);
         };
@@ -66,21 +66,21 @@ class DRLeprechaun extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         return sizeof($monsters) <= $this->getNumberOfMonsterToTransform() && sizeof($monsters) >= 1;
     }
 
     function executeUltimate($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $before = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
 
         // Change first monster into a potion
-        $monsters[0]['zone'] = ZONE_DUNGEON;
-        $monsters[0]['value'] = DIE_CHEST;
+        $monsters[0]['zone'] = DR_ZONE_DUNGEON;
+        $monsters[0]['value'] = DR_DIE_CHEST;
 
         // Return potion to the dungeon zone
         $this->game->manager->updateItems($monsters);

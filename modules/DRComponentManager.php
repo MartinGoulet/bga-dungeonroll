@@ -43,7 +43,7 @@ class DRComponentManager
     function getItemsByPlayerAndType($player_id, $type)
     {
         return DRUtils::filter($this->getAllItems(), function ($item) use ($player_id, $type) {
-            return $item['owner'] == $player_id && $item['type'] == $type && $item['zone'] != ZONE_BOX;
+            return $item['owner'] == $player_id && $item['type'] == $type && $item['zone'] != DR_ZONE_BOX;
         });
     }
 
@@ -91,7 +91,7 @@ class DRComponentManager
 
     function getActivePlayerUsableItems()
     {
-        $includedZones = array(ZONE_PARTY, ZONE_DUNGEON, ZONE_INVENTORY, ZONE_PLAY, ZONE_DRAGON_LAIR);
+        $includedZones = array(DR_ZONE_PARTY, DR_ZONE_DUNGEON, DR_ZONE_INVENTORY, DR_ZONE_PLAY, DR_ZONE_DRAGON_LAIR);
         return DRUtils::filter($this->getActivePlayerItems(), function ($item) use ($includedZones) {
             return in_array($item['zone'], $includedZones);
         });
@@ -120,13 +120,13 @@ class DRComponentManager
 
     function getActivePlayerHero()
     {
-        $currentHeroes = $this->getActivePlayerItemsByZone(ZONE_HERO);
+        $currentHeroes = $this->getActivePlayerItemsByZone(DR_ZONE_HERO);
         return DRHeroesManager::getHero(array_shift($currentHeroes), $this->game);
     }
 
     function getNoviceHeroes()
     {
-        return DRUtils::filter($this->getItemsByType(TYPE_NOVICE_HERO), function ($item) {
+        return DRUtils::filter($this->getItemsByType(DR_TYPE_NOVICE_HERO), function ($item) {
             return $item['owner'] == null;
         });
     }

@@ -26,7 +26,7 @@ class DRPaladin extends DRCrusader
      */
     function canExecuteUltimate()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
         return in_array($this->getState(), array('monsterPhase', 'lootPhase', 'dragonPhase')) &&
             sizeof($tokens) == 1;
@@ -36,18 +36,18 @@ class DRPaladin extends DRCrusader
     {
         $this->game->notif->ultimatePaladin();
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         // Discard 1 token
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
-        $tokens = DRItem::setZone($tokens, ZONE_BOX);
+        $tokens = DRItem::setZone($tokens, DR_ZONE_BOX);
         $this->game->manager->updateItems($tokens);
         $this->game->NTA_itemMove($tokens);
 
         // Move all Party dice to the party area (conflict with open chest and quaff potion)
         $party = DRPartyDice::getPartyDice($itemsInPlay);
         if (sizeof($party) > 0) {
-            $party = DRItem::setZone($party, ZONE_PARTY);
+            $party = DRItem::setZone($party, DR_ZONE_PARTY);
             $this->game->manager->updateItems($party);
             $this->game->NTA_itemMove($party);
         }
@@ -57,7 +57,7 @@ class DRPaladin extends DRCrusader
         // Defeat all Monsters
         $monsters = DRDungeonDice::getMonsterDices($items);
         if (sizeof($monsters) > 0) {
-            $monsters = DRItem::setZone($monsters, ZONE_BOX);
+            $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
             $this->game->manager->updateItems($monsters);
             $this->game->NTA_itemMove($monsters);
         }
@@ -65,7 +65,7 @@ class DRPaladin extends DRCrusader
         // Discard all dice in the Dragon's lair
         $dragons  = DRUtils::filter($items, 'DRDungeonDice::isDragon');
         if (sizeof($dragons) > 0) {
-            $dragons   = DRItem::setZone($dragons, ZONE_BOX);
+            $dragons   = DRItem::setZone($dragons, DR_ZONE_BOX);
             $this->game->manager->updateItems($dragons);
             $this->game->NTA_itemMove($dragons);
         }
@@ -74,7 +74,7 @@ class DRPaladin extends DRCrusader
         $chests = DRUtils::filter($items, 'DRDungeonDice::isChest');
         if (sizeof($chests) > 0) {
             // Move all chests to the playing zone
-            $chests = DRItem::setZone($chests, ZONE_PLAY);
+            $chests = DRItem::setZone($chests, DR_ZONE_PLAY);
             $this->game->manager->updateItems($chests);
             $this->game->NTA_itemMove($chests);
 
@@ -86,7 +86,7 @@ class DRPaladin extends DRCrusader
         $potions = DRUtils::filter($items, 'DRDungeonDice::isPotion');
         if (sizeof($potions) > 0) {
             // Move all potions to the playing zone
-            $potions = DRItem::setZone($potions, ZONE_PLAY);
+            $potions = DRItem::setZone($potions, DR_ZONE_PLAY);
             $this->game->manager->updateItems($potions);
             $this->game->NTA_itemMove($potions);
 

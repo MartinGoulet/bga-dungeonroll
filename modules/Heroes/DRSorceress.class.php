@@ -38,7 +38,7 @@ class DRSorceress extends DRStandardHero
         $items = $this->game->components->getActivePlayerUsableItems();
         $dragons = DRDungeonDice::getDragonDice($items);
         if(sizeof($dragons) >= 3) {
-            $dragons = DRItem::setZone($dragons, ZONE_BOX);
+            $dragons = DRItem::setZone($dragons, DR_ZONE_BOX);
             $this->game->manager->updateItems($dragons);
             $this->game->notif->sorceressDiscardDragon($dragons);
         }
@@ -50,18 +50,18 @@ class DRSorceress extends DRStandardHero
     function canExecuteUltimate()
     {
         // For each die in the Dragon's Lair, discard 1 Monster
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        $dragons = $this->game->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+        $dragons = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_DRAGON_LAIR);
         return sizeof($monsters) >= 1 && sizeof($monsters) <= sizeof($dragons);
     }
 
     function executeUltimate($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
 
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
 
         $this->game->manager->updateItems($monsters);
         $this->game->notif->ultimateSorceress($monsters);

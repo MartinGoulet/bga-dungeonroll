@@ -71,7 +71,7 @@ class DRItemManager extends APP_GameClass
     function getInventoryByPlayer($players) {
         $inventories = array();
         foreach ($players as $player_id => $player) {
-            $inventories[$player_id] = $this->game->components->getItemsByPlayerAndType($player_id, TYPE_TREASURE_TOKEN);
+            $inventories[$player_id] = $this->game->components->getItemsByPlayerAndType($player_id, DR_TYPE_TREASURE_TOKEN);
         }
         return $inventories;
     }
@@ -156,9 +156,9 @@ class DRItemManager extends APP_GameClass
         // Check for temporary item goes to the graveyard
         $updates = array();
         foreach ($items as $item) {
-            if ($item['zone'] == ZONE_GRAVEYARD) {
+            if ($item['zone'] == DR_ZONE_GRAVEYARD) {
                 if (DRItem::isTemporaryItem($item) || DRItem::isTemporaryAbility($item)) {
-                    $item['zone'] = ZONE_BOX;
+                    $item['zone'] = DR_ZONE_BOX;
                     $item['owner'] = null;
                 }
             }

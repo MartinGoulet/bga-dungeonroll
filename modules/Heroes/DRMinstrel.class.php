@@ -12,7 +12,7 @@ class DRMinstrel extends DRStandardHero
      */
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $thieves = DRUtils::filter($itemsInPlay, 'DRItem::isThief');
 
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
@@ -27,7 +27,7 @@ class DRMinstrel extends DRStandardHero
 
     function canOpenAllChests()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $mages = DRUtils::filter($itemsInPlay, 'DRItem::isMage');
         $chests = DRUtils::filter($itemsInPlay, 'DRDungeonDice::isChest');
 
@@ -39,7 +39,7 @@ class DRMinstrel extends DRStandardHero
 
     function canDefeatDragon()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $companions = DRItem::getCompanions($itemsInPlay);
         $thieves = DRUtils::filter($companions, 'DRItem::isThief');
@@ -75,7 +75,7 @@ class DRMinstrel extends DRStandardHero
     {
         $items = $this->game->components->getActivePlayerUsableItems();
         $dragons = DRDungeonDice::getDragonDice($items);
-        $dragons = DRItem::setZone($dragons, ZONE_BOX);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_BOX);
         $this->game->manager->updateItems($dragons);
         $this->game->notif->ultimateDiscardDragon($dragons);
 

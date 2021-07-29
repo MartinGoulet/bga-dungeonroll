@@ -24,9 +24,9 @@ class DRCommandQuaffPotion extends DRCommand
         if (!parent::canExecute()) return false;
 
         // Get all items from play
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Get chests items
-        $potions = DRItem::getSameAs($itemsInPlay, DRDungeonDice::getDie(DIE_POTION));
+        $potions = DRItem::getSameAs($itemsInPlay, DRDungeonDice::getDie(DR_DIE_POTION));
         // Get any party dice or "companion" tokens or scroll.
         $party_items = array_values(array_filter($itemsInPlay, function ($item) {
             return DRItem::isPartyDie($item) || 
@@ -46,9 +46,9 @@ class DRCommandQuaffPotion extends DRCommand
     public function execute($sub_command_id)
     {
         // Get all items from play
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Get chests items
-        $potions = DRItem::getSameAs($itemsInPlay, DRDungeonDice::getDie(DIE_POTION));
+        $potions = DRItem::getSameAs($itemsInPlay, DRDungeonDice::getDie(DR_DIE_POTION));
 
         DRUtils::userAssertTrue(
             clienttranslate('Not enough dice in your graveyard for the number of potions you want to quaff.'),
@@ -63,11 +63,11 @@ class DRCommandQuaffPotion extends DRCommand
         }));
 
         // Move dice to graveyard
-        $partyDice = DRItem::setZone(DRPartyDice::getPartyDice($party_items), ZONE_GRAVEYARD);
+        $partyDice = DRItem::setZone(DRPartyDice::getPartyDice($party_items), DR_ZONE_GRAVEYARD);
         // Return token
-        $tokens = DRItem::setZone(DRTreasureToken::getTreasureTokens($party_items), ZONE_BOX);
+        $tokens = DRItem::setZone(DRTreasureToken::getTreasureTokens($party_items), DR_ZONE_BOX);
         // Return potions to the box
-        $potions = DRItem::setZone($potions, ZONE_BOX);
+        $potions = DRItem::setZone($potions, DR_ZONE_BOX);
 
         // Update database
         $itemsUpdate = array_merge($partyDice, $tokens, $potions);
@@ -93,7 +93,7 @@ class DRCommandQuaffPotion extends DRCommand
             return !DRItem::isTemporaryAbility($item) && !DRItem::isTemporaryItem($item);
         });     
 
-        $items_graveyard = DRPartyDice::getPartyDice($this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD));
+        $items_graveyard = DRPartyDice::getPartyDice($this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD));
 
         return sizeof($party_dice_play_zone) + sizeof($items_graveyard) >= sizeof($potions);
     }

@@ -322,7 +322,7 @@ class DRNotification extends APP_GameClass
 
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'items_log' => array(DRTreasureToken::getToken(TOKEN_RING_INVISIBILITY)),
+            'items_log' => array(DRTreasureToken::getToken(DR_TOKEN_RING_INVISIBILITY)),
         ]);
     }
 
@@ -332,7 +332,7 @@ class DRNotification extends APP_GameClass
 
         $this->game->notifyAllPlayers('message', $message, [
             'player_name' => $this->game->getActivePlayerName(),
-            'items_log' => array(DRTreasureToken::getToken(TOKEN_TOWN_PORTAL)),
+            'items_log' => array(DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL)),
         ]);
     }
 
@@ -443,9 +443,9 @@ class DRNotification extends APP_GameClass
             'player_name' => $this->game->getActivePlayerName(),
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
-            'items_log' => array(DRPartyDice::getDie(DIE_SCROLL)),
+            'items_log' => array(DRPartyDice::getDie(DR_DIE_SCROLL)),
             'items_log_1' => $monster,
-            'items_log_2' => array(DRDungeonDice::getDie(DIE_DRAGON)),
+            'items_log_2' => array(DRDungeonDice::getDie(DR_DIE_DRAGON)),
         ]);
     }
 
@@ -629,7 +629,7 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
             'items_log' => $diceBefore,
-            'items_log_1' => array(DRDungeonDice::getDie(DIE_POTION)),
+            'items_log_1' => array(DRDungeonDice::getDie(DR_DIE_POTION)),
         ]);
     }
 
@@ -681,7 +681,7 @@ class DRNotification extends APP_GameClass
             'hero_name' => $this->game->components->getActivePlayerHero()->getName(),
             'items' => $dice,
             'items_log' => $diceBefore,
-            'items_log_1' => array(DRDungeonDice::getDie(DIE_CHEST)),
+            'items_log_1' => array(DRDungeonDice::getDie(DR_DIE_CHEST)),
         ]);
     }
 

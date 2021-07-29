@@ -28,7 +28,7 @@ class DRBattlemage extends DRSpellsword
         $items = $this->game->components->getActivePlayerUsableItems();
         $dungeons = DRDungeonDice::getDungeonDice($items);
 
-        $dungeons = DRItem::setZone($dungeons, ZONE_BOX);
+        $dungeons = DRItem::setZone($dungeons, DR_ZONE_BOX);
         $this->game->manager->updateItems($dungeons);
         $this->game->notif->ultimateBattlemage($dungeons);
         

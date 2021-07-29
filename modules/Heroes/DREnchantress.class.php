@@ -18,7 +18,7 @@ class DREnchantress extends DRStandardHero
 
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
         });
@@ -29,7 +29,7 @@ class DREnchantress extends DRStandardHero
 
     function canOpenAllChests()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
         });
@@ -42,7 +42,7 @@ class DREnchantress extends DRStandardHero
 
     function canDefeatDragon()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
@@ -65,21 +65,21 @@ class DREnchantress extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         return sizeof($monsters) <= $this->getNumberOfMonsterToTransform() && sizeof($monsters) >= 1;
     }
 
     function executeUltimate($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $before = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
 
         // Change first monster into a potion
-        $monsters[0]['zone'] = ZONE_DUNGEON;
-        $monsters[0]['value'] = DIE_POTION;
+        $monsters[0]['zone'] = DR_ZONE_DUNGEON;
+        $monsters[0]['value'] = DR_DIE_POTION;
 
         // Return potion to the dungeon zone
         $this->game->manager->updateItems($monsters);

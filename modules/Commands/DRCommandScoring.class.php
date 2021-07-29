@@ -33,13 +33,13 @@ class DRCommandScoring extends DRCommand
                 'type' => 'header'
             );
 
-            $treasures = $this->game->components->getItemsByPlayerAndType($player_id, TYPE_TREASURE_TOKEN);
+            $treasures = $this->game->components->getItemsByPlayerAndType($player_id, DR_TYPE_TREASURE_TOKEN);
             $treasures = DRUtils::filter($treasures, function ($token) {
-                return $token['zone'] == ZONE_INVENTORY;
+                return $token['zone'] == DR_ZONE_INVENTORY;
             });
 
-            $townPortal = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
-            $dragonScales = DRItem::getSameAs($treasures, DRTreasureToken::getToken(TOKEN_DRAGON_SCALES));
+            $townPortal = DRItem::getSameAs($treasures, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
+            $dragonScales = DRItem::getSameAs($treasures, DRTreasureToken::getToken(DR_TOKEN_DRAGON_SCALES));
 
             $nbrLevel = $this->game->stats->getLevelCompleted($player_id);
             if ($player_id == $this->game->getActivePlayerId()) {

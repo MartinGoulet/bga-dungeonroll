@@ -52,45 +52,45 @@ $game_options = array(
 
     */
 
-    GV_GAME_OPTION_ID => array(
+    DR_GV_GAME_OPTION_ID => array(
         'name' => totranslate('Game option'),
         'values' => array(
-            GAME_OPTION_RANDOM_HERO => array(
+            DR_GAME_OPTION_RANDOM_HERO => array(
                 'name' => totranslate('Random hero'),
                 'tmdisplay' => totranslate('Random hero')
             ),
-            GAME_OPTION_SELECT_HERO => array(
+            DR_GAME_OPTION_SELECT_HERO => array(
                 'name' => totranslate('Select hero'),
                 'tmdisplay' => totranslate('Select hero')
             ),
-            GAME_OPTION_NO_HERO => array(
+            DR_GAME_OPTION_NO_HERO => array(
                 'name' => totranslate('No hero'),
                 'tmdisplay' => totranslate('No hero')
             )
         )
     ),
 
-    GV_GAME_EXPANSION_ID => array(
+    DR_GV_GAME_EXPANSION_ID => array(
         'name' => totranslate('Expansions'),
         'values' => array(
-            GAME_EXPANSION_BASE => array(
+            DR_GAME_EXPANSION_BASE => array(
                 'name' => totranslate('Base game'),
                 'tmdisplay' => totranslate('Base game')
             ),
-            GAME_EXPANSION_PACK_1 => array(
+            DR_GAME_EXPANSION_PACK_1 => array(
                 'name' => totranslate('Hero pack #1'),
                 'tmdisplay' => totranslate('Hero pack #1')
             ),
-            GAME_EXPANSION_PACK_2 => array(
+            DR_GAME_EXPANSION_PACK_2 => array(
                 'name' => totranslate('Hero pack #2'),
                 'tmdisplay' => totranslate('Hero pack #2')
             ),
-            GAME_EXPANSION_KICKSTARTER => array(
+            DR_GAME_EXPANSION_KICKSTARTER => array(
                 'name' => totranslate("Kickstarter's heroes"),
                 'tmdisplay' => totranslate("Kickstarter's heroes"),
                 'description' => totranslate('Base game, Hero pack #1 and Promo')
             ),
-            GAME_EXPANSION_ALL => array(
+            DR_GAME_EXPANSION_ALL => array(
                 'name' => totranslate('All heroes'),
                 'tmdisplay' => totranslate('All heroes'),
                 'description' => totranslate('Base game, Hero pack #1 and #2 and Promo')
@@ -99,19 +99,19 @@ $game_options = array(
         'displaycondition' => array(
             array(
                 'type' => 'otheroption',
-                'id' => GV_GAME_OPTION_ID,
-                'value' => array(GAME_OPTION_RANDOM_HERO, GAME_OPTION_SELECT_HERO)
+                'id' => DR_GV_GAME_OPTION_ID,
+                'value' => array(DR_GAME_OPTION_RANDOM_HERO, DR_GAME_OPTION_SELECT_HERO)
             ),
         ),
     ),
 
-    GV_GAME_MIRROR_ID => array(
+    DR_GV_GAME_MIRROR_ID => array(
         'name' => totranslate('Mirror match'),
         'values' => array(
-            GAME_MIRROR_NO => array(
+            DR_GAME_MIRROR_NO => array(
                 'name' => totranslate('No')
             ),
-            GAME_MIRROR_YES => array(
+            DR_GAME_MIRROR_YES => array(
                 'name' => totranslate('Yes'),
                 'tmdisplay' => totranslate('Mirror match'),
                 'description' => totranslate('All players will use the same hero')
@@ -120,13 +120,13 @@ $game_options = array(
         'displaycondition' => array(
             array(
                 'type' => 'otheroption',
-                'id' => GV_GAME_OPTION_ID,
-                'value' => array(GAME_OPTION_RANDOM_HERO, GAME_OPTION_SELECT_HERO)
+                'id' => DR_GV_GAME_OPTION_ID,
+                'value' => array(DR_GAME_OPTION_RANDOM_HERO, DR_GAME_OPTION_SELECT_HERO)
             ),
         ),
         'startcondition' => array(
-            GAME_MIRROR_NO => array(),
-            GAME_MIRROR_YES => array(
+            DR_GAME_MIRROR_NO => array(),
+            DR_GAME_MIRROR_YES => array(
                 array(
                     'type' => 'minplayers',
                     'value' => 2,

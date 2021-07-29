@@ -21,26 +21,26 @@ class DRCommandUsePotion extends DRCommand
     {
         if (!parent::canExecute()) return false;
         
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Get chests items
         $potionToken = DRUtils::filter($itemsInPlay, function($item) {
             return DRTreasureToken::isPotion($item);
         });
-        $itemsInGraveyard = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $itemsInGraveyard = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         return sizeof($potionToken) == 1 && sizeof($itemsInGraveyard) >= 1;
     }
 
     public function execute($sub_command_id)
     {
         // Get all items from play
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Get chests items
         $potionToken = DRUtils::filter($itemsInPlay, function($item) {
             return DRTreasureToken::isPotion($item);
         });
 
         // Return potions to the box
-        $potionToken = DRItem::setZone($potionToken, ZONE_BOX);
+        $potionToken = DRItem::setZone($potionToken, DR_ZONE_BOX);
 
         // Update database
         $this->game->manager->updateItems($potionToken);

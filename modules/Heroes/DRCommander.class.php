@@ -18,7 +18,7 @@ class DRCommander extends DRStandardHero
      */
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
                 
         $fighters = DRUtils::filter($itemsInPlay, 'DRItem::isFighter');
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
@@ -61,7 +61,7 @@ class DRCommander extends DRStandardHero
         if (!$this->isStateOk())
             return false;
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $dice = DRUtils::filter($itemsInPlay, function ($item) {
             return DRItem::isPartyDie($item) || DRItem::isDungeonDie($item);
         });
@@ -71,7 +71,7 @@ class DRCommander extends DRStandardHero
     function executeUltimate($sub_command_id)
     {
         // Get all items from play (except dragons)
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $items = DRUtils::filter($items, function($item) { 
             return !DRDungeonDice::isDragon($item);
         });
@@ -81,13 +81,13 @@ class DRCommander extends DRStandardHero
 
         // Move dice the the right zone
         $dragons = DRDungeonDice::getDragonDice($rolledDice);
-        $dragons = DRItem::setZone($dragons, ZONE_DRAGON_LAIR);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_DRAGON_LAIR);
 
         $partys = DRPartyDice::getPartyDice($rolledDice);
-        $partys = DRItem::setZone($partys, ZONE_PARTY);
+        $partys = DRItem::setZone($partys, DR_ZONE_PARTY);
 
         $dungeons = DRDungeonDice::getDungeonDiceWithoutDragon($rolledDice);
-        $dungeons = DRItem::setZone($dungeons, ZONE_DUNGEON);
+        $dungeons = DRItem::setZone($dungeons, DR_ZONE_DUNGEON);
 
         $rolledDice = array_merge($dragons, $partys, $dungeons);
 

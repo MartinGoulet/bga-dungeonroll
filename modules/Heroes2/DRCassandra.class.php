@@ -19,7 +19,7 @@ class DRCassandra extends DRStandardHero
     function afterQuaffPotion()
     {
         $this->game->vars->setIsHeroActivated(false);
-        $this->game->notif->refreshCassandra(DRDungeonDice::getDie(DIE_POTION));
+        $this->game->notif->refreshCassandra(DRDungeonDice::getDie(DR_DIE_POTION));
     }
 
     /**
@@ -32,7 +32,7 @@ class DRCassandra extends DRStandardHero
             return false;
         }
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $companions = DRItem::getCompanions($itemsInPlay);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsterGroup = $this->groupByDiceValue($monsters);
@@ -53,20 +53,20 @@ class DRCassandra extends DRStandardHero
         }
 
         $companion = $companions[0];
-        if(!array_key_exists(DIE_GOBLIN, $monsterGroup)) {
-            $monsterGroup[DIE_GOBLIN] = array();
+        if(!array_key_exists(DR_DIE_GOBLIN, $monsterGroup)) {
+            $monsterGroup[DR_DIE_GOBLIN] = array();
         }
-        if(!array_key_exists(DIE_OOZE, $monsterGroup)) {
-            $monsterGroup[DIE_OOZE] = array();
+        if(!array_key_exists(DR_DIE_OOZE, $monsterGroup)) {
+            $monsterGroup[DR_DIE_OOZE] = array();
         }
-        if(!array_key_exists(DIE_SKELETON, $monsterGroup)) {
-            $monsterGroup[DIE_SKELETON] = array();
+        if(!array_key_exists(DR_DIE_SKELETON, $monsterGroup)) {
+            $monsterGroup[DR_DIE_SKELETON] = array();
         }
 
         $values = array(
-            sizeof($monsterGroup[DIE_GOBLIN]),
-            sizeof($monsterGroup[DIE_OOZE]),
-            sizeof($monsterGroup[DIE_SKELETON]),
+            sizeof($monsterGroup[DR_DIE_GOBLIN]),
+            sizeof($monsterGroup[DR_DIE_OOZE]),
+            sizeof($monsterGroup[DR_DIE_SKELETON]),
         );
         sort($values);
         if(!($values[2] >= 1 && $values[1] <= 1 && $values[0] == 0)) {
@@ -74,11 +74,11 @@ class DRCassandra extends DRStandardHero
         }
 
         if(DRItem::isMage($companion)) {
-            return sizeof($monsterGroup[DIE_OOZE]) > 1;
+            return sizeof($monsterGroup[DR_DIE_OOZE]) > 1;
         } else if(DRItem::isFighter($companion)) {
-            return sizeof($monsterGroup[DIE_GOBLIN]) > 1;
+            return sizeof($monsterGroup[DR_DIE_GOBLIN]) > 1;
         } else if(DRItem::isCleric($companion)) {
-            return sizeof($monsterGroup[DIE_SKELETON]) > 1;
+            return sizeof($monsterGroup[DR_DIE_SKELETON]) > 1;
         } else if(DRPartyDice::isChampion($companion)) {
             return true;
         }
@@ -92,7 +92,7 @@ class DRCassandra extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         return sizeof($itemsInPlay) == 1 &&
             (DRDungeonDice::isChest($itemsInPlay[0]) ||
@@ -101,8 +101,8 @@ class DRCassandra extends DRStandardHero
 
     function executeUltimate($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $itemsInPlay = DRItem::setZone($itemsInPlay, ZONE_BOX);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $itemsInPlay = DRItem::setZone($itemsInPlay, DR_ZONE_BOX);
         $this->game->manager->updateItems($itemsInPlay);
         $this->game->notif->ultimateCassandra($itemsInPlay);
     }

@@ -12,7 +12,7 @@ class DRCrusader extends DRStandardHero
      */
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $fighters = DRUtils::filter($itemsInPlay, 'DRItem::isFighter');
         $clerics = DRUtils::filter($itemsInPlay, 'DRItem::isCleric');
 
@@ -35,7 +35,7 @@ class DRCrusader extends DRStandardHero
      */
     function canDefeatDragon()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $companions = DRItem::getCompanions($itemsInPlay);
         $fighters = DRUtils::filter($companions, 'DRItem::isFighter');
@@ -73,13 +73,13 @@ class DRCrusader extends DRStandardHero
         );
 
         if ($sub_command_id == 1) {
-            $die = DRPartyDice::getDie(DIE_FIGHTER);
+            $die = DRPartyDice::getDie(DR_DIE_FIGHTER);
         } else if ($sub_command_id == 2) {
-            $die = DRPartyDice::getDie(DIE_CLERIC);
+            $die = DRPartyDice::getDie(DR_DIE_CLERIC);
         }
 
         $die['owner'] = $this->game->getActivePlayerId();
-        $die['zone'] = ZONE_PLAY;
+        $die['zone'] = DR_ZONE_PLAY;
         $this->game->manager->insertTemporaryAbility($die);
 
         $this->game->notif->ultimateCrusader($die);

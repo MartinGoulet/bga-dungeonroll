@@ -42,7 +42,7 @@ class DRToulak extends DRStandardHero
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
 
         // Return monsters to the box and notify for the kill
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
         $this->game->manager->updateItems($monsters);
         $this->game->notif->ultimateToulak($monsters);
 
@@ -51,14 +51,14 @@ class DRToulak extends DRStandardHero
     
     function canExecuteSpecialty()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         return sizeof($monsters) == 1 && !$this->game->vars->getIsSpecialtyActivated();
     }
 
     function executeSpecialty()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
 
         // Reroll other dice
@@ -66,10 +66,10 @@ class DRToulak extends DRStandardHero
 
         // Move dice the the right zone
         $dragons = DRDungeonDice::getDragonDice($rolledDice);
-        $dragons = DRItem::setZone($dragons, ZONE_DRAGON_LAIR);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_DRAGON_LAIR);
 
         $dungeons = DRDungeonDice::getDungeonDiceWithoutDragon($rolledDice);
-        $dungeons = DRItem::setZone($dungeons, ZONE_DUNGEON);
+        $dungeons = DRItem::setZone($dungeons, DR_ZONE_DUNGEON);
 
         $rolledDice = array_merge($dragons, $dungeons);
 

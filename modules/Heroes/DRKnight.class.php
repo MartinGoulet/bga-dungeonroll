@@ -45,8 +45,8 @@ class DRKnight extends DRStandardHero
     function stateAfterFormingParty(&$dice)
     {
         // All Chests become Potions
-        $scrolls = DRItem::getSameAs($dice, DRPartyDice::getDie(DIE_SCROLL));
-        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRPartyDice::isScroll', DIE_CHAMPION);
+        $scrolls = DRItem::getSameAs($dice, DRPartyDice::getDie(DR_DIE_SCROLL));
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRPartyDice::isScroll', DR_DIE_CHAMPION);
         if (sizeof($changes)) {
             $this->game->notif->changeScrollToChampion($changes, $scrolls);
         };

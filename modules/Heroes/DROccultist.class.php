@@ -12,7 +12,7 @@ class DROccultist extends DRStandardHero
      */
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $clerics = DRUtils::filter($itemsInPlay, 'DRItem::isCleric');
         $mages = DRUtils::filter($itemsInPlay, 'DRItem::isMage');
 
@@ -36,7 +36,7 @@ class DROccultist extends DRStandardHero
      */
     function canDefeatDragon()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $companions = DRItem::getCompanions($itemsInPlay);
         $clerics = DRUtils::filter($companions, 'DRItem::isCleric');
@@ -73,7 +73,7 @@ class DROccultist extends DRStandardHero
         $skeletons = array_slice($this->getSkeletonsPlayingArea(), 0, $this->getNumberSkeletonToFighter());
 
         // Return it to the box
-        $skeletons = DRItem::setZone($skeletons, ZONE_BOX);
+        $skeletons = DRItem::setZone($skeletons, DR_ZONE_BOX);
         $this->game->manager->updateItems($skeletons);
 
         $fighters = $this->getFighterDice(sizeof($skeletons));
@@ -103,16 +103,16 @@ class DROccultist extends DRStandardHero
     private function getDieFighter()
     {
         // Create a temporary dice as a fighter
-        $die = DRPartyDice::getDie(DIE_FIGHTER);
+        $die = DRPartyDice::getDie(DR_DIE_FIGHTER);
         $die['owner'] = $this->game->getActivePlayerId();
-        $die['zone'] = ZONE_PLAY;
+        $die['zone'] = DR_ZONE_PLAY;
         return $die;
     }
 
     private function getSkeletonsPlayingArea()
     {
         // Get items in the playing area
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Return skeletons in the playing area
         return DRUtils::filter($itemsInPlay, 'DRDungeonDice::isSkeleton');
     }

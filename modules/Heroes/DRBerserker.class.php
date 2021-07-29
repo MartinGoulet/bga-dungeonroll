@@ -34,17 +34,17 @@ class DRBerserker extends DRDwarf
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         return sizeof($items) > 0;
     }
 
     function executeUltimate($sub_command_id)
     {
         // Roll X Party dice from the Graveyard and add it to your Party
-        $dice = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $dice = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         $dice = array_slice($dice, 0, 4);
         $dice = DRItem::rollDice($dice);
-        $dice = DRItem::setZone($dice, ZONE_PARTY);
+        $dice = DRItem::setZone($dice, DR_ZONE_PARTY);
 
         $this->game->manager->updateItems($dice);
 

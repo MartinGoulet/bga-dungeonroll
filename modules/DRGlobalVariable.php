@@ -13,15 +13,15 @@ class DRGlobalVariable
 
     function initVariables($players)
     {
-        $this->game->setGameStateInitialValue(GL_CURRENT_TURN, 0);
-        $this->game->setGameStateInitialValue(GL_CURRENT_LEVEL, 0);
-        $this->game->setGameStateInitialValue(GL_MAX_TURN, sizeof($players) * 3);
-        $this->game->setGameStateInitialValue(GL_CHOOSE_DIE_COUNT, 0);
-        $this->game->setGameStateInitialValue(GL_CHOOSE_DIE_STATE, STATE_LOOT_PHASE);
-        $this->game->setGameStateInitialValue(GL_HERO_ACTIVATED, 0);
-        $this->game->setGameStateInitialValue(GL_SPECIALTY_ONCE_PER_LEVEL, 0);
-        $this->game->setGameStateInitialValue(GL_DRAGON_KILLED_THIS_TURN, 0);
-        $this->game->setGameStateInitialValue(GL_BERSERKER_ULTIMATE, 0);
+        $this->game->setGameStateInitialValue(DR_GL_CURRENT_TURN, 0);
+        $this->game->setGameStateInitialValue(DR_GL_CURRENT_LEVEL, 0);
+        $this->game->setGameStateInitialValue(DR_GL_MAX_TURN, sizeof($players) * 3);
+        $this->game->setGameStateInitialValue(DR_GL_CHOOSE_DR_DIE_COUNT, 0);
+        $this->game->setGameStateInitialValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_LOOT_PHASE);
+        $this->game->setGameStateInitialValue(DR_GL_HERO_ACTIVATED, 0);
+        $this->game->setGameStateInitialValue(DR_GL_SPECIALTY_ONCE_PER_LEVEL, 0);
+        $this->game->setGameStateInitialValue(DR_GL_DRAGON_KILLED_THIS_TURN, 0);
+        $this->game->setGameStateInitialValue(DR_GL_BERSERKER_ULTIMATE, 0);
     }
 
     /**
@@ -30,79 +30,79 @@ class DRGlobalVariable
 
     function getChooseDieCount()
     {
-        return $this->game->getGameStateValue(GL_CHOOSE_DIE_COUNT);
+        return $this->game->getGameStateValue(DR_GL_CHOOSE_DR_DIE_COUNT);
     }
 
     function getChooseDieState()
     {
-        $state_id = $this->game->getGameStateValue(GL_CHOOSE_DIE_STATE);
+        $state_id = $this->game->getGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE);
         switch ($state_id) {
 
-            case STATE_MONSTER_PHASE:
+            case DR_STATE_MONSTER_PHASE:
                 return 'monsterPhase';
 
-            case STATE_LOOT_PHASE:
+            case DR_STATE_LOOT_PHASE:
                 return 'lootPhase';
 
-            case STATE_DRAGON_PHASE:
+            case DR_STATE_DRAGON_PHASE:
                 return 'dragonPhase';
 
-            case STATE_REGROUP_PHASE:
+            case DR_STATE_REGROUP_PHASE:
                 return 'regroupPhase';
 
-            case STATE_NEXT_PLAYER:
+            case DR_STATE_NEXT_PLAYER:
                 return 'nextPlayer';
         }
     }
 
     function getCurrentTurn()
     {
-        return $this->game->getGameStateValue(GL_CURRENT_TURN);
+        return $this->game->getGameStateValue(DR_GL_CURRENT_TURN);
     }
 
     function getDungeonLevel()
     {
-        return $this->game->getGameStateValue(GL_CURRENT_LEVEL);
+        return $this->game->getGameStateValue(DR_GL_CURRENT_LEVEL);
     }
 
     function getMaxTurn()
     {
-        return $this->game->getGameStateValue(GL_MAX_TURN);
+        return $this->game->getGameStateValue(DR_GL_MAX_TURN);
     }
 
     function getGameOption()
     {
-        return $this->game->getGameStateValue(GV_GAME_OPTION);
+        return $this->game->getGameStateValue(DR_GV_GAME_OPTION);
     }
 
     function getGameExpansion()
     {
-        return $this->game->getGameStateValue(GV_GAME_EXPANSION);
+        return $this->game->getGameStateValue(DR_GV_GAME_EXPANSION);
     }
 
     function getIsGameMirror()
     {
-        return $this->game->getGameStateValue(GV_GAME_MIRROR) == GAME_MIRROR_YES;
+        return $this->game->getGameStateValue(DR_GV_GAME_MIRROR) == DR_GAME_MIRROR_YES;
     }
 
     function getIsHeroActivated()
     {
-        return $this->game->getGameStateValue(GL_HERO_ACTIVATED) == 1;
+        return $this->game->getGameStateValue(DR_GL_HERO_ACTIVATED) == 1;
     }
 
     function getIsSpecialtyActivated()
     {
-        return $this->game->getGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL) == 1;
+        return $this->game->getGameStateValue(DR_GL_SPECIALTY_ONCE_PER_LEVEL) == 1;
     }
 
     function getIsDragonKilledThisTurn()
     {
-        return $this->game->getGameStateValue(GL_DRAGON_KILLED_THIS_TURN) == 1;
+        return $this->game->getGameStateValue(DR_GL_DRAGON_KILLED_THIS_TURN) == 1;
     }
 
     function getIsBerserkerUltimate()
     {
-        return $this->game->getGameStateValue(GL_BERSERKER_ULTIMATE) == 1;
+        return $this->game->getGameStateValue(DR_GL_BERSERKER_ULTIMATE) == 1;
     }
 
     /**
@@ -111,12 +111,12 @@ class DRGlobalVariable
 
     function incCurrentTurn()
     {
-        return $this->game->incGameStateValue(GL_CURRENT_TURN, 1);
+        return $this->game->incGameStateValue(DR_GL_CURRENT_TURN, 1);
     }
 
     function incDungeonLevel()
     {
-        return $this->game->incGameStateValue(GL_CURRENT_LEVEL, 1);
+        return $this->game->incGameStateValue(DR_GL_CURRENT_LEVEL, 1);
     }
 
 
@@ -125,12 +125,12 @@ class DRGlobalVariable
      */
     function decChooseDieCount()
     {
-        return $this->game->incGameStateValue(GL_CHOOSE_DIE_COUNT, -1);
+        return $this->game->incGameStateValue(DR_GL_CHOOSE_DR_DIE_COUNT, -1);
     }
 
     function decDungeonLevel()
     {
-        return $this->game->incGameStateValue(GL_CURRENT_LEVEL, -1);
+        return $this->game->incGameStateValue(DR_GL_CURRENT_LEVEL, -1);
     }
 
     /**
@@ -139,7 +139,7 @@ class DRGlobalVariable
 
     function setChooseDieCount($count)
     {
-        $this->game->setGameStateValue(GL_CHOOSE_DIE_COUNT, $count);
+        $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_COUNT, $count);
     }
 
     function setChooseDieState($state_name)
@@ -147,30 +147,30 @@ class DRGlobalVariable
         switch ($state_name) {
 
             case 'monsterPhase':
-                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_MONSTER_PHASE);
+                $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_MONSTER_PHASE);
                 break;
 
             case 'lootPhase':
-                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_LOOT_PHASE);
+                $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_LOOT_PHASE);
                 break;
 
             case 'dragonPhase':
-                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_DRAGON_PHASE);
+                $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_DRAGON_PHASE);
                 break;
 
             case 'regroupPhase':
-                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_REGROUP_PHASE);
+                $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_REGROUP_PHASE);
                 break;
 
             case 'nextPlayer':
-                $this->game->setGameStateValue(GL_CHOOSE_DIE_STATE, STATE_NEXT_PLAYER);
+                $this->game->setGameStateValue(DR_GL_CHOOSE_DR_DIE_STATE, DR_STATE_NEXT_PLAYER);
                 break;
         }
     }
 
     function setDungeonLevel($level)
     {
-        $this->game->setGameStateValue(GL_CURRENT_LEVEL, $level);
+        $this->game->setGameStateValue(DR_GL_CURRENT_LEVEL, $level);
     }
 
     function setIsHeroActivated($isActivated)
@@ -180,7 +180,7 @@ class DRGlobalVariable
         } else {
             $value = 0;
         }
-        $this->game->setGameStateValue(GL_HERO_ACTIVATED, $value);
+        $this->game->setGameStateValue(DR_GL_HERO_ACTIVATED, $value);
     }
 
     function setIsSpecialtyActivated($isActivated)
@@ -190,7 +190,7 @@ class DRGlobalVariable
         } else {
             $value = 0;
         }
-        $this->game->setGameStateValue(GL_SPECIALTY_ONCE_PER_LEVEL, $value);
+        $this->game->setGameStateValue(DR_GL_SPECIALTY_ONCE_PER_LEVEL, $value);
     }
 
     function setIsDragonKilledThisTurn($isActivated)
@@ -200,7 +200,7 @@ class DRGlobalVariable
         } else {
             $value = 0;
         }
-        $this->game->setGameStateValue(GL_DRAGON_KILLED_THIS_TURN, $value);
+        $this->game->setGameStateValue(DR_GL_DRAGON_KILLED_THIS_TURN, $value);
     }
 
     function setIsBerserkerUltimate($isActivated)
@@ -210,7 +210,7 @@ class DRGlobalVariable
         } else {
             $value = 0;
         }
-        $this->game->setGameStateValue(GL_BERSERKER_ULTIMATE, $value);
+        $this->game->setGameStateValue(DR_GL_BERSERKER_ULTIMATE, $value);
     }
 
 }

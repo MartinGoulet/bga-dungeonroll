@@ -31,9 +31,9 @@ class DRCommandOpenChest extends DRCommand
         }
 
         // Get all items from play
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Get chests items
-        $chests = DRItem::getSameAs($items, DRDungeonDice::getDie(DIE_CHEST));
+        $chests = DRItem::getSameAs($items, DRDungeonDice::getDie(DR_DIE_CHEST));
         // Get companions
         $companions = DRItem::getCompanions($items);
 
@@ -71,26 +71,26 @@ class DRCommandOpenChest extends DRCommand
     public function execute($sub_command_id)
     {
         // Get all items from play
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         
-        $dungeonDice = DRItem::getSameAs($items, DRDungeonDice::getDie(DIE_CHEST));
+        $dungeonDice = DRItem::getSameAs($items, DRDungeonDice::getDie(DR_DIE_CHEST));
         $partyDice   = DRPartyDice::getPartyDice($items);
         $partyToken  = DRTreasureToken::getTreasureTokens($items);
 
-        $dungeonDice = DRItem::setZone($dungeonDice, ZONE_BOX);
-        $partyToken  = DRItem::setZone($partyToken, ZONE_BOX);
-        $partyDice   = DRItem::setZone($partyDice, ZONE_GRAVEYARD);
+        $dungeonDice = DRItem::setZone($dungeonDice, DR_ZONE_BOX);
+        $partyToken  = DRItem::setZone($partyToken, DR_ZONE_BOX);
+        $partyDice   = DRItem::setZone($partyDice, DR_ZONE_GRAVEYARD);
 
         $player_id = $this->game->getActivePlayerId();
 
-        $treasures = $this->game->components->getItemsByTypeAndZone(TYPE_TREASURE_TOKEN, ZONE_BOX);
+        $treasures = $this->game->components->getItemsByTypeAndZone(DR_TYPE_TREASURE_TOKEN, DR_ZONE_BOX);
         $treasures = DRUtils::random_item($treasures, sizeof($dungeonDice));
         $treasures = DRItem::setOwner($treasures, $player_id);
-        $treasures = DRItem::setZone($treasures, ZONE_INVENTORY);
+        $treasures = DRItem::setZone($treasures, DR_ZONE_INVENTORY);
 
         for ($i = 0; $i < sizeof($treasures); $i++) {
             $treasures[$i]['from'] = $dungeonDice[$i]['id'];
-            $treasures[$i]['previous_zone'] = ZONE_PLAY;
+            $treasures[$i]['previous_zone'] = DR_ZONE_PLAY;
         }
 
         $this->game->stats->incTreasureOpen(sizeof($treasures));

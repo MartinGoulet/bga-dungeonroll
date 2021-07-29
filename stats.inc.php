@@ -74,44 +74,44 @@ $stats_type = array(
     // Statistics existing for each player
     "player" => array(
 
-        STAT_XP_LEVEL => array(
-            "id" => STAT_XP_LEVEL_ID,
+        DR_STAT_XP_LEVEL => array(
+            "id" => DR_STAT_XP_LEVEL_ID,
             "name" => totranslate("Levels completed"),
             "type" => "int"
         ),
 
-        STAT_XP_DRAGON => array(
-            "id" => STAT_XP_DRAGON_ID,
+        DR_STAT_XP_DRAGON => array(
+            "id" => DR_STAT_XP_DRAGON_ID,
             "name" => totranslate("Dragon killed"),
             "type" => "int"
         ),
 
-        STAT_XP_TREASURE => array(
-            "id" => STAT_XP_TREASURE_ID,
+        DR_STAT_XP_TREASURE => array(
+            "id" => DR_STAT_XP_TREASURE_ID,
             "name" => totranslate("Treasures"),
             "type" => "int"
         ),
 
-        STAT_XP_DRAGON_SCALE => array(
-            "id" => STAT_XP_DRAGON_SCALE_ID,
+        DR_STAT_XP_DRAGON_SCALE => array(
+            "id" => DR_STAT_XP_DRAGON_SCALE_ID,
             "name" => totranslate("Dragon Scales"),
             "type" => "int"
         ),
 
-        STAT_XP_TOWN_PORTAL => array(
-            "id" => STAT_XP_TOWN_PORTAL_ID,
+        DR_STAT_XP_TOWN_PORTAL => array(
+            "id" => DR_STAT_XP_TOWN_PORTAL_ID,
             "name" => totranslate("Town Portal"),
             "type" => "int"
         ),
 
-        STAT_NBR_DRAGON_KILL=> array(
-            "id" => STAT_NBR_DRAGON_KILL_ID,
+        DR_STAT_NBR_DRAGON_KILL=> array(
+            "id" => DR_STAT_NBR_DRAGON_KILL_ID,
             "name" => totranslate("Dragon dice defeated"),
             "type" => "int"
         ),
 
-        STAT_NBR_TREASURE_OPEN => array(
-            "id" => STAT_NBR_TREASURE_OPEN_ID,
+        DR_STAT_NBR_TREASURE_OPEN => array(
+            "id" => DR_STAT_NBR_TREASURE_OPEN_ID,
             "name" => totranslate("Treasures opened"),
             "type" => "int"
         ),

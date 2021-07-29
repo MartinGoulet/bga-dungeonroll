@@ -58,87 +58,87 @@ $machinestates = array(
         "description" => "",
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => array("" => STATE_GAME_OPTION)
+        "transitions" => array("" => DR_STATE_GAME_OPTION)
     ),
 
-    STATE_GAME_OPTION => array(
+    DR_STATE_GAME_OPTION => array(
         "name" => "gameOption",
         "type" => "game",
         "action" => "stGameOption",
-        "transitions" => array("random" => STATE_RANDOM_HERO, "select" => STATE_SELECT_HERO, "nohero" => STATE_INIT_PLAYER_TURN)
+        "transitions" => array("random" => DR_STATE_RANDOM_HERO, "select" => DR_STATE_SELECT_HERO, "nohero" => DR_STATE_INIT_PLAYER_TURN)
     ),
 
-    STATE_RANDOM_HERO => array(
+    DR_STATE_RANDOM_HERO => array(
         "name" => "randomHero",
         "type" => "game",
         "action" => "stRandomHero",
         "transitions" => array(
-            "mirror" => STATE_SETUP_MIRROR_GAME,
-            "standard" => STATE_INIT_PLAYER_TURN
+            "mirror" => DR_STATE_SETUP_MIRROR_GAME,
+            "standard" => DR_STATE_INIT_PLAYER_TURN
         )
     ),
 
-    STATE_SELECT_HERO => array(
+    DR_STATE_SELECT_HERO => array(
         "name" => "draftHeroes",
         "description" => clienttranslate('${actplayer} must select a hero'),
         "descriptionmyturn" => clienttranslate('${you} must select a hero'),
         "type" => "activeplayer",
         "args" => "argDraftHeroes",
         "possibleactions" => array("selectHero"),
-        "transitions" => array("" => STATE_NEXT_PLAYER_HERO)
+        "transitions" => array("" => DR_STATE_NEXT_PLAYER_HERO)
     ),
 
 
-    STATE_NEXT_PLAYER_HERO => array(
+    DR_STATE_NEXT_PLAYER_HERO => array(
         "name" => "nextDraftHero",
         "type" => "game",
         "action" => "stNextDraftHero",
         "transitions" => array(
-            "mirror" => STATE_SETUP_MIRROR_GAME,
-            "next" => STATE_SELECT_HERO, 
-            "end" => STATE_INIT_PLAYER_TURN,
+            "mirror" => DR_STATE_SETUP_MIRROR_GAME,
+            "next" => DR_STATE_SELECT_HERO, 
+            "end" => DR_STATE_INIT_PLAYER_TURN,
         )
     ),
 
-    STATE_SETUP_MIRROR_GAME =>array(
+    DR_STATE_SETUP_MIRROR_GAME =>array(
         "name" => "setupMirrorGame",
         "type" => "game",
         "action" => "stSetupMirrorGame",
-        "transitions" => array("" => STATE_INIT_PLAYER_TURN)
+        "transitions" => array("" => DR_STATE_INIT_PLAYER_TURN)
     ),
 
 
-    STATE_INIT_PLAYER_TURN => array(
+    DR_STATE_INIT_PLAYER_TURN => array(
         "name" => "initPlayerTurn",
         "type" => "game",
         "action" => "stInitPlayerTurn",
-        "transitions" => array("" => STATE_FORMING_PARTY)
+        "transitions" => array("" => DR_STATE_FORMING_PARTY)
     ),
 
     // Phase when the player rolls all party dice
-    STATE_FORMING_PARTY => array(
+    DR_STATE_FORMING_PARTY => array(
         "name" => "formingParty",
         "type" => "game",
         "action" => "stFormingParty",
         "transitions" => array(
-            "mercenary" => STATE_POST_FORMING_PARTY_MERCENARY, 
-            "scout" => STATE_POST_FORMING_PARTY_SCOUT,
-            "loeg_yllavyre" => STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE,
-            "dungeon" => STATE_DUNGEON_ROLL
+            "mercenary" => DR_STATE_POST_FORMING_PARTY_MERCENARY, 
+            "scout" => DR_STATE_POST_FORMING_PARTY_SCOUT,
+            "loeg_yllavyre" => DR_STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE,
+            "dungeon" => DR_STATE_DUNGEON_ROLL
         )
     ),
 
-    STATE_POST_FORMING_PARTY_MERCENARY => array(
+    DR_STATE_POST_FORMING_PARTY_MERCENARY => array(
         "name" => "postFormingParty",
         "description" => clienttranslate('Forming party : ${actplayer} may re-roll any number of Party dice'),
         "descriptionmyturn" => clienttranslate('Forming party : ${you} may re-roll any number of Party dice'),
         "type" => "activeplayer",
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
-        "transitions" => array("" => STATE_DUNGEON_ROLL)
+        "transitions" => array("" => DR_STATE_DUNGEON_ROLL)
     ),
 
-    STATE_POST_FORMING_PARTY_SCOUT => array(
+    DR_STATE_POST_FORMING_PARTY_SCOUT => array(
         "name" => "postFormingPartyScout",
         "description" => clienttranslate('Forming party : ${actplayer} must choose ${nbr} dungeon dice for level ${nbr}'),
         "descriptionmyturn" => clienttranslate('Forming party : ${you} must choose ${nbr} dungeon dice for level ${nbr}'),
@@ -146,36 +146,36 @@ $machinestates = array(
         "args" => "argScoutPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
         "transitions" => array(
-            "next" => STATE_POST_FORMING_PARTY_SCOUT,
-            "end" => STATE_DUNGEON_ROLL,
+            "next" => DR_STATE_POST_FORMING_PARTY_SCOUT,
+            "end" => DR_STATE_DUNGEON_ROLL,
         )
     ),
 
-    STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE => array(
+    DR_STATE_POST_FORMING_PARTY_LOEG_YLLAVYRE => array(
         "name" => "postFormingPartyLeogYllavyre",
         "description" => clienttranslate('Forming party : ${actplayer} must select 2 dice to set to scrolls'),
         "descriptionmyturn" => clienttranslate('Forming party : ${you} must select 2 dice to set to scrolls'),
         "type" => "activeplayer",
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
-        "transitions" => array("" => STATE_DUNGEON_ROLL)
+        "transitions" => array("" => DR_STATE_DUNGEON_ROLL)
     ),
 
-    STATE_DUNGEON_ROLL => array(
+    DR_STATE_DUNGEON_ROLL => array(
         "name" => "nextDungeonLevel",
         "type" => "game",
         "action" => "stRollDungeonDice",
-        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+        "transitions" => array("" => DR_STATE_PRE_MONSTER_PHASE)
     ),
 
-    STATE_PRE_MONSTER_PHASE=> array(
+    DR_STATE_PRE_MONSTER_PHASE=> array(
         "name" => "preMonsterPhase",
         "type" => "game",
         "action" => "stPreMonsterPhase",
-        "transitions" => array("monsterPhase" => STATE_MONSTER_PHASE, "preLootPhase" => STATE_PRE_LOOT_PHASE)
+        "transitions" => array("monsterPhase" => DR_STATE_MONSTER_PHASE, "preLootPhase" => DR_STATE_PRE_LOOT_PHASE)
     ),
 
-    STATE_MONSTER_PHASE => array(
+    DR_STATE_MONSTER_PHASE => array(
         "name" => "monsterPhase",
         "description" => clienttranslate('Monster phase : ${actplayer} must defeat all monsters'),
         "descriptionmyturn" => clienttranslate('Monster phase : ${you} must defeat all monsters (one fight at a time)'),
@@ -184,31 +184,31 @@ $machinestates = array(
         "possibleactions" => array("moveItem", "executeCommand"),
         "updateGameProgression" => true,
         "transitions" => array(
-            "scroll" => STATE_PRE_MONSTER_PHASE,
-            "ultimate" => STATE_PRE_MONSTER_PHASE,
-            "fight" => STATE_PRE_MONSTER_PHASE,
-            "chest" => STATE_PRE_MONSTER_PHASE, // For Paladin
-            "dragonBait" => STATE_PRE_LOOT_PHASE,
-            "nextPhase" => STATE_PRE_LOOT_PHASE,
-            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
-            "townPortal" => STATE_PRE_NEXT_PLAYER,
-            'discardTreasures' => STATE_DISCARD_TREASURE,
-            "chooseDie" => STATE_CHOOSE_DIE,
-            "guildLeader" => STATE_SELECTION_DICE,
-            "szopin" => STATE_SELECTION_DICE,
-            "tristan" => STATE_SELECTION_DICE,
-            "alexandra" => STATE_SELECTION_DICE,
+            "scroll" => DR_STATE_PRE_MONSTER_PHASE,
+            "ultimate" => DR_STATE_PRE_MONSTER_PHASE,
+            "fight" => DR_STATE_PRE_MONSTER_PHASE,
+            "chest" => DR_STATE_PRE_MONSTER_PHASE, // For Paladin
+            "dragonBait" => DR_STATE_PRE_LOOT_PHASE,
+            "nextPhase" => DR_STATE_PRE_LOOT_PHASE,
+            "fleeDungeon" => DR_STATE_PRE_NEXT_PLAYER,
+            "townPortal" => DR_STATE_PRE_NEXT_PLAYER,
+            'discardTreasures' => DR_STATE_DISCARD_TREASURE,
+            "chooseDie" => DR_STATE_CHOOSE_DIE,
+            "guildLeader" => DR_STATE_SELECTION_DICE,
+            "szopin" => DR_STATE_SELECTION_DICE,
+            "tristan" => DR_STATE_SELECTION_DICE,
+            "alexandra" => DR_STATE_SELECTION_DICE,
         )
     ),
 
-    STATE_PRE_LOOT_PHASE => array(
+    DR_STATE_PRE_LOOT_PHASE => array(
         "name" => "preLootPhase",
         "type" => "game",
         "action" => "stPreLootPhase",
-        "transitions" => array("lootPhase" => STATE_LOOT_PHASE, "preDragonPhase" => STATE_PRE_DRAGON_PHASE)
+        "transitions" => array("lootPhase" => DR_STATE_LOOT_PHASE, "preDragonPhase" => DR_STATE_PRE_DRAGON_PHASE)
     ),
 
-    STATE_LOOT_PHASE => array(
+    DR_STATE_LOOT_PHASE => array(
         "name" => "lootPhase",
         "description" => clienttranslate('Loot phase : ${actplayer} may open Chests and quaff Potions'),
         "descriptionmyturn" => clienttranslate('Loot phase : ${you} may open Chests and quaff Potions'),
@@ -216,22 +216,22 @@ $machinestates = array(
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("moveItem", "executeCommand"),
         "transitions" => array(
-            "scroll" => STATE_PRE_MONSTER_PHASE,
-            "ultimate" => STATE_PRE_LOOT_PHASE,
-            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
-            "chest" => STATE_PRE_LOOT_PHASE, 
-            "end" => STATE_PRE_DRAGON_PHASE, 
-            "townPortal" => STATE_PRE_NEXT_PLAYER, 
-            'discardTreasures' => STATE_DISCARD_TREASURE,
-            "guildLeader" => STATE_SELECTION_DICE,
-            "szopin" => STATE_SELECTION_DICE,
-            "tristan" => STATE_SELECTION_DICE,
-            "alexandra" => STATE_SELECTION_DICE,
-            "chooseDie" => STATE_CHOOSE_DIE
+            "scroll" => DR_STATE_PRE_MONSTER_PHASE,
+            "ultimate" => DR_STATE_PRE_LOOT_PHASE,
+            "fleeDungeon" => DR_STATE_PRE_NEXT_PLAYER,
+            "chest" => DR_STATE_PRE_LOOT_PHASE, 
+            "end" => DR_STATE_PRE_DRAGON_PHASE, 
+            "townPortal" => DR_STATE_PRE_NEXT_PLAYER, 
+            'discardTreasures' => DR_STATE_DISCARD_TREASURE,
+            "guildLeader" => DR_STATE_SELECTION_DICE,
+            "szopin" => DR_STATE_SELECTION_DICE,
+            "tristan" => DR_STATE_SELECTION_DICE,
+            "alexandra" => DR_STATE_SELECTION_DICE,
+            "chooseDie" => DR_STATE_CHOOSE_DIE
         )
     ),
 
-    STATE_CHOOSE_DIE => array(
+    DR_STATE_CHOOSE_DIE => array(
         "name" => "quaffPotion",
         "description" => clienttranslate('${actplayer} must choose which die to get (x${nbr})'),
         "descriptionmyturn" => clienttranslate('${you} must choose which die to get (x${nbr})'),
@@ -239,23 +239,23 @@ $machinestates = array(
         "args" => "argQuaffPotion",
         "possibleactions" => array("chooseDieGain", "executeCommand"),
         "transitions" => array(
-            "next" => STATE_CHOOSE_DIE,
-            "end" => STATE_PRE_MONSTER_PHASE,
-            "monsterPhase" => STATE_MONSTER_PHASE,
-            "lootPhase" => STATE_PRE_LOOT_PHASE,
-            "dragonPhase" => STATE_DRAGON_PHASE,
-            "regroupPhase" => STATE_REGROUP_PHASE
+            "next" => DR_STATE_CHOOSE_DIE,
+            "end" => DR_STATE_PRE_MONSTER_PHASE,
+            "monsterPhase" => DR_STATE_MONSTER_PHASE,
+            "lootPhase" => DR_STATE_PRE_LOOT_PHASE,
+            "dragonPhase" => DR_STATE_DRAGON_PHASE,
+            "regroupPhase" => DR_STATE_REGROUP_PHASE
         )
     ),
 
-    STATE_PRE_DRAGON_PHASE => array(
+    DR_STATE_PRE_DRAGON_PHASE => array(
         "name" => "preDragonPhase",
         "type" => "game",
         "action" => "stPreDragonPhase",
-        "transitions" => array("dragonPhase" => STATE_DRAGON_PHASE, "regroupPhase" => STATE_PRE_REGROUP_PHASE)
+        "transitions" => array("dragonPhase" => DR_STATE_DRAGON_PHASE, "regroupPhase" => DR_STATE_PRE_REGROUP_PHASE)
     ),
 
-    STATE_DRAGON_PHASE => array(
+    DR_STATE_DRAGON_PHASE => array(
         "name" => "dragonPhase",
         "description" => clienttranslate('Dragon phase : ${actplayer} must defeat the Dragon'),
         "descriptionmyturn" => clienttranslate('Dragon phase : ${you} must defeat the Dragon (${nbr} differents Companions are required)'),
@@ -263,30 +263,30 @@ $machinestates = array(
         "args" => "argDragonPhasePlayerTurn",
         "possibleactions" => array("moveItem", "executeCommand"),
         "transitions" => array(
-            "scroll" => STATE_DRAGON_PHASE,
-            "ultimate" => STATE_PRE_DRAGON_PHASE,
-            "killDragons" => STATE_PRE_REGROUP_PHASE,
-            "fleeDungeon" => STATE_PRE_NEXT_PLAYER,
-            "townPortal" => STATE_PRE_NEXT_PLAYER,
-            "ringInvisibility" => STATE_PRE_REGROUP_PHASE,
-            "chooseDie" => STATE_CHOOSE_DIE,
-            'discardTreasures' => STATE_DISCARD_TREASURE,
-            "end" => STATE_PRE_LOOT_PHASE,
-            "guildLeader" => STATE_SELECTION_DICE,
-            "szopin" => STATE_SELECTION_DICE,
-            "tristan" => STATE_SELECTION_DICE,
-            "alexandra" => STATE_SELECTION_DICE,
+            "scroll" => DR_STATE_DRAGON_PHASE,
+            "ultimate" => DR_STATE_PRE_DRAGON_PHASE,
+            "killDragons" => DR_STATE_PRE_REGROUP_PHASE,
+            "fleeDungeon" => DR_STATE_PRE_NEXT_PLAYER,
+            "townPortal" => DR_STATE_PRE_NEXT_PLAYER,
+            "ringInvisibility" => DR_STATE_PRE_REGROUP_PHASE,
+            "chooseDie" => DR_STATE_CHOOSE_DIE,
+            'discardTreasures' => DR_STATE_DISCARD_TREASURE,
+            "end" => DR_STATE_PRE_LOOT_PHASE,
+            "guildLeader" => DR_STATE_SELECTION_DICE,
+            "szopin" => DR_STATE_SELECTION_DICE,
+            "tristan" => DR_STATE_SELECTION_DICE,
+            "alexandra" => DR_STATE_SELECTION_DICE,
         )
     ),
 
-    STATE_PRE_REGROUP_PHASE => array(
+    DR_STATE_PRE_REGROUP_PHASE => array(
         "name" => "preRegroupPhase",
         "type" => "game",
         "action" => "stPreRegroupPhase",
-        "transitions" => array("" => STATE_REGROUP_PHASE)
+        "transitions" => array("" => DR_STATE_REGROUP_PHASE)
     ),
 
-    STATE_REGROUP_PHASE => array(
+    DR_STATE_REGROUP_PHASE => array(
         "name" => "regroupPhase",
         "description" => clienttranslate('Regroup phase : ${actplayer} must choose his or her destiny'),
         "descriptionmyturn" => clienttranslate('Regroup phase : ${you} must choose your destiny'),
@@ -294,35 +294,35 @@ $machinestates = array(
         "args" => "argGenericPhasePlayerTurn",
         "possibleactions" => array("executeCommand", "moveItem"),
         "transitions" => array(
-            "retireTavern" => STATE_PRE_NEXT_PLAYER,
-            'discardTreasures' => STATE_DISCARD_TREASURE,
-            "seekGlory" => STATE_DUNGEON_ROLL,
-            "chooseDie" => STATE_CHOOSE_DIE,
-            "ultimate" => STATE_PRE_MONSTER_PHASE,
+            "retireTavern" => DR_STATE_PRE_NEXT_PLAYER,
+            'discardTreasures' => DR_STATE_DISCARD_TREASURE,
+            "seekGlory" => DR_STATE_DUNGEON_ROLL,
+            "chooseDie" => DR_STATE_CHOOSE_DIE,
+            "ultimate" => DR_STATE_PRE_MONSTER_PHASE,
         )
     ),
 
     // Next player
-    STATE_PRE_NEXT_PLAYER => array(
+    DR_STATE_PRE_NEXT_PLAYER => array(
         "name" => "preNextPlayer",
         "type" => "game",
         "action" => "stPreNextPlayer",
         "transitions" => array(
-            "next" => STATE_NEXT_PLAYER, 
-            "discardTreasures" => STATE_DISCARD_TREASURE
+            "next" => DR_STATE_NEXT_PLAYER, 
+            "discardTreasures" => DR_STATE_DISCARD_TREASURE
         )
     ),
 
     // Next player
-    STATE_NEXT_PLAYER => array(
+    DR_STATE_NEXT_PLAYER => array(
         "name" => "nextPlayer",
         "type" => "game",
         "action" => "stNextPlayer",
         "updateGameProgression" => true,
-        "transitions" => array("endGame" => STATE_FINAL_SCORING, "formingParty" => STATE_INIT_PLAYER_TURN)
+        "transitions" => array("endGame" => DR_STATE_FINAL_SCORING, "formingParty" => DR_STATE_INIT_PLAYER_TURN)
     ),
 
-    STATE_DISCARD_TREASURE => array(
+    DR_STATE_DISCARD_TREASURE => array(
         "name" => "discardTreasure",
         "description" => clienttranslate('${actplayer} must choose which Treasure Token to discard (x${nbr})'),
         "descriptionmyturn" => clienttranslate('${you} must choose which Treasure Token to discard (x${nbr})'),
@@ -330,15 +330,15 @@ $machinestates = array(
         "args" => "argDiscardTreasure",
         "possibleactions" => array("executeCommand", "moveItem"),
         "transitions" => array(
-            "monsterPhase" => STATE_MONSTER_PHASE,
-            "lootPhase" => STATE_PRE_LOOT_PHASE,
-            "dragonPhase" => STATE_PRE_DRAGON_PHASE,
-            "regroupPhase" => STATE_PRE_REGROUP_PHASE,
-            "nextPlayer" => STATE_NEXT_PLAYER,
+            "monsterPhase" => DR_STATE_MONSTER_PHASE,
+            "lootPhase" => DR_STATE_PRE_LOOT_PHASE,
+            "dragonPhase" => DR_STATE_PRE_DRAGON_PHASE,
+            "regroupPhase" => DR_STATE_PRE_REGROUP_PHASE,
+            "nextPlayer" => DR_STATE_NEXT_PLAYER,
         )
     ),
 
-    STATE_SELECTION_DICE => array(
+    DR_STATE_SELECTION_DICE => array(
         "name" => "selectionDice",
         "description" => clienttranslate('${actplayer} must select ${selection}'),
         "descriptionmyturn" => clienttranslate('${you} must select ${selection}'),
@@ -346,28 +346,28 @@ $machinestates = array(
         "args" => "argSelectionDice",
         "possibleactions" => array("moveItem", "executeCommand"),
         "transitions" => array(
-            "szopin" => STATE_ULTIMATE_SZOPIN,
-            "guildLeader" => STATE_ULTIMATE_GUILD_LEADER,
-            "tristan" => STATE_ULTIMATE_TRISTAN,
-            "alexandra" => STATE_SPECIALTY_ALEXANDRA,
+            "szopin" => DR_STATE_ULTIMATE_SZOPIN,
+            "guildLeader" => DR_STATE_ULTIMATE_GUILD_LEADER,
+            "tristan" => DR_STATE_ULTIMATE_TRISTAN,
+            "alexandra" => DR_STATE_SPECIALTY_ALEXANDRA,
         )
     ),
 
-    STATE_ULTIMATE_SZOPIN => array(
+    DR_STATE_ULTIMATE_SZOPIN => array(
         "name" => "szopinUltimate",
         "type" => "game",
         "action" => "stUltimateSzopin",
-        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+        "transitions" => array("" => DR_STATE_PRE_MONSTER_PHASE)
     ),
 
-    STATE_ULTIMATE_TRISTAN => array(
+    DR_STATE_ULTIMATE_TRISTAN => array(
         "name" => "tristanUltimate",
         "type" => "game",
         "action" => "stUltimateTristan",
-        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+        "transitions" => array("" => DR_STATE_PRE_MONSTER_PHASE)
     ),
 
-    STATE_ULTIMATE_GUILD_LEADER => array(
+    DR_STATE_ULTIMATE_GUILD_LEADER => array(
         "name" => "guildLeaderUltimate",
         "description" => clienttranslate('${actplayer} must choose which face to get'),
         "descriptionmyturn" => clienttranslate('${you} must choose which face to get'),
@@ -375,18 +375,18 @@ $machinestates = array(
         "args" => "argUltimateGuildLeader",
         "possibleactions" => array("selectGuildLeaderDice"),
         "transitions" => array(
-            "" => STATE_PRE_MONSTER_PHASE,
+            "" => DR_STATE_PRE_MONSTER_PHASE,
         )
     ),
 
-    STATE_SPECIALTY_ALEXANDRA => array(
+    DR_STATE_SPECIALTY_ALEXANDRA => array(
         "name" => "aleandraSpecialty",
         "type" => "game",
         "action" => "stSpecialtyAlexandra",
-        "transitions" => array("" => STATE_PRE_MONSTER_PHASE)
+        "transitions" => array("" => DR_STATE_PRE_MONSTER_PHASE)
     ),
 
-    STATE_FINAL_SCORING => array(
+    DR_STATE_FINAL_SCORING => array(
         "name" => "finalScoring",
         "type" => "game",
         "action" => "stGameEndScoring",

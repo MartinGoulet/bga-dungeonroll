@@ -22,7 +22,7 @@ class DRBard extends DRMinstrel
         }
 
         // Champions defeat 1 extra monster.
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $champions   = DRUtils::filter($itemsInPlay, 'DRPartyDice::isChampion');
         $goblins     = DRUtils::filter($itemsInPlay, 'DRDungeonDice::isGoblin');
         $oozes       = DRUtils::filter($itemsInPlay, 'DRDungeonDice::isOoze');

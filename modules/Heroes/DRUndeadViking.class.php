@@ -31,8 +31,8 @@ class DRUndeadViking extends DRViking
     function applySpecialty($dice) 
     {
         // All Skeletons become Potions
-        $skeletons = DRItem::getSameAs($dice, DRDungeonDice::getDie(DIE_SKELETON));
-        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isSkeleton', DIE_POTION);
+        $skeletons = DRItem::getSameAs($dice, DRDungeonDice::getDie(DR_DIE_SKELETON));
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isSkeleton', DR_DIE_POTION);
         if (sizeof($changes)) {
             $this->game->notif->changeSkeletonToPotion($changes, $skeletons);
         };

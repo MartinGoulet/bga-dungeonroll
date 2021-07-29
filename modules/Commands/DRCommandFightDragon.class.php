@@ -17,7 +17,7 @@ class DRCommandFightDragon extends DRCommand
         if (!parent::canExecute()) return false;
 
         // Get all items from play
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $hero = $this->game->components->getActivePlayerHero();
 
         if ($hero->canDefeatDragon()) {
@@ -25,7 +25,7 @@ class DRCommandFightDragon extends DRCommand
         }
 
         // Get companions in play
-        $companions = $this->game->components->getActivePlayerCompanionsByZone(ZONE_PLAY);
+        $companions = $this->game->components->getActivePlayerCompanionsByZone(DR_ZONE_PLAY);
         $dragons = DRDungeonDice::getDragonDice($items);
 
         // If there is more than companions and dragons in play
@@ -56,7 +56,7 @@ class DRCommandFightDragon extends DRCommand
     public function execute($sub_command_id)
     {
         // Find all items in play
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         // Separate items by type
         $dragons = DRDungeonDice::getDragonDice($itemsInPlay);
@@ -64,16 +64,16 @@ class DRCommandFightDragon extends DRCommand
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
 
         // Set the zone for each type of item
-        $dragons = DRItem::setZone($dragons, ZONE_BOX);
-        $party = DRItem::setZone($party, ZONE_GRAVEYARD);
-        $tokens = DRItem::setZone($tokens, ZONE_BOX);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_BOX);
+        $party = DRItem::setZone($party, DR_ZONE_GRAVEYARD);
+        $tokens = DRItem::setZone($tokens, DR_ZONE_BOX);
 
         // Get a treasure from the dragon
         $player_id = $this->game->getActivePlayerId();
-        $treasures = $this->game->components->getItemsByTypeAndZone(TYPE_TREASURE_TOKEN, ZONE_BOX);
+        $treasures = $this->game->components->getItemsByTypeAndZone(DR_TYPE_TREASURE_TOKEN, DR_ZONE_BOX);
         $treasures = DRUtils::random_item($treasures, 1);
         $treasures = DRItem::setOwner($treasures, $player_id);
-        $treasures = DRItem::setZone($treasures, ZONE_INVENTORY);
+        $treasures = DRItem::setZone($treasures, DR_ZONE_INVENTORY);
 
         // Concat all items into a single array
         $itemsInPlay = array_merge($dragons, $party, $tokens, $treasures);

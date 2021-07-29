@@ -4,7 +4,7 @@ class DRTreasureToken
 {
     static function getToken($value) {
         return array(
-            'type' => TYPE_TREASURE_TOKEN,
+            'type' => DR_TYPE_TREASURE_TOKEN,
             'value' => $value
         );
     }
@@ -24,51 +24,51 @@ class DRTreasureToken
 
     static function isVorpalSword($item)
     {
-        return $item['value'] == TOKEN_VORPAL_SWORD && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_VORPAL_SWORD && DRItem::isTreasureToken($item);
     }
 
     static function isTalisman($item)
     {
-        return $item['value'] == TOKEN_TALISMAN && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_TALISMAN && DRItem::isTreasureToken($item);
     }
 
     static function isScepterOfPower($item)
     {
-        return $item['value'] == TOKEN_SCEPTER_OF_POWER && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_SCEPTER_OF_POWER && DRItem::isTreasureToken($item);
     }
 
     static function isThieves($item)
     {
-        return $item['value'] == TOKEN_THIEVES && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_THIEVES && DRItem::isTreasureToken($item);
     }
 
     static function isScroll($item)
     {
-        return $item['value'] == TOKEN_SCROLL && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_SCROLL && DRItem::isTreasureToken($item);
     }
 
     static function isRingOfInvisibility($item)
     {
-        return $item['value'] == TOKEN_RING_INVISIBILITY && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_RING_INVISIBILITY && DRItem::isTreasureToken($item);
     }
 
     static function isDragonBait($item)
     {
-        return $item['value'] == TOKEN_DRAGON_BAIT && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_DRAGON_BAIT && DRItem::isTreasureToken($item);
     }
 
     static function isDragonScales($item)
     {
-        return $item['value'] == TOKEN_DRAGON_SCALES && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_DRAGON_SCALES && DRItem::isTreasureToken($item);
     }
 
     static function isPotion($item)
     {
-        return $item['value'] == TOKEN_ELIXIR && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_ELIXIR && DRItem::isTreasureToken($item);
     }
 
     static function isTownPortal($item)
     {
-        return $item['value'] == TOKEN_TOWN_PORTAL && DRItem::isTreasureToken($item);
+        return $item['value'] == DR_TOKEN_TOWN_PORTAL && DRItem::isTreasureToken($item);
     }
 }

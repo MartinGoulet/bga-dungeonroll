@@ -10,14 +10,14 @@ class DRDungeonDice
     {
         return array(
             'value' => $value,
-            'type' => TYPE_DUNGEON_DIE
+            'type' => DR_TYPE_DUNGEON_DIE
         );
     }
 
     static function isMonsterDice($dice)
     {
         return DRItem::isDungeonDie($dice) && in_array($dice['value'], array(
-            DIE_GOBLIN, DIE_OOZE, DIE_SKELETON
+            DR_DIE_GOBLIN, DR_DIE_OOZE, DR_DIE_SKELETON
         ));
     }
 
@@ -59,7 +59,7 @@ class DRDungeonDice
 
     static function getDragonDice($dice)
     {
-        return self::getDiceByFace($dice, DIE_DRAGON);
+        return self::getDiceByFace($dice, DR_DIE_DRAGON);
     }
 
     static function getDiceByFace($dice, $value)
@@ -71,31 +71,31 @@ class DRDungeonDice
 
     static function isDragon($dice)
     {
-        return $dice['value'] == DIE_DRAGON && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_DRAGON && DRItem::isDungeonDie($dice);
     }
 
     static function isPotion($dice)
     {
-        return $dice['value'] == DIE_POTION && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_POTION && DRItem::isDungeonDie($dice);
     }
 
     static function isChest($dice)
     {
-        return $dice['value'] == DIE_CHEST && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_CHEST && DRItem::isDungeonDie($dice);
     }
 
     static function isGoblin($dice)
     {
-        return $dice['value'] == DIE_GOBLIN && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_GOBLIN && DRItem::isDungeonDie($dice);
     }
 
     static function isOoze($dice)
     {
-        return $dice['value'] == DIE_OOZE && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_OOZE && DRItem::isDungeonDie($dice);
     }
 
     static function isSkeleton($dice)
     {
-        return $dice['value'] == DIE_SKELETON && DRItem::isDungeonDie($dice);
+        return $dice['value'] == DR_DIE_SKELETON && DRItem::isDungeonDie($dice);
     }
 }

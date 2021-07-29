@@ -31,17 +31,17 @@ class DRTristan extends DRStandardHero
         // Callback from ultimate
 
         // Get all items from play
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         // Reroll other dice
         $rolledDice = DRItem::rollDice($items);
 
         // Move dice the the right zone
         $dragons = DRDungeonDice::getDragonDice($rolledDice);
-        $dragons = DRItem::setZone($dragons, ZONE_DRAGON_LAIR);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_DRAGON_LAIR);
 
         $dungeons = DRDungeonDice::getDungeonDiceWithoutDragon($rolledDice);
-        $dungeons = DRItem::setZone($dungeons, ZONE_DUNGEON);
+        $dungeons = DRItem::setZone($dungeons, DR_ZONE_DUNGEON);
 
         $rolledDice = array_merge($dragons, $dungeons);
 
@@ -54,7 +54,7 @@ class DRTristan extends DRStandardHero
 
     function isSelectionDiceCorrect()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $dungeon = DRDungeonDice::getDungeonDice($items);
         return sizeof($dungeon) == sizeof($items) &&
                sizeof($dungeon) >= 1;
@@ -68,16 +68,16 @@ class DRTristan extends DRStandardHero
 
     function canExecuteSpecialty()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $treasures = DRTreasureToken::getTreasureTokens($itemsInPlay);
         return sizeof($treasures) == 1 && $this->game->vars->getIsHeroActivated();
     }
 
     function executeSpecialty()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $treasures = DRTreasureToken::getTreasureTokens($itemsInPlay);
-        $treasures = DRItem::setZone($treasures, ZONE_BOX);
+        $treasures = DRItem::setZone($treasures, DR_ZONE_BOX);
         $this->game->manager->updateItems($treasures);
         $this->game->NTA_itemMove($treasures);
 

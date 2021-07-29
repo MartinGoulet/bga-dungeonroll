@@ -27,7 +27,7 @@ class DRViking extends DRStandardHero
     {
         // Take 5 Champions instead of rolling
         for ($i=0; $i < 5; $i++) { 
-            $dice[$i]['value'] = DIE_CHAMPION;
+            $dice[$i]['value'] = DR_DIE_CHAMPION;
         }
     }
 
@@ -45,7 +45,7 @@ class DRViking extends DRStandardHero
     {
         $items = $this->game->components->getActivePlayerUsableItems();
         $dragons = DRDungeonDice::getDragonDice($items);
-        $dragons = DRItem::setZone($dragons, ZONE_BOX);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_BOX);
         $this->game->manager->updateItems($dragons);
         $this->game->notif->ultimateDiscardDragon($dragons);
 

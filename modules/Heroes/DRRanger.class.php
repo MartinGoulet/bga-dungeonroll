@@ -25,8 +25,8 @@ class DRRanger extends DRTracker
     function executeUltimate($sub_command_id)
     {
         $items = array_merge(
-            $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY),
-            $this->game->components->getActivePlayerItemsByZone(ZONE_DUNGEON)
+            $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY),
+            $this->game->components->getActivePlayerItemsByZone(DR_ZONE_DUNGEON)
         );
 
         $monsters = array_merge(
@@ -36,7 +36,7 @@ class DRRanger extends DRTracker
         );
 
         // Return monsters to the box and notify for the kill
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
         $this->game->manager->updateItems($monsters);
         $this->game->notif->ultimateTracker($monsters);
 

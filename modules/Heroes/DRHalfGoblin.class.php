@@ -34,7 +34,7 @@ class DRHalfGoblin extends DRStandardHero
         $goblins = array_slice($this->getGoblinsPlayingArea(), 0, $this->getNumberGoblinsToThief());
 
         // Return it to the box
-        $goblins = DRItem::setZone($goblins, ZONE_BOX);
+        $goblins = DRItem::setZone($goblins, DR_ZONE_BOX);
         $this->game->manager->updateItems($goblins);
 
         $thieves = $this->getThieveDice(sizeof($goblins));
@@ -64,16 +64,16 @@ class DRHalfGoblin extends DRStandardHero
     private function getDieThief()
     {
         // Create a temporary dice as a thief
-        $dieThief = DRPartyDice::getDie(DIE_THIEF);
+        $dieThief = DRPartyDice::getDie(DR_DIE_THIEF);
         $dieThief['owner'] = $this->game->getActivePlayerId();
-        $dieThief['zone'] = ZONE_PLAY;
+        $dieThief['zone'] = DR_ZONE_PLAY;
         return $dieThief;
     }
 
     private function getGoblinsPlayingArea()
     {
         // Get items in the playing area
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         // Return goblins in the playing area
         return DRUtils::filter($itemsInPlay, 'DRDungeonDice::isGoblin');
     }

@@ -24,7 +24,7 @@ class DRGuildLeader extends DRStandardHero
     {
         // Callback from ultimate
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party = DRPartyDice::getPartyDice($itemsInPlay);
         $dungeon = DRDungeonDice::getDungeonDice($itemsInPlay);
 
@@ -38,8 +38,8 @@ class DRGuildLeader extends DRStandardHero
         if ($dungeonValue >= 1 && $dungeonValue <= 6 && sizeof($dungeon) == 1) {
             $before = $dungeon;
             $dungeon[0]['value'] = $dungeonValue;
-            if($dungeonValue == DIE_DRAGON) {
-                $dungeon = DRItem::setZone($dungeon, ZONE_DRAGON_LAIR);
+            if($dungeonValue == DR_DIE_DRAGON) {
+                $dungeon = DRItem::setZone($dungeon, DR_ZONE_DRAGON_LAIR);
             }
             $this->game->manager->updateItems($dungeon);
             $this->game->notif->ultimateGuildLeader($before, $dungeon);
@@ -51,7 +51,7 @@ class DRGuildLeader extends DRStandardHero
 
     function isSelectionDiceCorrect()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party = DRPartyDice::getPartyDice($items);
         $dungeon = DRDungeonDice::getDungeonDice($items);
         return (sizeof($party) == 1 || sizeof($dungeon) == 1) && sizeof($items) == 1;

@@ -21,23 +21,23 @@ class DRCommandRingInvisibility extends DRCommand
     {
         if (!parent::canExecute()) return false;
         
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         return in_array($this->getState(), array('dragonPhase')) &&
-            DRItem::containsSameAs($items, DRTreasureToken::getToken(TOKEN_RING_INVISIBILITY));
+            DRItem::containsSameAs($items, DRTreasureToken::getToken(DR_TOKEN_RING_INVISIBILITY));
     }
 
     public function execute($sub_command_id)
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $rings = DRItem::getSameAs($items, DRTreasureToken::getToken(TOKEN_RING_INVISIBILITY));
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $rings = DRItem::getSameAs($items, DRTreasureToken::getToken(DR_TOKEN_RING_INVISIBILITY));
 
         // Select all dragons
-        $dragons = DRItem::getSameAs($items, DRDungeonDice::getDie(DIE_DRAGON));
+        $dragons = DRItem::getSameAs($items, DRDungeonDice::getDie(DR_DIE_DRAGON));
 
         // Discard the ring and all dragons
         $itemsUpdate = array_merge(
-            DRItem::setZone(array($rings[0]), ZONE_BOX),
-            DRItem::setZone($dragons, ZONE_BOX)
+            DRItem::setZone(array($rings[0]), DR_ZONE_BOX),
+            DRItem::setZone($dragons, DR_ZONE_BOX)
         );
 
         $this->game->manager->updateItems($itemsUpdate);

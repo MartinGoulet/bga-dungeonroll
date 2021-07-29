@@ -31,8 +31,8 @@ class DRAlchemist extends DRStandardHero
     function applySpecialty($dice)
     {
         // All Chests become Potions
-        $chests = DRItem::getSameAs($dice, DRDungeonDice::getDie(DIE_CHEST));
-        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DIE_POTION);
+        $chests = DRItem::getSameAs($dice, DRDungeonDice::getDie(DR_DIE_CHEST));
+        $changes = $this->allDungeonDiceXBecomeY($dice, 'DRDungeonDice::isChest', DR_DIE_POTION);
         if (sizeof($changes)) {
             $this->game->notif->changeChestToPotion($changes, $chests);
         };
@@ -44,7 +44,7 @@ class DRAlchemist extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         return sizeof($items) >= 1;
     }
 
@@ -52,10 +52,10 @@ class DRAlchemist extends DRStandardHero
     {
 
         // Roll X Party dice from the Graveyard and add it to your Party
-        $dice = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $dice = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         $dice = array_slice($dice, 0, $this->getNumberDiceFromGraveyard());
         $dice = DRItem::rollDice($dice);
-        $dice = DRItem::setZone($dice, ZONE_PLAY);
+        $dice = DRItem::setZone($dice, DR_ZONE_PLAY);
 
         $this->game->manager->updateItems($dice);
 

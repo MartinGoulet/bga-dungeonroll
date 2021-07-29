@@ -22,7 +22,7 @@ class DRGuildMaster extends DRGuildLeader
 
     function isSelectionDiceCorrect()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party = DRPartyDice::getPartyDice($items);
         $dungeon = DRDungeonDice::getDungeonDice($items);
         return (sizeof($party) == 1 || sizeof($dungeon) == 1) && sizeof($items) <= 2;

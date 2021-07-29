@@ -7,17 +7,17 @@ class DRItem
 
     static function isPartyDie($dice)
     {
-        return $dice['type'] == TYPE_PARTY_DIE;
+        return $dice['type'] == DR_TYPE_PARTY_DIE;
     }
 
     static function isDungeonDie($dice)
     {
-        return $dice['type'] == TYPE_DUNGEON_DIE;
+        return $dice['type'] == DR_TYPE_DUNGEON_DIE;
     }
 
     static function isTreasureToken($item)
     {
-        return $item['type'] == TYPE_TREASURE_TOKEN;
+        return $item['type'] == DR_TYPE_TREASURE_TOKEN;
     }
 
     static function setZone($items, $zone)
@@ -106,10 +106,10 @@ class DRItem
 
     static function isCompanionToken($item)
     {
-        return  DRItem::isTreasureToken($item) && ($item['value'] == TOKEN_SCEPTER_OF_POWER ||
-            $item['value'] == TOKEN_TALISMAN ||
-            $item['value'] == TOKEN_THIEVES ||
-            $item['value'] == TOKEN_VORPAL_SWORD);
+        return  DRItem::isTreasureToken($item) && ($item['value'] == DR_TOKEN_SCEPTER_OF_POWER ||
+            $item['value'] == DR_TOKEN_TALISMAN ||
+            $item['value'] == DR_TOKEN_THIEVES ||
+            $item['value'] == DR_TOKEN_VORPAL_SWORD);
     }
 
     static function getCompanions($items)
@@ -142,17 +142,17 @@ class DRItem
         } else if (DRItem::isTreasureToken($item)) {
 
             switch ($item['value']) {
-                case TOKEN_VORPAL_SWORD:
-                    return DIE_FIGHTER;
+                case DR_TOKEN_VORPAL_SWORD:
+                    return DR_DIE_FIGHTER;
 
-                case TOKEN_SCEPTER_OF_POWER:
-                    return DIE_MAGE;
+                case DR_TOKEN_SCEPTER_OF_POWER:
+                    return DR_DIE_MAGE;
 
-                case TOKEN_TALISMAN:
-                    return DIE_CLERIC;
+                case DR_TOKEN_TALISMAN:
+                    return DR_DIE_CLERIC;
 
-                case TOKEN_THIEVES:
-                    return DIE_THIEF;
+                case DR_TOKEN_THIEVES:
+                    return DR_DIE_THIEF;
             }
         }
     }

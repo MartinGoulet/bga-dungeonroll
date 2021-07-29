@@ -22,14 +22,14 @@ class DRCommandDragonBait extends DRCommand
     {
         if (!parent::canExecute()) return false;
 
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        return DRItem::containsSameAs($items, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT));
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        return DRItem::containsSameAs($items, DRTreasureToken::getToken(DR_TOKEN_DRAGON_BAIT));
     }
 
     public function execute($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $dragonBaits = array_slice(DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(TOKEN_DRAGON_BAIT)), 0, 1);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $dragonBaits = array_slice(DRItem::getSameAs($itemsInPlay, DRTreasureToken::getToken(DR_TOKEN_DRAGON_BAIT)), 0, 1);
 
         $items    = $this->game->components->getActivePlayerUsableItems();
         $monstersBefore = DRDungeonDice::getMonsterDices($items);
@@ -38,7 +38,7 @@ class DRCommandDragonBait extends DRCommand
 
         // Discard the token
         $itemsUpdate = array_merge(
-            $dragonBaits = DRItem::setZone($dragonBaits, ZONE_BOX),
+            $dragonBaits = DRItem::setZone($dragonBaits, DR_ZONE_BOX),
             $dragons
         );
 

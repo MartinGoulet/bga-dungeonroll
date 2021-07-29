@@ -241,10 +241,10 @@ class DRStandardHero extends APP_GameClass
     }
     protected function drawTreasures($nbr)
     {
-        $treasures = $this->game->components->getItemsByTypeAndZone(TYPE_TREASURE_TOKEN, ZONE_BOX);
+        $treasures = $this->game->components->getItemsByTypeAndZone(DR_TYPE_TREASURE_TOKEN, DR_ZONE_BOX);
         $treasures = DRUtils::random_item($treasures, $nbr);
         $treasures = DRItem::setOwner($treasures, $this->game->getActivePlayerId());
-        $treasures = DRItem::setZone($treasures, ZONE_INVENTORY);
+        $treasures = DRItem::setZone($treasures, DR_ZONE_INVENTORY);
         $this->game->manager->updateItems($treasures);
         return $treasures;
     }

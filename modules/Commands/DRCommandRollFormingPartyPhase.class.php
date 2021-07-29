@@ -16,7 +16,7 @@ class DRCommandRollFormingPartyPhase extends DRCommand
     {
         if (!parent::canExecute()) return false;
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party_dice = DRPartyDice::getPartyDice($itemsInPlay);
 
         return sizeof($itemsInPlay) > 0 && sizeof($itemsInPlay) == sizeof($party_dice);
@@ -24,12 +24,12 @@ class DRCommandRollFormingPartyPhase extends DRCommand
 
     public function execute($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party_dice = DRPartyDice::getPartyDice($itemsInPlay);
 
         // Roll all party dice
         $rolledDice = DRItem::rollDice($party_dice);
-        $rolledDice = DRItem::setZone($rolledDice, ZONE_PARTY);
+        $rolledDice = DRItem::setZone($rolledDice, DR_ZONE_PARTY);
         $this->game->notif->rerollPartyDice($party_dice, $rolledDice);
         $this->game->manager->updateItems($rolledDice);
 

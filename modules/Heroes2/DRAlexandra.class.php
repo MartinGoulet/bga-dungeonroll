@@ -24,7 +24,7 @@ class DRAlexandra extends DRStandardHero
 
     function isSelectionDiceCorrect()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $dungeon = DRDungeonDice::getDungeonDice($items);
         $party = DRPartyDice::getPartyDice($items);
         $dragons = DRDungeonDice::getDragonDice($items);
@@ -37,20 +37,20 @@ class DRAlexandra extends DRStandardHero
         // Callback from specialty
 
         // Get all items from play
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         // Reroll other dice
         $rolledDice = DRItem::rollDice($items);
 
         // Move dice the the right zone
         $dragons = DRDungeonDice::getDragonDice($rolledDice);
-        $dragons = DRItem::setZone($dragons, ZONE_DRAGON_LAIR);
+        $dragons = DRItem::setZone($dragons, DR_ZONE_DRAGON_LAIR);
 
         $dungeons = DRDungeonDice::getDungeonDiceWithoutDragon($rolledDice);
-        $dungeons = DRItem::setZone($dungeons, ZONE_DUNGEON);
+        $dungeons = DRItem::setZone($dungeons, DR_ZONE_DUNGEON);
 
         $partys = DRPartyDice::getPartyDice($rolledDice);
-        $partys = DRItem::setZone($partys, ZONE_PARTY);
+        $partys = DRItem::setZone($partys, DR_ZONE_PARTY);
 
         $rolledDice = array_merge($dragons, $dungeons, $partys);
 
@@ -67,7 +67,7 @@ class DRAlexandra extends DRStandardHero
 
     function canDefeatMonster()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
         });
@@ -79,7 +79,7 @@ class DRAlexandra extends DRStandardHero
 
     function canDefeatDragon()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
@@ -96,7 +96,7 @@ class DRAlexandra extends DRStandardHero
 
     function canOpenAllChests()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $scrolls = DRUtils::filter($itemsInPlay, function ($item) {
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
         });
@@ -109,15 +109,15 @@ class DRAlexandra extends DRStandardHero
 
     function canExecuteSpecialty()
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $party = DRPartyDice::getPartyDice($itemsInPlay);
         return sizeof($party) == 1 && sizeof($itemsInPlay) == 1;
     }
 
     function executeSpecialty()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $items = DRItem::setZone($items, ZONE_GRAVEYARD);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $items = DRItem::setZone($items, DR_ZONE_GRAVEYARD);
         $this->game->manager->updateItems($items);
         $this->game->NTA_itemMove($items);
         $this->game->gamestate->nextState('alexandra');
@@ -128,7 +128,7 @@ class DRAlexandra extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $dragons = DRDungeonDice::getDragonDice($items);
         $scrolls = DRUtils::filter($items, function($item) {
             return DRItem::isScroll($item);

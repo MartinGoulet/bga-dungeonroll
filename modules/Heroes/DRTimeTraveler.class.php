@@ -26,13 +26,13 @@ class DRTimeTraveler extends DRStandardHero
 
     function stateBeforeFormingParty(&$dice)
     {
-        $dice[0]['value'] = DIE_FIGHTER;
-        $dice[1]['value'] = DIE_CLERIC;
-        $dice[2]['value'] = DIE_MAGE;
-        $dice[3]['value'] = DIE_THIEF;
-        $dice[4]['value'] = DIE_SCROLL;
-        $dice[5]['value'] = DIE_CHAMPION;
-        $dice[6]['value'] = DIE_CHAMPION;
+        $dice[0]['value'] = DR_DIE_FIGHTER;
+        $dice[1]['value'] = DR_DIE_CLERIC;
+        $dice[2]['value'] = DR_DIE_MAGE;
+        $dice[3]['value'] = DR_DIE_THIEF;
+        $dice[4]['value'] = DR_DIE_SCROLL;
+        $dice[5]['value'] = DR_DIE_CHAMPION;
+        $dice[6]['value'] = DR_DIE_CHAMPION;
     }
 
     /**
@@ -40,7 +40,7 @@ class DRTimeTraveler extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $tokens = DRTreasureToken::getTreasureTokens($items);
         return sizeof($tokens) == 1;
     }

@@ -9,14 +9,14 @@ class DRPartyDice
     {
         return array(
             'value' => $value,
-            'type' => TYPE_PARTY_DIE,
+            'type' => DR_TYPE_PARTY_DIE,
             'id'   => $id
         );
     }
 
     static function getDie($value) {
         return array(
-            'type' => TYPE_PARTY_DIE,
+            'type' => DR_TYPE_PARTY_DIE,
             'value' => $value
         );
     }
@@ -53,36 +53,36 @@ class DRPartyDice
 
     static function isScroll($dice)
     {
-        return $dice['value'] == DIE_SCROLL && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_SCROLL && DRItem::isPartyDie($dice);
     }
 
     static function isMage($dice)
     {
-        return $dice['value'] == DIE_MAGE && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_MAGE && DRItem::isPartyDie($dice);
     }
 
     static function isCleric($dice)
     {
-        return $dice['value'] == DIE_CLERIC && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_CLERIC && DRItem::isPartyDie($dice);
     }
 
     static function isFighter($dice)
     {
-        return $dice['value'] == DIE_FIGHTER && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_FIGHTER && DRItem::isPartyDie($dice);
     }
 
     static function isThief($dice)
     {
-        return $dice['value'] == DIE_THIEF && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_THIEF && DRItem::isPartyDie($dice);
     }
 
     static function isChampion($dice)
     {
-        return $dice['value'] == DIE_CHAMPION && DRItem::isPartyDie($dice);
+        return $dice['value'] == DR_DIE_CHAMPION && DRItem::isPartyDie($dice);
     }
 
     static function isGenericDragon($die)
     {
-        return $die['value'] == DIE_GENERIC_DRAGON && DRItem::isPartyDie($die);
+        return $die['value'] == DR_DIE_GENERIC_DRAGON && DRItem::isPartyDie($die);
     }
 }

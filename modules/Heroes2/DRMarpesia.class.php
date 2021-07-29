@@ -32,7 +32,7 @@ class DRMarpesia extends DRStandardHero
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         return sizeof($items) >= 1;
     }
 
@@ -40,18 +40,18 @@ class DRMarpesia extends DRStandardHero
     {
 
         // Roll all dice from the Graveyard, discard any scrolls and add the rest to your Party
-        $dice = $this->game->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD);
+        $dice = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD);
         $dice = DRItem::rollDice($dice);
-        $dice = DRItem::setZone($dice, ZONE_PLAY);
+        $dice = DRItem::setZone($dice, DR_ZONE_PLAY);
         $this->game->manager->updateItems($dice);
         $this->game->notif->rerollDiceWithoutMessage($dice);
 
-        $dice = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $dice = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $scrolls = DRPartyDice::getScrollDice($dice);
         $companions = DRPartyDice::getCompanionDice($dice);
 
-        $scrolls = DRItem::setZone($scrolls, ZONE_GRAVEYARD);
-        $companions = DRItem::setZone($companions, ZONE_PARTY);
+        $scrolls = DRItem::setZone($scrolls, DR_ZONE_GRAVEYARD);
+        $companions = DRItem::setZone($companions, DR_ZONE_PARTY);
 
         $dice = array_merge($scrolls, $companions);
         $this->game->manager->updateItems($dice);

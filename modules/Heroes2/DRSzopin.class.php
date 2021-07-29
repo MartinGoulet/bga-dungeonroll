@@ -20,8 +20,8 @@ class DRSzopin extends DRStandardHero
     {
         // Callback from ultimate
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
-        $itemsInPlay = DRItem::setZone($itemsInPlay, ZONE_BOX);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
+        $itemsInPlay = DRItem::setZone($itemsInPlay, DR_ZONE_BOX);
         $this->game->manager->updateItems($itemsInPlay);
         $this->game->notif->ultimateSzopin($itemsInPlay);
 
@@ -30,7 +30,7 @@ class DRSzopin extends DRStandardHero
 
     function isSelectionDiceCorrect()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $dungeon = DRDungeonDice::getDungeonDice($items);
         return sizeof($dungeon) == sizeof($items) &&
                sizeof($dungeon) >= 1 && 

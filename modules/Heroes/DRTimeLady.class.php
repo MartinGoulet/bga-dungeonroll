@@ -19,7 +19,7 @@ class DRTimeLady extends DRTimeTraveler
      */
     function canExecuteUltimate()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $tokens = DRTreasureToken::getTreasureTokens($items);
         $scrolls = DRPartyDice::getScrollDice($items);
         $companions = DRPartyDice::getCompanionDice($items);

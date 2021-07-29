@@ -24,81 +24,81 @@ require_once("modules/constants.inc.php");
 
 $this->items = array(
     array(
-        'type' => TYPE_PARTY_DIE,
+        'type' => DR_TYPE_PARTY_DIE,
         'value' => 0,
         'name' => '',
         'number' => 8
     ),
     array(
-        'type' => TYPE_DUNGEON_DIE,
+        'type' => DR_TYPE_DUNGEON_DIE,
         'value' => 0,
         'name' => '',
         'number' => 7
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_VORPAL_SWORD,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_VORPAL_SWORD,
         'name' => 'VorpalSword',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_TALISMAN,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_TALISMAN,
         'name' => 'Talisman',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_SCEPTER_OF_POWER,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_SCEPTER_OF_POWER,
         'name' => 'ScepterOfPower',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_THIEVES,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_THIEVES,
         'name' => 'Thieves',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_SCROLL,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_SCROLL,
         'name' => 'Scroll',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_RING_INVISIBILITY,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_RING_INVISIBILITY,
         'name' => 'RingOfInvisibility',
         'number' => 8
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_DRAGON_SCALES,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_DRAGON_SCALES,
         'name' => 'DragonScales',
         'number' => 12
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_ELIXIR,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_ELIXIR,
         'name' => 'Elixir',
         'number' => 6
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_DRAGON_BAIT,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_DRAGON_BAIT,
         'name' => 'DragonBait',
         'number' => 8
     ),
     array(
-        'type' => TYPE_TREASURE_TOKEN,
-        'value' => TOKEN_TOWN_PORTAL,
+        'type' => DR_TYPE_TREASURE_TOKEN,
+        'value' => DR_TOKEN_TOWN_PORTAL,
         'name' => 'TownPortal',
         'number' => 8
     ),
 );
 
 $this->items_party_dice = array(
-    TYPE_PARTY_DIE . '_' . DIE_MAGE => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_MAGE => array(
         'name' => clienttranslate("Mage"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 1,
@@ -109,7 +109,7 @@ $this->items_party_dice = array(
             clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_CLERIC => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_CLERIC => array(
         'name' => clienttranslate("Cleric"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 2,
@@ -120,7 +120,7 @@ $this->items_party_dice = array(
             clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_FIGHTER => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_FIGHTER => array(
         'name' => clienttranslate("Fighter"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 3,
@@ -131,7 +131,7 @@ $this->items_party_dice = array(
             clienttranslate("May be used to open 1 Chest or quaff any number of Potions"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_THIEF => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_THIEF => array(
         'name' => clienttranslate("Thief"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 4,
@@ -142,7 +142,7 @@ $this->items_party_dice = array(
             clienttranslate("May be used to open any number of Chests or quaff any number of Potions"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_CHAMPION => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_CHAMPION => array(
         'name' => clienttranslate("Champion"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 5,
@@ -153,7 +153,7 @@ $this->items_party_dice = array(
             clienttranslate("May be used to open any number of Chests or quaff any number of Potions"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_SCROLL => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_SCROLL => array(
         'name' => clienttranslate("Scroll"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 0,
@@ -165,7 +165,7 @@ $this->items_party_dice = array(
             clienttranslate("Scroll is not a Companion so you cannot use it to defeat Monster or Dragon"),
         )
     ),
-    TYPE_PARTY_DIE . '_' . DIE_GENERIC_DRAGON => array(
+    DR_TYPE_PARTY_DIE . '_' . DR_DIE_GENERIC_DRAGON => array(
         'name' => clienttranslate("Companion"),
         'image_file' => 'img/dice_party.jpg',
         'image_index' => 6,
@@ -178,7 +178,7 @@ $this->items_party_dice = array(
 );
 
 $this->items_dungeon_dice = array(
-    TYPE_DUNGEON_DIE . '_' . DIE_GOBLIN => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_GOBLIN => array(
         'name' => clienttranslate("Goblin"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 5,
@@ -188,7 +188,7 @@ $this->items_dungeon_dice = array(
             clienttranslate("Any other Companion may be used to defeat 1 Goblin"),
         )
     ),
-    TYPE_DUNGEON_DIE . '_' . DIE_OOZE => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_OOZE => array(
         'name' => clienttranslate("Ooze"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 2,
@@ -198,7 +198,7 @@ $this->items_dungeon_dice = array(
             clienttranslate("Any other Companion may be used to defeat 1 Ooze"),
         )
     ),
-    TYPE_DUNGEON_DIE . '_' . DIE_SKELETON => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_SKELETON => array(
         'name' => clienttranslate("Skeleton"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 3,
@@ -208,7 +208,7 @@ $this->items_dungeon_dice = array(
             clienttranslate("Any other Companion may be used to defeat 1 Skeleton"),
         )
     ),
-    TYPE_DUNGEON_DIE . '_' . DIE_CHEST => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_CHEST => array(
         'name' => clienttranslate("Chest"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 4,
@@ -220,7 +220,7 @@ $this->items_dungeon_dice = array(
             clienttranslate("In the rare case that no Treasure token remain in the box, you receive 1 Experience instead"),
         )
     ),
-    TYPE_DUNGEON_DIE . '_' . DIE_POTION => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_POTION => array(
         'name' => clienttranslate("Potion"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 1,
@@ -231,7 +231,7 @@ $this->items_dungeon_dice = array(
             clienttranslate("Unused Potion are returned to the available pool before moving onto the Dragon phase"),
         )
     ),
-    TYPE_DUNGEON_DIE . '_' . DIE_DRAGON => array(
+    DR_TYPE_DUNGEON_DIE . '_' . DR_DIE_DRAGON => array(
         'name' => clienttranslate("Dragon"),
         'image_file' => 'img/dice_dungeon.jpg',
         'image_index' => 0,
@@ -244,7 +244,7 @@ $this->items_dungeon_dice = array(
 );
 
 $this->items_treasure_tokens = array(
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_DRAGON_BAIT => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_DRAGON_BAIT => array(
         'name' => clienttranslate("Dragon bait"),
         'image_file' => 'img/treasures.png',
         'image_index' => 0,
@@ -253,7 +253,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Transform all monsters into the Dragon faces and move those dice into the Dragon's Lair"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_RING_INVISIBILITY => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_RING_INVISIBILITY => array(
         'name' => clienttranslate("Ring of invisibility"),
         'image_file' => 'img/treasures.png',
         'image_index' => 1,
@@ -263,7 +263,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("This does not count as Defeating the Dragon - do not collect Experience or get Treasure"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_TOWN_PORTAL => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_TOWN_PORTAL => array(
         'name' => clienttranslate("Town Portal"),
         'image_file' => 'img/treasures.png',
         'image_index' => 2,
@@ -272,7 +272,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Collect Experience equal to the Level. The delve is over. If unused, Town Portal is worth 2 Experience at the end of the game instead of the usual 1"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_DRAGON_SCALES => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_DRAGON_SCALES => array(
         'name' => clienttranslate("Dragon scales"),
         'image_file' => 'img/treasures.png',
         'image_index' => 3,
@@ -281,7 +281,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("At the end of the game, collect 2 additional Experiences for each pair of Dragon Scales you possess"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_SCROLL => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_SCROLL => array(
         'name' => clienttranslate("Scroll"),
         'image_file' => 'img/treasures.png',
         'image_index' => 4,
@@ -290,7 +290,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Use as one Scroll die face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_ELIXIR => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_ELIXIR => array(
         'name' => clienttranslate("Elixir"),
         'image_file' => 'img/treasures.png',
         'image_index' => 5,
@@ -299,7 +299,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Revive 1 Party die (return it from the Graveyard to your active party) and choose its face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_VORPAL_SWORD => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_VORPAL_SWORD => array(
         'name' => clienttranslate("Vorpal sword"),
         'image_file' => 'img/treasures.png',
         'image_index' => 6,
@@ -308,7 +308,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Use as one Fighter die face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_TALISMAN => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_TALISMAN => array(
         'name' => clienttranslate("Talisman"),
         'image_file' => 'img/treasures.png',
         'image_index' => 7,
@@ -317,7 +317,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Use as one Cleric die face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_SCEPTER_OF_POWER => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_SCEPTER_OF_POWER => array(
         'name' => clienttranslate("Scepter of power"),
         'image_file' => 'img/treasures.png',
         'image_index' => 8,
@@ -326,7 +326,7 @@ $this->items_treasure_tokens = array(
             clienttranslate("Use as one Mage die face"),
         )
     ),
-    TYPE_TREASURE_TOKEN . '_' . TOKEN_THIEVES => array(
+    DR_TYPE_TREASURE_TOKEN . '_' . DR_TOKEN_THIEVES => array(
         'name' => clienttranslate("Thieves"),
         'image_file' => 'img/treasures.png',
         'image_index' => 9,
@@ -345,7 +345,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Spellsword may be used as a Fighter or a Mage"),
         'ultimate_name' => clienttranslate("Arcane Blade"),
         'imageindex' => 1,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRSpellsword",
         'commandText' => "",
         'commands' => array(
@@ -360,7 +360,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all Monsters, Chests, Potions, and dice in the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Arcane Fury"),
         'imageindex' => 2,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRBattlemage",
         'commandText' => clienttranslate("Battlemage : Discard all dungeon dice"),
     ),
@@ -371,7 +371,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Defeat up to 2 Monsters"),
         'ultimate_name' => clienttranslate("Calculated Strike"),
         'imageindex' => 3,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRMercenary",
         'commandText' => clienttranslate("Mercenary : Defeat up to 2 Monsters"),
     ),
@@ -382,7 +382,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Re-roll any number of Party and Dungeon dice"),
         'ultimate_name' => clienttranslate("Battlefield Presence"),
         'imageindex' => 4,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRCommander",
         'commandText' => clienttranslate("Commander : Re-roll Party and Dungeon dice"),
     ),
@@ -393,7 +393,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform all Monsters to Dragon faces and move them to the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Battlecry"),
         'imageindex' => 5,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRKnight",
         'commandText' => clienttranslate("Knight : Transform all Monsters to Dragon faces"),
     ),
@@ -404,7 +404,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform all Monsters to Dragon faces and move them to the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Battlecry"),
         'imageindex' => 6,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRDragonSlayer",
         'commandText' => clienttranslate("Dragon Slayer : Transform all Monsters to Dragon faces"),
     ),
@@ -415,7 +415,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform 1 Goblin into a Thief. Discard it during the next Regroup Phase"),
         'ultimate_name' => clienttranslate("Plea for Help"),
         'imageindex' => 7,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRHalfGoblin",
         'commandText' => clienttranslate("Half-Goblin : Transform 1 Goblin into a Thief"),
     ),
@@ -426,7 +426,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform up to 2 Goblins into Thieves. Discard them during the next Regroup Phase"),
         'ultimate_name' => clienttranslate("Pull Rank"),
         'imageindex' => 8,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRChieftain",
         'commandText' => clienttranslate("Chieftain : Transform up to 2 Goblins into Thieves"),
     ),
@@ -437,7 +437,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Bard Song"),
         'imageindex' => 9,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRMinstrel",
         'commandText' => clienttranslate("Minstrel : Discard all Dragon dice"),
     ),
@@ -448,7 +448,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Bard Song"),
         'imageindex' => 10,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRBard",
         'commandText' => clienttranslate("Bard : Discard all Dragon dice"),
     ),
@@ -459,7 +459,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform 1 Monster into 1 Potion"),
         'ultimate_name' => clienttranslate("Charm Monster"),
         'imageindex' => 11,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DREnchantress",
         'commandText' => clienttranslate("Enchantress : Transform 1 Monster into 1 Potion"),
     ),
@@ -470,7 +470,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform up to 2 Monsters into 1 Potion"),
         'ultimate_name' => clienttranslate("Mesmerize"),
         'imageindex' => 12,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRBeguiler",
         'commandText' => clienttranslate("Beguiler : Transform up to 2 Monsters into 1 Potion"),
     ),
@@ -481,7 +481,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform 1 Skeleton into a Fighter. Discard it during the next Regroup Phase"),
         'ultimate_name' => clienttranslate("Animate Dead"),
         'imageindex' => 13,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DROccultist",
         'commandText' => clienttranslate("Occultist : Transform 1 Skeleton into a Fighter"),
     ),
@@ -492,7 +492,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform up to 2 Skeletons into Fighters. Discard it during the next Regroup Phase"),
         'ultimate_name' => clienttranslate("Command Dead"),
         'imageindex' => 14,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRNecromancer",
         'commandText' => clienttranslate("Necromancer : Transform up to 2 Skeletons into Fighters"),
     ),
@@ -503,7 +503,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Crusader may be used as a Cleric or a Fighter"),
         'ultimate_name' => clienttranslate("Holy Strike"),
         'imageindex' => 15,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRCrusader",
         'commandText' => "",
         'commands' => array(
@@ -518,7 +518,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 Treasure Token to defeat all Monsters, open all Chests, quaff all Potions and discard all dice in the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Divine Intervention"),
         'imageindex' => 16,
-        'expansions' => array(GAME_EXPANSION_BASE, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_BASE, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRPaladin",
         'commandText' => clienttranslate("Paladin : Defeat Monsters, open Chests, quaff Potions and discard Dragon dice"),
     ),
@@ -529,7 +529,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Viking Fury"),
         'imageindex' => 17,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRViking",
         'commandText' => clienttranslate("Viking : Discard all Dragon dice"),
     ),
@@ -540,7 +540,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all dice from the Dragon's Lair"),
         'ultimate_name' => clienttranslate("Viking Fury"),
         'imageindex' => 18,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRUndeadViking",
         'commandText' => clienttranslate("Undead Viking : Discard all Dragon dice"),
     ),
@@ -551,7 +551,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Roll 1 Party die from the Graveyard and add it to your Party"),
         'ultimate_name' => clienttranslate("Healing Salve"),
         'imageindex' => 19,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRAlchemist",
         'commandText' => clienttranslate("Alchemist : Roll 1 die from the Graveyard"),
     ),
@@ -562,7 +562,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Roll 2 dice from the Graveyard and add them to your Party"),
         'ultimate_name' => clienttranslate("Transformation Potion"),
         'imageindex' => 20,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRThaumaturge",
         'commandText' => clienttranslate("Thaumaturge : Roll 2 dice from the Graveyard"),
     ),
@@ -573,7 +573,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("During the Monster phase, Reduce the Level die by 1 and Retire immediately. Collect Experience equal to the Level die"),
         'ultimate_name' => clienttranslate("Scout Ahead"),
         'imageindex' => 21,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRScout",
         'commandText' => clienttranslate("Scout : Reduce Level by 1 and Retire to the tavern"),
     ),
@@ -584,7 +584,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Retire immediately. Collect Experience equal to the Level die"),
         'ultimate_name' => clienttranslate("Know when to say when"),
         'imageindex' => 22,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRDungeoneer",
         'commandText' => clienttranslate("Dungeoneer : Retire to the tavern"),
     ),
@@ -595,7 +595,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("For each die in the Dragon's Lair, discard 1 Monster"),
         'ultimate_name' => clienttranslate("Dragon Breath"),
         'imageindex' => 23,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRSorceress",
         'commandText' => clienttranslate("Sorceress : Discard 1 Monster for each Dragon"),
     ),
@@ -606,7 +606,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("For each die in the Dragon's Lair, discard all Monsters of 1 type"),
         'ultimate_name' => clienttranslate("Dragon Fury"),
         'imageindex' => 24,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRDRakeKin",
         'commandText' => clienttranslate("Drake Kin : Discard all Monsters of 1 type for each Dragon"),
     ),
@@ -617,7 +617,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then discard 2 Treasure Tokens"),
         'ultimate_name' => clienttranslate("Treasure Seeker"),
         'imageindex' => 25,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRArchaeologist",
         'commandText' => clienttranslate("Archaeologist : Draw 2 Treasure Tokens, Discard 2 Treasure Tokens"),
     ),
@@ -628,7 +628,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Draw 2 Treasures Tokens from the box and then discard 1 Treasure Token"),
         'ultimate_name' => clienttranslate("Treasure Seeker"),
         'imageindex' => 26,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRTombRaider",
         'commandText' => clienttranslate("Tomb Raider : Draw 2 Treasure Tokens, Discard 1 Treasure Token"),
     ),
@@ -639,7 +639,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform 1 Monster into a Chest"),
         'ultimate_name' => clienttranslate("Fortunate Strike"),
         'imageindex' => 27,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRLeprechaun",
         'commandText' => clienttranslate("Leprechaun : Transform 1 Monster into a Chest"),
     ),
@@ -650,7 +650,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Transform 2 Monsters into 1 Chest"),
         'ultimate_name' => clienttranslate("Bit O'Luck"),
         'imageindex' => 28,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRClurichaun",
         'commandText' => clienttranslate("Clurichaun : Transform 2 Monsters into 1 Chest"),
     ),
@@ -661,7 +661,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 Monster for each Champion in your Party, then re-roll all Champions in your Party"),
         'ultimate_name' => clienttranslate("Rally"),
         'imageindex' => 29,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRDwarf",
         'commandText' => clienttranslate("Dwarf : Discard 1 Monster for each Champion in your Party"),
     ),
@@ -672,7 +672,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Roll 4 Party dice from the Graveyard and add them to your party. For the rest of the delve, you may not choose to Retire during Regroup phase unless you defeated a Dragon on that level or reach level 10."),
         'ultimate_name' => clienttranslate("Berserker Rage"),
         'imageindex' => 30,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRBerserker",
         'commandText' => clienttranslate("Berkerser : Roll 4 Party dice from the Graveyard"),
     ),
@@ -683,7 +683,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 Monster of any type"),
         'ultimate_name' => clienttranslate("Called Shot"),
         'imageindex' => 31,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRTracker",
         'commandText' => clienttranslate("Tracker : Discard 1 Monster"),
         'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Goblin'),
@@ -695,7 +695,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 Monster of each type"),
         'ultimate_name' => clienttranslate("Flurry of Arrows"),
         'imageindex' => 32,
-        'expansions' => array(GAME_EXPANSION_PACK_1, GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_1, DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRRanger",
         'commandText' => clienttranslate("Ranger : Discard 1 Monster of each type"),
         'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Goblin'),
@@ -707,7 +707,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Set 1 Party die or 1 Dungeon die to any face"),
         'ultimate_name' => clienttranslate("Call in a Favor"),
         'imageindex' => 33,
-        'expansions' => array(GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRGuildLeader",
         'commandText' => clienttranslate("Guild Leader : Set 1 Party die or 1 Dungeon die to any face"),
     ),
@@ -718,7 +718,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Set 1 Party die and 1 Dungeon die to any face"),
         'ultimate_name' => clienttranslate("Reinforcements"),
         'imageindex' => 34,
-        'expansions' => array(GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRGuildMaster",
         'commandText' => clienttranslate("Guild Master : Set 1 Party die and 1 Dungeon die to any face"),
     ),
@@ -729,7 +729,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard one of your Treasures to defeat a Dragon"),
         'ultimate_name' => clienttranslate("Future Technology"),
         'imageindex' => 35,
-        'expansions' => array(GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRTimeTraveler",
         'commandText' => clienttranslate("Time Traveler : Defeat a Dragon"),
     ),
@@ -740,7 +740,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard one of your Treasures or Scroll to defeat a Dragon"),
         'ultimate_name' => clienttranslate("Super-sonic Future Technology"),
         'imageindex' => 36,
-        'expansions' => array(GAME_EXPANSION_KICKSTARTER, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_KICKSTARTER, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRTimeLady",
         'commandText' => clienttranslate("Time Lady : Defeat a Dragon"),
     ),
@@ -751,7 +751,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard 1 chest or potion (there must be a chest or potion to discard)"),
         'ultimate_name' => clienttranslate("Bestial Fury"),
         'imageindex' => 37,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRCassandra",
         'commandText' => clienttranslate("Cassandra : Discard 1 chest or potion"),
     ),
@@ -762,7 +762,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Roll all dice from the Graveyard, discard any Scrolls, and add the rest to your party"),
         'ultimate_name' => clienttranslate("Rallying Cry"),
         'imageindex' => 38,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRMarpesia",
         'commandText' => clienttranslate("Marpesia : Roll all dice from the Graveyard"),
     ),
@@ -773,7 +773,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all Monsters on the current level"),
         'ultimate_name' => clienttranslate("Deafening Roar"),
         'imageindex' => 39,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRToulak",
         'commandText' => clienttranslate("Tou'lak : Discard all Monsters on the current level"),
         'commandSpecialty' => clienttranslate('Specialty : Re-roll 1 Dungeon die'),
@@ -785,7 +785,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard all Monsters of 1 type. Draw 1 Treasure for each Monster discarded this way"),
         'ultimate_name' => clienttranslate("Touch of Midas"),
         'imageindex' => 40,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRAmarSuen",
         'commandText' => clienttranslate("Amar-Suen : Discard all Monsters of 1 type and draw Treasures"),
     ),
@@ -796,7 +796,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Re-roll any number of Dungeon dice (including dice in the Dragon's Lair)."),
         'ultimate_name' => clienttranslate("Calculated Risk"),
         'imageindex' => 41,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRTristan",
         'commandText' => clienttranslate("Tristan : Select any number of Dungeon dice to re-roll"),
         'commandSpecialty' => clienttranslate('Specialty : Discard 1 Treasure token to Refresh'),
@@ -808,7 +808,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Take control of all dice in the Dragon's Lair. They count as companions (defeat 1 Monster, open 1 chest, or quaff all potions). Discard them duging the next Regroup Phase"),
         'ultimate_name' => clienttranslate("Word of Command"),
         'imageindex' => 42,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRLoegYllavyre",
         'commandText' => clienttranslate("Loeg Yllavyre : Take control of all dice in the Dragon's Lair"),
         'commandSpecialty' => clienttranslate('Specialty : Discard a Scroll to transform a Monster into a Dragon'),
@@ -820,7 +820,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard a Scroll (instead of 3 different companions) to defeat a Dragon during the Dragon Phase"),
         'ultimate_name' => clienttranslate("Forbidden Knowledge"),
         'imageindex' => 43,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRAlexandra",
         'commandText' => clienttranslate("Alexandra : Discard a Scroll to defeat a Dragon"),
         'commandSpecialty' => clienttranslate('Specialty : Discard a Party Die to re-roll Party and Dungeon dice'),
@@ -832,7 +832,7 @@ $this->card_types = array(
         'ultimate' => clienttranslate("Discard up to 2 Dungeon dice (including dice in the Dragon's Lair)"),
         'ultimate_name' => clienttranslate("Strike Fear"),
         'imageindex' => 44,
-        'expansions' => array(GAME_EXPANSION_PACK_2, GAME_EXPANSION_ALL),
+        'expansions' => array(DR_GAME_EXPANSION_PACK_2, DR_GAME_EXPANSION_ALL),
         'heroclass' => "DRSzopin",
         'commandText' => clienttranslate("Szopin : Select up to 2 Dungeon dice to discard"),
     ),

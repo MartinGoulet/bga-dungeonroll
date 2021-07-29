@@ -17,16 +17,16 @@ class DRCommandEndFormingPartyPhaseScout extends DRCommand
     {
         if (!parent::canExecute()) return false;
 
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         return sizeof($items) == $this->getNumberOfDiceToConfirm();
     }
 
     public function execute($sub_command_id)
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         // Notify the return
-        $items = DRItem::setZone($items, ZONE_BOX);
+        $items = DRItem::setZone($items, DR_ZONE_BOX);
         $this->game->NTA_itemMove($items);
 
         $items = DRItem::setZone($items, "LEVEL_" . sizeof($items));
@@ -35,9 +35,9 @@ class DRCommandEndFormingPartyPhaseScout extends DRCommand
 
         // All remaining dice will go for the level 3
         if (sizeof($items) == 2) {
-            $dungeon = $this->game->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
+            $dungeon = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_DUNGEON);
 
-            $dungeon = DRItem::setZone($dungeon, ZONE_BOX);
+            $dungeon = DRItem::setZone($dungeon, DR_ZONE_BOX);
             $this->game->NTA_itemMove($dungeon);
 
             $dungeon = DRItem::setZone($dungeon, "LEVEL_" . sizeof($dungeon));

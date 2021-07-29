@@ -53,20 +53,20 @@ class DungeonRoll extends Table
 
         self::initGameStateLabels(array(
             // Global variables
-            GL_CURRENT_TURN => GL_CURRENT_TURN_ID,
-            GL_CURRENT_LEVEL => GL_CURRENT_LEVEL_ID,
-            GL_MAX_TURN => GL_MAX_TURN_ID,
-            GL_HERO_ACTIVATED => GL_HERO_ACTIVATED_ID,
-            GL_CHOOSE_DIE_COUNT => GL_CHOOSE_DIE_COUNT_ID,
-            GL_CHOOSE_DIE_STATE => GL_CHOOSE_DIE_STATE_ID,
-            GL_SPECIALTY_ONCE_PER_LEVEL => GL_SPECIALTY_ONCE_PER_LEVEL_ID,
-            GL_DRAGON_KILLED_THIS_TURN => GL_DRAGON_KILLED_THIS_TURN_ID,
-            GL_BERSERKER_ULTIMATE => GL_BERSERKER_ULTIMATE_ID,
+            DR_GL_CURRENT_TURN => DR_GL_CURRENT_TURN_ID,
+            DR_GL_CURRENT_LEVEL => DR_GL_CURRENT_LEVEL_ID,
+            DR_GL_MAX_TURN => DR_GL_MAX_TURN_ID,
+            DR_GL_HERO_ACTIVATED => DR_GL_HERO_ACTIVATED_ID,
+            DR_GL_CHOOSE_DR_DIE_COUNT => DR_GL_CHOOSE_DR_DIE_COUNT_ID,
+            DR_GL_CHOOSE_DR_DIE_STATE => DR_GL_CHOOSE_DR_DIE_STTE_ID,
+            DR_GL_SPECIALTY_ONCE_PER_LEVEL => DR_GL_SPECIALTY_ONCE_PER_LEVEL_ID,
+            DR_GL_DRAGON_KILLED_THIS_TURN => DR_GL_DRAGON_KILLED_THIS_TURN_ID,
+            DR_GL_BERSERKER_ULTIMATE => DR_GL_BERSERKER_ULTIMATE_ID,
             
             // Game variants
-            GV_GAME_OPTION => GV_GAME_OPTION_ID,
-            GV_GAME_EXPANSION => GV_GAME_EXPANSION_ID,
-            GV_GAME_MIRROR => GV_GAME_MIRROR_ID,
+            DR_GV_GAME_OPTION => DR_GV_GAME_OPTION_ID,
+            DR_GV_GAME_EXPANSION => DR_GV_GAME_EXPANSION_ID,
+            DR_GV_GAME_MIRROR => DR_GV_GAME_MIRROR_ID,
         ));
 
         // Initialize helper class
@@ -145,7 +145,7 @@ class DungeonRoll extends Table
             'level' => $this->vars->getDungeonLevel(),
             'delve' => $this->getCurrentDelve(),
             'currentTurn' => $this->vars->getCurrentTurn(),
-            'useHero' => $this->vars->getGameOption() != GAME_OPTION_NO_HERO,
+            'useHero' => $this->vars->getGameOption() != DR_GAME_OPTION_NO_HERO,
 
             'card_types' => $this->card_types,
             'items_party_dice' => $this->items_party_dice,
@@ -232,20 +232,20 @@ class DungeonRoll extends Table
 
     function heroLevelUp()
     {
-        $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO);
+        $heroNovice = $this->components->getActivePlayerItemsByZone(DR_ZONE_HERO);
         $heroMaster = array(
             // Master hero is always the next item in de database
             $this->components->getItemById($heroNovice[0]['id'] + 1)
         );
 
-        $heroNovice = DRItem::setZone($heroNovice, ZONE_BOX);
+        $heroNovice = DRItem::setZone($heroNovice, DR_ZONE_BOX);
         $heroNovice = DRItem::setOwner($heroNovice, null);
 
-        $heroMaster = DRItem::setZone($heroMaster, ZONE_HERO);
+        $heroMaster = DRItem::setZone($heroMaster, DR_ZONE_HERO);
         $heroMaster = DRItem::setOwner($heroMaster, $this->getActivePlayerId());
 
         $heroMaster[0]['from'] = $heroNovice[0]['id'];
-        $heroMaster[0]['previous_zone'] = ZONE_BOX;
+        $heroMaster[0]['previous_zone'] = DR_ZONE_BOX;
 
         $heroes = array_merge($heroNovice, $heroMaster);
 
@@ -260,29 +260,29 @@ class DungeonRoll extends Table
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
 
         foreach ($monsters as &$monster) {
-            $monster['value'] = DIE_DRAGON;
+            $monster['value'] = DR_DIE_DRAGON;
         }
 
-        $monsters = DRItem::setZone(array_values($monsters), ZONE_DRAGON_LAIR);
+        $monsters = DRItem::setZone(array_values($monsters), DR_ZONE_DRAGON_LAIR);
 
         return $monsters;
     }
 
     static function getZoneAfterClickDice($dice, $state)
     {
-        if ($dice['zone'] == ZONE_PLAY) {
+        if ($dice['zone'] == DR_ZONE_PLAY) {
             if (DRItem::isPartyDie($dice)) {
-                return ZONE_PARTY;
+                return DR_ZONE_PARTY;
             } else if (DRItem::isTreasureToken($dice)) {
-                return ZONE_INVENTORY;
+                return DR_ZONE_INVENTORY;
             } else if (DRDungeonDice::isDragon($dice) && $state != 'postFormingPartyScout') {
-                return ZONE_DRAGON_LAIR;
+                return DR_ZONE_DRAGON_LAIR;
             } else {
-                return ZONE_DUNGEON;
+                return DR_ZONE_DUNGEON;
             }
         } else {
             // Go to the play zone
-            return ZONE_PLAY;
+            return DR_ZONE_PLAY;
         }
     }
 
@@ -311,10 +311,10 @@ class DungeonRoll extends Table
     {
         // Get the die
         $hero = $this->components->getItemById($hero_id);
-        $hero['zone'] = ZONE_DRAFT;
+        $hero['zone'] = DR_ZONE_DRAFT;
 
         $updateItems = DRItem::setOwner(array($hero), $this->getActivePlayerId());
-        $updateItems = DRItem::setZone($updateItems, ZONE_HERO);
+        $updateItems = DRItem::setZone($updateItems, DR_ZONE_HERO);
 
         // Update the change
         $this->manager->updateItems($updateItems);
@@ -382,14 +382,14 @@ class DungeonRoll extends Table
             );
 
         // If a dungeon die goes in play, try to move all same dice in play
-        if ($location == ZONE_PLAY && DRItem::isDungeonDie($die) && !$stateSkip) {
+        if ($location == DR_ZONE_PLAY && DRItem::isDungeonDie($die) && !$stateSkip) {
             // Get dungeon dice into play
-            $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+            $itemsInPlay = $this->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
             $dungeonDiceInPlay = DRDungeonDice::getDungeonDice($itemsInPlay);
             // If no dungeon dice is found in play
             if (sizeof($dungeonDiceInPlay) == 0) {
                 // Get all same dice and move them.
-                $dungeonDice = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
+                $dungeonDice = $this->components->getActivePlayerItemsByZone(DR_ZONE_DUNGEON);
                 $dice = DRUtils::filter($dungeonDice, function ($item) use ($die) {
                     return $item['value'] == $die['value'];
                 });
@@ -414,7 +414,7 @@ class DungeonRoll extends Table
 
     function chooseDieGain($type, $value)
     {
-        $diceOfAskedType = array_values(array_filter($this->components->getActivePlayerItemsByZone(ZONE_GRAVEYARD), function ($die) use ($type) {
+        $diceOfAskedType = array_values(array_filter($this->components->getActivePlayerItemsByZone(DR_ZONE_GRAVEYARD), function ($die) use ($type) {
             return $die['type'] == $type;
         }));
 
@@ -426,7 +426,7 @@ class DungeonRoll extends Table
         $rerollDice['value'] = $value;
 
         // Set new zone for both dice
-        $updatedDice = DRItem::setZone(array($rerollDice), ZONE_PARTY);
+        $updatedDice = DRItem::setZone(array($rerollDice), DR_ZONE_PARTY);
 
         // Update database and notify players
         $this->manager->updateItems($updatedDice);
@@ -448,18 +448,18 @@ class DungeonRoll extends Table
 
     //     //$this->vars->setIsHeroActivated(false);
 
-    //     $monsters = $this->components->getActivePlayerItemsByZone(ZONE_DUNGEON);
+    //     $monsters = $this->components->getActivePlayerItemsByZone(DR_ZONE_DUNGEON);
     //     // $monsters = DRUtils::filter($monsters, 'DRDungeonDice::isSkeleton');
 
-    //     // $monsters[0]['value'] = DIE_POTION;
-    //     // $monsters[1]['value'] = DIE_POTION;
-    //     // $monsters[2]['value'] = DIE_OOZE;
-    //     // $monsters[3]['value'] = DIE_SKELETON;
+    //     // $monsters[0]['value'] = DR_DIE_POTION;
+    //     // $monsters[1]['value'] = DR_DIE_POTION;
+    //     // $monsters[2]['value'] = DR_DIE_OOZE;
+    //     // $monsters[3]['value'] = DR_DIE_SKELETON;
 
     //     foreach ($monsters as &$monster) {
-    //         $monster['value'] = DIE_DRAGON;
+    //         $monster['value'] = DR_DIE_DRAGON;
     //     }
-    //     $monsters = DRItem::setZone($monsters, ZONE_DRAGON_LAIR);
+    //     $monsters = DRItem::setZone($monsters, DR_ZONE_DRAGON_LAIR);
 
     //     $this->manager->updateItems($monsters);
     //     $this->NTA_itemMove($monsters);
@@ -531,7 +531,7 @@ class DungeonRoll extends Table
 
     function argSelectionDice()
     {
-        $items = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $hero =  $this->components->getActivePlayerHero();
         return array(
             'selection' => $hero->getSelectionDiceText(),
@@ -541,7 +541,7 @@ class DungeonRoll extends Table
 
     function argUltimateGuildLeader()
     {
-        $items = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         return array(
             'party' => DRPartyDice::getPartyDice($items),
             'dungeon' => DRDungeonDice::getDungeonDice($items),
@@ -556,11 +556,11 @@ class DungeonRoll extends Table
     {
         $mode = $this->vars->getGameOption();
 
-        if ($mode == GAME_OPTION_RANDOM_HERO) {
+        if ($mode == DR_GAME_OPTION_RANDOM_HERO) {
             $this->gamestate->nextState("random");
-        } else if ($mode == GAME_OPTION_SELECT_HERO) {
+        } else if ($mode == DR_GAME_OPTION_SELECT_HERO) {
             $this->gamestate->nextState("select");
-        } else if ($mode == GAME_OPTION_NO_HERO) {
+        } else if ($mode == DR_GAME_OPTION_NO_HERO) {
             $this->gamestate->nextState("nohero");
         }
     }
@@ -568,7 +568,7 @@ class DungeonRoll extends Table
     function stRandomHero()
     {
         $players = $this->loadPlayersBasicInfos();
-        $noviceHeroes = $this->components->getItemsByType(TYPE_NOVICE_HERO);
+        $noviceHeroes = $this->components->getItemsByType(DR_TYPE_NOVICE_HERO);
 
         $selectedHeroes = array();
         foreach ($players as $player_id => $dummy) {
@@ -583,7 +583,7 @@ class DungeonRoll extends Table
                 $noviceHeroes = array_values($noviceHeroes);
 
                 $hero['owner'] = $player_id;
-                $hero['zone'] = ZONE_HERO;
+                $hero['zone'] = DR_ZONE_HERO;
                 $selectedHeroes[] = $hero;
             }
         }
@@ -605,8 +605,8 @@ class DungeonRoll extends Table
         $players = $this->loadPlayersBasicInfos();
         $active_player_id = $this->getActivePlayerId();
 
-        $heroNovice = $this->components->getActivePlayerItemsByZone(ZONE_HERO)[0];
-        $heroMasters = $this->components->getItemsByTypeAndValue(TYPE_MASTER_HERO, $heroNovice['value']);
+        $heroNovice = $this->components->getActivePlayerItemsByZone(DR_ZONE_HERO)[0];
+        $heroMasters = $this->components->getItemsByTypeAndValue(DR_TYPE_MASTER_HERO, $heroNovice['value']);
 
         $newHeroes = array();
 
@@ -676,20 +676,20 @@ class DungeonRoll extends Table
     function stFormingParty()
     {
         // Move treasures and hero to the inventory zone
-        $treasures = $this->components->getActivePlayerItemsByZone(ZONE_INVENTORY);
-        $heroes = $this->components->getActivePlayerItemsByZone(ZONE_HERO);
+        $treasures = $this->components->getActivePlayerItemsByZone(DR_ZONE_INVENTORY);
+        $heroes = $this->components->getActivePlayerItemsByZone(DR_ZONE_HERO);
         $this->NTA_itemMove(array_merge($treasures, $heroes));
 
         $hero = $this->components->getActivePlayerHero();
 
         // Roll all party dice
-        $dices = $this->components->getItemsByType(TYPE_PARTY_DIE);
+        $dices = $this->components->getItemsByType(DR_TYPE_PARTY_DIE);
         $party_dices = array_slice($dices, 0, $hero->getTotalPartyDice());
         $rolledDice = DRItem::rollDice($party_dices);
-        $rolledDice = DRItem::setZone($rolledDice, ZONE_PARTY);
+        $rolledDice = DRItem::setZone($rolledDice, DR_ZONE_PARTY);
 
         $unusedDice = array_slice($dices, $hero->getTotalPartyDice(), 8 - $hero->getTotalPartyDice());
-        $unusedDice = DRItem::setZone($unusedDice, ZONE_BOX);
+        $unusedDice = DRItem::setZone($unusedDice, DR_ZONE_BOX);
 
         $hero->stateBeforeFormingParty($rolledDice);
 
@@ -705,12 +705,12 @@ class DungeonRoll extends Table
             $this->gamestate->nextState('mercenary');
         } else if ($hero instanceof DRScout) {
             // Get all available dungeon dice to roll
-            $dice = $this->components->getItemsByType(TYPE_DUNGEON_DIE);
+            $dice = $this->components->getItemsByType(DR_TYPE_DUNGEON_DIE);
             // Get 6 dungeon dice
             $dice = array_slice($dice, 0, 6);
             // Roll dice and move them to dungeon zone
             $dice = DRItem::rollDice($dice);
-            $dice = DRItem::setZone($dice, ZONE_DUNGEON);
+            $dice = DRItem::setZone($dice, DR_ZONE_DUNGEON);
             // Update UI
             $this->manager->updateItems($dice);
             $this->NTA_itemMove($dice);
@@ -740,7 +740,7 @@ class DungeonRoll extends Table
 
         if ($rolledDice == null) {
             // Get all available dungeon dice to roll
-            $dungeonDiceAvailable = $this->components->getItemsByTypeAndZone(TYPE_DUNGEON_DIE, ZONE_BOX);
+            $dungeonDiceAvailable = $this->components->getItemsByTypeAndZone(DR_TYPE_DUNGEON_DIE, DR_ZONE_BOX);
             // Select a number of dungeon dice equal to the maximum of the level
             $dungeonDiceToRoll = array_slice($dungeonDiceAvailable, 0, min(sizeof($dungeonDiceAvailable), $level));
             // Roll dice
@@ -748,15 +748,15 @@ class DungeonRoll extends Table
         }
 
         // For animation to show the dice
-        $rolledDice = DRItem::setZone($rolledDice, ZONE_PLAY);
+        $rolledDice = DRItem::setZone($rolledDice, DR_ZONE_PLAY);
         $this->notif->rollingDungeonDice($rolledDice);
 
         $dragonsDice = DRDungeonDice::getDragonDice($rolledDice);
-        $rolledDragonDice = DRItem::setZone($dragonsDice, ZONE_DRAGON_LAIR);
+        $rolledDragonDice = DRItem::setZone($dragonsDice, DR_ZONE_DRAGON_LAIR);
         $this->manager->updateItems($rolledDragonDice);
 
         $dungeonDice = DRDungeonDice::getDungeonDiceWithoutDragon($rolledDice);
-        $rolledDungeonDice = DRItem::setZone($dungeonDice, ZONE_DUNGEON);
+        $rolledDungeonDice = DRItem::setZone($dungeonDice, DR_ZONE_DUNGEON);
         $this->manager->updateItems($rolledDungeonDice);
 
         // Notify for the move
@@ -804,9 +804,9 @@ class DungeonRoll extends Table
 
         // If 3 or more dragons is found, the player must fight them
         if (sizeof($dragons) >= $hero->getNumberOfDragonRequiredForDragonPhase()) {
-            $dragons = $this->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+            $dragons = $this->components->getActivePlayerItemsByZone(DR_ZONE_DRAGON_LAIR);
             if (sizeof($dragons) > 0) {
-                $dragons = DRItem::setZone($dragons, ZONE_PLAY);
+                $dragons = DRItem::setZone($dragons, DR_ZONE_PLAY);
                 $this->manager->updateItems($dragons);
                 $this->NTA_itemMove($dragons);
             }
@@ -814,10 +814,10 @@ class DungeonRoll extends Table
             // Next state
             $this->gamestate->nextState("dragonPhase");
         } else {
-            $dice = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+            $dice = $this->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
             $dragons = DRDungeonDice::getDragonDice($dice);
             if (sizeof($dragons) > 0) {
-                $dragons = DRItem::setZone($dragons, ZONE_DRAGON_LAIR);
+                $dragons = DRItem::setZone($dragons, DR_ZONE_DRAGON_LAIR);
                 $this->manager->updateItems($dragons);
                 $this->NTA_itemMove($dragons);
             }
@@ -830,7 +830,7 @@ class DungeonRoll extends Table
     {
         $items = $this->components->getActivePlayerItems();
         $itemsTemporary = DRUtils::filter($items, 'DRItem::isTemporaryItem');
-        $itemsTemporary = DRItem::setZone($itemsTemporary, ZONE_BOX);
+        $itemsTemporary = DRItem::setZone($itemsTemporary, DR_ZONE_BOX);
         $itemsTemporary = DRItem::setOwner($itemsTemporary, null);
 
         if (sizeof($itemsTemporary) >= 1) {
@@ -848,12 +848,12 @@ class DungeonRoll extends Table
     {
         $items = $this->components->getActivePlayerUsableItems();
         $temporaryAbilities = DRUtils::filter($items, 'DRItem::isTemporaryAbility');
-        $temporaryAbilities = DRItem::setZone($temporaryAbilities, ZONE_BOX);
+        $temporaryAbilities = DRItem::setZone($temporaryAbilities, DR_ZONE_BOX);
         
         $dice = DRUtils::filter($items, function($die) {
             return DRItem::isDungeonDie($die) || DRItem::isPartyDie($die);
         });
-        $dice = DRItem::setZone($dice, ZONE_BOX);
+        $dice = DRItem::setZone($dice, DR_ZONE_BOX);
 
         if (sizeof($temporaryAbilities) >= 1) {
             $this->components->updateItems($temporaryAbilities);
@@ -877,11 +877,11 @@ class DungeonRoll extends Table
     {
 
         // Move tokens in Playing Area into the right area
-        $itemsInPlay = $this->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
 
         if (sizeof($tokens) > 0) {
-            $tokens = DRItem::setZone($tokens, ZONE_INVENTORY);
+            $tokens = DRItem::setZone($tokens, DR_ZONE_INVENTORY);
             $this->manager->updateItems($tokens);
         }
 
@@ -916,17 +916,17 @@ class DungeonRoll extends Table
                 return $token['owner_id'] == $player_id;
             }));
             $nbrXpTreasures = sizeof($playerTreasures);
-            self::setStat($nbrXpTreasures, STAT_XP_TREASURE, $player_id);
+            self::setStat($nbrXpTreasures, DR_STAT_XP_TREASURE, $player_id);
 
             // Set 1 xp for each townPortal
-            $townPortal = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(TOKEN_TOWN_PORTAL));
+            $townPortal = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
             $nbrXpTownPortal = sizeof($townPortal);
-            self::setStat($nbrXpTownPortal, STAT_XP_TOWN_PORTAL, $player_id);
+            self::setStat($nbrXpTownPortal, DR_STAT_XP_TOWN_PORTAL, $player_id);
 
             // Set 2 xp for each pair of dragon scale
-            $dragonScales = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(TOKEN_DRAGON_SCALES));
+            $dragonScales = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_DRAGON_SCALES));
             $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2;
-            self::setStat($nbrXpDragonScales, STAT_XP_DRAGON_SCALE, $player_id);
+            self::setStat($nbrXpDragonScales, DR_STAT_XP_DRAGON_SCALE, $player_id);
 
             // The player with the fewest number of treasures win; (36 treasure tokens max);
             $tieBreaker = 36 - sizeof($playerTreasures);
@@ -1009,7 +1009,7 @@ class DungeonRoll extends Table
                     $command->execute(0);
                     break;
                 case 'quaffPotion':
-                    $this->chooseDieGain(TYPE_PARTY_DIE, DIE_CHAMPION);
+                    $this->chooseDieGain(DR_TYPE_PARTY_DIE, DR_DIE_CHAMPION);
                     break;
             }
 

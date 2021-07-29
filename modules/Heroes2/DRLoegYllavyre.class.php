@@ -33,7 +33,7 @@ class DRLoegYllavyre extends DRStandardHero
 
     function canExecuteSpecialty()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monster = DRDungeonDice::getMonsterDices($items);
         $scroll = DRUtils::filter($items, function($item) {
             return DRItem::isScroll($item);
@@ -45,21 +45,21 @@ class DRLoegYllavyre extends DRStandardHero
 
     function executeSpecialty()
     {
-        $items = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $items = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $originalMonster = DRDungeonDice::getMonsterDices($items);
         $monster = DRDungeonDice::getMonsterDices($items);
         $scroll = DRUtils::filter($items, function($item) {
             return DRItem::isScroll($item);
         });
 
-        $monster[0]['value'] = DIE_DRAGON;
+        $monster[0]['value'] = DR_DIE_DRAGON;
         
         if(DRItem::isPartyDie($scroll[0])) {
-            $scroll = DRItem::setZone($scroll, ZONE_GRAVEYARD);
+            $scroll = DRItem::setZone($scroll, DR_ZONE_GRAVEYARD);
         } else {
-            $scroll = DRItem::setZone($scroll, ZONE_BOX);
+            $scroll = DRItem::setZone($scroll, DR_ZONE_BOX);
         }
-        $monster = DRItem::setZone($monster, ZONE_DRAGON_LAIR);
+        $monster = DRItem::setZone($monster, DR_ZONE_DRAGON_LAIR);
 
         $updateItems = array_merge($scroll, $monster);
         $this->game->manager->updateItems($updateItems);
@@ -86,7 +86,7 @@ class DRLoegYllavyre extends DRStandardHero
         $dragon = DRDungeonDice::getDragonDice($items);
 
         // Return them to the box
-        $dragon = DRItem::setZone($dragon, ZONE_BOX);
+        $dragon = DRItem::setZone($dragon, DR_ZONE_BOX);
         $this->game->manager->updateItems($dragon);
 
         $generic_dragon = $this->getDiceGenericDragon(sizeof($dragon));
@@ -112,9 +112,9 @@ class DRLoegYllavyre extends DRStandardHero
     private function getDieGenericDragon()
     {
         // Create a temporary dice as a fighter
-        $die = DRPartyDice::getDie(DIE_GENERIC_DRAGON);
+        $die = DRPartyDice::getDie(DR_DIE_GENERIC_DRAGON);
         $die['owner'] = $this->game->getActivePlayerId();
-        $die['zone'] = ZONE_PLAY;
+        $die['zone'] = DR_ZONE_PLAY;
         return $die;
     }
 

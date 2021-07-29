@@ -23,7 +23,7 @@ class DRScout extends DRStandardHero
             return null;
         }
         $items = $this->game->components->getItemsByZone("LEVEL_" . $level);
-        $items = DRItem::setZone($items, ZONE_BOX);
+        $items = DRItem::setZone($items, DR_ZONE_BOX);
         return $items;
     }
 
@@ -36,7 +36,7 @@ class DRScout extends DRStandardHero
     {
         // He can skip his monster phase unless 3 dragon dice found.
         // Otherwise, he cannot use his ultimte
-        $dragons = $this->game->components->getActivePlayerItemsByZone(ZONE_DRAGON_LAIR);
+        $dragons = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_DRAGON_LAIR);
         return sizeof($dragons) < 3;
     }
 

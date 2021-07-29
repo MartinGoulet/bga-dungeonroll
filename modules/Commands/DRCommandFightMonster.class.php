@@ -16,7 +16,7 @@ class DRCommandFightMonster extends DRCommand
     {
         if (!parent::canExecute()) return false;
 
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         
         if(sizeOf($monsters) == 0) {
@@ -51,19 +51,19 @@ class DRCommandFightMonster extends DRCommand
 
     public function execute($sub_command_id)
     {
-        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+        $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(DR_ZONE_PLAY);
 
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         $companions = DRPartyDice::getPartyDice($itemsInPlay);
         $tokens = DRTreasureToken::getTreasureTokens($itemsInPlay);
 
-        $monsters = DRItem::setZone($monsters, ZONE_BOX);
-        $companions = DRItem::setZone($companions, ZONE_GRAVEYARD);
-        $tokens = DRItem::setZone($tokens, ZONE_BOX);
+        $monsters = DRItem::setZone($monsters, DR_ZONE_BOX);
+        $companions = DRItem::setZone($companions, DR_ZONE_GRAVEYARD);
+        $tokens = DRItem::setZone($tokens, DR_ZONE_BOX);
 
         foreach ($companions as &$companion) {
             if(DRItem::isTemporaryAbility($companion) || DRItem::isTemporaryItem($companion)) {
-                $companion['zone'] = ZONE_BOX;
+                $companion['zone'] = DR_ZONE_BOX;
             }
         }
 
