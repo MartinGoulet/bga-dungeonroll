@@ -28,11 +28,20 @@ class DRCommandFightMonster extends DRCommand
             return true;
         }
 
+        // No hero can defeat monster with non token companion
         $nonTokenCompanion = DRUtils::filter($itemsInPlay, function ($item) {
             return DRItem::isTreasureToken($item) && !DRItem::isCompanionToken($item);
         });
 
         if(sizeof($nonTokenCompanion) > 0) {
+            return false;
+        }
+
+        // Some hero can use scroll (Enchantress and Alexandra) 
+        // This verification has been place after checking if hero can defeat monster
+        // Note : Some heroes have to check for this verification internally
+        $scrolls = DRUtils::filter($itemsInPlay, 'DRItem::isScroll');
+        if(sizeof($scrolls) > 0) {
             return false;
         }
 

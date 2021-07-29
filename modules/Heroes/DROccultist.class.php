@@ -22,10 +22,11 @@ class DROccultist extends DRStandardHero
 
         // Clerics may be used as Mages and Mages may be used as Clerics.
         if (sizeof($clerics) == 1 && sizeof($oozes) == sizeof($monsters))
-            return true;
+            return sizeof($clerics) + sizeof($oozes) == sizeof($itemsInPlay);
+
 
         if (sizeof($mages) == 1 && sizeof($skeletons) == sizeof($monsters))
-            return true;
+            return sizeof($mages) + sizeof($skeletons) == sizeof($itemsInPlay);
 
         return false;
     }

@@ -22,10 +22,10 @@ class DRCrusader extends DRStandardHero
 
         // Fighters may be used as Clerics and Clerics may be used as Fighters.
         if (sizeof($fighters) == 1 && sizeof($skeletons) == sizeof($monsters))
-            return true;
+            return sizeof($fighters) + sizeof($skeletons) == sizeof($itemsInPlay);
 
         if (sizeof($clerics) == 1 && sizeof($goblins) == sizeof($monsters))
-            return true;
+            return sizeof($clerics) + sizeof($goblins) == sizeof($itemsInPlay);
 
         return false;
     }

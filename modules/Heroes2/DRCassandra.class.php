@@ -37,6 +37,11 @@ class DRCassandra extends DRStandardHero
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         $monsterGroup = $this->groupByDiceValue($monsters);
 
+        $scrolls = DRUtils::filter($itemsInPlay, 'DRItem::isScroll');
+        if(sizeof($scrolls) > 0) {
+            return false;
+        }
+
         // Use normal rules if not single hero
         if(sizeof($companions) != 1 || sizeof($monsters) == 1) {
             return false;

@@ -22,10 +22,10 @@ class DRSpellsword extends DRStandardHero
 
         // Fighters may be used as Mages and Mages may be used as Fighters.
         if (sizeof($fighters) == 1 && sizeof($oozes) == sizeof($monsters))
-            return true;
+            return sizeof($fighters) + sizeof($oozes) == sizeof($itemsInPlay);
 
         if (sizeof($mages) == 1 && sizeof($goblins) == sizeof($monsters))
-            return true;
+            return sizeof($mages) + sizeof($goblins) == sizeof($itemsInPlay);
 
         return false;
     }

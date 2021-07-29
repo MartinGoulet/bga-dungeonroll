@@ -20,7 +20,7 @@ class DRMinstrel extends DRStandardHero
 
         // Thieves may be used as Mages and Mages may be used as Thieves.
         if (sizeof($thieves) == 1 && sizeof($oozes) == sizeof($monsters))
-            return true;
+            return sizeof($thieves) + sizeof($oozes) == sizeof($itemsInPlay);
 
         return false;
     }

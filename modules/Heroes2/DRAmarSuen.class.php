@@ -19,7 +19,8 @@ class DRAmarSuen extends DRStandardHero
         }
 
         $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
-        return sizeof($monsters) <= 2;
+        return sizeof($monsters) <= 2 &&
+               sizeof($thieves) + sizeof($monsters) == sizeof($itemsInPlay);
     }
 
     /**

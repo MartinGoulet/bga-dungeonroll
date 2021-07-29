@@ -19,12 +19,18 @@ class DRCommander extends DRStandardHero
     function canDefeatMonster()
     {
         $itemsInPlay = $this->game->components->getActivePlayerItemsByZone(ZONE_PLAY);
+                
         $fighters = DRUtils::filter($itemsInPlay, 'DRItem::isFighter');
+        $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
+
+        if (sizeof($fighters) + sizeof($monsters) !== sizeof($itemsInPlay)) {
+            return false;
+        }
+
         if (sizeof($fighters) != 1) {
             return false;
         }
 
-        $monsters = DRDungeonDice::getMonsterDices($itemsInPlay);
         if (sizeof($monsters) <= 2)
             return true;
 

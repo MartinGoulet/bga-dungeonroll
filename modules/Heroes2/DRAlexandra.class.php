@@ -72,7 +72,9 @@ class DRAlexandra extends DRStandardHero
             return DRPartyDice::isScroll($item) || DRTreasureToken::isScroll($item);
         });
         $monstersTypeCount = DRDungeonDice::getMonsterTypeCount($itemsInPlay);
-        return $monstersTypeCount == 1 && sizeof($scrolls) == 1;
+        $companions = DRItem::getCompanions($itemsInPlay);
+
+        return $monstersTypeCount == 1 && sizeof($scrolls) == 1 && sizeof($companions) == 0;
     }
 
     function canDefeatDragon()
