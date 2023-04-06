@@ -9,7 +9,7 @@ class DRCommandFleeDungeon extends DRCommand
     }
 
     public function getAllowedStates() {
-        return array('monsterPhase', 'lootPhase', 'dragonPhase');
+        return array('monsterPhase', 'dragonPhase');
     }
 
     public function execute($sub_command_id)
