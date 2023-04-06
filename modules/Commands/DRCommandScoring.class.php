@@ -20,7 +20,7 @@ class DRCommandScoring extends DRCommand
         $rowHeader = array(array('str' => clienttranslate('Points'), 'args' => array(), 'type' => 'header'));
         $rowLevel = array(array('str' => clienttranslate('Levels completed'), 'args' => array()));
         $rowDragon = array(array('str' => clienttranslate('Dragon killed'), 'args' => array()));
-        $rowTreasure = array(array('str' => clienttranslate('Treasures'), 'args' => array()));
+        $rowTreasure = array(array('str' => clienttranslate('Remaining treasures'), 'args' => array()));
         $rowScales = array(array('str' => clienttranslate('Dragon Scales'), 'args' => array()));
         $rowTownPortal = array(array('str' => clienttranslate('Town Portal'), 'args' => array()));
         $rowTotal = array(array('str' => clienttranslate('Total'), 'args' => array()));
@@ -46,9 +46,9 @@ class DRCommandScoring extends DRCommand
                 $nbrLevel += $this->game->vars->getDungeonLevel();
             }
 
-            $nbrTreasures = sizeof($treasures);
-            $nbrXpTownPortal = sizeof($townPortal);
-            $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2;
+            $nbrTreasures = sizeof($treasures) - sizeof($townPortal) - sizeof($dragonScales);
+            $nbrXpTownPortal = sizeof($townPortal) * 2;
+            $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2 + sizeof($dragonScales);
 
             $rowLevel[] = $this->game->getValueWithStar($nbrLevel, true);
             $rowDragon[] = $this->game->getValueWithStar($this->game->stats->getExpDragon($player_id));
@@ -66,7 +66,7 @@ class DRCommandScoring extends DRCommand
             $rowTotal[] = $this->game->getValueWithStar($total, true);
         }
 
-        $table = array($rowHeader, $rowLevel, $rowTreasure, $rowDragon, $rowScales, $rowTownPortal, $rowTotal);
+        $table = array($rowHeader, $rowLevel, $rowDragon, $rowScales, $rowTownPortal, $rowTreasure, $rowTotal);
 
         $this->game->notifyPlayer($this->game->getActivePlayerId(), "tableWindow", '', array(
             "id" => 'finalScoring',

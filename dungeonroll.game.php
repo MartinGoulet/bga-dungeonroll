@@ -916,12 +916,9 @@ class DungeonRoll extends Table
 
         foreach ($finalSituation as $player_id => $player) {
 
-            // Set nbr of xp from treasures
             $playerTreasures = array_values(array_filter($treasures, function ($token) use ($player_id) {
                 return $token['owner_id'] == $player_id;
             }));
-            $nbrXpTreasures = sizeof($playerTreasures);
-            self::setStat($nbrXpTreasures, DR_STAT_XP_TREASURE, $player_id);
 
             // Set 1 xp for each townPortal
             $townPortal = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
@@ -932,6 +929,10 @@ class DungeonRoll extends Table
             $dragonScales = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_DRAGON_SCALES));
             $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2;
             self::setStat($nbrXpDragonScales, DR_STAT_XP_DRAGON_SCALE, $player_id);
+
+            // Set nbr of xp from treasures
+            $nbrXpTreasures = sizeof($playerTreasures) - sizeof($townPortal) - sizeof($dragonScales);
+            self::setStat($nbrXpTreasures, DR_STAT_XP_TREASURE, $player_id);
 
             // The player with the fewest number of treasures win; (36 treasure tokens max);
             $tieBreaker = 36 - sizeof($playerTreasures);
@@ -1058,7 +1059,7 @@ class DungeonRoll extends Table
         $rowHeader = array(array('str' => clienttranslate('Points'), 'args' => array(), 'type' => 'header'));
         $rowLevel = array(array('str' => clienttranslate('Levels completed'), 'args' => array()));
         $rowDragon = array(array('str' => clienttranslate('Dragon killed'), 'args' => array()));
-        $rowTreasure = array(array('str' => clienttranslate('Treasures'), 'args' => array()));
+        $rowTreasure = array(array('str' => clienttranslate('Remaining treasures'), 'args' => array()));
         $rowScales = array(array('str' => clienttranslate('Dragon Scales'), 'args' => array()));
         $rowTownPortal = array(array('str' => clienttranslate('Town Portal'), 'args' => array()));
         $rowTotal = array(array('str' => clienttranslate('Total'), 'args' => array()));
@@ -1089,7 +1090,7 @@ class DungeonRoll extends Table
             $rowRank[] = $this->getRank($total, $number);
         }
 
-        $table = array($rowHeader, $rowLevel, $rowTreasure, $rowDragon, $rowScales, $rowTownPortal, $rowRank, $rowTotal);
+        $table = array($rowHeader, $rowLevel, $rowDragon, $rowScales, $rowTownPortal, $rowTreasure, $rowRank, $rowTotal);
 
         foreach ($players as $player_id => $player) {
             $total =
