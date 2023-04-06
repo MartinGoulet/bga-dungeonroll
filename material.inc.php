@@ -901,6 +901,34 @@ $this->command_infos = array(
         'html_zone' => 'zone_phases_actions'
     ),
 
+    8 => array(
+        'name' => 'openChestScout',
+        'text' => clienttranslate('Open Chest'),
+        'php_class' => 'DRCommandOpenChestScout',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'always',
+                'confirmation' => clienttranslate("Are you sure you want to open Chests? If you do, you will not be able to use your Scout Ultimate ability before fighting Dragons.")
+            )
+        )
+    ),
+
+    9 => array(
+        'name' => 'quaffPotionScout',
+        'text' => clienttranslate('Quaff Potion'),
+        'php_class' => 'DRCommandQuaffPotionScout',
+        'always_visible' => true,
+        'html_zone' => 'zone_actions',
+        'confirmations' => array(
+            array(
+                'askConfirmation' => 'always',
+                'confirmation' => clienttranslate("Are you sure you want to quaff Potions? If you do, you will not be able to use your Scout Ultimate ability before fighting Dragons.")
+            )
+        )
+    ),
+
     10 => array(
         'name' => 'fightDragon',
         'text' => clienttranslate('Fight Dragon'),

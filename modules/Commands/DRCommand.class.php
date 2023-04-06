@@ -2,6 +2,7 @@
 
 class DRCommand
 {
+    /** @var DungeonRoll */
     protected $game;
     protected $command_info;
 

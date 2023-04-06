@@ -4,11 +4,11 @@
  *------
  * BGA framework: © Gregory Isabelli <gisabelli@boardgamearena.com> & Emmanuel Colin <ecolin@boardgamearena.com>
  * DungeonRoll implementation : © Martin Goulet <martin.goulet@live.ca>
- * 
+ *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
  * -----
- * 
+ *
  * dungeonroll.game.php
  *
  * This is the main file for your game logic.
@@ -41,6 +41,11 @@ require_once('modules/DRTreasureToken.php');
 
 class DungeonRoll extends Table
 {
+    /** @var DRComponentManager */
+    public $components;
+    /** @var DRGlobalVariable */
+    public $vars;
+
     function __construct()
     {
         // Your global variables labels:
@@ -62,7 +67,7 @@ class DungeonRoll extends Table
             DR_GL_SPECIALTY_ONCE_PER_LEVEL => DR_GL_SPECIALTY_ONCE_PER_LEVEL_ID,
             DR_GL_DRAGON_KILLED_THIS_TURN => DR_GL_DRAGON_KILLED_THIS_TURN_ID,
             DR_GL_BERSERKER_ULTIMATE => DR_GL_BERSERKER_ULTIMATE_ID,
-            
+
             // Game variants
             DR_GV_GAME_OPTION => DR_GV_GAME_OPTION_ID,
             DR_GV_GAME_EXPANSION => DR_GV_GAME_EXPANSION_ID,
@@ -86,7 +91,7 @@ class DungeonRoll extends Table
 
     /*
         setupNewGame:
-        
+
         This method is called only once, when a new game is launched.
         In this method, you must setup the game according to the game rules, so that
         the game is ready to be played.
@@ -126,10 +131,10 @@ class DungeonRoll extends Table
     }
 
     /*
-        getAllDatas: 
-        
+        getAllDatas:
+
         Gather all informations about current game situation (visible by the current player).
-        
+
         The method is called each time the game interface is displayed to a player, ie:
         _ when the game starts
         _ when a player refreshes the game page (F5)
@@ -163,12 +168,12 @@ class DungeonRoll extends Table
 
     /*
         getGameProgression:
-        
+
         Compute and return the current game progression.
         The number returned must be an integer beween 0 (=the game just started) and
         100 (= the game is finished or almost finished).
-    
-        This method is called each time we are in a game state with the "updateGameProgression" property set to true 
+
+        This method is called each time we are in a game state with the "updateGameProgression" property set to true
         (see states.inc.php)
     */
     function getGameProgression()
@@ -188,7 +193,7 @@ class DungeonRoll extends Table
 
     //////////////////////////////////////////////////////////////////////////////
     //////////// Utility functions
-    ////////////  
+    ////////////
 
     function getCommandInfos()
     {
@@ -217,7 +222,7 @@ class DungeonRoll extends Table
         $score = $this->getUniqueValueFromDB("SELECT player_score FROM player WHERE player_id='$player_id'");
         // Set score
         self::DbQuery("UPDATE player SET player_score = player_score + $nbr WHERE player_id='$player_id'");
-        // Check if hero level up        
+        // Check if hero level up
         $hero = $this->components->getActivePlayerHero();
 
         if ($score < 5 && ($score + $nbr) >= 5 && $hero->canLevelUp()) {
@@ -288,7 +293,7 @@ class DungeonRoll extends Table
 
     //////////////////////////////////////////////////////////////////////////////
     //////////// Player actions
-    //////////// 
+    ////////////
 
     function executeCommand($command_id, $sub_command_id)
     {
@@ -374,7 +379,7 @@ class DungeonRoll extends Table
 
         $dice = array($die);
 
-        $stateSkip = 
+        $stateSkip =
             $this->gamestate->state()['name'] == "selectionDice" ||
             (
                 $this->gamestate->state()['name'] == "postFormingPartyScout" &&
@@ -619,12 +624,12 @@ class DungeonRoll extends Table
                 $newNoviceHero['owner'] = $player_id;
                 // Add new components
                 $newHeroes[] = $newNoviceHero;
-                
+
                 if(sizeof($heroMasters) == 1) {
                     // Clone item
                     $newMasterHero = $heroMasters[0];
                     // Add new components
-                    $newHeroes[] = $newMasterHero;                   
+                    $newHeroes[] = $newMasterHero;
                 }
             }
         }
@@ -849,7 +854,7 @@ class DungeonRoll extends Table
         $items = $this->components->getActivePlayerUsableItems();
         $temporaryAbilities = DRUtils::filter($items, 'DRItem::isTemporaryAbility');
         $temporaryAbilities = DRItem::setZone($temporaryAbilities, DR_ZONE_BOX);
-        
+
         $dice = DRUtils::filter($items, function($die) {
             return DRItem::isDungeonDie($die) || DRItem::isPartyDie($die);
         });
@@ -904,7 +909,7 @@ class DungeonRoll extends Table
         $finalSituation = self::getCollectionFromDB($sql);
 
         // Get all treasures tokens from all players
-        $sql = "SELECT item_id id, item_value value, item_type type, item_zone zone, owner_id 
+        $sql = "SELECT item_id id, item_value value, item_type type, item_zone zone, owner_id
                   FROM item  WHERE owner_id is not null AND item_type = 3 AND item_zone != 'box';";
 
         $treasures = self::getObjectListFromDB($sql);
@@ -931,7 +936,7 @@ class DungeonRoll extends Table
             // The player with the fewest number of treasures win; (36 treasure tokens max);
             $tieBreaker = 36 - sizeof($playerTreasures);
 
-            self::DbQuery("UPDATE player 
+            self::DbQuery("UPDATE player
                               SET player_score = player_score + $nbrXpTreasures + $nbrXpTownPortal + $nbrXpDragonScales,
                                   player_score_aux = $tieBreaker
                             WHERE player_id='$player_id' ");
@@ -969,15 +974,15 @@ class DungeonRoll extends Table
 
     /*
         zombieTurn:
-        
+
         This method is called each time it is the turn of a player who has quit the game (= "zombie" player).
         You can do whatever you want in order to make sure the turn of this player ends appropriately
         (ex: pass).
-        
+
         Important: your zombie code will be called when the player leaves the game. This action is triggered
         from the main site and propagated to the gameserver from a server, not from a browser.
         As a consequence, there is no current player associated to this action. In your zombieTurn function,
-        you must _never_ use getCurrentPlayerId() or getCurrentPlayerName(), otherwise it will fail with a "Not logged" error message. 
+        you must _never_ use getCurrentPlayerId() or getCurrentPlayerName(), otherwise it will fail with a "Not logged" error message.
     */
 
     function zombieTurn($state, $active_player)
@@ -1155,13 +1160,13 @@ class DungeonRoll extends Table
 
     /*
         upgradeTableDb:
-        
+
         You don't have to care about this until your game has been published on BGA.
         Once your game is on BGA, this method is called everytime the system detects a game running with your old
         Database scheme.
         In this case, if you change your Database scheme, you just have to apply the needed changes in order to
         update the game database and allow the game to continue to run with your new version.
-    
+
     */
 
     function upgradeTableDb($from_version)
