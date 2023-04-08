@@ -402,6 +402,13 @@
     text-align: center;
 }
 
+.tableWindow table tr:last-child td {
+    border-top: 2px solid #6678b1;
+    color: #039;
+    font-size: 12px;
+    font-weight: 400;
+}
+
 .tableWindow .rank-text {
     text-align: center;
     padding: 20px 0;
@@ -428,6 +435,10 @@
 
 .tableWindow .rank-5 {
     color: goldenrod;
+}
+
+.tableWindow .fa-exclamation-triangle {
+    color: red;
 }
 
 #board .stockitem,
