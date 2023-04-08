@@ -1119,10 +1119,16 @@ class DungeonRoll extends Table
         }
     }
 
-    function getValueWithStar($value, $zeroWithStar = false)
+    function getValueWithStar($value, $zeroWithStar = false, bool $warning = false, bool $ban = false)
     {
         if ($value > 0 || $zeroWithStar) {
-            return $value . ' <i class="fa fa-star"></i>';
+            if($warning == true) {
+                return $value . ' <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>';
+            } else if($ban == true) {
+                return '<i class="fa fa-ban" aria-hidden="true"></i>';
+            } else {
+                return $value . ' <i class="fa fa-star" aria-hidden="true"></i>';
+            }
         } else {
             return '-';
         }
