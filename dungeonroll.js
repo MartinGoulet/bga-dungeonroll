@@ -172,13 +172,14 @@ define([
                 }
 
                 // Display Score button
-                // this.addActionButton(`'display-score`, _('Display scores'), 'displayScore', `player_board_actions_${this.player_id}` );
-                var playerBoard = dojo.query("#player_board_actions_" + this.player_id)[0];
-                dojo.place(dojo.create("button", {
-                    class: "display-score", 
-                    innerHTML: _('Display scores')
-                }), playerBoard);
-                dojo.query(".display-score").connect("click", this, "displayScore");
+                if(!this.isSpectator) {
+                    var playerBoard = dojo.query("#player_board_actions_" + this.player_id)[0];
+                    dojo.place(dojo.create("button", {
+                        class: "display-score", 
+                        innerHTML: _('Display scores')
+                    }), playerBoard);
+                    dojo.query(".display-score").connect("click", this, "displayScore");
+                }
             },
 
             displayScore() {
