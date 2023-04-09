@@ -1113,14 +1113,6 @@ $this->command_infos = array(
         )
     ),
 
-    80 => array(
-        'name' => 'getScores',
-        'text' => clienttranslate('Get Scores'),
-        'button_color' => "blue",
-        'php_class' => 'DRCommandScoring',
-        'html_zone' => 'zone_actions'
-    ),
-
 );
 
 $this->phases = array(

@@ -84,4 +84,12 @@ class action_dungeonroll extends APP_GameAction
         $this->game->selectGuildLeaderDice($party, $dungeon);
         self::ajaxResponse();
     }
+
+    public function displayScore() 
+    {
+        self::setAjaxMode();
+        $command = new DRCommandScoring($this->game, null);
+        $command->execute(0);
+        self::ajaxResponse();
+    }
 }

@@ -183,6 +183,8 @@ var jstpl_item_tooltip = '\
 
 var jstpl_player_board = '\
 <div class="player_board">\
+    <div class="player_board_actions" id="player_board_actions_${id}">\
+    </div>\
     <div class="player_hero">\
         <div id="player_hero_${id}" class="col_1"></div>\
     </div>\

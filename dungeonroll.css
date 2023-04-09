@@ -382,6 +382,26 @@
     padding-left: 3px;
 }
 
+.player_board .player_board_actions:not(:empty) {
+    padding: 10px 0;
+}
+
+.player_board .player_board_actions .display-score {
+    padding: 5px;
+    border: solid 3px #9e6464;
+    border-style: outset;
+    border-radius: 10px;
+    background: beige;
+}
+
+.player_board .player_board_actions .display-score:hover {
+    background: #f1f1c3;
+}
+
+.player_board .player_board_actions .display-score:active {
+    background: #d8d879;
+}
+
 .player_board .player_hero {
     width: 55px;
     float: left;

@@ -97,7 +97,7 @@ class DRCommandScoring extends DRCommand
             $str .= '<p>${warning_icon} : ${warning_text}</p>';
         }
 
-        $this->game->notifyPlayer($this->game->getActivePlayerId(), "tableWindow", '', array(
+        $this->game->notifyPlayer($this->game->getCallingPlayerId(), "tableWindow", '', array(
             "id" => 'finalScoring',
             "title" => clienttranslate("Scores"),
             "table" => $table,

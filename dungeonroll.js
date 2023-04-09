@@ -170,6 +170,21 @@ define([
                     var type = hero.type + '_' + hero.value;
                     this.showSpecialty(type);
                 }
+
+                // Display Score button
+                // this.addActionButton(`'display-score`, _('Display scores'), 'displayScore', `player_board_actions_${this.player_id}` );
+                var playerBoard = dojo.query("#player_board_actions_" + this.player_id)[0];
+                dojo.place(dojo.create("button", {
+                    class: "display-score", 
+                    innerHTML: _('Display scores')
+                }), playerBoard);
+                dojo.query(".display-score").connect("click", this, "displayScore");
+            },
+
+            displayScore() {
+                this.ajaxcall("/dungeonroll/dungeonroll/displayScore.html", {
+                    lock: true
+                }, this, function(result) {});
             },
 
             setIsHeroActivated: function(isActivated) {

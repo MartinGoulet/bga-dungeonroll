@@ -1203,4 +1203,8 @@ class DungeonRoll extends Table
 
 
     }
+
+    function getCallingPlayerId() {
+        return self::getCurrentPlayerId();
+    }
 }
