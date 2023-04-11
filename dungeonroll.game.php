@@ -920,14 +920,14 @@ class DungeonRoll extends Table
                 return $token['owner_id'] == $player_id;
             }));
 
-            // Set 1 xp for each townPortal
+            // Set 2 xp for each townPortal
             $townPortal = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_TOWN_PORTAL));
-            $nbrXpTownPortal = sizeof($townPortal);
+            $nbrXpTownPortal = sizeof($townPortal) * 2;
             self::setStat($nbrXpTownPortal, DR_STAT_XP_TOWN_PORTAL, $player_id);
 
-            // Set 2 xp for each pair of dragon scale
+            // Set 2 xp for each pair of dragon scale + remaining dragon scale
             $dragonScales = DRItem::getSameAs($playerTreasures, DRTreasureToken::getToken(DR_TOKEN_DRAGON_SCALES));
-            $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2;
+            $nbrXpDragonScales = intdiv(sizeof($dragonScales), 2) * 2 + sizeof($dragonScales);
             self::setStat($nbrXpDragonScales, DR_STAT_XP_DRAGON_SCALE, $player_id);
 
             // Set nbr of xp from treasures
