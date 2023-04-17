@@ -1207,4 +1207,9 @@ class DungeonRoll extends Table
     function getCallingPlayerId() {
         return self::getCurrentPlayerId();
     }
+
+    public function getStateName() {
+        $state = $this->gamestate->state();
+        return $state['name'];
+    }
 }

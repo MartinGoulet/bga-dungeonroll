@@ -50,7 +50,7 @@ class DRCommandScoring extends DRCommand
             $dragonScales = DRItem::getSameAs($treasures, DRTreasureToken::getToken(DR_TOKEN_DRAGON_SCALES));
 
             $nbrLevel = $this->game->stats->getLevelCompleted($player_id);
-            if ($player_id == $this->game->getActivePlayerId()) {
+            if ($player_id == $this->game->getActivePlayerId() && $this->game->getStateName() != 'gameEnd') {
                 $nbrLevel += $this->game->vars->getDungeonLevel();
             }
 
