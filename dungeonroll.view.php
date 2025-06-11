@@ -51,7 +51,7 @@
         $this->tpl['ZONE_SPECIALTY'] = self::_("Specialty");
 
         /*
-        
+
         // Examples: set the value of some element defined in your tpl file like this: {MY_VARIABLE_ELEMENT}
 
         // Display a specific number / string
@@ -62,17 +62,17 @@
 
         // Display some HTML content of your own:
         $this->tpl['MY_VARIABLE_ELEMENT'] = self::raw( $some_html_code );
-        
+
         */
-        
+
         /*
-        
+
         // Example: display a specific HTML block for each player in this game.
         // (note: the block is defined in your .tpl file like this:
         //      <!-- BEGIN myblock --> 
         //          ... my HTML code ...
         //      <!-- END myblock --> 
-        
+
 
         $this->page->begin_block( "dungeonroll_dungeonroll", "myblock" );
         foreach( $players as $player )
@@ -83,7 +83,7 @@
                                                     ...
                                                      ) );
         }
-        
+
         */
 
 
